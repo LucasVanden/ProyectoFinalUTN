@@ -15,7 +15,7 @@ require './../rutas.php';
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
-        <script src="funciones.js" type="text/javascript"></script>
+        <script src="./../js/funciones.js" type="text/javascript"></script>
     </head>
     <body>
         <?php require './../partials/header.php' ?>
