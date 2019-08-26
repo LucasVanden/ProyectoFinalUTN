@@ -28,6 +28,7 @@ require './../rutas.php';
             <textarea name="textarea" rows="10" cols="50">Ingrese su tema (opcional)</textarea>
             <br>
             <br>
+            <!-- agregar CSS -->
             <input id=buttonConfirmar type="button" value="Confirmar" onclick="confirmarasistencia()">
             <input type="button" value="Cancelar" onclick="self.location.href=<?php echo $alumnoPrincipal?>"/>
         </form>

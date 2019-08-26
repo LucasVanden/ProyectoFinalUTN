@@ -21,6 +21,22 @@ require './../rutas.php';
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
+        
+        <script src="jquery.js"></script>
+        <script src="./../js/funciones.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function() {
+
+        $('#example tr').click(function() {
+            var href = $(this).find("a").attr("href");
+            if (href) {
+                window.location = href;
+            }
+        });
+
+    });
+</script>
+
         <h2>Estás cursando:</h2>
         <form action="alumnoPpal.php" method="POST">        
             <div>
@@ -30,7 +46,10 @@ require './../rutas.php';
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Administración Gerencial</td>
+                            <th> Materias </th>
+                        </tr>
+                        <tr>
+                            <td><a href="busquedaPorMateria.php">Administración Gerencial</a></td>
                         </tr>
                         <tr>
                             <td>Inteligencia Artificial</td>
@@ -86,7 +105,7 @@ require './../rutas.php';
                                     <option>Álgebra</option>                        
                                     <option>Administración de Recursos</option>
                                     <option>Administración Gerencial</option>
-                                    <option>Análisis de Sistemas</option>
+                                    <option >Análisis de Sistemas</option>
                                     <option>Análisis Matemático I</option>                        
                                     <option>Análisis Matemático II</option>
                                     <option>Materia N</option>
@@ -97,7 +116,9 @@ require './../rutas.php';
             </div>
             <div>
                 <br>
-                <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />    
+                <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
+                <input id=buttonBuscar type="submit" value="Buscar Profesor" formaction="busquedaPorProfesor.php" onclick="buscarHorarios(Materias,profesor)",>
+                <input type="submit" value="Buscar Materia" formaction="busquedaPorMateria.php">
             </div>
             <div>                     
                 <h2>Mis Anotaciones</h2>
