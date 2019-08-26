@@ -15,7 +15,7 @@ require './../rutas.php';
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
-        <script src="funciones.js" type="text/javascript"></script>
+        <script src="./../js/funciones.js" type="text/javascript"></script>
     </head>
     <body>
         <?php require './../partials/header.php' ?>
@@ -28,7 +28,7 @@ require './../rutas.php';
             <textarea name="textarea" rows="10" cols="50">Ingrese su tema (opcional)</textarea>
             <br>
             <br>
-            <input type="button" value="Confirmar" onclick="confirmarasistencia()">
+            <input id=buttonConfirmar type="button" value="Confirmar" onclick="confirmarasistencia()">
             <input type="button" value="Cancelar" onclick="self.location.href=<?php echo $alumnoPrincipal?>"/>
         </form>
     </body>
