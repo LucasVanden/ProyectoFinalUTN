@@ -1,7 +1,7 @@
 //alumno inscribiendose a consulta
 function asistirconsulta() { //funciona
     document.getElementById("buttonAsistir").innerHTML;
-    window.location.replace("http://localhost:8888/PFProyect/alumno/alumnoConfirmarAsistencia.php");
+   // window.location.replace("http://localhost:8888/pikbguv/alumno/alumnoConfirmarAsistencia.php");
 }
 
 function confirmarasistencia() { //no esta funcionando
@@ -9,7 +9,8 @@ function confirmarasistencia() { //no esta funcionando
     //    guardar inscripcion en la db
     // mostrar mensaje de inscripcion correcta
     // prompt("picachu", "...");
-    window.location.replace("http://localhost:8888/PFProyect/vista/alumno/alumnoPpal.php");
+    //window.location.replace("http://localhost/ProyectoFinalUTN/vista/alumno/alumnoPpal.php");    
+    window.location.replace(alumnoppal);
 }
 
 function buscarHorarios(materia, profesor) { //no esta funcionando
