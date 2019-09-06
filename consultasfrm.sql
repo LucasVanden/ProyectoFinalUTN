@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-09-2019 a las 03:54:55
+-- Tiempo de generación: 06-09-2019 a las 04:15:41
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -37,6 +37,14 @@ CREATE TABLE `alumno` (
   `fechaNacimientoAlumno` date NOT NULL,
   `telefonoAlumno` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `alumno`
+--
+
+INSERT INTO `alumno` (`id_alumno`, `legajo`, `apellido`, `nombre`, `email`, `fechaNacimientoAlumno`, `telefonoAlumno`) VALUES
+(1, 35821, 'van den bosch', 'lucas', 'vandenboschlucas@hotmail.com', '1992-05-18', '2616394922'),
+(2, 32145, 'Porte', 'Gaston', 'email', '2019-09-09', '2618586488');
 
 -- --------------------------------------------------------
 
@@ -132,6 +140,13 @@ CREATE TABLE `departamento` (
   `nombre` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `departamento`
+--
+
+INSERT INTO `departamento` (`id_departamento`, `nombre`) VALUES
+(1, 'Sistemas');
+
 -- --------------------------------------------------------
 
 --
@@ -157,6 +172,18 @@ CREATE TABLE `dia` (
   `id_dia` int(20) NOT NULL,
   `dia` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `dia`
+--
+
+INSERT INTO `dia` (`id_dia`, `dia`) VALUES
+(1, 'Lunes'),
+(2, 'Martes'),
+(3, 'Miercoles'),
+(4, 'Jueves'),
+(5, 'Viernes'),
+(6, 'Sabado');
 
 -- --------------------------------------------------------
 
@@ -235,6 +262,14 @@ CREATE TABLE `materia` (
   `fk_dia` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `materia`
+--
+
+INSERT INTO `materia` (`id_materia`, `nombreMateria`, `fk_departamento`, `fk_dia`) VALUES
+(1, 'Proyecto Final', 1, 1),
+(2, 'Computacion en la Nube', 1, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -245,6 +280,14 @@ CREATE TABLE `materias_alumno` (
   `fk_alumno` int(20) NOT NULL,
   `fk_materia` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `materias_alumno`
+--
+
+INSERT INTO `materias_alumno` (`fk_alumno`, `fk_materia`) VALUES
+(1, 1),
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -346,7 +389,8 @@ CREATE TABLE `usuario` (
 --
 ALTER TABLE `alumno`
   ADD PRIMARY KEY (`id_alumno`),
-  ADD KEY `id_alumno` (`id_alumno`);
+  ADD KEY `id_alumno` (`id_alumno`),
+  ADD KEY `id_alumno_2` (`id_alumno`);
 
 --
 -- Indices de la tabla `anotadosestado`
@@ -500,14 +544,19 @@ ALTER TABLE `turno`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
-  ADD KEY `fk_alumno` (`fk_alumno`),
   ADD KEY `fk_profesor` (`fk_profesor`),
-  ADD KEY `fk_perfil` (`fk_perfil`);
+  ADD KEY `fk_perfil` (`fk_perfil`),
+  ADD KEY `fk_alumno` (`fk_alumno`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
+--
+-- AUTO_INCREMENT de la tabla `alumno`
+--
+ALTER TABLE `alumno`
+  MODIFY `id_alumno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `anotadosestado`
 --
@@ -534,6 +583,11 @@ ALTER TABLE `dedicacion`
 ALTER TABLE `dedicacion_materia_profesor`
   MODIFY `id_dedicacion_materia_profesor` int(20) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `departamento`
+--
+ALTER TABLE `departamento`
+  MODIFY `id_departamento` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT de la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
@@ -542,12 +596,17 @@ ALTER TABLE `detalleanotados`
 -- AUTO_INCREMENT de la tabla `dia`
 --
 ALTER TABLE `dia`
-  MODIFY `id_dia` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_dia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `estadoanotados`
 --
 ALTER TABLE `estadoanotados`
   MODIFY `id_estadoanotados` int(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `horadeconsulta`
+--
+ALTER TABLE `horadeconsulta`
+  MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `horariocursado`
 --
@@ -562,7 +621,7 @@ ALTER TABLE `horariodeconsulta`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
@@ -608,7 +667,7 @@ ALTER TABLE `anotadosestado`
 -- Filtros para la tabla `avisoprofesor`
 --
 ALTER TABLE `avisoprofesor`
-  ADD CONSTRAINT `avisoprofesor_ibfk_1` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`);
+  ADD CONSTRAINT `avisoprofesor_ibfk_1` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horariocursado` (`id_horariocursado`);
 
 --
 -- Filtros para la tabla `dedicacion_materia_profesor`
@@ -621,8 +680,8 @@ ALTER TABLE `dedicacion_materia_profesor`
 -- Filtros para la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
-  ADD CONSTRAINT `detalleanotados_ibfk_1` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`),
-  ADD CONSTRAINT `detalleanotados_ibfk_2` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`);
+  ADD CONSTRAINT `detalleanotados_ibfk_3` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`),
+  ADD CONSTRAINT `detalleanotados_ibfk_4` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`);
 
 --
 -- Filtros para la tabla `horadeconsulta`
@@ -660,8 +719,8 @@ ALTER TABLE `materia`
 -- Filtros para la tabla `materias_alumno`
 --
 ALTER TABLE `materias_alumno`
-  ADD CONSTRAINT `materias_alumno_ibfk_1` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`),
-  ADD CONSTRAINT `materias_alumno_ibfk_2` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`);
+  ADD CONSTRAINT `materias_alumno_ibfk_2` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`),
+  ADD CONSTRAINT `materias_alumno_ibfk_3` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`);
 
 --
 -- Filtros para la tabla `presentismo`
@@ -686,9 +745,9 @@ ALTER TABLE `profesor`
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`),
   ADD CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`),
-  ADD CONSTRAINT `usuario_ibfk_3` FOREIGN KEY (`fk_perfil`) REFERENCES `perfil` (`id_perfil`);
+  ADD CONSTRAINT `usuario_ibfk_3` FOREIGN KEY (`fk_perfil`) REFERENCES `perfil` (`id_perfil`),
+  ADD CONSTRAINT `usuario_ibfk_4` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
