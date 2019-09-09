@@ -1,7 +1,7 @@
 //alumno inscribiendose a consulta
 function asistirconsulta() { //funciona
     document.getElementById("buttonAsistir").innerHTML;
-   // window.location.replace("http://localhost:8888/pikbguv/alumno/alumnoConfirmarAsistencia.php");
+    // window.location.replace("http://localhost:8888/pikbguv/alumno/alumnoConfirmarAsistencia.php");
 }
 
 function confirmarasistencia() { //no esta funcionando
@@ -23,4 +23,11 @@ function buscarHorarios(materia, profesor) { //no esta funcionando
     // } else {
     //     window.location.replace("http://localhost:8888/PFProyect/vista/alumno/busquedaPorProfesor.php");
     // }
+
+}
+
+function buscarHorariosporMateria() {
+    prompt("allala");
+
+
 }

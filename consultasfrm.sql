@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-09-2019 a las 04:15:41
+-- Tiempo de generación: 10-09-2019 a las 00:27:09
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -249,6 +249,13 @@ CREATE TABLE `horariodeconsulta` (
   `fk_materia` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `horariodeconsulta`
+--
+
+INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`, `hora`, `activoDesde`, `activoHasta`, `semestre`, `fk_dia`, `fk_profesor`, `fk_materia`) VALUES
+(1, '17:00', '2019-09-01', '2019-12-30', 2, 1, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -349,8 +356,15 @@ CREATE TABLE `profesor` (
   `apellido` varchar(50) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `fk_dedicacion_materia_profesor` int(20) NOT NULL
+  `fk_dedicacion_materia_profesor` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `profesor`
+--
+
+INSERT INTO `profesor` (`id_profesor`, `legajo`, `apellido`, `nombre`, `email`, `fk_dedicacion_materia_profesor`) VALUES
+(2, '1234', 'Vazquez', 'Alejandro ', 'alejandro.vazquez@docentes.frm.utn.edu.ar', NULL);
 
 -- --------------------------------------------------------
 
@@ -616,7 +630,7 @@ ALTER TABLE `horariocursado`
 -- AUTO_INCREMENT de la tabla `horariodeconsulta`
 --
 ALTER TABLE `horariodeconsulta`
-  MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
@@ -641,7 +655,7 @@ ALTER TABLE `privilegio`
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `id_profesor` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `turno`
 --

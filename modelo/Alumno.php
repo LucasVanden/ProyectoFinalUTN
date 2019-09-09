@@ -17,20 +17,20 @@ class Alumno extends conexion
 	function Alumno()
 	{
 	}
-function buscarAlumno($id){
-	$conn = $this->getconexion();
+// function buscarAlumno($id){
+// 	$conn = $this->getconexion();
 
-	$stmt = $conn->prepare("SELECT legajo,apellido FROM alumno"); 
-    $stmt->execute();
-	$ListaAlumno=array();
-    while($row = $stmt->fetch()) {
-		$alum = new Alumno();
-		$alum->setlegajo($row['legajo']);
-		$alum->setapellido($row['apellido']);
-       $ListaAlumno->array_push($alum);
-	}
-	return $ListaAlumno;
-}
+// 	$stmt = $conn->prepare("SELECT legajo,apellido FROM alumno"); 
+//     $stmt->execute();
+// 	$ListaAlumno=array();
+//     while($row = $stmt->fetch()) {
+// 		$alum = new Alumno();
+// 		$alum->setlegajo($row['legajo']);
+// 		$alum->setapellido($row['apellido']);
+//        $ListaAlumno->array_push($alum);
+// 	}
+// 	return $ListaAlumno;
+// }
 
 	function getid_alumno()
 	{

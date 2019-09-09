@@ -6,6 +6,7 @@ if (isset($_SESSION['user_id'])) {
 }
 require './../dbPFprueba.php';
 require './../rutas.php';
+require './../../controlador/alumnoControlador.php'
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +25,7 @@ require './../rutas.php';
         
         <script src="jquery.js"></script>
         <script src="./../js/funciones.js" type="text/javascript"></script>
-<script>
+<!-- <script>
     $(document).ready(function() {
 
         $('#example tr').click(function() {
@@ -35,7 +36,7 @@ require './../rutas.php';
         });
 
     });
-</script>
+</script> -->
 
         <h2>Estás cursando:</h2>
         <form action="alumnoPpal.php" method="POST">        
@@ -48,18 +49,18 @@ require './../rutas.php';
                         <tr>
                             <th> Materias </th>
                         </tr>
-                        <tr>
-                            <td><a href="busquedaPorMateria.php">Administración Gerencial</a></td>
-                        </tr>
-                        <tr>
-                            <td>Inteligencia Artificial</td>
-                        </tr>
-                        <tr>
-                            <td>Sistemas de Gestión</td>
-                        </tr>
-                        <tr>
-                            <td>Proyecto Final</td>
-                        </tr>
+                        <?php 
+                        $a =new AlumnoControlador ;
+                        $alumno = $a->buscarAlumno(1);
+                        foreach ($alumno[0]->getMateria() as $materia): ?> 
+                      
+                            <tr>
+                            <td><a href="busquedaPorMateria.php"><?php echo $materia->getnombreMateria(); ?></a></td>
+                           <td> <input id=temp type="submit" value=<?php echo $materia->getnombreMateria()?> formaction="busquedaPorMateria.php" 
+                            onclick="buscarHorariosporMateria()"></td>
+                             </tr>
+                        <?php endforeach; 
+                            ?>
                     </tbody>
                 </table>
             </div>
@@ -117,7 +118,7 @@ require './../rutas.php';
             <div>
                 <br>
                 <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
-                <input id=buttonBuscar type="submit" value="Buscar Profesor" formaction="busquedaPorProfesor.php" onclick="buscarHorarios(Materias,profesor)",>
+                <input id=buttonBuscar type="submit" value="Buscar Profesor" formaction="busquedaPorProfesor.php" onclick="buscarHorarios(Materias,profesor)">
                 <input type="submit" value="Buscar Materia" formaction="busquedaPorMateria.php">
             </div>
             <div>                     
