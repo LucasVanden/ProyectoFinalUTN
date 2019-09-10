@@ -17,7 +17,7 @@ function buscarHorarios(materia, profesor) { //no esta funcionando
     document.getElementById("buttonBuscar").innerHTML;
     //    guardar inscripcion en la db
     // mostrar mensaje de inscripcion correcta
-    prompt("allala" + materia.value + "_" + profesor.value);
+    prompt("lelele" + materia.value + "_" + profesor.value);
     // if (false) {
     //     window.location.replace("http://localhost:8888/PFProyect/vista/alumno/busquedaPorMateria.php");
     // } else {
@@ -26,8 +26,8 @@ function buscarHorarios(materia, profesor) { //no esta funcionando
 
 }
 
-function buscarHorariosporMateria() {
-    prompt("allala");
+function buscarHorariosporMateria($a) {
+    prompt($a);
 
 
 }

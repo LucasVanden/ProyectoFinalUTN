@@ -41,7 +41,7 @@ require './../../controlador/alumnoControlador.php'
         <h2>Estás cursando:</h2>
         <form action="alumnoPpal.php" method="POST">        
             <div>
-                <table class="table-mostrar" id="tablaMateria" onclick="">
+                <table class="table-mostrar" id="tablaMateria">
                     <thead>
                         <!--aca va cabecera de tabla-->
                     </thead>
@@ -55,9 +55,9 @@ require './../../controlador/alumnoControlador.php'
                         foreach ($alumno[0]->getMateria() as $materia): ?> 
                       
                             <tr>
-                            <td><a href="busquedaPorMateria.php"><?php echo $materia->getnombreMateria(); ?></a></td>
-                           <td> <input id=temp type="submit" value=<?php echo $materia->getnombreMateria()?> formaction="busquedaPorMateria.php" 
-                            onclick="buscarHorariosporMateria()"></td>
+                            <td><a href='busquedaPorMateria.php?id=".$id["id"].'><?php echo $materia->getnombreMateria(); ?></a></td>
+                           <td> <input id=<?php echo $materia->getid_materia()?> type="submit" value=<?php echo $materia->getnombreMateria()?> formaction="busquedaPorMateria.php" 
+                            onclick="buscarHorariosporMateria(id)"></td>
                              </tr>
                         <?php endforeach; 
                             ?>

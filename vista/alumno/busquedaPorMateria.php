@@ -45,7 +45,7 @@ require './../rutas.php';
                                 Carbonari, Daniela
                             </td>
                             <td>
-                                <button id="buttonAsistir" name="Asistir" onclick="asistirconsulta()"> Asistir </button>
+                                <button id="buttonAsistir" name="Asistir" onclick="buscarHorariosporMateria(<?php $id = $_GET['id'];?>)"> Asistir </button>
                             </td>
                         </tr>
                         <tr>

@@ -1,9 +1,9 @@
 <?php
 session_start();
 require 'dbPFprueba.php';
-if (isset($_SESSION['user_id'])) {
-    $records = $conn->prepare('SELECT id, ususrio, contrasenia FROM usuarios WHERE id = :id');
-    $records->bindParam(':id', $_SESSION['user_id']);
+if (isset($_SESSION['id_usuario'])) {
+    $records = $conn->prepare('SELECT id_usuario, usuario, contrasenia FROM usuario WHERE id = :id');
+    $records->bindParam(':id', $_SESSION['id_usuario']);
     $records->execute();
     $results = $records->fetch(PDO::FETCH_ASSOC);
     $user = null;

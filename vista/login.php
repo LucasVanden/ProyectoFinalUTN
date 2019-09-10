@@ -1,12 +1,12 @@
 <?php
 session_start();
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['id_usuario'])) {
     header('Location: /PFProyect');
     footer('Location: /PFProyect');
 }
 require 'dbPFprueba.php';
 if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
-    $records = $conn->prepare('SELECT id, usuario, contraseña FROM usuario WHERE usuario = :usuario');
+    $records = $conn->prepare('SELECT id_usuario, usuario, contraseña FROM usuario WHERE usuario = :usuario');
     $records->bindParam(':usuario', $_POST['usuario']);
     $records->execute();
     $results = $records->fetch(PDO::FETCH_ASSOC);
