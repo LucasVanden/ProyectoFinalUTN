@@ -28,6 +28,11 @@ function buscarHorarios(materia, profesor) { //no esta funcionando
 
 function buscarHorariosporMateria($a) {
     prompt($a);
+    localStorage.setItem("id_materia", $a);
 
+}
 
+function returnid_materia() {
+    var m = localStorage.getItem("id_materia");
+    //prompt(m);
 }

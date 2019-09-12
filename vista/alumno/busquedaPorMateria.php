@@ -6,7 +6,10 @@ if (isset($_SESSION['user_id'])) {
 }
 require './../dbPFprueba.php';
 require './../rutas.php';
+require './../../controlador/alumnoControlador.php'
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -22,8 +25,32 @@ require './../rutas.php';
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Administración Gerencial</h2>
+
+
+
+ <!-- <script>var Var_JavaScript = localStorage.getItem("id_materia");    // declaración de la variable </script>  
+    <?php
+        $var_PHP = "<script> document.writeln(Var_JavaScript); </script>"; // igualar el valor de la variable JavaScript a PHP 
+    echo $var_PHP   // muestra el resultado 
+    ?> -->
+
+        <?php
+         $a =new AlumnoControlador ;
+         $mat = $a->buscarHorariosDeConsultaDeMateria(1);
+        ?>
+
+        <h2><?php echo $mat->getnombreMateria(); ?></h2>
         <h3>Horarios de Consulta</h3>
+       
+ 
+
+<!-- <input id="pikachu" type="button" value="" name="test"> </input>
+<script> 
+ 
+ document.getElementById("pikachu").value = localStorage.getItem("id_materia");
+ </script> -->
+
+
         <form action="alumnoConfirmarAsistencia.php" method="POST">        
             <div>
                 <table id="tablaMateriaPpal">
@@ -35,32 +62,29 @@ require './../rutas.php';
                     </thead>
                     <tbody style="text-align: left">
                         <tr>
+
+                        <?php 
+                        // $a =new AlumnoControlador ;
+                        // $mat = $a->buscarHorariosDeConsultaDeMateria(1);
+                        foreach ($mat->getHorarioDeConsulta() as $horarioconsulta): ?> 
+                      
                             <td>
-                                Lunes
+                                 <?php echo $horarioconsulta->getDia()->getdia(); ?>
                             </td>
                             <td>
-                                15:45 - 16:45
+                                <?php echo $horarioconsulta->getHora(); ?>
                             </td>
                             <td>
-                                Carbonari, Daniela
+                                <?php echo $horarioconsulta->getProfesor()->getnombre(); ?>
+                                <?php echo $horarioconsulta->getProfesor()->getapellido(); ?>
                             </td>
                             <td>
-                                <button id="buttonAsistir" name="Asistir" onclick="buscarHorariosporMateria(<?php $id = $_GET['id'];?>)"> Asistir </button>
+                                <button id="buttonAsistir" name="Asistir" onclick="returnid_materia()"> Asistir </button>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Jueves
-                            </td>
-                            <td>
-                                17:30 - 19:00
-                            </td>
-                            <td>
-                                Troglia, Carlos
-                            </td>
-                            <td>
-                                <button id="buttonAsistir" name="Asistir" onclick="asistirconsulta()"> Asistir </button>
-                            </td>
+
+                        <?php endforeach; 
+                            ?>
+                        
                         </tr>
                     </tbody>                    
                 </table>                
