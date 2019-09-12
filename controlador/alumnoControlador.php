@@ -113,6 +113,16 @@ return $mat;
 
     }
     
+    function buscarIDdeNombreMateria($nombre){
+        $conn = $this->getconexion();
+        $stmt = $conn->prepare("SELECT id_materia FROM materia where nombreMateria='$nombre'"); 
+        $stmt->execute(); 
+        $id="";
+        while($row = $stmt->fetch()) {
+        $id= $row['id_materia'];
+    }
+        return $id;
+    }
 
 }
 ?>

@@ -56,7 +56,7 @@ require './../../controlador/alumnoControlador.php'
                       
                             <tr>
                             <td><a href='busquedaPorMateria.php?id=".$id["id"].'><?php echo $materia->getnombreMateria(); ?></a></td>
-                           <td> <input id=<?php echo $materia->getid_materia()?> type="submit" value=<?php echo $materia->getnombreMateria()?> formaction="busquedaPorMateria.php" 
+                           <td> <input name="nombreMateriaSeleccionada" id=<?php echo $materia->getid_materia()?> type="submit" value="<?php echo $materia->getnombreMateria()?>" formaction="busquedaPorMateria.php" 
                             onclick="buscarHorariosporMateria(id)"></td>
                              </tr>
                         <?php endforeach; 

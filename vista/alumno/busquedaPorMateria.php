@@ -28,15 +28,22 @@ require './../../controlador/alumnoControlador.php'
 
 
 
- <!-- <script>var Var_JavaScript = localStorage.getItem("id_materia");    // declaración de la variable </script>  
+ <script>var Var_JavaScript = localStorage.getItem("id_materia");    // declaración de la variable </script>  
     <?php
+    
         $var_PHP = "<script> document.writeln(Var_JavaScript); </script>"; // igualar el valor de la variable JavaScript a PHP 
-    echo $var_PHP   // muestra el resultado 
-    ?> -->
-
+        setcookie("idmateria3",$var_PHP);
+    echo $var_PHP   // muestra el resultado  
+    ?> 
+ <?php $a = new alumnoControlador();
+ echo "este es el id de la materia";
+  $id = $a->buscarIDdeNombreMateria($_POST["nombreMateriaSeleccionada"]);
+//echo $a->buscarIDdeNombreMateria("ProyectoFinal");
+ echo ($_POST["nombreMateriaSeleccionada"]);
+   ?>
         <?php
          $a =new AlumnoControlador ;
-         $mat = $a->buscarHorariosDeConsultaDeMateria(1);
+         $mat = $a->buscarHorariosDeConsultaDeMateria($id);
         ?>
 
         <h2><?php echo $mat->getnombreMateria(); ?></h2>
