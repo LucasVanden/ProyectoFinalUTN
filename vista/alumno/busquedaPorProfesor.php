@@ -6,6 +6,7 @@ if (isset($_SESSION['user_id'])) {
 }
 require './../dbPFprueba.php';
 require './../rutas.php';
+require './../../controlador/alumnoControlador.php'
 ?>
 
 <!DOCTYPE html>
@@ -21,9 +22,15 @@ require './../rutas.php';
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-            <h2 style="align-content: center">Troglia, Carlos</h2>
+
+        <?php  $a=new AlumnoControlador();
+        $listaHorarios= $a->buscarHorariosDeConsultaporProfesor($_POST["profesor"])?>
+
+            <h2 style="align-content: center"><?php echo $listaHorarios[0]->getapellido();echo ' '; echo $listaHorarios[0]->getnombre()?></h2>
             <h3>Horarios de Consulta</h3>
-            <form action="alumnoConfirmarAsistencia.php" method="POST">        
+            
+            <form action="alumnoConfirmarAsistencia.php" method="POST">      
+           
             <div>
                 <table id="tablaBusquedaPorProfesor" onclick="">
                     <thead>
@@ -33,34 +40,28 @@ require './../rutas.php';
                         <th>Asistir</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                Administración Gerencial
-                            </td>
-                            <td>
-                                Jueves
-                            </td>                            
-                            <td>
-                                17:30 - 19:00
-                            </td>
-                            <td>
-                                <button id="buttonAsistir" name="Asistir"> Asistir </button>
-                            </td>
-                        </tr>                        
-                        <tr>
-                            <td>
-                                Administracion de Recursos
-                            </td>
-                            <td>
-                                Martes
-                            </td>                            
-                            <td>
-                                19:00 - 20:00
-                            </td>
-                            <td>
-                                <button id="buttonAsistir" name="Asistir"> Asistir </button>
-                            </td>
-                        </tr>                        
+                       
+                         <?php  
+                            // $a =new AlumnoControlador ;
+                            // $mat = $a->buscarHorariosDeConsultaDeMateria(1);
+                            foreach ($listaHorarios[1] as $horadeconsulta): ?> 
+                           <tr>
+                                 <td>
+                                     <?php echo $horadeconsulta->getMateria()->getnombreMateria() ?>
+                                </td>
+                                <td>
+                                     <?php echo $horadeconsulta->getHorarioDeConsulta()->getdia()->getdia(); ?>
+                                </td>
+                                <td>
+                                    <?php echo $horadeconsulta->getHorarioDeConsulta()->getHora(); ?>
+                                </td>
+                                <td>
+                                    <button id="buttonAsistir" name="Asistir" value=<?php echo $horadeconsulta->getid_horadeconsulta();?> onclick="returnid_materia()"> Asistir </button>
+                                </td>
+                            </tr>   
+                            <?php endforeach; 
+                                ?>        
+                                
                     </tbody>                    
                 </table>                
             </div>

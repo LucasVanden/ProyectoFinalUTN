@@ -10,7 +10,9 @@ function confirmarasistencia() { //no esta funcionando
     // mostrar mensaje de inscripcion correcta
     // prompt("picachu", "...");
     //window.location.replace("http://localhost/ProyectoFinalUTN/vista/alumno/alumnoPpal.php");    
-    window.location.replace(alumnoppal);
+    //window.location.replace(alumnoppal);
+    document.location.href = alumnoppal;
+    prompt("lelele");
 }
 
 function buscarHorarios(materia, profesor) { //no esta funcionando

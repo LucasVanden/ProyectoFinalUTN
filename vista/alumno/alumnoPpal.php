@@ -6,7 +6,8 @@ if (isset($_SESSION['user_id'])) {
 }
 require './../dbPFprueba.php';
 require './../rutas.php';
-require './../../controlador/alumnoControlador.php'
+require './../../controlador/alumnoControlador.php';
+require './../../controlador/departamentoMaterias.php';
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +26,7 @@ require './../../controlador/alumnoControlador.php'
         
         <script src="jquery.js"></script>
         <script src="./../js/funciones.js" type="text/javascript"></script>
+        
 <!-- <script>
     $(document).ready(function() {
 
@@ -64,6 +66,7 @@ require './../../controlador/alumnoControlador.php'
                     </tbody>
                 </table>
             </div>
+           
             <div>
                 <br>
                 <h2>Buscar Otra Consulta</h2>
@@ -82,35 +85,35 @@ require './../../controlador/alumnoControlador.php'
                         <tr>
                             <td>
                                 <select name="profesor">
-                                    <option>Alfonso, Eugenia</option>                        
-                                    <option>Correa, Claudia</option>
-                                    <option>Manino, Gustavo</option>
-                                    <option>Moralejo, Raúl</option>
-                                    <option>Tagarelli, Sandra</option>                        
-                                    <option>Vázquez, Alejandro</option>
-                                    <option>Profesor N</option>
+                               
+                                <?php 
+                               $listaprofesores = $a->BuscarProfesor();
+                               foreach ($listaprofesores as $profesor): ?> 
+                                <option value=<?php echo "{$profesor->getid_profesor()}" ?>> <?php echo "{$profesor->getApellido()}, {$profesor->getnombre()}" ?></option>   
+                                <?php endforeach; 
+                               ?>
+
                                 </select>                                
                             </td>
                             <td>                                
-                                <select name="departamentos">
-                                    <option>Básicas</option>                        
-                                    <option>Civil</option>                        
-                                    <option>Electrónica</option>
-                                    <option>Electromecánica</option>
-                                    <option>Sistemas</option>
-                                    <option>Química</option>
+                                <select id="first-choice" name="departamentos">
+
+                                       <?php 
+                               $listadepartamento = $a->BuscarDepartamento();
+                               foreach ($listadepartamento as $departamento): ?> 
+                                <option value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
+                                <?php endforeach; 
+                               ?>
                                 </select>
                             </td>
                             <td>                       
-                                <select name="Materias">
-                                    <option>Álgebra</option>                        
-                                    <option>Administración de Recursos</option>
-                                    <option>Administración Gerencial</option>
-                                    <option >Análisis de Sistemas</option>
-                                    <option>Análisis Matemático I</option>                        
-                                    <option>Análisis Matemático II</option>
-                                    <option>Materia N</option>
+                                <select id="second-choice" name="Materias">
                                 </select> 
+                                <script>
+                 $("#first-choice").change(function() {
+                 $("#second-choice").load("departamentoMaterias.php?choice=" + $("#first-choice").val());
+                });</script>
+
                             </td>
                         </tr>                   
                 </table>

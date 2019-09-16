@@ -1,12 +1,12 @@
 <?php
 
 //alumno
-$alumnoPrincipal="'http://localhost/ProyectoFinalUTN/vista/alumno/alumnoPpal.php'";
-$alumnoAnotaciones="'http://localhost/ProyectoFinalUTN/vista/alumno/alumnoAnotaciones.php'";
-$alumnoConfirmarAsistencia="'http://localhost/ProyectoFinalUTN/vista/alumno/alumnoConfirmarAsistencia.php'";
-$alumnoRegistrarAsistencia="'http://localhost/ProyectoFinalUTN/vista/alumno/alumnoRegistrarAsistencia.php'";
-$busquedaPorMateria="'http://localhost/ProyectoFinalUTN/vista/alumno/busquedaPorMateria.php'";
-$busquedaPorProfesor="'http://localhost/ProyectoFinalUTN/vista/alumno/busquedaPorProfesor.php'";
+// $alumnoPrincipal="'http://localhost/ProyectoFinalUTN/vista/alumno/alumnoPpal.php'";
+// $alumnoAnotaciones="'http://localhost/ProyectoFinalUTN/vista/alumno/alumnoAnotaciones.php'";
+// $alumnoConfirmarAsistencia="'http://localhost/ProyectoFinalUTN/vista/alumno/alumnoConfirmarAsistencia.php'";
+// $alumnoRegistrarAsistencia="'http://localhost/ProyectoFinalUTN/vista/alumno/alumnoRegistrarAsistencia.php'";
+// $busquedaPorMateria="'http://localhost/ProyectoFinalUTN/vista/alumno/busquedaPorMateria.php'";
+// $busquedaPorProfesor="'http://localhost/ProyectoFinalUTN/vista/alumno/busquedaPorProfesor.php'";
 
 //profesor
 $profesorAlumnosAnotados="'http://localhost/ProyectoFinalUTN/vista/profesor/profesorAlumnosAnotados.php'";
@@ -22,12 +22,12 @@ $directorReportes="'http://localhost/ProyectoFinalUTN/vista/directorReportes.php
 
 
 //alumno
-//$alumnoPrincipal="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoPpal.php'";
-//$alumnoAnotaciones="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoAnotaciones.php'";
-//$alumnoConfirmarAsistencia="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoConfirmarAsistencia.php'";
-//$alumnoRegistrarAsistencia="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoRegistrarAsistencia.php'";
-//$busquedaPorMateria="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/busquedaPorMateria.php'";
-//$busquedaPorProfesor="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/busquedaPorProfesor.php'";
+$alumnoPrincipal="http://localhost:8888/PFProyect/vista/alumno/alumnoPpal.php";
+$alumnoAnotaciones="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoAnotaciones.php'";
+$alumnoConfirmarAsistencia="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoConfirmarAsistencia.php'";
+$alumnoRegistrarAsistencia="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoRegistrarAsistencia.php'";
+$busquedaPorMateria="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/busquedaPorMateria.php'";
+$busquedaPorProfesor="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/busquedaPorProfesor.php'";
 
 //profesor
 //$profesorAlumnosAnotados="'http://localhost:8888/ProyectoFinalUTN/vista/profesor/profesorAlumnosAnotados.php'";

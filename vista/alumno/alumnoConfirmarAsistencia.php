@@ -23,13 +23,18 @@ require './../rutas.php';
             <p> <?= $message ?></p>
         <?php endif; ?>
         <h1>Confirmar Asistencia</h1>
-        <form action="alumnoPpal.php" method="POST">
+<?php 
+     echo   $_POST['Asistir'];
+     $idhora = $_POST['Asistir'];
+        ?>
+        <form action="./../../controlador/crearAnotacion.php" method="POST">
         
             <textarea name="textarea" rows="10" cols="50">Ingrese su tema (opcional)</textarea>
+            <input name="idhora" type="hidden" value=<?php echo $idhora ?> > </button>
             <br>
             <br>
             <!-- agregar CSS -->
-            <input id=buttonConfirmar type="button" value="Confirmar" onclick="confirmarasistencia()">
+            <input id=buttonConfirmar name="textoConfirmar" type="submit" value="Confirmar" onclick="confirmarasistencia()">
             <input type="button" value="Cancelar" onclick="self.location.href=<?php echo $alumnoPrincipal?>"/>
         </form>
     </body>

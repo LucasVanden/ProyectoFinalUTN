@@ -7,6 +7,7 @@ class Materia
 	//var $m_Horario Cursado;
 	var $m_CarreRA;
 	var $HorarioDeConsulta;
+	var $HoraDeConsulta;
 	var $m_Mesas;
 
 	function Materia()
@@ -36,6 +37,14 @@ class Materia
 		return $this->HorarioDeConsulta;
 	}
 	function setHorarioDeConsulta($newVal)
+	{
+		$this->HorarioDeConsulta = $newVal;
+	}
+	function getHoraDeConsulta()
+	{
+		return $this->HorarioDeConsulta;
+	}
+	function setHoraDeConsulta($newVal)
 	{
 		$this->HorarioDeConsulta = $newVal;
 	}

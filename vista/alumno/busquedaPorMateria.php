@@ -43,7 +43,7 @@ require './../../controlador/alumnoControlador.php'
    ?>
         <?php
          $a =new AlumnoControlador ;
-         $mat = $a->buscarHorariosDeConsultaDeMateria($id);
+         $mat = $a->buscarHorariosDeConsultaDeMateriaporhoraconsulta($id);
         ?>
 
         <h2><?php echo $mat->getnombreMateria(); ?></h2>
@@ -73,20 +73,20 @@ require './../../controlador/alumnoControlador.php'
                         <?php 
                         // $a =new AlumnoControlador ;
                         // $mat = $a->buscarHorariosDeConsultaDeMateria(1);
-                        foreach ($mat->getHorarioDeConsulta() as $horarioconsulta): ?> 
+                        foreach ($mat->getHoraDeConsulta() as $horadeconsulta): ?> 
                       
                             <td>
-                                 <?php echo $horarioconsulta->getDia()->getdia(); ?>
+                                 <?php echo $horadeconsulta->getHorarioDeConsulta()->getDia()->getdia(); ?>
                             </td>
                             <td>
-                                <?php echo $horarioconsulta->getHora(); ?>
+                                <?php echo $horadeconsulta->getHorarioDeConsulta()->getHora(); ?>
                             </td>
                             <td>
-                                <?php echo $horarioconsulta->getProfesor()->getnombre(); ?>
-                                <?php echo $horarioconsulta->getProfesor()->getapellido(); ?>
+                                <?php echo $horadeconsulta->getHorarioDeConsulta()->getProfesor()->getnombre(); ?>
+                                <?php echo $horadeconsulta->getHorarioDeConsulta()->getProfesor()->getapellido(); ?>
                             </td>
                             <td>
-                                <button id="buttonAsistir" name="Asistir" onclick="returnid_materia()"> Asistir </button>
+                                <button id="buttonAsistir" name="Asistir" value=<?php echo $horadeconsulta->getid_horadeconsulta();?> onclick="returnid_materia()"> Asistir </button>
                             </td>
 
                         <?php endforeach; 
