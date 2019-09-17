@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-09-2019 a las 01:00:20
--- Versión del servidor: 10.1.25-MariaDB
--- Versión de PHP: 7.1.7
+-- Tiempo de generación: 17-09-2019 a las 07:23:49
+-- Versión del servidor: 10.1.28-MariaDB
+-- Versión de PHP: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,7 +36,7 @@ CREATE TABLE `alumno` (
   `email` varchar(50) NOT NULL,
   `fechaNacimientoAlumno` date NOT NULL,
   `telefonoAlumno` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `alumno`
@@ -58,7 +58,7 @@ CREATE TABLE `anotadosestado` (
   `horaAnotadosEstado` time NOT NULL,
   `fk_estadoanotados` int(11) NOT NULL,
   `fk_detalleanotados` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -71,7 +71,7 @@ CREATE TABLE `asueto` (
   `fechaAsueto` date NOT NULL,
   `horaDesdeAsueto` time NOT NULL,
   `horaHastaAsueto` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `asueto`
@@ -90,7 +90,7 @@ CREATE TABLE `aula` (
   `cuerpoAula` varchar(20) NOT NULL,
   `nivelAula` int(11) NOT NULL,
   `numeroAula` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -103,7 +103,7 @@ CREATE TABLE `avisoprofesor` (
   `fechaAvisoProfesor` date NOT NULL,
   `detalleDescripcion` varchar(500) NOT NULL,
   `fk_horadeconsulta` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -115,7 +115,7 @@ CREATE TABLE `dedicacion` (
   `id_dedicacion` int(16) NOT NULL,
   `tipo` varchar(20) NOT NULL,
   `cantidadHora` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -127,7 +127,7 @@ CREATE TABLE `dedicacion_materia_profesor` (
   `id_dedicacion_materia_profesor` int(20) NOT NULL,
   `fk_dedicacion` int(20) NOT NULL,
   `fk_materia` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -137,8 +137,8 @@ CREATE TABLE `dedicacion_materia_profesor` (
 
 CREATE TABLE `departamento` (
   `id_departamento` int(20) NOT NULL,
-  `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `nombre` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `departamento`
@@ -162,10 +162,10 @@ CREATE TABLE `detalleanotados` (
   `id_detalleanotados` int(20) NOT NULL,
   `fechaDesdeAnotados` date NOT NULL,
   `horaDetalleAnotados` time(6) NOT NULL,
-  `tema` text,
+  `tema` mediumtext,
   `fk_alumno` int(20) NOT NULL,
   `fk_horadeconsulta` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `detalleanotados`
@@ -196,7 +196,8 @@ INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `hora
 (30, '2019-09-15', '22:02:10.000000', 'Ingrese su tema (opcional)', 1, 2),
 (31, '2019-09-15', '17:40:15.000000', 'Ingrese su tema (opcional)', 1, 2),
 (32, '0000-00-00', '19:49:59.000000', 'anda por profesor', 1, 2),
-(33, '2019-09-16', '19:53:40.000000', 'anda la fecha', 1, 2);
+(33, '2019-09-16', '19:53:40.000000', 'anda la fecha', 1, 2),
+(34, '2019-09-17', '01:11:41.000000', 'Ingrese su tema (opcional)', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -207,7 +208,7 @@ INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `hora
 CREATE TABLE `dia` (
   `id_dia` int(20) NOT NULL,
   `dia` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 --
 -- Volcado de datos para la tabla `dia`
@@ -216,10 +217,10 @@ CREATE TABLE `dia` (
 INSERT INTO `dia` (`id_dia`, `dia`) VALUES
 (1, 'Lunes'),
 (2, 'Martes'),
-(3, 'Miercoles'),
+(3, 'Miércoles'),
 (4, 'Jueves'),
 (5, 'Viernes'),
-(6, 'Sabado');
+(6, 'Sábado');
 
 -- --------------------------------------------------------
 
@@ -230,7 +231,7 @@ INSERT INTO `dia` (`id_dia`, `dia`) VALUES
 CREATE TABLE `estadoanotados` (
   `id_estadoanotados` int(20) NOT NULL,
   `nombreEstado` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -249,7 +250,7 @@ CREATE TABLE `horadeconsulta` (
   `fk_presentismo` int(20) DEFAULT NULL,
   `fk_horariodeconsulta` int(20) NOT NULL,
   `fk_profesor` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `horadeconsulta`
@@ -274,7 +275,7 @@ CREATE TABLE `horariocursado` (
   `fk_dia` int(20) NOT NULL,
   `fk_profesor` int(20) NOT NULL,
   `fk_turno` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -291,7 +292,7 @@ CREATE TABLE `horariodeconsulta` (
   `fk_dia` int(20) NOT NULL,
   `fk_profesor` int(20) NOT NULL,
   `fk_materia` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `horariodeconsulta`
@@ -311,7 +312,7 @@ CREATE TABLE `materia` (
   `nombreMateria` varchar(50) NOT NULL,
   `fk_departamento` int(20) NOT NULL,
   `fk_dia` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `materia`
@@ -330,7 +331,7 @@ INSERT INTO `materia` (`id_materia`, `nombreMateria`, `fk_departamento`, `fk_dia
 CREATE TABLE `materias_alumno` (
   `fk_alumno` int(20) NOT NULL,
   `fk_materia` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `materias_alumno`
@@ -349,7 +350,7 @@ INSERT INTO `materias_alumno` (`fk_alumno`, `fk_materia`) VALUES
 CREATE TABLE `perfil` (
   `nombrePerfil` varchar(20) NOT NULL,
   `id_perfil` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -363,7 +364,7 @@ CREATE TABLE `presentismo` (
   `horaDesde` time NOT NULL,
   `horaHasta` time NOT NULL,
   `fk_profesor` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -375,7 +376,7 @@ CREATE TABLE `privilegio` (
   `nombrePrivilegio` varchar(20) NOT NULL,
   `numeroPerfil` int(11) NOT NULL,
   `id_privilegio` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -386,7 +387,7 @@ CREATE TABLE `privilegio` (
 CREATE TABLE `privilegioperfil` (
   `fk_perfil` int(20) NOT NULL,
   `fk_privilegio` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -401,7 +402,7 @@ CREATE TABLE `profesor` (
   `nombre` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `fk_dedicacion_materia_profesor` int(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `profesor`
@@ -422,7 +423,7 @@ CREATE TABLE `turno` (
   `nombre` varchar(20) NOT NULL,
   `HoraDesdeTurno` time NOT NULL,
   `HoraHastaTurno` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -437,7 +438,7 @@ CREATE TABLE `usuario` (
   `fk_profesor` int(20) DEFAULT NULL,
   `fk_perfil` int(20) NOT NULL,
   `id_usuario` int(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Índices para tablas volcadas
@@ -617,101 +618,121 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `alumno`
   MODIFY `id_alumno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `anotadosestado`
 --
 ALTER TABLE `anotadosestado`
   MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `asueto`
 --
 ALTER TABLE `asueto`
   MODIFY `id_asueto` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `avisoprofesor`
 --
 ALTER TABLE `avisoprofesor`
   MODIFY `id_avisoprofesor` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `dedicacion`
 --
 ALTER TABLE `dedicacion`
   MODIFY `id_dedicacion` int(16) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `dedicacion_materia_profesor`
 --
 ALTER TABLE `dedicacion_materia_profesor`
   MODIFY `id_dedicacion_materia_profesor` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
   MODIFY `id_departamento` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
-  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
 --
 -- AUTO_INCREMENT de la tabla `dia`
 --
 ALTER TABLE `dia`
   MODIFY `id_dia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `estadoanotados`
 --
 ALTER TABLE `estadoanotados`
   MODIFY `id_estadoanotados` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `horadeconsulta`
 --
 ALTER TABLE `horadeconsulta`
   MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `horariocursado`
 --
 ALTER TABLE `horariocursado`
   MODIFY `id_horariocursado` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `horariodeconsulta`
 --
 ALTER TABLE `horariodeconsulta`
   MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
   MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
   MODIFY `id_perfil` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `presentismo`
 --
 ALTER TABLE `presentismo`
   MODIFY `id_presentismo` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `privilegio`
 --
 ALTER TABLE `privilegio`
   MODIFY `id_privilegio` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
   MODIFY `id_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `turno`
 --
 ALTER TABLE `turno`
   MODIFY `id_turno` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(20) NOT NULL AUTO_INCREMENT;
+
 --
 -- Restricciones para tablas volcadas
 --
