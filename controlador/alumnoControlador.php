@@ -7,7 +7,9 @@ require_once ('../../modelo/HorarioDeConsulta.php');
 require_once ('../../modelo/Profesor.php');
 require_once ('../../modelo/HoraDeConsulta.php');
 require_once ('../../modelo/Departamento.php');
-
+require_once ('../../modelo/AnotadosEstado.php');
+require_once ('../../modelo/DetalleAnotados.php');
+require_once ('../../modelo/EstadoAnotados.php');
 class AlumnoControlador extends conexion
 {
 
@@ -301,5 +303,52 @@ return $mat;
     return $profesorHorarios;
 }
 
+
+
+function AnotadoRepetido($idhora,$idalumno){
+   
+    $conn = $this->getconexion();
+    $stmt = $conn->prepare("SELECT id_detalleanotados FROM detalleanotados where fk_horadeconsulta=$idhora and fk_alumno=$idalumno "); 
+    $stmt->execute();
+    $res;
+        while($row = $stmt->fetch()) {
+                $detalle = new Detalleanotados();
+                $detalle->setid_detalleanotados($row['id_detalleanotados']);
+                $iddetalle=$row['id_detalleanotados'];
+                $Estados=array();
+
+                $stmt2 = $conn->prepare("SELECT id_anotadoestado,fechaAnotadosEstado,horaAnotadosEstado,fk_estadoanotados FROM anotadosestado where fk_detalleanotados=$iddetalle "); 
+                $stmt2->execute();
+                while($row = $stmt2->fetch()) {
+                    $anotado = new AnotadosEstado();
+                    $anotado->setid_anotadosEstado($row['id_anotadoestado']);
+                    $anotado->setfechaAnotadosEstado($row['fechaAnotadosEstado']);
+                    $anotado->sethoraAnotadosEstado($row['horaAnotadosEstado']);
+                    $idnombreestado=$row['fk_estadoanotados'];
+
+                    $stmt3 = $conn->prepare("SELECT nombreEstado,id_estadoanotados FROM estadoanotados where id_estadoanotados=$idnombreestado "); 
+                    $stmt3->execute();
+                    while($row = $stmt3->fetch()) {
+                        $estado = new EstadoAnotados();
+                        $estado->setnombreEstado($row['nombreEstado']);
+                        $estado->setid_estadoanotados($row['id_estadoanotados']);
+                        $anotado->setEstadoAnotados($estado);       
+                    }
+                
+                        array_push($Estados,$anotado);
+                }
+                $detalle->setAnotadosEstado($Estados);
+                $res=$detalle;
+        }  
+        $respuesta;
+        $listadetalles= $res->getAnotadosEstado();
+     if  ( end($listadetalles)->getEstadoAnotados()->getnombreEstado()=="Anotado") {
+        $respuesta=true; }
+         else {$respuesta=false;}
+         return $respuesta;
+     } 
+    
 }
+
+
 ?>

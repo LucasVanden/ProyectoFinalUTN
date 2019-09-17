@@ -26,14 +26,19 @@ echo $temporal3->getHoraDeConsulta()[0]->getHorarioDeConsulta()->getid_horarioDe
 echo $temporal3->getHoraDeConsulta()[0]->getHorarioDeConsulta()->getdia()->getdia();
 echo $temporal3->getHoraDeConsulta()[0]->getHorarioDeConsulta()->getprofesor()->getnombre();
 
-
+echo " <br> nuevo <br>";
 $listaprofesores = $cont->BuscarProfesor();
 echo $listaprofesores[0]->getnombre();
 echo "óáéíúñ";
+echo " <br> nuevo <br>";
 $listProfeHoras=$cont->buscarHorariosDeConsultaporProfesor(2);
 echo $listProfeHoras[0]->getnombre();
 echo $listProfeHoras[1][0]->getid_horadeconsulta();
 echo $listProfeHoras[1][0]->getHorarioDeConsulta()->getdia()->getdia();
+
+echo "nueva prueba <br>";
+$tf=$cont->AnotadoRepetido(2,1);
+if( $tf){echo 'true';} else { echo 'false';};
 
 
 ?>

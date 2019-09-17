@@ -29,12 +29,21 @@ $idalumno= 1;
 
        // $fechahora="{$fecha['hours']}:{$fecha['minutes']}:{$fecha['seconds']}.000000";
         $fechadia= "{$fecha['year']}-{$mes}-{$dia}";
-
-        echo $fechadia;
-        echo $fechahora;
-        $stmt = $conexttion->prepare("INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `horaDetalleAnotados`, `tema`, `fk_alumno`, `fk_horadeconsulta`) 
-        VALUES (NULL, '$fechadia', '$fechahora' , '$mensaje', $idalumno, $idhoradeconsulta);"); 
+       
+        $idnextdetalle=0;
+        $stmt = $conexttion->prepare("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'consultasfrm' AND TABLE_NAME = 'detalleanotados'"); 
         $stmt->execute();
+        while($row = $stmt->fetch()) {
+            $idnextdetalle=($row['AUTO_INCREMENT']);}
+        
+        $stmt = $conexttion->prepare("INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `horaDetalleAnotados`, `tema`, `fk_alumno`, `fk_horadeconsulta`) 
+        VALUES ('$idnextdetalle', '$fechadia', '$fechahora' , '$mensaje', $idalumno, $idhoradeconsulta);"); 
+        $stmt->execute();
+
+        $stmt = $conexttion->prepare("INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAnotadosEstado`, `fk_detalleanotados`, `fk_estadoanotados`) 
+        VALUES (NULL, '$fechadia', '$fechahora' , '$idnextdetalle', 1);"); 
+        $stmt->execute();
+
         header_remove();
         //header("Location: http://localhost:8888/PFProyect/vista/alumno/alumnoPpal.php");
       
