@@ -8,6 +8,7 @@ class DetalleAnotados
 	var $tema;
 	var $m_Alumno;
 	var $AnotadosEstado;
+	var $fk_horadeconsulta;
 
 	function DetalleAnotados()
 	{
@@ -20,6 +21,15 @@ class DetalleAnotados
 	function setid_detalleanotados($newVal)
 	{
 		$this->id_detalleanotados = $newVal;
+	}
+
+	function getfk_horadeconsulta()
+	{
+		return $this->fk_horadeconsulta;
+	}
+	function setfk_horadeconsulta($newVal)
+	{
+		$this->fk_horadeconsulta = $newVal;
 	}
 
 	function getAnotadosEstado()

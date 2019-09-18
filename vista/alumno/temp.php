@@ -40,6 +40,11 @@ echo "nueva prueba <br>";
 $tf=$cont->AnotadoRepetido(2,1);
 if( $tf){echo 'true';} else { echo 'false';};
 
+echo "nueva prueba <br>";
+$anotados=$cont->MisAnotaciones(1);
+// echo $anotados->id_horadeconsulta();
+echo '<pre>'; print_r($anotados); echo '</pre>'
+
 
 ?>
 

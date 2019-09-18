@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-09-2019 a las 07:23:49
--- Versión del servidor: 10.1.28-MariaDB
--- Versión de PHP: 7.1.11
+-- Tiempo de generación: 18-09-2019 a las 03:21:56
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -59,6 +59,15 @@ CREATE TABLE `anotadosestado` (
   `fk_estadoanotados` int(11) NOT NULL,
   `fk_detalleanotados` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `anotadosestado`
+--
+
+INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAnotadosEstado`, `fk_estadoanotados`, `fk_detalleanotados`) VALUES
+(1, '2019-09-17', '16:36:31', 1, 37),
+(2, '2019-09-17', '18:06:14', 2, 37),
+(3, '2019-09-17', '20:31:53', 1, 39);
 
 -- --------------------------------------------------------
 
@@ -172,32 +181,8 @@ CREATE TABLE `detalleanotados` (
 --
 
 INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `horaDetalleAnotados`, `tema`, `fk_alumno`, `fk_horadeconsulta`) VALUES
-(2, '2019-09-18', '12:00:00.000000', 'pikachu', 1, 2),
-(10, '2019-09-15', '21:26:43.000000', 'Ingrese su tema (opcional)', 1, 2),
-(11, '2019-09-15', '21:40:07.000000', 'Ingrese su tema (opcional)', 1, 2),
-(12, '2019-09-15', '21:40:29.000000', 'Ingrese su tema (opcional)', 1, 2),
-(13, '2019-09-15', '21:42:48.000000', 'Ingrese su tema (opcional)', 1, 2),
-(14, '2019-09-15', '21:45:16.000000', 'Ingrese su tema (opcional)', 1, 2),
-(15, '2019-09-15', '21:46:37.000000', 'Ingrese su tema (opcional)', 1, 2),
-(16, '2019-09-15', '21:46:59.000000', 'Ingrese su tema (opcional)', 1, 2),
-(17, '2019-09-15', '21:48:47.000000', 'Ingrese su tema (opcional)', 1, 2),
-(18, '2019-09-15', '21:53:53.000000', 'Ingrese su tema (opcional)', 1, 2),
-(19, '2019-09-15', '21:54:32.000000', 'Ingrese su tema (opcional)', 1, 2),
-(20, '2019-09-15', '21:56:07.000000', 'Ingrese su tema (opcional)', 1, 2),
-(21, '2019-09-15', '21:56:37.000000', 'Ingrese su tema (opcional)', 1, 2),
-(22, '2019-09-15', '21:57:10.000000', 'Ingrese su tema (opcional)', 1, 2),
-(23, '2019-09-15', '21:58:10.000000', 'Ingrese su tema (opcional)', 1, 2),
-(24, '2019-09-15', '21:58:26.000000', 'Ingrese su tema (opcional)', 1, 2),
-(25, '2019-09-15', '21:59:59.000000', 'Ingrese su tema (opcional)', 1, 2),
-(26, '2019-09-15', '22:00:31.000000', 'Ingrese su tema (opcional)', 1, 2),
-(27, '2019-09-15', '22:00:50.000000', 'Ingrese su tema (opcional)', 1, 2),
-(28, '2019-09-15', '22:01:21.000000', 'Ingrese su tema (opcional)', 1, 2),
-(29, '2019-09-15', '22:01:37.000000', 'Ingrese su tema (opcional)', 1, 2),
-(30, '2019-09-15', '22:02:10.000000', 'Ingrese su tema (opcional)', 1, 2),
-(31, '2019-09-15', '17:40:15.000000', 'Ingrese su tema (opcional)', 1, 2),
-(32, '0000-00-00', '19:49:59.000000', 'anda por profesor', 1, 2),
-(33, '2019-09-16', '19:53:40.000000', 'anda la fecha', 1, 2),
-(34, '2019-09-17', '01:11:41.000000', 'Ingrese su tema (opcional)', 1, 2);
+(37, '2019-09-17', '16:36:31.000000', 'Probar si anda detalle', 1, 2),
+(39, '2019-09-17', '20:31:53.000000', 'ver anotaciones', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -232,6 +217,18 @@ CREATE TABLE `estadoanotados` (
   `id_estadoanotados` int(20) NOT NULL,
   `nombreEstado` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `estadoanotados`
+--
+
+INSERT INTO `estadoanotados` (`id_estadoanotados`, `nombreEstado`) VALUES
+(1, 'Anotado'),
+(2, 'Eliminado'),
+(3, 'Ausente'),
+(4, 'Presente'),
+(5, 'Suspendido'),
+(6, 'Reprogramado');
 
 -- --------------------------------------------------------
 
@@ -618,121 +615,101 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `alumno`
   MODIFY `id_alumno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `anotadosestado`
 --
 ALTER TABLE `anotadosestado`
-  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `asueto`
 --
 ALTER TABLE `asueto`
   MODIFY `id_asueto` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `avisoprofesor`
 --
 ALTER TABLE `avisoprofesor`
   MODIFY `id_avisoprofesor` int(20) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `dedicacion`
 --
 ALTER TABLE `dedicacion`
   MODIFY `id_dedicacion` int(16) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `dedicacion_materia_profesor`
 --
 ALTER TABLE `dedicacion_materia_profesor`
   MODIFY `id_dedicacion_materia_profesor` int(20) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
   MODIFY `id_departamento` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
-  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
+  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT de la tabla `dia`
 --
 ALTER TABLE `dia`
   MODIFY `id_dia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `estadoanotados`
 --
 ALTER TABLE `estadoanotados`
-  MODIFY `id_estadoanotados` int(20) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id_estadoanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `horadeconsulta`
 --
 ALTER TABLE `horadeconsulta`
   MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `horariocursado`
 --
 ALTER TABLE `horariocursado`
   MODIFY `id_horariocursado` int(20) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `horariodeconsulta`
 --
 ALTER TABLE `horariodeconsulta`
   MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
   MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
   MODIFY `id_perfil` int(20) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `presentismo`
 --
 ALTER TABLE `presentismo`
   MODIFY `id_presentismo` int(20) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `privilegio`
 --
 ALTER TABLE `privilegio`
   MODIFY `id_privilegio` int(20) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
   MODIFY `id_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `turno`
 --
 ALTER TABLE `turno`
   MODIFY `id_turno` int(20) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(20) NOT NULL AUTO_INCREMENT;
-
 --
 -- Restricciones para tablas volcadas
 --

@@ -136,56 +136,34 @@ require './../../controlador/departamentoMaterias.php';
                             <th>Acciones</th>
                         </thead>
                         <tbody style="text-align: left">
-                            <tr>
+                        <tr>
+                        <?php     
+                        $misanotaciones = $a->MisAnotaciones(1);
+                        foreach ($misanotaciones as $hora): ?> 
+                      
+                           
                                 <td>
-                                    Administración Gerencial
+                                    <?php echo $hora->getMateria()->getnombreMateria(); ?>
                                 </td>
                                 <td>
-                                    Carbonari, Daniela
+                                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getapellido(); ?>
+                                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?>
                                 </td>
                                 <td>
-                                    Lunes
-                                </td>                            
-                                <td>
-                                    15:45 - 16:45
+                                    <?php echo $hora->getHorariodeConsulta()->getdia()->getdia(); ?>
                                 </td>
                                 <td>
-                                    <button id="buttonBorrar" name="Eliminar"> Eliminar </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Administración Gerencial
+                                    <?php echo $hora->getHorariodeConsulta()->gethora(); ?>
                                 </td>
                                 <td>
-                                    Troglia, Carlos
+                                    <button id="buttonBorrar" name="Eliminar" value=  <?php echo $hora->gettempiddetalle(); ?>> Eliminar </button>
                                 </td>
-                                <td>
-                                    Jueves
-                                </td>                            
-                                <td>
-                                    17:30 - 19:00
-                                </td>
-                                <td>
-                                    <button id="buttonAsistir" name="Eliminar"> Eliminar </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Sistemas de Gestión
-                                </td>
-                                <td>
-                                    Cortés, Lucía
-                                </td>
-                                <td>
-                                    Jueves
-                                </td>                            
-                                <td>
-                                    16:45 - 17:45
-                                </td>
-                                <td>
-                                    <button id="buttonAsistir" name="Eliminar"> Eliminar </button>
-                                </td>
+                        <?php endforeach; 
+                            ?>
+                           
+                            
+                            
+                            
                             </tr>
                         </tbody>
                     </table>
