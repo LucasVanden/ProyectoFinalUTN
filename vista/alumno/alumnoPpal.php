@@ -4,10 +4,9 @@ if (isset($_SESSION['user_id'])) {
     header('Location: /PFProyect');
     footer('Location: /PFProyect');
 }
-require './../dbPFprueba.php';
-require './../rutas.php';
-require './../../controlador/alumnoControlador.php';
-require './../../controlador/departamentoMaterias.php';
+require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once $DIR . '/controlador/alumnoControlador.php';
+require_once $DIR . '/controlador/departamentoMaterias.php';
 ?>
 
 <!DOCTYPE html>
@@ -111,7 +110,7 @@ require './../../controlador/departamentoMaterias.php';
                                 </select> 
                                 <script>
                  $("#first-choice").change(function() {
-                 $("#second-choice").load("departamentoMaterias.php?choice=" + $("#first-choice").val());
+                 $("#second-choice").load("http://localhost:8888/ProyectoFinalUTN/controlador/departamentoMaterias.php?choice=" + $("#first-choice").val());
                 });</script>
 
                             </td>
@@ -136,11 +135,11 @@ require './../../controlador/departamentoMaterias.php';
                             <th>Acciones</th>
                         </thead>
                         <tbody style="text-align: left">
-                        <tr>
+                        
                         <?php     
                         $misanotaciones = $a->MisAnotaciones(1);
                         foreach ($misanotaciones as $hora): ?> 
-                      
+                      <tr>
                            
                                 <td>
                                     <?php echo $hora->getMateria()->getnombreMateria(); ?>
@@ -158,13 +157,14 @@ require './../../controlador/departamentoMaterias.php';
                                 <td>
                                     <button id="buttonBorrar" name="Eliminar" value=  <?php echo $hora->gettempiddetalle(); ?>> Eliminar </button>
                                 </td>
+                                </tr>
                         <?php endforeach; 
                             ?>
                            
                             
                             
                             
-                            </tr>
+                          
                         </tbody>
                     </table>
                     <br>

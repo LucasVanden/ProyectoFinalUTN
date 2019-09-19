@@ -1,7 +1,7 @@
 <?php
-require_once './../../modelo/persistencia/conexion.php';
-require_once './../../vista/rutas.php';
-require_once './../../modelo/Materia.php';
+require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once $DIR . '/modelo/persistencia/conexion.php';
+require_once $DIR . '/modelo/Materia.php';
 
 $con= new conexion();
 $conexttion=$con->getconexion();
@@ -9,8 +9,8 @@ $conexttion=$con->getconexion();
 
   
     $conn = $conexttion;
+    if (isset($_GET['choice'])){
     $choice = $_GET['choice'];
-    $choice=1;
     $stmt = $conn->prepare("SELECT id_materia,nombreMateria FROM materia where fk_departamento='$choice' ORDER BY nombreMateria "); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
@@ -19,6 +19,6 @@ $conexttion=$con->getconexion();
         $dep->setnombreMateria($row['nombreMateria']);
         echo "<option>" . $row{'nombreMateria'} . "</option>";
     }
-    
+}
 
     ?>

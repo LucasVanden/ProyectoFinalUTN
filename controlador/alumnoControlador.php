@@ -1,15 +1,15 @@
 <?php
-require_once ('../../modelo/persistencia/conexion.php');
-require_once ('../../modelo/Alumno.php');
-require_once ('../../modelo/Materia.php');
-//quiza separado en otro controlador
-require_once ('../../modelo/HorarioDeConsulta.php');
-require_once ('../../modelo/Profesor.php');
-require_once ('../../modelo/HoraDeConsulta.php');
-require_once ('../../modelo/Departamento.php');
-require_once ('../../modelo/AnotadosEstado.php');
-require_once ('../../modelo/DetalleAnotados.php');
-require_once ('../../modelo/EstadoAnotados.php');
+require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once ($DIR . '/modelo/persistencia/conexion.php');
+require_once ($DIR . '/modelo/Alumno.php');
+require_once ($DIR . '/modelo/Materia.php');
+require_once ($DIR . '/modelo/HorarioDeConsulta.php');
+require_once ($DIR . '/modelo/Profesor.php');
+require_once ($DIR . '/modelo/HoraDeConsulta.php');
+require_once ($DIR . '/modelo/Departamento.php');
+require_once ($DIR . '/modelo/AnotadosEstado.php');
+require_once ($DIR . '/modelo/DetalleAnotados.php');
+require_once ($DIR . '/modelo/EstadoAnotados.php');
 class AlumnoControlador extends conexion
 {
 

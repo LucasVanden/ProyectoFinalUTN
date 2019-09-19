@@ -22,7 +22,7 @@ $directorReportes="'http://localhost/ProyectoFinalUTN/vista/directorReportes.php
 
 
 //alumno
-$alumnoPrincipal="http://localhost:8888/PFProyect/vista/alumno/alumnoPpal.php";
+//$alumnoPrincipal="http://localhost:8888/PFProyect/vista/alumno/alumnoPpal.php";
 $alumnoAnotaciones="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoAnotaciones.php'";
 $alumnoConfirmarAsistencia="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoConfirmarAsistencia.php'";
 $alumnoRegistrarAsistencia="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoRegistrarAsistencia.php'";
@@ -40,8 +40,13 @@ $busquedaPorProfesor="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/busqu
 
 //reportes
 //$directorReportes="'http://localhost:8888/ProyectoFinalUTN/vista/directorReportes.php'";
+
+//----------------------------------------------------------------------
+$DIR='C:/xampp/htdocs/ProyectoFinalUTN';
+$URL='http://localhost:8888/ProyectoFinalUTN';
+$alumnoPrincipal="http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoPpal.php";
 ?>
 
-<script type ='text/javascript'>
+<!-- <script type ='text/javascript'>
 var alumnoppal=<?php echo $alumnoPrincipal ?>;
-</script>
+</script> -->

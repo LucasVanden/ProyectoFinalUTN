@@ -11,7 +11,7 @@ function confirmarasistencia() { //no esta funcionando
     // prompt("picachu", "...");
     //window.location.replace("http://localhost/ProyectoFinalUTN/vista/alumno/alumnoPpal.php");    
     //window.location.replace(alumnoppal);
-    document.location.href = alumnoppal;
+    //   document.location.href = alumnoppal;
     prompt("lelele");
 }
 

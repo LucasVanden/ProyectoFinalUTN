@@ -4,9 +4,9 @@ if (isset($_SESSION['user_id'])) {
     header('Location: /PFProyect');
     footer('Location: /PFProyect');
 }
-require './../dbPFprueba.php';
-require './../rutas.php';
-require './../../controlador/alumnoControlador.php'
+
+require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once $DIR .'/controlador/alumnoControlador.php'
 ?>
 
 

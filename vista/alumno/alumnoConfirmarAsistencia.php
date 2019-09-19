@@ -4,8 +4,8 @@ if (isset($_SESSION['usuario_id'])) {
     header('Location: /PFProyect');
     footer('Location: /PFProyect');
 }
-require './../dbPFprueba.php';
-require './../rutas.php';
+require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+$crearanotacion= $URL . '/controlador/crearAnotacion.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@ require './../rutas.php';
      echo   $_POST['Asistir'];
      $idhora = $_POST['Asistir'];
         ?>
-        <form action="./../../controlador/crearAnotacion.php" method="POST">
+        <form action=<?php echo $crearanotacion ?> method="POST">
         
             <textarea name="textarea" rows="10" cols="50">Ingrese su tema (opcional)</textarea>
             <input name="idhora" type="hidden" value=<?php echo $idhora ?> > </button>
