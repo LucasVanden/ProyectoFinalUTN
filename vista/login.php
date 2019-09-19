@@ -1,19 +1,24 @@
 <?php
 session_start();
-if (isset($_SESSION['id_usuario'])) {
+if (isset($_SESSION['user_id'])) {
     header('Location: /PFProyect');
     footer('Location: /PFProyect');
 }
 require 'dbPFprueba.php';
-if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
-    $records = $conn->prepare('SELECT id_usuario, usuario, contraseña FROM usuario WHERE usuario = :usuario');
-    $records->bindParam(':usuario', $_POST['usuario']);
-    $records->execute();
-    $results = $records->fetch(PDO::FETCH_ASSOC);
-    $message = '';
-    if (count($results) > 0 && password_verify($_POST['contrasenia'], $results['contrasenia'])) {
-        $_SESSION['user_id'] = $results['id'];
-        header("Location: /PFProyect");
+require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once $DIR . '/modelo/persistencia/conexion.php';
+
+if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
+    $con = new conexion();
+    $conexttion = $con->getconexion();
+    $stmt = $conexttion->prepare('SELECT id_usuario, usuario, contraseña FROM usuario WHERE usuario = :usuario');
+    $stmt->bindParam(':usuario', $_POST['usuario']);
+    $stmt->execute();
+    $results = $stmt->fetch(PDO::FETCH_ASSOC);
+    $message = ' ';
+    if (count($results) > 0 && password_verify($_POST['contraseña'], $results['contraseña'])) {
+        $_SESSION['user_id'] = $results['id_usuario'];
+        header("Location: /PFProyect");//header("Location: /PFProyect/login.php");//
         footer('Location: /PFProyect');
     } else {
         $message = 'Usuario y/o contraseñas inválidos.-';
@@ -34,10 +39,11 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
+
         <h1>Login</h1>
         <form action="login.php" method="POST">
             Nombre de Usuario <input name="usuario" type="text" placeholder="Ingrese Usuario" required="">
-            Contraseña <input name="contrasenia" type="password" placeholder="Ingrese Contraseña" required="">
+            Contraseña <input name="contraseña" type="password" placeholder="Ingrese Contraseña" required="">
             <div class="send-button">
                 <input type="submit" value="Ingresar">
             </div>

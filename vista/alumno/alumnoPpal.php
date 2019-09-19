@@ -208,6 +208,31 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                 <h2>Mis Notificaciones</h2>
                 <h5>Usted no tiene Mensajes Nuevos</h5>
                 <br>
+                <?php     
+                        foreach ($misanotaciones as $hora): ?> 
+                      <tr>
+                           
+                                <td>
+                                    <?php echo $hora->getMateria()->getnombreMateria(); ?>
+                                </td>
+                                <td>
+                                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getapellido(); ?>
+                                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?> :
+                                </td>
+                               <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> 
+                               
+                                <td>
+                                    <?php echo $aviso->getdetalleDescripcion() ?>
+                                </td>
+                                <td>
+                                    <?php echo $aviso->getfechaAvisoProfesor() ?>
+                                </td>
+                                <?php endforeach; 
+                            ?>
+                               
+                                </tr>
+                        <?php endforeach; 
+                            ?>
                 <br>
                 <br>
             </div>

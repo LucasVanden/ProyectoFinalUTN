@@ -10,6 +10,7 @@ require_once ($DIR . '/modelo/Departamento.php');
 require_once ($DIR . '/modelo/AnotadosEstado.php');
 require_once ($DIR . '/modelo/DetalleAnotados.php');
 require_once ($DIR . '/modelo/EstadoAnotados.php');
+require_once ($DIR . '/modelo/AvisoProfesor.php');
 class AlumnoControlador extends conexion
 {
 
@@ -407,9 +408,23 @@ function AnotadoRepetido($idhora,$idalumno){
                                 $hora = new HoraDeConsulta();
                                 $hora->settempiddetalle($idvaluedetalle);
                                 $hora->setid_horadeconsulta($row['id_horadeconsulta']);
-                                    
+                                $listaAvisos=array();    
                                 $tempidhorario =$row['fk_horariodeconsulta'];
                                 $tempmaeria =$row['fk_materia'];
+                                $tempidhora=$row['id_horadeconsulta'];
+
+                                $stmt5 = $conn->prepare("SELECT id_avisoprofesor,fechaAvisoProfesor,detalleDescripcion FROM avisoprofesor where fk_horadeconsulta=$tempidhora"); 
+                                $stmt5->execute();
+
+                                while($row = $stmt5->fetch()) {
+                                    $aviso = new AvisoProfesor();
+                                    $aviso->setid_avisoprofesor($row['id_avisoprofesor']);
+                                    $aviso->setfechaAvisoProfesor($row['fechaAvisoProfesor']);
+                                    $aviso->setdetalleDescripcion($row['detalleDescripcion']);
+                                    array_push($listaAvisos,$aviso);
+                                    
+                                }
+                                $hora->setAvisoProfesor($listaAvisos);
                                 $stmt5 = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where id_materia=$tempmaeria"); 
                                 $stmt5->execute();
 
