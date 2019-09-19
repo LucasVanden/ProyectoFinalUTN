@@ -1,10 +1,15 @@
 <?php
-session_start();
-if (isset($_SESSION['user_id'])) {
-    header('Location: /PFProyect');
-    footer('Location: /PFProyect');
-}
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+
+session_start();
+if(!isset($_SESSION['rol'])){
+    header('location: '. $URL.'/vista/login.php');
+}else{
+    if($_SESSION['rol'] != 1){
+        header('location: '. $URL.'/vista/login.php');
+    }
+}
+
 require_once $DIR . '/controlador/alumnoControlador.php';
 require_once $DIR . '/controlador/departamentoMaterias.php';
 $eliminar= $URL . '/controlador/eliminarAnotacion.php';

@@ -1,27 +1,84 @@
 <?php
+require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 session_start();
-if (isset($_SESSION['user_id'])) {
-    header('Location: /PFProyect');
-    footer('Location: /PFProyect');
+//como estaba
+//if (isset($_SESSION['user_id'])) {    
+    //header('Location: /PFProyect');
+    //footer('Location: /PFProyect');
+//}
+//con sesiones para los distintos tipos de roles de los usuarios
+if (isset($_SESSION['rol'])) {
+    switch($_SESSION['rol']){
+        case 1: //alumno
+            header('location: '. $URL.'/vista/alumno/alumnoPpal.php');
+        break;
+        case 2: //profesor
+        header('location: '. $URL.'/vista/profesor/profesorPpal.php');
+        break;
+        //agregar director
+        default:
+    }
 }
 require 'dbPFprueba.php';
-require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+
 require_once $DIR . '/modelo/persistencia/conexion.php';
 
+//asi estaba
+//if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
+    //$con = new conexion();
+    //$conexttion = $con->getconexion();
+    //$stmt = $conexttion->prepare('SELECT id_usuario, usuario, contraseña FROM usuario WHERE usuario = :usuario');
+    //$stmt->bindParam(':usuario', $_POST['usuario']);
+    //$stmt->execute();
+    //$results = $stmt->fetch(PDO::FETCH_ASSOC);
+    //$message = ' ';
+    //if (count($results) > 0 && password_verify($_POST['contraseña'], $results['contraseña'])) {
+        //$_SESSION['user_id'] = $results['id_usuario'];
+        //header("Location: /PFProyect");//header("Location: /PFProyect/login.php"); tal vez//
+        //footer('Location: /PFProyect');
+    //} else {
+        //$message = 'Usuario y/o contraseñas inválidos.-';
+    //}
+//}
+//nuevo con sesion
 if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
+    $usuario = $_POST['usuario'];
+   
+    $contraseña = $_POST['contraseña'];
     $con = new conexion();
     $conexttion = $con->getconexion();
-    $stmt = $conexttion->prepare('SELECT id_usuario, usuario, contraseña FROM usuario WHERE usuario = :usuario');
-    $stmt->bindParam(':usuario', $_POST['usuario']);
+    $stmt = $conexttion->prepare("SELECT fk_perfil,contraseña FROM usuario WHERE usuario= $usuario ");
     $stmt->execute();
-    $results = $stmt->fetch(PDO::FETCH_ASSOC);
+    // $results = $stmt->fetch(PDO::FETCH_ASSOC);
     $message = ' ';
-    if (count($results) > 0 && password_verify($_POST['contraseña'], $results['contraseña'])) {
-        $_SESSION['user_id'] = $results['id_usuario'];
-        header("Location: /PFProyect");//header("Location: /PFProyect/login.php");//
-        footer('Location: /PFProyect');
-    } else {
-        $message = 'Usuario y/o contraseñas inválidos.-';
+
+    $perfil=null;
+     $pass=null;
+    while($row = $stmt->fetch()) {
+        $perfil= $row['fk_perfil'];
+        $pass= $row['contraseña'];
+    }
+    if (isset($perfil)) {
+    if (password_verify($_POST['contraseña'],$pass)){
+    
+        $_SESSION['rol'] = $perfil;
+        switch($perfil){
+            case 1:
+           // $message = 'Entro al 1';
+                header('Location: '. $URL.'/vista/alumno/alumnoPpal.php');
+            break;
+            case 2:
+           // $message = 'Entro al 2';
+                header('Location: '. $URL.'/vista/profesor/profesorPpal.php');
+            break;
+            default:
+           // $message = 'Entro al default'. $perfil ;
+        }
+    }
+    $message = 'contraseña inválida.-';    
+}
+    else {
+        $message = 'Usuario inválidos.-';
     }
 }
 ?>

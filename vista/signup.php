@@ -6,11 +6,20 @@
   if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
     $con = new conexion();
     $conexttion = $con->getconexion();
-    $sql = "INSERT INTO usuario (usuario, contraseña) VALUES (:usuario, :contraseña)";
-    $stmt = $conexttion->prepare($sql);
-    $stmt->bindParam(':usuario', $_POST['usuario']);
+   
+    $usuario=$_POST['usuario'];
+    $passw=$_POST['contraseña'];
     $contraseña = password_hash($_POST['contraseña'], PASSWORD_BCRYPT);
-    $stmt->bindParam(':contraseña', $contraseña);
+
+    $stmt = $conexttion->prepare("INSERT INTO `usuario` (`id_usuario`, `usuario`, `contraseña`, `fk_alumno`, `fk_profesor`, `fk_perfil`) 
+    VALUES (NULL, '$usuario', '$contraseña' , 1, NULL,1);"); 
+    $stmt->execute();
+
+   
+    // $stmt->bindParam(':usuario', $_POST['usuario']);
+   
+    // $stmt->bindParam(':contraseña', $contraseña);
+   
     if ($stmt->execute()) {
       $message = 'Usuario creado con exito!!!';
     } else {
