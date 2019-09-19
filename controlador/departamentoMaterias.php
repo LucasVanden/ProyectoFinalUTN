@@ -17,7 +17,7 @@ $conexttion=$con->getconexion();
         $dep = new Materia();
         $dep->setid_materia($row['id_materia']);
         $dep->setnombreMateria($row['nombreMateria']);
-        echo "<option>" . $row{'nombreMateria'} . "</option>";
+        echo "<option value=" . $row['id_materia'].">" . $row{'nombreMateria'} . "</option>";
     }
 }
 

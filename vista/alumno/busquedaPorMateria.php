@@ -37,9 +37,13 @@ require_once $DIR .'/controlador/alumnoControlador.php'
     ?> 
  <?php $a = new alumnoControlador();
  echo "este es el id de la materia";
-  $id = $a->buscarIDdeNombreMateria($_POST["nombreMateriaSeleccionada"]);
+ if (isset($_POST['nombreMateriaSeleccionada'])){
+  $id = $a->buscarIDdeNombreMateria($_POST["nombreMateriaSeleccionada"]);}
+  else{
+      $id=$_POST['Materias'];
+  }
 //echo $a->buscarIDdeNombreMateria("ProyectoFinal");
- echo ($_POST["nombreMateriaSeleccionada"]);
+ 
    ?>
         <?php
          $a =new AlumnoControlador ;
