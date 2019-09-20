@@ -28,8 +28,6 @@ $conexttion=$con->getconexion();
         $stmt->execute();
 
         header_remove();
-        //header("Location: http://localhost:8888/PFProyect/vista/alumno/alumnoPpal.php");
-      
         header("Location: $alumnoPrincipal");
         
     ?>

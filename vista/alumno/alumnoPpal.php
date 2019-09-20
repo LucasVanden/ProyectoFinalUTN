@@ -113,7 +113,7 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                                 </select> 
                                 <script>
                  $("#first-choice").change(function() {
-                 $("#second-choice").load("http://localhost:8888/ProyectoFinalUTN/controlador/departamentoMaterias.php?choice=" + $("#first-choice").val());
+                 $("#second-choice").load("<?php echo $URL.'/controlador/departamentoMaterias.php?choice='?>"+ $("#first-choice").val());
                 });</script>
 
                             </td>
