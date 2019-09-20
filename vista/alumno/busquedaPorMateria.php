@@ -27,16 +27,8 @@ require_once $DIR .'/controlador/alumnoControlador.php'
         <?php endif; ?>
 
 
-
- <script>var Var_JavaScript = localStorage.getItem("id_materia");    // declaración de la variable </script>  
-    <?php
-    
-        $var_PHP = "<script> document.writeln(Var_JavaScript); </script>"; // igualar el valor de la variable JavaScript a PHP 
-        setcookie("idmateria3",$var_PHP);
-    echo $var_PHP   // muestra el resultado  
-    ?> 
  <?php $a = new alumnoControlador();
- echo "este es el id de la materia";
+ 
  if (isset($_POST['nombreMateriaSeleccionada'])){
   $id = $a->buscarIDdeNombreMateria($_POST["nombreMateriaSeleccionada"]);}
   else{

@@ -24,7 +24,7 @@ $crearanotacion= $URL . '/controlador/crearAnotacion.php';
         <?php endif; ?>
         <h1>Confirmar Asistencia</h1>
 <?php 
-     echo   $_POST['Asistir'];
+   
      $idhora = $_POST['Asistir'];
         ?>
         <form action=<?php echo $crearanotacion ?> method="POST">
@@ -34,8 +34,8 @@ $crearanotacion= $URL . '/controlador/crearAnotacion.php';
             <br>
             <br>
             <!-- agregar CSS -->
-            <input id=buttonConfirmar name="textoConfirmar" type="submit" value="Confirmar" onclick="confirmarasistencia()">
-            <input type="button" value="Cancelar" onclick="self.location.href=<?php echo $alumnoPrincipal?>"/>
+            <input id=buttonConfirmar name="textoConfirmar" type="submit" value="Confirmar" onclick="">
+            <input type="submit" value="Cancelar" formaction="alumnoPpal.php" onclick="self.location.href=<?php echo $alumnoPrincipal?>"/>
         </form>
     </body>
     <footer>

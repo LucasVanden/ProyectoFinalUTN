@@ -39,19 +39,7 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
         
         <script src="jquery.js"></script>
         <script src="./../js/funciones.js" type="text/javascript"></script>
-        
-<!-- <script>
-    $(document).ready(function() {
 
-        $('#example tr').click(function() {
-            var href = $(this).find("a").attr("href");
-            if (href) {
-                window.location = href;
-            }
-        });
-
-    });
-</script> -->
 
         <h2>Estás cursando:</h2>
         <form action="alumnoPpal.php" method="POST">        
@@ -72,9 +60,8 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                         foreach ($alumno[0]->getMateria() as $materia): ?> 
                       
                             <tr>
-                            <td><a href='busquedaPorMateria.php?id=".$id["id"].'><?php echo $materia->getnombreMateria(); ?></a></td>
                            <td> <input name="nombreMateriaSeleccionada" id=<?php echo $materia->getid_materia()?> type="submit" value="<?php echo $materia->getnombreMateria()?>" formaction="busquedaPorMateria.php" 
-                            onclick="buscarHorariosporMateria(id)"></td>
+                            onclick=""></td>
                              </tr>
                         <?php endforeach; 
                             ?>
@@ -136,7 +123,7 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
             <div>
                 <br>
                 <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
-                <input id=buttonBuscar type="submit" value="Buscar Profesor" formaction="busquedaPorProfesor.php" onclick="buscarHorarios(Materias,profesor)">
+                <input id=buttonBuscar type="submit" value="Buscar Profesor" formaction="busquedaPorProfesor.php" onclick="">
                 <input type="submit" value="Buscar Materia" formaction="busquedaPorMateria.php">
             </div>
             <div>                     
@@ -176,35 +163,6 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                                 </tr>
                         <?php endforeach; 
                             ?>
-                           
-                          
-                            
- <!-- BOTON BONITO   
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Desea eliminarse de la conulsta title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Aceptar</button>
-      </div>
-    </div>
-  </div>
-</div>  -->
-<!-- BOTON BONITO  --> 
                         </tbody>
                     </table>
                     <br>
@@ -213,8 +171,15 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
             <div>
                 <br>
                 <h2>Mis Notificaciones</h2>
-                <h5>Usted no tiene Mensajes Nuevos</h5>
-             
+                <!-- <h5>Usted no tiene Mensajes Nuevos</h5> -->
+                <table class="table-mostrar" id="tablaAvisos" onclick="" title="tablaAvisos">
+                <thead>                    
+                            <th>Materia</th>
+                            <th>Profesor</th>
+                            <th>Fecha</th>
+                            <th>Mensaje</th>
+                          
+                        </thead>
                 <?php     
                         foreach ($misanotaciones as $hora): ?> 
                            <br>
@@ -225,28 +190,30 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                                 </td>
                                 <td>
                                     <?php echo $hora->getHorariodeConsulta()->getProfesor()->getapellido(); ?>
-                                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?> :
+                                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?> 
                                 </td>
                                <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> 
-                               
+                               <td>
+                                    <?php echo $aviso->getfechaAvisoProfesor() ?>
+                                </td>
                                 <td>
                                     <?php echo $aviso->getdetalleDescripcion() ?>
                                 </td>
-                                <td>
-                                    <?php echo $aviso->getfechaAvisoProfesor() ?>
-                                </td>
+                            
                                 <?php endforeach; 
                             ?>
                                
                                 </tr>
                         <?php endforeach; 
                             ?>
+                </table>
+                <br>
                 <br>
                 <br>
             </div>
         </form>
     </body>
-    <!-- <footer>
+    <footer>
         <?php require './../partials/footer.php'; ?>         
-    </footer>   -->
+    </footer>  
 </html>
