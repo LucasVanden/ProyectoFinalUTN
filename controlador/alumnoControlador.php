@@ -312,6 +312,7 @@ function AnotadoRepetido($idhora,$idalumno){
     $stmt = $conn->prepare("SELECT id_detalleanotados FROM detalleanotados where fk_horadeconsulta=$idhora and fk_alumno=$idalumno "); 
     $stmt->execute();
     $res;
+    $respuesta=false;
         while($row = $stmt->fetch()) {
                 $detalle = new Detalleanotados();
                 $detalle->setid_detalleanotados($row['id_detalleanotados']);
@@ -341,14 +342,13 @@ function AnotadoRepetido($idhora,$idalumno){
                 $detalle->setAnotadosEstado($Estados);
                 $res=$detalle;
         }  
-        $respuesta;
+        if(isset($res)){
         $listadetalles= $res->getAnotadosEstado();
      if  ( end($listadetalles)->getEstadoAnotados()->getnombreEstado()=="Anotado") {
         $respuesta=true; }
-         else {$respuesta=false;}
-         return $respuesta;
      } 
-
+     return $respuesta;
+    }
      function MisAnotaciones($idalumno){
 
         $ListDetalles=array();
@@ -479,7 +479,17 @@ function AnotadoRepetido($idhora,$idalumno){
         return $ListHoraDeConsulta;
     }
 
-
+    function buscarAlumnoDeUsuario($idusuario){
+        $conn = $this->getconexion();
+    
+        $stmt = $conn->prepare("SELECT fk_alumno FROM usuario where id_usuario=$idusuario"); 
+        $stmt->execute();
+        $idalumno=null;
+        while($row = $stmt->fetch()) {
+           $idalumno=$row['fk_alumno'];
+        }
+       return $idalumno;
+        }
 
 
 }?>

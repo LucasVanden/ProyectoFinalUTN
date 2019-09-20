@@ -66,7 +66,9 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                         </tr>
                         <?php 
                         $a =new AlumnoControlador ;
-                        $alumno = $a->buscarAlumno(1);
+                        $idusuario=$_SESSION['usuario'];
+                        $idalumno= $a->buscarAlumnoDeUsuario($idusuario);
+                        $alumno = $a->buscarAlumno($idalumno);
                         foreach ($alumno[0]->getMateria() as $materia): ?> 
                       
                             <tr>
@@ -212,9 +214,10 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                 <br>
                 <h2>Mis Notificaciones</h2>
                 <h5>Usted no tiene Mensajes Nuevos</h5>
-                <br>
+             
                 <?php     
                         foreach ($misanotaciones as $hora): ?> 
+                           <br>
                       <tr>
                            
                                 <td>
@@ -243,7 +246,7 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
             </div>
         </form>
     </body>
-    <footer>
+    <!-- <footer>
         <?php require './../partials/footer.php'; ?>         
-    </footer>  
+    </footer>   -->
 </html>

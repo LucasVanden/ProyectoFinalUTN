@@ -47,21 +47,24 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
     $contraseña = $_POST['contraseña'];
     $con = new conexion();
     $conexttion = $con->getconexion();
-    $stmt = $conexttion->prepare("SELECT fk_perfil,contraseña FROM usuario WHERE usuario= $usuario ");
+    $stmt = $conexttion->prepare("SELECT id_usuario,fk_perfil,contraseña FROM usuario WHERE usuario= $usuario ");
     $stmt->execute();
     // $results = $stmt->fetch(PDO::FETCH_ASSOC);
     $message = ' ';
 
+    $usuario=null;
     $perfil=null;
      $pass=null;
     while($row = $stmt->fetch()) {
         $perfil= $row['fk_perfil'];
         $pass= $row['contraseña'];
+        $usuario=$row['id_usuario'];
     }
     if (isset($perfil)) {
     if (password_verify($_POST['contraseña'],$pass)){
     
         $_SESSION['rol'] = $perfil;
+        $_SESSION['usuario']=$usuario;
         switch($perfil){
             case 1:
            // $message = 'Entro al 1';

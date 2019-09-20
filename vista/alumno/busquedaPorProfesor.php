@@ -54,9 +54,27 @@ require $DIR . '/controlador/alumnoControlador.php';
                                 <td>
                                     <?php echo $horadeconsulta->getHorarioDeConsulta()->getHora(); ?>
                                 </td>
-                                <td>
-                                    <button id="buttonAsistir" name="Asistir" value=<?php echo $horadeconsulta->getid_horadeconsulta();?> onclick="returnid_materia()"> Asistir </button>
-                                </td>
+                                      <?php
+                                      
+                            $idHora=$horadeconsulta->getid_horadeconsulta();
+                            $idusuario=$_SESSION['usuario'];
+                            $idalumno= $a->buscarAlumnoDeUsuario($idusuario);
+                            //aca ingresar del login
+                            if ($a->AnotadoRepetido($idHora,$idalumno)){
+                              echo  '<td bgcolor="Lime">';
+                             echo "Anotado";
+                              echo  '</td>';
+                            }else{
+                               echo  '<td>';
+                               echo  '<button id="buttonAsistir" name="Asistir" value='; 
+                               echo $horadeconsulta->getid_horadeconsulta();
+                                echo '> Asistir </button>';
+                               echo  '</td>';
+                            }
+                            ?>
+                            
+                                    <!-- <button id="buttonAsistir" name="Asistir" value=<?php echo $horadeconsulta->getid_horadeconsulta();?> onclick="returnid_materia()"> Asistir </button> -->
+                                
                             </tr>   
                             <?php endforeach; 
                                 ?>        
