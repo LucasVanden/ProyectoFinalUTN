@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-09-2019 a las 03:21:56
+-- Tiempo de generación: 20-09-2019 a las 03:35:37
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -65,9 +65,21 @@ CREATE TABLE `anotadosestado` (
 --
 
 INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAnotadosEstado`, `fk_estadoanotados`, `fk_detalleanotados`) VALUES
-(1, '2019-09-17', '16:36:31', 1, 37),
-(2, '2019-09-17', '18:06:14', 2, 37),
-(3, '2019-09-17', '20:31:53', 1, 39);
+(35, '2019-09-19', '20:43:24', 1, 54),
+(36, '2019-09-19', '20:49:40', 2, 54),
+(37, '2019-09-19', '20:49:44', 1, 55),
+(38, '2019-09-19', '21:22:18', 1, 56),
+(39, '2019-09-19', '22:22:40', 2, 55),
+(40, '2019-09-19', '22:23:29', 1, 57),
+(41, '2019-09-19', '22:23:33', 2, 57),
+(42, '2019-09-19', '22:23:41', 1, 58),
+(43, '2019-09-19', '22:24:08', 2, 58),
+(44, '2019-09-19', '22:24:16', 1, 59),
+(45, '2019-09-19', '22:24:28', 2, 59),
+(46, '2019-09-19', '22:29:12', 1, 60),
+(47, '2019-09-19', '22:29:35', 2, 60),
+(48, '2019-09-19', '22:29:39', 1, 61),
+(49, '2019-09-19', '22:31:09', 2, 61);
 
 -- --------------------------------------------------------
 
@@ -113,6 +125,13 @@ CREATE TABLE `avisoprofesor` (
   `detalleDescripcion` varchar(500) NOT NULL,
   `fk_horadeconsulta` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `avisoprofesor`
+--
+
+INSERT INTO `avisoprofesor` (`id_avisoprofesor`, `fechaAvisoProfesor`, `detalleDescripcion`, `fk_horadeconsulta`) VALUES
+(2, '2019-09-19', 'no habra consulta', 2);
 
 -- --------------------------------------------------------
 
@@ -181,8 +200,14 @@ CREATE TABLE `detalleanotados` (
 --
 
 INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `horaDetalleAnotados`, `tema`, `fk_alumno`, `fk_horadeconsulta`) VALUES
-(37, '2019-09-17', '16:36:31.000000', 'Probar si anda detalle', 1, 2),
-(39, '2019-09-17', '20:31:53.000000', 'ver anotaciones', 1, 2);
+(54, '2019-09-19', '20:43:24.000000', 'Probar repetido', 1, 2),
+(55, '2019-09-19', '20:49:44.000000', 'Ingrese su tema (opcional)', 1, 2),
+(56, '2019-09-19', '21:22:18.000000', 'Ingrese su tema (opcional)', 1, 3),
+(57, '2019-09-19', '22:23:29.000000', 'lipieza', 1, 2),
+(58, '2019-09-19', '22:23:41.000000', 'limpieza', 1, 2),
+(59, '2019-09-19', '22:24:16.000000', 'Ingrese su tema (opcional)', 1, 2),
+(60, '2019-09-19', '22:29:12.000000', 'Ingrese su tema (opcional)', 1, 2),
+(61, '2019-09-19', '22:29:39.000000', 'Ingrese su tema (opcional)', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -254,7 +279,8 @@ CREATE TABLE `horadeconsulta` (
 --
 
 INSERT INTO `horadeconsulta` (`id_horadeconsulta`, `fechaDesdeAnotados`, `fechaHastaAnotados`, `cantidadAnotados`, `estadoPresentismo`, `estadoVigencia`, `fk_materia`, `fk_presentismo`, `fk_horariodeconsulta`, `fk_profesor`) VALUES
-(2, '2019-09-02', '2019-09-09', 0, 'pendiente', 'activo', 1, NULL, 1, 2);
+(2, '2019-09-02', '2019-09-09', 0, 'pendiente', 'activo', 1, NULL, 1, 2),
+(3, '2019-09-13', '2019-09-20', 0, 'pendiente', 'activo', 2, NULL, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -296,7 +322,8 @@ CREATE TABLE `horariodeconsulta` (
 --
 
 INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`, `hora`, `activoDesde`, `activoHasta`, `semestre`, `fk_dia`, `fk_profesor`, `fk_materia`) VALUES
-(1, '17:00', '2019-09-01', '2019-12-30', 2, 1, 2, 1);
+(1, '17:00', '2019-09-01', '2019-12-30', 2, 1, 2, 1),
+(2, '18:30', '2019-09-19', '2019-09-26', 2, 5, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -348,6 +375,13 @@ CREATE TABLE `perfil` (
   `nombrePerfil` varchar(20) NOT NULL,
   `id_perfil` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `perfil`
+--
+
+INSERT INTO `perfil` (`nombrePerfil`, `id_perfil`) VALUES
+('alumno', 1);
 
 -- --------------------------------------------------------
 
@@ -429,13 +463,20 @@ CREATE TABLE `turno` (
 --
 
 CREATE TABLE `usuario` (
-  `contraseña` varchar(50) NOT NULL,
+  `id_usuario` int(20) NOT NULL,
   `usuario` varchar(50) NOT NULL,
+  `contraseña` varchar(70) NOT NULL,
   `fk_alumno` int(20) DEFAULT NULL,
   `fk_profesor` int(20) DEFAULT NULL,
-  `fk_perfil` int(20) NOT NULL,
-  `id_usuario` int(20) NOT NULL
+  `fk_perfil` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `usuario`, `contraseña`, `fk_alumno`, `fk_profesor`, `fk_perfil`) VALUES
+(6, '35821', '$2y$10$LTAsfQoxzhQXQOu88XBAoerUDbW7O68wNPrHz3x8gIc0Ddnyt61s6', 1, NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -619,7 +660,7 @@ ALTER TABLE `alumno`
 -- AUTO_INCREMENT de la tabla `anotadosestado`
 --
 ALTER TABLE `anotadosestado`
-  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT de la tabla `asueto`
 --
@@ -629,7 +670,7 @@ ALTER TABLE `asueto`
 -- AUTO_INCREMENT de la tabla `avisoprofesor`
 --
 ALTER TABLE `avisoprofesor`
-  MODIFY `id_avisoprofesor` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_avisoprofesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `dedicacion`
 --
@@ -649,7 +690,7 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
-  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 --
 -- AUTO_INCREMENT de la tabla `dia`
 --
@@ -664,7 +705,7 @@ ALTER TABLE `estadoanotados`
 -- AUTO_INCREMENT de la tabla `horadeconsulta`
 --
 ALTER TABLE `horadeconsulta`
-  MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `horariocursado`
 --
@@ -674,7 +715,7 @@ ALTER TABLE `horariocursado`
 -- AUTO_INCREMENT de la tabla `horariodeconsulta`
 --
 ALTER TABLE `horariodeconsulta`
-  MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
@@ -684,7 +725,7 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `id_perfil` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_perfil` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `presentismo`
 --
@@ -709,7 +750,7 @@ ALTER TABLE `turno`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Restricciones para tablas volcadas
 --
@@ -725,7 +766,7 @@ ALTER TABLE `anotadosestado`
 -- Filtros para la tabla `avisoprofesor`
 --
 ALTER TABLE `avisoprofesor`
-  ADD CONSTRAINT `avisoprofesor_ibfk_1` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horariocursado` (`id_horariocursado`);
+  ADD CONSTRAINT `avisoprofesor_ibfk_1` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`);
 
 --
 -- Filtros para la tabla `dedicacion_materia_profesor`
