@@ -32,7 +32,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
 
     </head>
-    <body>
+    <body background=https://secure.img1-fg.wfcdn.com/im/78135171/resize-h505-w505%5Ecompr-r85/8470/84707680/Pokemon+Pikachu+Wall+Decal.jpg>
         <?php require './../partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
