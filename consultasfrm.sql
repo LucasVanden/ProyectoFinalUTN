@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-09-2019 a las 03:35:37
+-- Tiempo de generación: 22-09-2019 a las 01:20:03
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -65,21 +65,16 @@ CREATE TABLE `anotadosestado` (
 --
 
 INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAnotadosEstado`, `fk_estadoanotados`, `fk_detalleanotados`) VALUES
-(35, '2019-09-19', '20:43:24', 1, 54),
-(36, '2019-09-19', '20:49:40', 2, 54),
-(37, '2019-09-19', '20:49:44', 1, 55),
-(38, '2019-09-19', '21:22:18', 1, 56),
-(39, '2019-09-19', '22:22:40', 2, 55),
-(40, '2019-09-19', '22:23:29', 1, 57),
-(41, '2019-09-19', '22:23:33', 2, 57),
-(42, '2019-09-19', '22:23:41', 1, 58),
-(43, '2019-09-19', '22:24:08', 2, 58),
-(44, '2019-09-19', '22:24:16', 1, 59),
-(45, '2019-09-19', '22:24:28', 2, 59),
-(46, '2019-09-19', '22:29:12', 1, 60),
-(47, '2019-09-19', '22:29:35', 2, 60),
-(48, '2019-09-19', '22:29:39', 1, 61),
-(49, '2019-09-19', '22:31:09', 2, 61);
+(83, '2019-09-21', '20:16:21', 2, 73),
+(84, '2019-09-21', '20:17:17', 1, 73),
+(85, '2019-09-21', '20:17:57', 2, 73),
+(86, '2019-09-21', '20:18:01', 1, 73),
+(87, '2019-09-21', '20:18:04', 2, 73),
+(88, '2019-09-21', '20:18:07', 1, 73),
+(89, '2019-09-21', '20:19:17', 2, 78),
+(90, '2019-09-21', '20:19:20', 1, 78),
+(91, '2019-09-21', '20:19:23', 2, 78),
+(92, '2019-09-21', '20:19:26', 1, 78);
 
 -- --------------------------------------------------------
 
@@ -200,14 +195,8 @@ CREATE TABLE `detalleanotados` (
 --
 
 INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `horaDetalleAnotados`, `tema`, `fk_alumno`, `fk_horadeconsulta`) VALUES
-(54, '2019-09-19', '20:43:24.000000', 'Probar repetido', 1, 2),
-(55, '2019-09-19', '20:49:44.000000', 'Ingrese su tema (opcional)', 1, 2),
-(56, '2019-09-19', '21:22:18.000000', 'Ingrese su tema (opcional)', 1, 3),
-(57, '2019-09-19', '22:23:29.000000', 'lipieza', 1, 2),
-(58, '2019-09-19', '22:23:41.000000', 'limpieza', 1, 2),
-(59, '2019-09-19', '22:24:16.000000', 'Ingrese su tema (opcional)', 1, 2),
-(60, '2019-09-19', '22:29:12.000000', 'Ingrese su tema (opcional)', 1, 2),
-(61, '2019-09-19', '22:29:39.000000', 'Ingrese su tema (opcional)', 1, 2);
+(73, '2019-09-21', '18:47:47.000000', 'Ingrese su tema (opcional)', 1, 2),
+(78, '2019-09-21', '19:58:36.000000', 'Ingrese su tema (opcional)', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -344,7 +333,8 @@ CREATE TABLE `materia` (
 
 INSERT INTO `materia` (`id_materia`, `nombreMateria`, `fk_departamento`, `fk_dia`) VALUES
 (1, 'ProyectoFinal', 1, 1),
-(2, 'Computacion en la Nube', 1, 5);
+(2, 'Computacion en la Nube', 1, 5),
+(3, 'Análisis matemático', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -363,7 +353,8 @@ CREATE TABLE `materias_alumno` (
 
 INSERT INTO `materias_alumno` (`fk_alumno`, `fk_materia`) VALUES
 (1, 1),
-(1, 2);
+(1, 2),
+(1, 3);
 
 -- --------------------------------------------------------
 
@@ -660,7 +651,7 @@ ALTER TABLE `alumno`
 -- AUTO_INCREMENT de la tabla `anotadosestado`
 --
 ALTER TABLE `anotadosestado`
-  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 --
 -- AUTO_INCREMENT de la tabla `asueto`
 --
@@ -690,7 +681,7 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
-  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 --
 -- AUTO_INCREMENT de la tabla `dia`
 --
@@ -720,7 +711,7 @@ ALTER TABLE `horariodeconsulta`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
@@ -779,8 +770,8 @@ ALTER TABLE `dedicacion_materia_profesor`
 -- Filtros para la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
-  ADD CONSTRAINT `detalleanotados_ibfk_3` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`),
-  ADD CONSTRAINT `detalleanotados_ibfk_4` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`);
+  ADD CONSTRAINT `detalleanotados_ibfk_1` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`),
+  ADD CONSTRAINT `detalleanotados_ibfk_2` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`);
 
 --
 -- Filtros para la tabla `horadeconsulta`

@@ -26,11 +26,21 @@ $idalumno= $_SESSION['idalumno'];
         $seg= date('s');
 
         $fechahora="{$hora}:{$min}:{$seg}.000000";
-
-       // $fechahora="{$fecha['hours']}:{$fecha['minutes']}:{$fecha['seconds']}.000000";
         $fechadia= "{$fecha['year']}-{$mes}-{$dia}";
-       
+
+
+        $idDetalleExistente=null;
         $idnextdetalle=0;
+
+        $stmt = $conexttion->prepare("SELECT id_detalleanotados FROM detalleanotados where fk_alumno=$idalumno AND fk_horadeconsulta=$idhoradeconsulta"); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+        $idDetalleExistente=$row['id_detalleanotados'];
+        }
+        if(isset($idDetalleExistente)){
+            $idnextdetalle=$idDetalleExistente;
+        }else{
+        
         $stmt = $conexttion->prepare("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'consultasfrm' AND TABLE_NAME = 'detalleanotados'"); 
         $stmt->execute();
         while($row = $stmt->fetch()) {
@@ -39,11 +49,13 @@ $idalumno= $_SESSION['idalumno'];
         $stmt = $conexttion->prepare("INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `horaDetalleAnotados`, `tema`, `fk_alumno`, `fk_horadeconsulta`) 
         VALUES ('$idnextdetalle', '$fechadia', '$fechahora' , '$mensaje', $idalumno, $idhoradeconsulta);"); 
         $stmt->execute();
+        }
 
         $stmt = $conexttion->prepare("INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAnotadosEstado`, `fk_detalleanotados`, `fk_estadoanotados`) 
         VALUES (NULL, '$fechadia', '$fechahora' , '$idnextdetalle', 1);"); 
         $stmt->execute();
-$direccion = $URL.$alumnoPpal;
+        
+        $direccion = $URL.$alumnoPpal;
         header_remove();
         header("Location: $direccion");
         
