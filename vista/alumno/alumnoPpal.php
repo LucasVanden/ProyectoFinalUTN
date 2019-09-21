@@ -231,6 +231,12 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                 <input type="submit" value="Agregar Materia" formaction="alumnoAgregarMateria.php">
                 <br>
             </div>
+            <!-- metodo vandenbosch para ver el fondo -->
+            <div>
+            <td>.</td><br>
+            <td>.</td>
+            </div>
+             <!-- metodo vandenbosch para ver el fondo -->
         </form>
     </body>
     <footer>
