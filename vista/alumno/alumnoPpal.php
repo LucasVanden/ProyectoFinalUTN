@@ -3,16 +3,17 @@ require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 
 session_start();
 if(!isset($_SESSION['rol'])){
-    header('location: '. $URL.'/vista/login.php');
+    header('location: '. $URL.$login);
 }else{
     if($_SESSION['rol'] != 1){
-        header('location: '. $URL.'/vista/login.php');
+        header('location: '. $URL.$login);
     }
 }
 
-require_once $DIR . '/controlador/alumnoControlador.php';
-require_once $DIR . '/controlador/departamentoMaterias.php';
-$eliminar= $URL . '/controlador/eliminarAnotacion.php';
+require_once $DIR . $alumnoControlador;
+require_once $DIR . $departamentoMaterias;
+$eliminar= $URL . $eliminarAnotacion;
+$depatartamentomaterias= $URL.$departamentoMaterias;
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +115,7 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                                 </select> 
                                 <script>
                  $("#first-choice").change(function() {
-                 $("#second-choice").load("<?php echo $URL.'/controlador/departamentoMaterias.php?choice='?>"+ $("#first-choice").val());
+                 $("#second-choice").load("<?php echo $depatartamentomaterias.'?choice='?>"+ $("#first-choice").val());
                 }).change();</script>
 
                             </td>

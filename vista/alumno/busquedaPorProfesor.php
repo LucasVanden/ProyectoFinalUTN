@@ -5,7 +5,7 @@ if (isset($_SESSION['user_id'])) {
     footer('Location: /PFProyect');
 }
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-require $DIR . '/controlador/alumnoControlador.php';
+require_once $DIR .$alumnoControlador;
 ?>
 
 <!DOCTYPE html>

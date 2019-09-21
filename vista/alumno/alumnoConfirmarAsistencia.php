@@ -5,7 +5,7 @@ if (isset($_SESSION['usuario_id'])) {
     footer('Location: /PFProyect');
 }
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-$crearanotacion= $URL . '/controlador/crearAnotacion.php';
+$crearanotacion= $URL .$crearAnotacion;
 ?>
 
 <!DOCTYPE html>

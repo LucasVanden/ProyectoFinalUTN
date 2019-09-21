@@ -1,6 +1,6 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-require_once ($DIR . '/modelo/persistencia/conexion.php');
+require_once ($DIR.$conexion);
 session_start();
 $con= new conexion();
 $conexttion=$con->getconexion();

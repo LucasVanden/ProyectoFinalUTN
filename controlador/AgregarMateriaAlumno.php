@@ -1,13 +1,13 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-require_once ($DIR . '/modelo/persistencia/conexion.php');
-
+require_once ($DIR .$conexion);
+session_start();
 $con= new conexion();
 $conexttion=$con->getconexion();
       
     $idmateria=$_POST["Materias"];
     //$idalumno=$_SESSION['idalumno'];
-    $idalumno=$_POST['idalumnobutton'];
+    $idalumno= $_SESSION['idalumno'];
 
  
 
@@ -22,8 +22,8 @@ $conexttion=$con->getconexion();
      }
 
         header_remove();
-        $alumnoPrincipal= $URL . '/vista/alumno/alumnoAgregarMateria.php';
-        header("Location: $alumnoPrincipal");
+        $direccion= $URL . $alumnoagregarmateria;
+        header("Location: $direccion");
 
         
     ?>

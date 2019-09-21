@@ -1,16 +1,17 @@
 <?php
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-require_once ($DIR . '/modelo/persistencia/conexion.php');
-require_once ($DIR . '/modelo/Alumno.php');
-require_once ($DIR . '/modelo/Materia.php');
-require_once ($DIR . '/modelo/HorarioDeConsulta.php');
-require_once ($DIR . '/modelo/Profesor.php');
-require_once ($DIR . '/modelo/HoraDeConsulta.php');
-require_once ($DIR . '/modelo/Departamento.php');
-require_once ($DIR . '/modelo/AnotadosEstado.php');
-require_once ($DIR . '/modelo/DetalleAnotados.php');
-require_once ($DIR . '/modelo/EstadoAnotados.php');
-require_once ($DIR . '/modelo/AvisoProfesor.php');
+require_once ($DIR.$conexion);
+require_once ($DIR . $Alumno);
+require_once ($DIR . $Materia);
+require_once ($DIR . $HorarioDeConsulta);
+require_once ($DIR . $Profesor);
+require_once ($DIR . $HoraDeConsulta);
+require_once ($DIR . $Departamento);
+require_once ($DIR . $AnotadosEstado);
+require_once ($DIR . $DetalleAnotados);
+require_once ($DIR . $EstadoAnotados);
+require_once ($DIR . $AvisoProfesor);
+
 class AlumnoControlador extends conexion
 {
 
