@@ -57,6 +57,7 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                         $idusuario=$_SESSION['usuario'];
                         $idalumno= $a->buscarAlumnoDeUsuario($idusuario);
                         $alumno = $a->buscarAlumno($idalumno);
+                        $_SESSION['idalumno']=$idalumno;
                         foreach ($alumno[0]->getMateria() as $materia): ?> 
                       
                             <tr>
@@ -114,7 +115,7 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                                 <script>
                  $("#first-choice").change(function() {
                  $("#second-choice").load("<?php echo $URL.'/controlador/departamentoMaterias.php?choice='?>"+ $("#first-choice").val());
-                });</script>
+                }).change();</script>
 
                             </td>
                         </tr>                   
@@ -209,6 +210,7 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                 </table>
                 <br>
                 <br>
+                <input type="submit" value="Agregar Materia" formaction="alumnoAgregarMateria.php">
                 <br>
             </div>
         </form>
