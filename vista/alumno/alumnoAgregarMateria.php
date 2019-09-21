@@ -109,7 +109,7 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                             <tr>
                            <td> <?php echo $materia->getnombreMateria()?> </td>
                            <td>
-                            <button type="submit" id="buttonBorrar" name="nombreMateriaSeleccionada" value=  <?php echo $materia->getid_materia(); ?> formaction=<?php echo $eleminarmat?> onclick="return confirm('Esta seguro que desea eliminarse')"> Eliminar </button>
+                            <button type="submit" id="buttonBorrar" name="nombreMateriaSeleccionada" value=  <?php echo $materia->getid_materia(); ?> formaction=<?php echo $eleminarmat?> onclick="return confirm('Esta seguro que desea eliminar <?php echo $materia->getnombreMateria()?>')"> Eliminar </button>
                              </td>
                              </tr>
                         <?php endforeach; 
