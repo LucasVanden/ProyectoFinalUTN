@@ -412,7 +412,7 @@ function AnotadoRepetido($idhora,$idalumno){
                                 $tempidhorario =$row['fk_horariodeconsulta'];
                                 $tempmaeria =$row['fk_materia'];
                                 $tempidhora=$row['id_horadeconsulta'];
-                                $notificacion=null;
+                                
 
                                 $stmt5 = $conn->prepare("SELECT id_avisoprofesor,fechaAvisoProfesor,detalleDescripcion FROM avisoprofesor where fk_horadeconsulta=$tempidhora"); 
                                 $stmt5->execute();
@@ -423,7 +423,7 @@ function AnotadoRepetido($idhora,$idalumno){
                                     $aviso->setfechaAvisoProfesor($row['fechaAvisoProfesor']);
                                     $aviso->setdetalleDescripcion($row['detalleDescripcion']);
                                     array_push($listaAvisos,$aviso);
-                                    $notificacion=true;
+                                  
                                     
                                 }
                                 $hora->setAvisoProfesor($listaAvisos);
@@ -471,9 +471,9 @@ function AnotadoRepetido($idhora,$idalumno){
                                             }
                                         $hora->setHorarioDeConsulta($hor);
                                         }
-                                                if(isset($notificacion)){
+                                               
                                 array_push($ListHoraDeConsulta,$hora);
-                                                }
+                                                
                                 }
                                
             } 
@@ -494,5 +494,15 @@ function AnotadoRepetido($idhora,$idalumno){
        return $idalumno;
         }
 
+
+        function notificaciones($misanotaciones){
+            $lista=array();
+            foreach ($misanotaciones as $hora) {
+                if($hora->getAvisoProfesor()){
+                    array_push($lista,$hora);
+                }
+            }
+            return $lista;
+            }
 
 }?>

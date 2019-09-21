@@ -130,6 +130,10 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
             <div>                     
                 <h2>Mis Anotaciones</h2>
                 <div>
+                <?php $misanotaciones = $a->MisAnotaciones($idalumno);?>
+                
+              
+                    <?php if (count($misanotaciones)>0){ ?>
                     <table class="table-mostrar" id="tablaAnotaciones" onclick="" title="tablaAnotaciones">
                         <thead>                    
                             <th>Materia</th>
@@ -141,7 +145,6 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                         <tbody style="text-align: left">
                         
                         <?php     
-                        $misanotaciones = $a->MisAnotaciones(1);
                         foreach ($misanotaciones as $hora): ?> 
                       <tr>
                            
@@ -166,6 +169,13 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                             ?>
                         </tbody>
                     </table>
+                <?php } else{ ?>
+                    <table class="table-mostrar" id="tablaAnotaciones" onclick="" title="tablaAnotaciones">
+                    <td>
+                                    <?php echo "No esta anotado" ?>
+                        </td>
+                        </table> 
+                        <?php }; ?>
                     <br>
                 </div>
             </div>
@@ -173,6 +183,8 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                 <br>
                 <h2>Mis Notificaciones</h2>
                 <!-- <h5>Usted no tiene Mensajes Nuevos</h5> -->
+                <?php $notificaciones= $a->notificaciones($misanotaciones); ?>
+                <?php if (count($notificaciones)>0){ ?>
                 <table class="table-mostrar" id="tablaAvisos" onclick="" title="tablaAvisos">
                 <thead>                    
                             <th>Materia</th>
@@ -182,10 +194,9 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                           
                         </thead>
                 <?php     
-                        foreach ($misanotaciones as $hora): ?> 
+                        foreach ($notificaciones as $hora): ?>   
                            <br>
-                      <tr>
-                           
+                      <tr>     
                                 <td>
                                     <?php echo $hora->getMateria()->getnombreMateria(); ?>
                                 </td>
@@ -208,6 +219,13 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                         <?php endforeach; 
                             ?>
                 </table>
+                <?php } else{ ?>
+                    <table class="table-mostrar" id="tablanotificaciones" onclick="" title="tablanotificaiones">
+                    <td>
+                                    <?php echo "No hay notificaciones" ?>
+                        </td>
+                        </table> 
+                        <?php }; ?>
                 <br>
                 <br>
                 <input type="submit" value="Agregar Materia" formaction="alumnoAgregarMateria.php">
