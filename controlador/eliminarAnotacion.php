@@ -27,7 +27,8 @@ $conexttion=$con->getconexion();
         VALUES (NULL, '$fechadia', '$fechahora' , '$detalle', 2);"); 
         $stmt->execute();
 
+        $direccion = $URL.$alumnoPpal;
         header_remove();
-        header("Location: $alumnoPrincipal");
+        header("Location: $direccion");
         
     ?>

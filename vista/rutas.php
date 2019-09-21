@@ -44,7 +44,8 @@ $busquedaPorProfesor="'http://localhost:8888/ProyectoFinalUTN/vista/alumno/busqu
 //----------------------------------------------------------------------
 $DIR='C:/xampp/htdocs/ProyectoFinalUTN';
 $URL='http://localhost:8888/ProyectoFinalUTN';
-$alumnoPrincipal="http://localhost:8888/ProyectoFinalUTN/vista/alumno/alumnoPpal.php";
+$alumnoPpal="/vista/alumno/alumnoPpal.php";
+$alumnoagregarmateria='/vista/alumno/alumnoAgregarMateria.php';
 
 ?>
 

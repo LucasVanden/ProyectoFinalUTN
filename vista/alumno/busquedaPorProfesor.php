@@ -41,8 +41,6 @@ require $DIR . '/controlador/alumnoControlador.php';
                     <tbody>
                        
                          <?php  
-                            // $a =new AlumnoControlador ;
-                            // $mat = $a->buscarHorariosDeConsultaDeMateria(1);
                             foreach ($listaHorarios[1] as $horadeconsulta): ?> 
                            <tr>
                                  <td>

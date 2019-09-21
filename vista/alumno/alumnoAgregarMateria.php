@@ -57,7 +57,6 @@ $eliminar= $URL . '/controlador/eliminarAnotacion.php';
                         <th>Departamento</th>
                         <th colspan="2">Materia</th>
                     </tr>
-                    <input type='hidden' value=1 name=idalumnobutton></input>
                             <td>                                
                                 <select id="first-choice" name="departamentos">
 

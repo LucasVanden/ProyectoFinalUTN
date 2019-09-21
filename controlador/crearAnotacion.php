@@ -1,13 +1,13 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR . '/modelo/persistencia/conexion.php');
-
+session_start();
 $con= new conexion();
 $conexttion=$con->getconexion();
 
 $idhoradeconsulta= $_POST['idhora'];
 $mensaje= $_POST['textarea'];
-$idalumno= 1;
+$idalumno= $_SESSION['idalumno'];
         
        echo $idhoradeconsulta;
        echo $mensaje;
@@ -43,8 +43,8 @@ $idalumno= 1;
         $stmt = $conexttion->prepare("INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAnotadosEstado`, `fk_detalleanotados`, `fk_estadoanotados`) 
         VALUES (NULL, '$fechadia', '$fechahora' , '$idnextdetalle', 1);"); 
         $stmt->execute();
-
+$direccion = $URL.$alumnoPpal;
         header_remove();
-        header("Location: $alumnoPrincipal");
+        header("Location: $direccion");
         
     ?>

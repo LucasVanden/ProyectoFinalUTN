@@ -67,8 +67,6 @@ require_once $DIR .'/controlador/alumnoControlador.php'
                         <tr>
 
                         <?php 
-                        // $a =new AlumnoControlador ;
-                        // $mat = $a->buscarHorariosDeConsultaDeMateria(1);
                         foreach ($mat->getHoraDeConsulta() as $horadeconsulta): ?> 
                       
                             <td>

@@ -35,7 +35,7 @@ $crearanotacion= $URL . '/controlador/crearAnotacion.php';
             <br>
             <!-- agregar CSS -->
             <input id=buttonConfirmar name="textoConfirmar" type="submit" value="Confirmar" onclick="">
-            <input type="submit" value="Cancelar" formaction="alumnoPpal.php" onclick="self.location.href=<?php echo $alumnoPrincipal?>"/>
+            <input type="submit" value="Cancelar" formaction="alumnoPpal.php" onclick="self.location.href=<?php echo $URL.$alumnoPpal?>"/>
         </form>
     </body>
     <footer>
