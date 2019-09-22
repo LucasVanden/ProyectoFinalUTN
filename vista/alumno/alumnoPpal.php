@@ -45,7 +45,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
         <h2>Estás cursando:</h2>
         <form action="alumnoPpal.php" method="POST">        
             <div>
-                <table class="table-mostrar" id="tablaMateria">
+                <table align='center' class="table-mostrar" id="tablaMateria">
                     <thead>
                         <!--aca va cabecera de tabla-->
                     </thead>
@@ -74,7 +74,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
             <div>
                 <br>
                 <h2>Buscar Otra Consulta</h2>
-                <table class="table-buscar" id="tablaBuscar" style="border-color: #FFFFFF">  
+                <table align='center' class="table-buscar" id="tablaBuscar" style="border-color: #FFFFFF">  
                     <tr>
                         <th>Por Profesor</th>
                         <th colspan="2">Por Materia</th>
@@ -135,7 +135,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                 
               
                     <?php if (count($misanotaciones)>0){ ?>
-                    <table class="table-mostrar" id="tablaAnotaciones" onclick="" title="tablaAnotaciones">
+                    <table align='center' class="table-mostrar" id="tablaAnotaciones" onclick="" title="tablaAnotaciones">
                         <thead>                    
                             <th>Materia</th>
                             <th>Profesor</th>
@@ -171,7 +171,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                         </tbody>
                     </table>
                 <?php } else{ ?>
-                    <table class="table-mostrar" id="tablaAnotaciones" onclick="" title="tablaAnotaciones">
+                    <table align='center' class="table-mostrar" id="tablaAnotaciones" onclick="" title="tablaAnotaciones">
                     <td>
                                     <?php echo "No esta anotado" ?>
                         </td>
@@ -186,7 +186,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                 <!-- <h5>Usted no tiene Mensajes Nuevos</h5> -->
                 <?php $notificaciones= $a->notificaciones($misanotaciones); ?>
                 <?php if (count($notificaciones)>0){ ?>
-                <table class="table-mostrar" id="tablaAvisos" onclick="" title="tablaAvisos">
+                <table  align='center' class="table-mostrar" id="tablaAvisos" onclick="" title="tablaAvisos">
                 <thead>                    
                             <th>Materia</th>
                             <th>Profesor</th>
