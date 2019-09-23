@@ -93,7 +93,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
 
  <table align='center' class="table-mostrar" id="tablaMateria">
                     <thead>
-                     <h2> Eliminiarse de Materia</h2>
+                     <h2> Eliminarse de Materia</h2>
                     </thead>
                     <tbody>
                         <tr>
