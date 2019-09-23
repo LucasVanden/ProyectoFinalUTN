@@ -70,6 +70,9 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                     </tbody>
                 </table>
             </div>
+            <br>
+                <input type="submit" value="Agregar Materia" formaction="alumnoAgregarMateria.php">
+                <br>
            
             <div>
                 <br>
@@ -135,7 +138,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                 
               
                     <?php if (count($misanotaciones)>0){ ?>
-                    <table align='center' class="table-mostrar" id="tablaAnotaciones" onclick="" title="tablaAnotaciones">
+                    <table align='center' class="table-mostrar" id="tablaAnotaciones" onclick="" >
                         <thead>                    
                             <th>Materia</th>
                             <th>Profesor</th>
@@ -171,7 +174,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                         </tbody>
                     </table>
                 <?php } else{ ?>
-                    <table align='center' class="table-mostrar" id="tablaAnotaciones" onclick="" title="tablaAnotaciones">
+                    <table align='center' class="table-mostrar" id="tablaAnotaciones" onclick="" >
                     <td>
                                     <?php echo "No esta anotado" ?>
                         </td>
@@ -186,7 +189,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                 <!-- <h5>Usted no tiene Mensajes Nuevos</h5> -->
                 <?php $notificaciones= $a->notificaciones($misanotaciones); ?>
                 <?php if (count($notificaciones)>0){ ?>
-                <table  align='center' class="table-mostrar" id="tablaAvisos" onclick="" title="tablaAvisos">
+                <table  align='center' class="table-mostrar" id="tablaAvisos" onclick="" >
                 <thead>                    
                             <th>Materia</th>
                             <th>Profesor</th>
@@ -221,16 +224,14 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                             ?>
                 </table>
                 <?php } else{ ?>
-                    <table class="table-mostrar" id="tablanotificaciones" onclick="" title="tablanotificaiones">
+                    <table align='center' class="table-mostrar" id="tablanotificaciones" onclick="" >
                     <td>
                                     <?php echo "No hay notificaciones" ?>
                         </td>
                         </table> 
                         <?php }; ?>
                 <br>
-                <br>
-                <input type="submit" value="Agregar Materia" formaction="alumnoAgregarMateria.php">
-                <br>
+
             </div>
             <!-- metodo vandenbosch para ver el fondo -->
             <div>

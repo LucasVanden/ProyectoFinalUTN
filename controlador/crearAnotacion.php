@@ -38,7 +38,11 @@ $idalumno= $_SESSION['idalumno'];
         $idDetalleExistente=$row['id_detalleanotados'];
         }
         if(isset($idDetalleExistente)){
+            echo $idDetalleExistente;
             $idnextdetalle=$idDetalleExistente;
+            $stmt2 = $conexttion->prepare("UPDATE detalleanotados SET tema = '$mensaje' WHERE id_detalleanotados=$idDetalleExistente"); 
+            $stmt2->execute();
+            
         }else{
         
         $stmt = $conexttion->prepare("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'consultasfrm' AND TABLE_NAME = 'detalleanotados'"); 
@@ -54,6 +58,9 @@ $idalumno= $_SESSION['idalumno'];
         $stmt = $conexttion->prepare("INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAnotadosEstado`, `fk_detalleanotados`, `fk_estadoanotados`) 
         VALUES (NULL, '$fechadia', '$fechahora' , '$idnextdetalle', 1);"); 
         $stmt->execute();
+
+        $stmt3 = $conexttion->prepare("UPDATE horadeconsulta SET cantidadAnotados = cantidadAnotados +1  WHERE id_horadeconsulta=$idhoradeconsulta"); 
+        $stmt3->execute();
         
         $direccion = $URL.$alumnoPpal;
         header_remove();

@@ -27,6 +27,18 @@ $conexttion=$con->getconexion();
         VALUES (NULL, '$fechadia', '$fechahora' , '$detalle', 2);"); 
         $stmt->execute();
 
+
+
+        $idhora=null;
+        $stmt = $conexttion->prepare("SELECT fk_horadeconsulta FROM detalleanotados where id_detalleanotados=$detalle "); 
+        $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $idhora=$row['fk_horadeconsulta'];
+            }
+
+        $stmt3 = $conexttion->prepare("UPDATE horadeconsulta SET cantidadAnotados = cantidadAnotados -1  WHERE id_horadeconsulta=$idhora"); 
+        $stmt3->execute();
+
         $direccion = $URL.$alumnoPpal;
         header_remove();
         header("Location: $direccion");
