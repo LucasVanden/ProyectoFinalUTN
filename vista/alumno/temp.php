@@ -1,5 +1,13 @@
 <?php 
+require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require $DIR.'/controlador/PHPMailer/src/Exception.php';
+require $DIR.'/controlador/PHPMailer/src/PHPMailer.php';
+require $DIR.'/controlador/PHPMailer/src/SMTP.php';
 
 require '../../controlador/alumnoControlador.php';
 
@@ -43,8 +51,41 @@ if( $tf){echo 'true';} else { echo 'false';};
 echo "nueva prueba <br>";
 $anotados=$cont->MisAnotaciones(1);
 // echo $anotados->id_horadeconsulta();
-echo '<pre>'; print_r($anotados); echo '</pre>'
+echo '<pre>'; print_r($anotados); echo '</pre>';
 
+$mail = new PHPMailer(true);
+
+try {
+    //Server settings
+                                         // Enable verbose debug output
+    $mail->isSMTP();                                            // Set mailer to use SMTP
+    $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+    $mail->Username   = 'consultasutnfrm2019@gmail.com';                     // SMTP username
+    $mail->Password   = '123qweQWE$';                               // SMTP password
+    $mail->SMTPSecure = 'ssl';                                  // Enable TLS encryption, `ssl` also accepted
+    $mail->Port       = 465;                                    // TCP port to connect to
+
+    //Recipients
+    $mail->setFrom('no-reply@howcode.org');
+    $mail->addAddress('vandenboschlucas@gmail.com');     // Add a recipient
+                 // Name is optional
+    
+
+    // Attachments
+   
+
+    // Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = 'Here is the subject';
+    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+
+    $mail->send();
+
+    echo 'Message has been sent';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
 
 ?>
 
