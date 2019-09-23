@@ -54,7 +54,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                 <br>
                 <h2>Agregar Materias</h2>
                 <form action=<?php echo $agregarmat?> method="POST">   
-                <table class="table-buscar" id="tablaBuscar" style="border-color: #FFFFFF">  
+                <table align='center' class="table-buscar" id="tablaBuscar" style="border-color: #FFFFFF">  
                     <tr>
                         <th>Departamento</th>
                         <th colspan="2">Materia</th>
@@ -91,9 +91,9 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
 
 
 
- <table class="table-mostrar" id="tablaMateria">
+ <table align='center' class="table-mostrar" id="tablaMateria">
                     <thead>
-                     <h2> Elimniarse de Materia</h2>
+                     <h2> Eliminiarse de Materia</h2>
                     </thead>
                     <tbody>
                         <tr>
