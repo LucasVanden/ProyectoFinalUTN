@@ -17,7 +17,7 @@ try {
     //Server settings
     $mail->SMTPDebug = 2;                             
     $mail->isSMTP();    
-    $mail->Host = gethostbyname('smtp.gmail.com'); 
+    $mail->Host = 'smtp.gmail.com'; 
     $mail->SMTPAuth   = true;                              
     $mail->Username   = 'consultasutnfrm2019@gmail.com';    
     $mail->Password   = '123qweQWE$';                 

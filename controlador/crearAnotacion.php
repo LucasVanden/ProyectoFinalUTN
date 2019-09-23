@@ -115,8 +115,8 @@ $idalumno= $_SESSION['idalumno'];
         echo enviaremail($emailprofesor,$body);
 
 
-        // $direccion = $URL.$alumnoPpal;
-        // header_remove();
-        // header("Location: $direccion");
+        $direccion = $URL.$alumnoPpal;
+        header_remove();
+        header("Location: $direccion");
         
     ?>
