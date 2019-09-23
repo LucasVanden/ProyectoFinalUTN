@@ -4,6 +4,7 @@ $DIR='C:/xampp/htdocs/ProyectoFinalUTN';
 $URL='http://localhost:8888/ProyectoFinalUTN';
 
 $login='/vista/login.php';
+$email='/controlador/enviaremail.php';
 
 $alumnoPpal="/vista/alumno/alumnoPpal.php";
 $alumnoagregarmateria='/vista/alumno/alumnoAgregarMateria.php';

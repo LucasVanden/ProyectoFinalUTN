@@ -57,9 +57,9 @@ $mail = new PHPMailer(true);
 
 try {
     //Server settings
-                                         // Enable verbose debug output
+   $mail->SMTPDebug = 2;                             // Enable verbose debug output
     $mail->isSMTP();                                            // Set mailer to use SMTP
-    $mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+    $mail->Host = gethostbyname('smtp.gmail.com');  // Specify main and backup SMTP servers
     $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
     $mail->Username   = 'consultasutnfrm2019@gmail.com';                     // SMTP username
     $mail->Password   = '123qweQWE$';                               // SMTP password
@@ -77,8 +77,8 @@ try {
 
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+    $mail->Subject = 'Anotaciones Consulta';
+    $mail->Body    = 'Se anoto juanito';
 
     $mail->send();
 
