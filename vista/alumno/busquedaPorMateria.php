@@ -64,11 +64,11 @@ require_once $DIR .$alumnoControlador;
                         <th>Asistir</th>
                     </thead>
                     <tbody style="text-align: left">
-                        <tr>
+                        
 
                         <?php 
                         foreach ($mat->getHoraDeConsulta() as $horadeconsulta): ?> 
-                      
+                      <tr>
                             <td>
                                  <?php echo $horadeconsulta->getHorarioDeConsulta()->getDia()->getdia(); ?>
                             </td>
@@ -99,11 +99,11 @@ require_once $DIR .$alumnoControlador;
                             ?>
                                 <!-- <button id="buttonAsistir" name="Asistir" value=<?php echo $horadeconsulta->getid_horadeconsulta();?> onclick=<?php echo $dialog?>> Asistir </button> -->
                            
-
+                                </tr>
                         <?php endforeach; 
                             ?>
                         
-                        </tr>
+                        
                     </tbody>                    
                 </table>                
             </div>

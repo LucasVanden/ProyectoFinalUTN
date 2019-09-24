@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-09-2019 a las 01:20:03
+-- Tiempo de generación: 24-09-2019 a las 03:10:37
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -44,7 +44,9 @@ CREATE TABLE `alumno` (
 
 INSERT INTO `alumno` (`id_alumno`, `legajo`, `apellido`, `nombre`, `email`, `fechaNacimientoAlumno`, `telefonoAlumno`) VALUES
 (1, 35821, 'van den bosch', 'lucas', 'vandenboschlucas@hotmail.com', '1992-05-18', '2616394922'),
-(2, 32145, 'Porte', 'Gaston', 'email', '2019-09-09', '2618586488');
+(2, 32145, 'Porte', 'Gaston', 'email', '2019-09-09', '2618586488'),
+(4, 123, '123', '123', '', '0000-00-00', ''),
+(16, 1234, '1234', '1234', '1234', '2019-08-01', '');
 
 -- --------------------------------------------------------
 
@@ -74,7 +76,44 @@ INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAn
 (89, '2019-09-21', '20:19:17', 2, 78),
 (90, '2019-09-21', '20:19:20', 1, 78),
 (91, '2019-09-21', '20:19:23', 2, 78),
-(92, '2019-09-21', '20:19:26', 1, 78);
+(92, '2019-09-21', '20:19:26', 1, 78),
+(93, '2019-09-22', '22:41:33', 2, 78),
+(94, '2019-09-22', '22:47:03', 2, 73),
+(95, '2019-09-22', '22:54:31', 1, 73),
+(96, '2019-09-22', '23:11:09', 1, 78),
+(97, '2019-09-22', '23:39:27', 2, 78),
+(98, '2019-09-22', '23:52:30', 1, 78),
+(99, '2019-09-22', '23:53:10', 2, 78),
+(100, '2019-09-23', '00:14:49', 1, 78),
+(101, '2019-09-23', '00:14:54', 2, 78),
+(102, '2019-09-23', '00:15:01', 1, 78),
+(103, '2019-09-23', '00:16:11', 2, 78),
+(104, '2019-09-23', '00:24:43', 2, 73),
+(105, '2019-09-23', '00:24:54', 1, 73),
+(106, '2019-09-23', '00:25:07', 2, 73),
+(107, '2019-09-23', '00:25:11', 1, 73),
+(108, '2019-09-23', '00:30:26', 2, 73),
+(109, '2019-09-23', '00:31:09', 1, 73),
+(110, '2019-09-23', '00:31:23', 2, 73),
+(111, '2019-09-23', '01:33:42', 1, 78),
+(112, '2019-09-23', '12:18:57', 1, 73),
+(113, '2019-09-23', '12:19:32', 2, 73),
+(114, '2019-09-23', '12:19:41', 1, 73),
+(115, '2019-09-23', '12:23:47', 2, 73),
+(116, '2019-09-23', '12:23:50', 1, 73),
+(117, '2019-09-23', '12:24:52', 2, 73),
+(118, '2019-09-23', '12:24:55', 1, 73),
+(119, '2019-09-23', '12:25:52', 2, 73),
+(120, '2019-09-23', '12:25:55', 1, 73),
+(121, '2019-09-23', '12:27:24', 2, 73),
+(122, '2019-09-23', '12:27:27', 1, 73),
+(123, '2019-09-23', '12:28:00', 2, 73),
+(124, '2019-09-23', '12:28:03', 1, 73),
+(125, '2019-09-23', '12:31:06', 2, 73),
+(126, '2019-09-23', '12:31:11', 1, 73),
+(127, '2019-09-23', '12:33:25', 2, 73),
+(128, '2019-09-23', '12:33:29', 1, 73),
+(129, '2019-09-23', '21:59:04', 1, 79);
 
 -- --------------------------------------------------------
 
@@ -195,8 +234,9 @@ CREATE TABLE `detalleanotados` (
 --
 
 INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `horaDetalleAnotados`, `tema`, `fk_alumno`, `fk_horadeconsulta`) VALUES
-(73, '2019-09-21', '18:47:47.000000', 'Ingrese su tema (opcional)', 1, 2),
-(78, '2019-09-21', '19:58:36.000000', 'Ingrese su tema (opcional)', 1, 3);
+(73, '2019-09-21', '18:47:47.000000', '', 1, 2),
+(78, '2019-09-21', '19:58:36.000000', '', 1, 3),
+(79, '2019-09-23', '21:59:04.000000', '', 1, 13);
 
 -- --------------------------------------------------------
 
@@ -268,8 +308,12 @@ CREATE TABLE `horadeconsulta` (
 --
 
 INSERT INTO `horadeconsulta` (`id_horadeconsulta`, `fechaDesdeAnotados`, `fechaHastaAnotados`, `cantidadAnotados`, `estadoPresentismo`, `estadoVigencia`, `fk_materia`, `fk_presentismo`, `fk_horariodeconsulta`, `fk_profesor`) VALUES
-(2, '2019-09-02', '2019-09-09', 0, 'pendiente', 'activo', 1, NULL, 1, 2),
-(3, '2019-09-13', '2019-09-20', 0, 'pendiente', 'activo', 2, NULL, 2, 3);
+(2, '2019-09-02', '2019-09-09', 1, 'pendiente', 'activo', 1, NULL, 1, 2),
+(3, '2019-09-13', '2019-09-20', 1, 'pendiente', 'activo', 2, NULL, 2, 3),
+(13, '2019-09-23', '2019-09-30', 1, 'pendiente', 'activo', 1, NULL, 11, 6),
+(14, '2019-09-23', '2019-09-30', 0, 'pendiente', 'activo', 1, NULL, 9, 5),
+(15, '2019-09-23', '2019-09-30', 0, 'pendiente', 'activo', 1, NULL, 10, 4),
+(16, '2019-09-23', '2019-09-30', 0, 'pendiente', 'activo', 4, NULL, 12, 2);
 
 -- --------------------------------------------------------
 
@@ -311,8 +355,12 @@ CREATE TABLE `horariodeconsulta` (
 --
 
 INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`, `hora`, `activoDesde`, `activoHasta`, `semestre`, `fk_dia`, `fk_profesor`, `fk_materia`) VALUES
-(1, '17:00', '2019-09-01', '2019-12-30', 2, 1, 2, 1),
-(2, '18:30', '2019-09-19', '2019-09-26', 2, 5, 3, 2);
+(1, '17:30', '2019-09-01', '2019-12-30', 2, 1, 2, 1),
+(2, '18:30', '2019-09-19', '2019-09-26', 2, 5, 3, 2),
+(9, '14:00', '2019-09-23', '0000-00-00', 2, 4, 5, 1),
+(10, '19:00', '2019-09-23', '0000-00-00', 2, 3, 4, 1),
+(11, '09:00', '2019-09-23', '0000-00-00', 2, 4, 6, 1),
+(12, '18:30', '2019-09-23', '2019-09-30', 2, 3, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -332,9 +380,10 @@ CREATE TABLE `materia` (
 --
 
 INSERT INTO `materia` (`id_materia`, `nombreMateria`, `fk_departamento`, `fk_dia`) VALUES
-(1, 'ProyectoFinal', 1, 1),
+(1, 'Proyecto Final', 1, 1),
 (2, 'Computacion en la Nube', 1, 5),
-(3, 'Análisis matemático', 2, 3);
+(3, 'Análisis matemático', 2, 3),
+(4, 'Administración Gerencial', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -431,8 +480,11 @@ CREATE TABLE `profesor` (
 --
 
 INSERT INTO `profesor` (`id_profesor`, `legajo`, `apellido`, `nombre`, `email`, `fk_dedicacion_materia_profesor`) VALUES
-(2, '1234', 'Vazquez', 'Alejandro ', 'alejandro.vazquez@docentes.frm.utn.edu.ar', NULL),
-(3, '789', 'Ryan', 'Mauricio', 'mauriciorayan@gmail.com', NULL);
+(2, '1234', 'Vazquez', 'Alejandro ', 'vandenboschlucas@gmail.com', NULL),
+(3, '789', 'Ryan', 'Mauricio', 'mauriciorayan@gmail.com', NULL),
+(4, '1234', 'Moralejo', 'Raúl ', 'moralejoraul@gmail.com', NULL),
+(5, '4321', 'Manino', 'Gustavo', 'marinogustavo@gmail.com', NULL),
+(6, '1452', 'Villa', 'Diego', 'villadiego@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -467,7 +519,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `contraseña`, `fk_alumno`, `fk_profesor`, `fk_perfil`) VALUES
-(6, '35821', '$2y$10$LTAsfQoxzhQXQOu88XBAoerUDbW7O68wNPrHz3x8gIc0Ddnyt61s6', 1, NULL, 1);
+(6, '35821', '$2y$10$LTAsfQoxzhQXQOu88XBAoerUDbW7O68wNPrHz3x8gIc0Ddnyt61s6', 1, NULL, 1),
+(7, 'porte', '$2y$10$LHdyKE6JxmTVqA6T.mdYPOblig4zCJw.BeUbalTk21wSG/h89uaJW', 2, NULL, 1),
+(8, 'test', '$2y$10$jEshAdowgM5ekVRLD/b9YenbPegwO3aFY0vkwHU6KQ51rgBYg33ZK', 4, NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -646,12 +700,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `id_alumno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_alumno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `anotadosestado`
 --
 ALTER TABLE `anotadosestado`
-  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 --
 -- AUTO_INCREMENT de la tabla `asueto`
 --
@@ -681,7 +735,7 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
-  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 --
 -- AUTO_INCREMENT de la tabla `dia`
 --
@@ -696,7 +750,7 @@ ALTER TABLE `estadoanotados`
 -- AUTO_INCREMENT de la tabla `horadeconsulta`
 --
 ALTER TABLE `horadeconsulta`
-  MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `horariocursado`
 --
@@ -706,12 +760,12 @@ ALTER TABLE `horariocursado`
 -- AUTO_INCREMENT de la tabla `horariodeconsulta`
 --
 ALTER TABLE `horariodeconsulta`
-  MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
@@ -731,7 +785,7 @@ ALTER TABLE `privilegio`
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `id_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `turno`
 --
@@ -741,7 +795,7 @@ ALTER TABLE `turno`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_usuario` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Restricciones para tablas volcadas
 --
