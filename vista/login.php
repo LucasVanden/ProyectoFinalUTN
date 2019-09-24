@@ -47,8 +47,10 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
     $contraseña = $_POST['contraseña'];
     $con = new conexion();
     $conexttion = $con->getconexion();
-    $stmt = $conexttion->prepare("SELECT id_usuario,fk_perfil,contraseña FROM usuario WHERE usuario= $usuario ");
+    $stmt = $conexttion->prepare("SELECT id_usuario,fk_perfil,contraseña FROM usuario WHERE usuario= '$usuario'");
     $stmt->execute();
+
+    
     // $results = $stmt->fetch(PDO::FETCH_ASSOC);
     $message = ' ';
 
@@ -81,7 +83,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
     $message = 'contraseña inválida.-';    
 }
     else {
-        $message = 'Usuario inválidos.-';
+        $message = 'Usuario inválido.-';
     }
 }
 ?>
@@ -94,7 +96,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="assert/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
         <?php require 'partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
@@ -106,8 +108,10 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
             Contraseña <input name="contraseña" type="password" placeholder="Ingrese Contraseña" required="">
             <div class="send-button">
                 <input type="submit" value="Ingresar">
-            </div>
+            </div>        
             <a href="recuperarContraseña.php">Olvidó su contraseña?</a>
+            <br>
+            <br> <a href="altaAlumno.php">Registrese</a>
         </form>
     </body>
     <footer>

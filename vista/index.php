@@ -21,7 +21,7 @@ if (isset($_SESSION['id_usuario'])) {
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <link href="assert/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
         <?php require 'partials/header.php' ?>
         <?php if (!empty($user)): ?>
             <br> Welcome. <?= $user['usuario']; ?>
@@ -33,7 +33,7 @@ if (isset($_SESSION['id_usuario'])) {
             <h1> Bienvenido </h1>
             <br><a href="login.php">Ingrese</a>
             <br>
-            <br><a href="registrarse.php"> Registrese</a>
+            <br><a href="altaAlumno.php"> Registrese</a>
             <br>
             <br><a href="http://www.frm.utn.edu.ar/index.php"> Regresar a la Web de la Regional</a>
         <?php endif; ?>

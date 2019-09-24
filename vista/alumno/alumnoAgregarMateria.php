@@ -28,7 +28,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
         
 
     </head>
-    <body>
+    <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
         <?php require './../partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
@@ -85,7 +85,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
             <div>
                 <br>
 
-                <input type="submit" value="Agergar Materia" formaction=<?php echo $agregarmat?>>
+                <input type="submit" value="Agregar Materia" formaction=<?php echo $agregarmat?>>
             </div>
 
 
@@ -121,6 +121,6 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
         </form>
     </body>
     <footer>
-        <?php require './../partials/footer.php'; ?>         
+        <?php require './../partials/footer.php'; ?>     
     </footer>  
 </html>

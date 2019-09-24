@@ -50,15 +50,15 @@ input[type="submit"]:hover {
 /* Header */
 header {
     border-bottom: 0 solid #eee;
-    padding: 0;
+    padding: 5px 0 2px;
     margin-bottom: 0;
     width: 100%;
     text-align: center;
-    background-color: #000000;
+    background-color:  #0000004f;
 }
 header a {
     text-decoration: none;
-    color: #FFFFFF;
+    color: #00000;
 }
 
 /* Footer */
@@ -67,11 +67,11 @@ footer {
     padding: 5px 0;
     width: 100%;
     text-align: center;
-    color:  #FFFFFF;
+    color:  #00000;
     height: 40px;
     bottom: 0;
     position:absolute;
-    background-color: #000000; 
+    background-color:  #0000004f; 
     align-self: flex-end;
 }
 

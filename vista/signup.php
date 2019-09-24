@@ -30,7 +30,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
         $message = 'Usuario creado con exito!!!';
       
     } else {
-      $message = "lejao inexistente";
+      $message = "legajo inexistente";
     }
 
   } else {
@@ -42,11 +42,11 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 <html>
   <head>
     <meta charset="utf-8">
-    <title>SignUp</title>
+    <title>Registrese</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
-  <body>
+  <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
 
     <?php require 'partials/header.php' ?>
 
@@ -54,7 +54,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
       <p> <?= $message ?></p>
     <?php endif; ?>
 
-    <h1>SignUp</h1>
+    <h1>Registrese</h1>
     <span>or <a href="login.php">Login</a></span>
 
     <form action="signup.php" method="POST">
@@ -66,4 +66,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
     </form>
 
   </body>
+  <footer>
+        <?php require 'partials/footer.php'; ?>     
+    </footer>
 </html>

@@ -17,7 +17,7 @@ $crearanotacion= $URL .$crearAnotacion;
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
         <script src="./../js/funciones.js" type="text/javascript"></script>
     </head>
-    <body>
+    <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
         <?php require './../partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>

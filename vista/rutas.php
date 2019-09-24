@@ -1,7 +1,7 @@
 <?php
 
 $DIR='C:/xampp/htdocs/ProyectoFinalUTN';
-$URL='http://localhost:8888/ProyectoFinalUTN';
+$URL='http://192.168.43.84/ProyectoFinalUTN';
 
 $login='/vista/login.php';
 $email='/controlador/enviaremail.php';

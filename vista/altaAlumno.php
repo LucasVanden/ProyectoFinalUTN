@@ -46,7 +46,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
-  <body>
+  <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
 
     <?php require 'partials/header.php' ?>
 
@@ -55,7 +55,8 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     <?php endif; ?>
 
     <h1>Alta Alumno</h1>
-    <span>or <a href="login.php">Login</a></span>
+    <br>
+    <span>or <a href="signup.php">Alta Usuario</a></span>
     <br>
     <form action="altaAlumno.php" method="POST">
     <br>
@@ -81,4 +82,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     </form>
 
   </body>
+  <footer>
+        <?php require 'partials/footer.php'; ?>      
+    </footer>
 </html>
