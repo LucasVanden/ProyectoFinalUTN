@@ -1,7 +1,10 @@
 <?php
 
 $DIR='C:/xampp/htdocs/ProyectoFinalUTN';
-$URL='http://192.168.43.84/ProyectoFinalUTN';
+$URL='http://localhost/ProyectoFinalUTN';
+
+$logo="/vista//partials/logo.png";
+$fondo="/vista/fondoCuerpo.jpg";
 
 $login='/vista/login.php';
 $email='/controlador/enviaremail.php';

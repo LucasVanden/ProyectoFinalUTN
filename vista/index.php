@@ -21,7 +21,7 @@ if (isset($_SESSION['id_usuario'])) {
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <link href="assert/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
+    <body background = <?php echo $URL."/vista/fondoCuerpo.jpg>"?>
         <?php require 'partials/header.php' ?>
         <?php if (!empty($user)): ?>
             <br> Welcome. <?= $user['usuario']; ?>

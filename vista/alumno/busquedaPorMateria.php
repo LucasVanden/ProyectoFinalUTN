@@ -63,7 +63,7 @@ require_once $DIR .$alumnoControlador;
                         <th>Profesor</th>
                         <th>Asistir</th>
                     </thead>
-                    <body style="text-align: center" background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
+                    <body style="text-align: center" background = <?php echo $URL.$fondo?>>
                         
 
                         <?php 

@@ -15,7 +15,7 @@ require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
+    <body background = <?php echo $URL.$fondo?>>
         <?php require './../partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>

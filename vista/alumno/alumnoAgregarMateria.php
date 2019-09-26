@@ -28,7 +28,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
         
 
     </head>
-    <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
+    <body background = <?php echo $URL.$fondo?>>
         <?php require './../partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
