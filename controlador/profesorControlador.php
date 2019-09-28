@@ -78,6 +78,78 @@ class Profesorcontrolador extends conexion
         return $ded;
     }
 
+    function buscarHorariodeConsultadeMateriadeProfesor($idmateria,$idprofesor){
+        $listaHorarios=array();
+        $conn = $this->getconexion();
+        $stmt = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,semestre,fk_dia FROM horariodeconsulta where fk_profesor=$idprofesor AND fk_materia=$idmateria AND activoHasta='0000-00-00'" ); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+            $ListaHorariosDeConsulta=array();
+            $hor = new HorarioDeConsulta();
+            $hor->setid_horariodeconsulta($row['id_horariodeconsulta']);
+            $hor->sethora($row['hora']);
+            $hor->setactivoDesde($row['activoDesde']);
+            $hor->setsemestre($row['semestre']);
+                
+                $tempDia =$row['fk_dia'];
+                $stmt4 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
+                $stmt4->execute();
+                while($row = $stmt4->fetch()) {
+                    $dia = new Dia();
+                    $dia->setid_dia($row['id_dia']);
+                    $dia->setdia($row['dia']);
+                    $hor->setdia($dia);
+                }
+            array_push($listaHorarios,$hor);
+            }
+            return $listaHorarios;
+    }
 
+    function alumnosAnotados($idprofesor){
+        $listaHora=array();
+        $conn = $this->getconexion();
+        $stmt2 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia,cantidadAnotados FROM horadeconsulta where fk_profesor=$idprofesor and estadoVigencia='activo'"); 
+        $stmt2->execute();
+        while($row = $stmt2->fetch()) {
+            $hora = new HoraDeConsulta();
+            $hora->setid_horadeconsulta($row['id_horadeconsulta']);
+            $hora->setcantidadAnotados($row['cantidadAnotados']);
+            $tempidhorario =$row['fk_horariodeconsulta'];
+            $temporalMateriaid =$row['fk_materia'];
 
+              $stmt3 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
+              $stmt3->execute();
+                while($row = $stmt3->fetch()) {
+                    $hor = new HorarioDeConsulta();
+                    $hor->setid_horariodeconsulta($row['id_horariodeconsulta']);
+                    $hor->sethora($row['hora']);
+                    $hor->setactivoDesde($row['activoDesde']);
+                    $hor->setactivoHasta($row['activoHasta']);
+                    $hor->setsemestre($row['semestre']);
+                
+                        $tempDia =$row['fk_dia'];
+
+                        $stmt4 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
+                        $stmt4->execute();
+                        while($row = $stmt4->fetch()) {
+                            $dia = new Dia();
+                            $dia->setid_dia($row['id_dia']);
+                            $dia->setdia($row['dia']);
+                            $hor->setdia($dia);
+                        }
+                    $hora->setHorarioDeConsulta($hor);
+                }
+            $stmt5 = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where id_materia=$temporalMateriaid"); 
+            $stmt5->execute();
+    
+            while($row = $stmt5->fetch()) {
+                $mat = new Materia();
+                $mat->setid_materia($row['id_materia']);
+                $mat->setnombreMateria($row['nombreMateria']);
+                $hora->setMateria($mat);
+            }
+            array_push($listaHora,$hora);
+        }
+        return $listaHora;
+    }
 }

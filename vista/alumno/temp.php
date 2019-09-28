@@ -92,8 +92,12 @@ require '../../controlador/profesorControlador.php';
 $a =new profesorControlador ;
 // $listaDedicaciones = $a->buscarMateriasProfesor(2);
 // echo '<pre>'; print_r($listaDedicaciones); echo '</pre>';
-
-$ded=$a->buscarDedicaciondeMateria(1,2);
+echo 'horarios'.'<br>';
+$ded=$a->buscarHorariodeConsultadeMateriadeProfesor(1,2);
 echo '<pre>'; print_r($ded); echo '</pre>';
+echo 'anotados'.'<br>';
+$ded=$a->alumnosAnotados(2);
+echo '<pre>'; print_r($ded); echo '</pre>';
+echo(strtotime("next Monday") . "<br>");
 ?>
 
