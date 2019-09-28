@@ -4,8 +4,8 @@ if (isset($_SESSION['user_id'])) {
     header('Location: /PFProyect');
     footer('Location: /PFProyect');
 }
-require './../dbPFprueba.php';
-require './../rutas.php';
+require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once $DIR . $profesorControlador;
 ?>
 
 <!DOCTYPE html>
@@ -25,6 +25,11 @@ require './../rutas.php';
             <form action="profesorAlumnosAnotados.php" method="POST">        
             <div>
                 <h2>Administración Gerencial</h2>
+                
+                <?php
+                 $a = new Profesorcontrolador();
+                 $detalles=$a->detallealumnosAnotados($_POST['Notificaridhora'])
+                 ?>
                 <table id="tablaAlumnosAnotadosMateria" onclick="">
                     <thead>                    
                         <th></th>
@@ -33,30 +38,29 @@ require './../rutas.php';
                         <th>Tema</th>
                     </thead>
                     <tbody style="text-align: left">
+                        
+                    <?php $i=0;
+                     foreach ($detalles as $detalle): 
+                        $i++;?>   
                         <tr>
-                            <td>1</td>
-                            <td>Porte, Gastón</td>
-                            <td>37184</td>                            
-                            <td>Indicadores</td>                            
+                            <td>
+                            <?php echo $i?>
+                            </td>
+                            <td>
+                            <?php echo $detalle->getAlumno()->getnombre() ?>
+                            <?php echo $detalle->getAlumno()->getapellido() ?>
+                            </td>
+                            <td>
+                            <?php echo $detalle->getAlumno()->getlegajo() ?>
+                            </td>                            
+                            <td>
+                            <?php echo $detalle->gettema() ?>
+                            </td>                            
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Pereyra, Albana</td>
-                            <td>34891</td>                            
-                            <td></td>                            
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Van Den Bosch, Lucas</td>
-                            <td>35821</td>                            
-                            <td>Diferencia entre Puesta en Marcha - Prueba Piloto</td>                            
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Morales, María Alicia</td>
-                            <td>26142</td>                            
-                            <td></td>                            
-                        </tr>
+                          <?php endforeach; 
+                              ?>    
+
+                      
                     </tbody>                    
                 </table>                
             </div>

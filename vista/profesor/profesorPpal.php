@@ -23,6 +23,7 @@ require_once $DIR . $profesorControlador;
         <?php endif; ?>
         <?php
         $notificar= $URL . $profesorNotificarAlumno; 
+        $anotados= $URL . $profesorAlumnosAnotados; 
         ?>
         <h2>Estás Dictando:</h2>
         <form action="profesorPpal.php" method="POST">        
@@ -97,6 +98,9 @@ require_once $DIR . $profesorControlador;
                             </td>
                             <td>
                                 <button name="Notificaridhora" type='submit' value=<?php echo $hora->getid_horadeconsulta()?> formaction=<?php echo $notificar?> > Notificar </button>
+                            </td>
+                            <td>
+                                <button name="Notificaridhora" type='submit' value=<?php echo $hora->getid_horadeconsulta()?> formaction=<?php echo $anotados?> > Ver </button>
                             </td>
                         </tr>
                         <?php endforeach; 

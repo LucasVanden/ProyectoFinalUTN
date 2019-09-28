@@ -101,5 +101,10 @@ echo '<pre>'; print_r($ded); echo '</pre>';
 echo(strtotime("next Monday") . "<br>");
 echo 'verdaderofalso';
 echo $a->hayAvisosProfesor($ded);
+echo"anotados:";
+$t= $a->detallealumnosAnotados(2);
+echo '<pre>'; print_r($t); echo '</pre>';
+
+
 ?>
 

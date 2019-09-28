@@ -165,13 +165,6 @@ class Profesorcontrolador extends conexion
         return $listaHora;
     }
 
-
-
-
-
-
-
-
     function hayAvisosProfesor($hora){
         $respuesta = false;
         foreach ($hora as $horadeconsulta) {
@@ -184,5 +177,88 @@ class Profesorcontrolador extends conexion
         }
         return $respuesta;
     }
+
+    function detallealumnosAnotados($idhora){
+        $ListDetalles=array();
+        $conn = $this->getconexion();
+        $stmt = $conn->prepare("SELECT id_detalleanotados,fk_horadeconsulta,fk_alumno,tema FROM detalleanotados where fk_horadeconsulta=$idhora "); 
+        $stmt->execute();
+       
+            while($row = $stmt->fetch()) {
+                    $detalle = new Detalleanotados();
+                    $detalle->setid_detalleanotados($row['id_detalleanotados']);
+                    $detalle->setfk_horadeconsulta($row['fk_horadeconsulta']);
+                    $detalle->settema($row['tema']);
+                    $tempidalumno=($row['fk_alumno']);
+
+                    $iddetalle=$row['id_detalleanotados'];
+                    $Estados=array();
+    
+                    $stmt2 = $conn->prepare("SELECT id_anotadoestado,fechaAnotadosEstado,horaAnotadosEstado,fk_estadoanotados FROM anotadosestado where fk_detalleanotados=$iddetalle "); 
+                    $stmt2->execute();
+                    while($row = $stmt2->fetch()) {
+                        $anotado = new AnotadosEstado();
+                        $anotado->setid_anotadosEstado($row['id_anotadoestado']);
+                        $anotado->setfechaAnotadosEstado($row['fechaAnotadosEstado']);
+                        $anotado->sethoraAnotadosEstado($row['horaAnotadosEstado']);
+                        $idnombreestado=$row['fk_estadoanotados'];
+    
+                        $stmt3 = $conn->prepare("SELECT nombreEstado,id_estadoanotados FROM estadoanotados where id_estadoanotados=$idnombreestado "); 
+                        $stmt3->execute();
+                        while($row = $stmt3->fetch()) {
+                            $estado = new EstadoAnotados();
+                            $estado->setnombreEstado($row['nombreEstado']);
+                            $estado->setid_estadoanotados($row['id_estadoanotados']);
+                            $anotado->setEstadoAnotados($estado);       
+                        }
+                    
+                            array_push($Estados,$anotado);
+                    }
+                    $stmt4 = $conn->prepare("SELECT nombre,apellido,email,legajo FROM alumno where id_alumno=$tempidalumno "); 
+                    $stmt4->execute();
+                    while($row = $stmt4->fetch()) {
+                        $alum=new alumno();
+                        $alum->setnombre($row['nombre']);
+                        $alum->setapellido($row['apellido']);
+                        $alum->setemail($row['email']);
+                        $alum->setlegajo($row['legajo']);
+                        $detalle->setAlumno($alum);
+                    }
+                    $detalle->setAnotadosEstado($Estados);
+                    
+                    array_push($ListDetalles,$detalle);
+            } 
+                $listaDetallesAnotados=array();
+            foreach ($ListDetalles as $detalle) {
+                    //    echo $detalle->getAnotadosEstado()[0]->getid_anotadosEstado();
+                    $d= $detalle->getAnotadosEstado();
+                if  ( end($d)->getEstadoAnotados()->getnombreEstado()=="Anotado") {
+                array_push($listaDetallesAnotados,$detalle);
+                }      
+            }
+            return $listaDetallesAnotados;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

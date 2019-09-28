@@ -6,7 +6,7 @@ class DetalleAnotados
 	var $fechaDetalleAnotados;
 	var $horaDetalleAnotados;
 	var $tema;
-	var $m_Alumno;
+	var $Alumno;
 	var $AnotadosEstado;
 	var $fk_horadeconsulta;
 
@@ -21,6 +21,14 @@ class DetalleAnotados
 	function setid_detalleanotados($newVal)
 	{
 		$this->id_detalleanotados = $newVal;
+	}
+	function getAlumno()
+	{
+		return $this->Alumno;
+	}
+	function setAlumno($newVal)
+	{
+		$this->Alumno = $newVal;
 	}
 
 	function getfk_horadeconsulta()

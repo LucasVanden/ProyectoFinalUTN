@@ -39,4 +39,5 @@ $profesorControlador='/controlador/profesor/profesorControlador.php';
 $profesorNotificarAlumno='/vista/profesor/profesorNotificarAlumnos.php';
 $profesorPpal='/vista/profesor/profesorPpal.php';
 $profesorCrearNotificacion='/controlador/profesor/profesorCrearNotificacion.php';
+$profesorAlumnosAnotados='/vista/profesor/profesorAlumnosAnotados.php';
 ?>
