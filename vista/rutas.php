@@ -33,4 +33,7 @@ $AnotadosEstado='/modelo/AnotadosEstado.php';
 $DetalleAnotados='/modelo/DetalleAnotados.php';
 $EstadoAnotados='/modelo/EstadoAnotados.php';
 $AvisoProfesor='/modelo/AvisoProfesor.php';
+
+$Dedicacion='/modelo/Dedicacion.php';
+$profesorControlador='/controlador/profesorControlador.php';
 ?>

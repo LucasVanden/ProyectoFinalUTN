@@ -4,8 +4,8 @@ if (isset($_SESSION['user_id'])) {
     header('Location: /PFProyect');
     footer('Location: /PFProyect');
 }
-require './../dbPFprueba.php';
-require './../rutas.php';
+require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once $DIR . $profesorControlador;
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +21,12 @@ require './../rutas.php';
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
+
+        <?php $nommat= $_POST['nombreMateriaSeleccionada'];
+           $a=new profesorControlador();
+           $idmateria= $a->buscarIDdeNombreMateria($nommat);
+           $dedicacion=$a->buscarDedicaciondeMateria($idmateria,2)//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
+           ?>
         <h2>Establecer Horario de Consulta:</h2>
         <form action="alumnoPpal.php" method="POST">
             <div>
@@ -28,7 +34,7 @@ require './../rutas.php';
                     <tr>
                         <th>Nombre</th>
                         <td>
-                            Administración de Recursos
+                           <?php echo $_POST['nombreMateriaSeleccionada']?>
 <!--                            <select name="Materias">                       
                                 <option>Administración de Recursos</option>
                                 <option>Administración Gerencial</option>
@@ -38,7 +44,7 @@ require './../rutas.php';
                     <tr>
                         <th>Dedicación</th>
                         <td>
-                            Simple
+                        <?php echo $dedicacion->gettipo()?>
                         </td>
                     </tr>                   
                     <tr>

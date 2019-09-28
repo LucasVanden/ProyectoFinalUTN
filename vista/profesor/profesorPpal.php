@@ -4,8 +4,8 @@ if (isset($_SESSION['usuario_id'])) {
     header('Location: /PFProyect');
     footer('Location: /PFProyect');
 }
-require './../dbPFprueba.php';
-require './../rutas.php';
+require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once $DIR . $profesorControlador;
 ?>
 
 <!DOCTYPE html>
@@ -24,21 +24,26 @@ require './../rutas.php';
         <h2>Estás Dictando:</h2>
         <form action="profesorPpal.php" method="POST">        
             <div>
-                <table id="tablaMateria" onclick="">
+            <table align='center' class="table-mostrar" id="tablaMateria">
                     <thead>
-                        <!--Nombre de Materia-->
+                        <!--aca va cabecera de tabla-->
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
-                                Administración Gerencial
-                            </td>
+                            <th> Materias </th>
                         </tr>
-                        <tr>
-                            <td>
-                                Administración de Recursos
-                            </td>
-                        </tr>                        
+                        <?php 
+                        $a =new profesorControlador ;
+                        $listaDedicaciones = $a->buscarMateriasProfesor(02);
+                        foreach ($listaDedicaciones as $dedicacion): ?> 
+                      
+                            <tr>
+                           <td> 
+                           <input type="submit" name="nombreMateriaSeleccionada" id='<?php echo $dedicacion->getid_dedicacion()?>'  value="<?php echo $dedicacion->getMateria()->getnombreMateria()?>" formaction="profesorEstablecerHorario.php" 
+                            onclick=""></input></td>
+                             </tr>
+                        <?php endforeach; 
+                            ?>
                     </tbody>
                 </table>
             </div>            
