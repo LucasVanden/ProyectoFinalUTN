@@ -9,8 +9,8 @@ require $DIR.'/controlador/PHPMailer/src/Exception.php';
 require $DIR.'/controlador/PHPMailer/src/PHPMailer.php';
 require $DIR.'/controlador/PHPMailer/src/SMTP.php';
 
-require '../../controlador/alumnoControlador.php';
-require '../../controlador/profesorControlador.php';
+require $DIR.'/controlador/alumnoControlador.php';
+require $DIR.'/controlador/profesor/profesorControlador.php';
 
 // $cont =new alumnoControlador();
 // $temporal = $cont->buscarAlumno(1);
@@ -99,5 +99,7 @@ echo 'anotados'.'<br>';
 $ded=$a->alumnosAnotados(2);
 echo '<pre>'; print_r($ded); echo '</pre>';
 echo(strtotime("next Monday") . "<br>");
+echo 'verdaderofalso';
+echo $a->hayAvisosProfesor($ded);
 ?>
 

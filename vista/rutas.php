@@ -35,5 +35,8 @@ $EstadoAnotados='/modelo/EstadoAnotados.php';
 $AvisoProfesor='/modelo/AvisoProfesor.php';
 
 $Dedicacion='/modelo/Dedicacion.php';
-$profesorControlador='/controlador/profesorControlador.php';
+$profesorControlador='/controlador/profesor/profesorControlador.php';
+$profesorNotificarAlumno='/vista/profesor/profesorNotificarAlumnos.php';
+$profesorPpal='/vista/profesor/profesorPpal.php';
+$profesorCrearNotificacion='/controlador/profesor/profesorCrearNotificacion.php';
 ?>

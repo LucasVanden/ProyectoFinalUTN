@@ -21,6 +21,9 @@ require_once $DIR . $profesorControlador;
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
+        <?php
+        $notificar= $URL . $profesorNotificarAlumno; 
+        ?>
         <h2>Estás Dictando:</h2>
         <form action="profesorPpal.php" method="POST">        
             <div>
@@ -93,7 +96,7 @@ require_once $DIR . $profesorControlador;
                             <?php echo $hora->getcantidadAnotados() ?>
                             </td>
                             <td>
-                                <button id="buttonNotificar" name="Notificar"> Notificar </button>
+                                <button name="Notificaridhora" type='submit' value=<?php echo $hora->getid_horadeconsulta()?> formaction=<?php echo $notificar?> > Notificar </button>
                             </td>
                         </tr>
                         <?php endforeach; 
@@ -104,33 +107,33 @@ require_once $DIR . $profesorControlador;
             <div>
             <br>
             <h2>Mis Notificaciones</h2> <!-- desde aca acomodar con lo que viene-->
-            <?php $notificaciones= $a->notificaciones($misanotaciones); ?>
-            <?php if (count($notificaciones)>0){ ?>
+            <?php if ($a->hayAvisosProfesor($alumnosanotados)){ ?>
             <table  align='center' class="table-mostrar" id="tablaAvisos" onclick="" >
                 <thead>                    
                     <th>Materia</th>
-                    <th>Alumno</th>
                     <th>Fecha</th>
                     <th>Mensaje</th>          
                 </thead>
                 <?php     
-                    foreach ($notificaciones as $hora): ?>   
+                    foreach ($alumnosanotados as $hora): ?>   
                 <br>
                 <tr>     
                     <td>
                         <?php echo $hora->getMateria()->getnombreMateria(); ?>
                     </td>
-                <td>
-                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getapellido(); ?> <!-- aca datos del alumno-->
-                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?> <!-- aca datos del alumno-->
-                </td>
+             
                     <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> <!-- aca mensaje del alumno-->
+                <tr>    
+                <td>
+                    <?php echo ""?> <!-- aca fecha aviso del alumno-->
+                </td>
                 <td>
                     <?php echo $aviso->getfechaAvisoProfesor() ?> <!-- aca fecha aviso del alumno-->
                 </td>
                 <td>
                     <?php echo $aviso->getdetalleDescripcion() ?>
                 </td>
+                </tr>
                     <?php endforeach;
                     ?>
                 </tr>

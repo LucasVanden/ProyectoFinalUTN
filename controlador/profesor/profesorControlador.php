@@ -114,9 +114,10 @@ class Profesorcontrolador extends conexion
             $hora = new HoraDeConsulta();
             $hora->setid_horadeconsulta($row['id_horadeconsulta']);
             $hora->setcantidadAnotados($row['cantidadAnotados']);
+
             $tempidhorario =$row['fk_horariodeconsulta'];
             $temporalMateriaid =$row['fk_materia'];
-
+             $temphoraconsulta =$row['id_horadeconsulta'];
               $stmt3 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
               $stmt3->execute();
                 while($row = $stmt3->fetch()) {
@@ -148,8 +149,40 @@ class Profesorcontrolador extends conexion
                 $mat->setnombreMateria($row['nombreMateria']);
                 $hora->setMateria($mat);
             }
+            $listaAvisos=array();
+            $stmt6 = $conn->prepare("SELECT id_avisoProfesor,detalleDescripcion,fechaAvisoProfesor FROM avisoprofesor where fk_horadeconsulta=$temphoraconsulta"); 
+            $stmt6->execute();
+            while($row = $stmt6->fetch()) {
+                $aviso= new AvisoProfesor();
+                $aviso->setid_avisoProfesor($row['id_avisoProfesor']);
+                $aviso->setdetalleDescripcion($row['detalleDescripcion']);
+                $aviso->setfechaAvisoProfesor($row['fechaAvisoProfesor']);
+                array_push($listaAvisos,$aviso);
+            }
+            $hora->setAvisoProfesor($listaAvisos);
             array_push($listaHora,$hora);
         }
         return $listaHora;
     }
+
+
+
+
+
+
+
+
+    function hayAvisosProfesor($hora){
+        $respuesta = false;
+        foreach ($hora as $horadeconsulta) {
+           foreach ($horadeconsulta->getAvisoProfesor() as $aviso) {
+            if (isset($aviso)){
+                $respuesta=true;
+                break;
+            }
+           }
+        }
+        return $respuesta;
+    }
+
 }
