@@ -76,6 +76,7 @@ require_once $DIR . $profesorControlador;
                         <th>Hora</th>
                         <th>Cantidad</th>
                         <th>Notificar</th>
+                        <th>Ver detelles</th>
                     </thead>
                    <?php 
                    $alumnosanotados = $a->alumnosAnotados(02);//<---------------------------------id session

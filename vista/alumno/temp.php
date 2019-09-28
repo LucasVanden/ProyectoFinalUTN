@@ -92,19 +92,19 @@ require $DIR.'/controlador/profesor/profesorControlador.php';
 $a =new profesorControlador ;
 // $listaDedicaciones = $a->buscarMateriasProfesor(2);
 // echo '<pre>'; print_r($listaDedicaciones); echo '</pre>';
-echo 'horarios'.'<br>';
+echo 'buscarHorariodeConsultadeMateriadeProfesor'.'<br>';
 $ded=$a->buscarHorariodeConsultadeMateriadeProfesor(1,2);
 echo '<pre>'; print_r($ded); echo '</pre>';
-echo 'anotados'.'<br>';
+echo 'alumnosAnotados'.'<br>';
 $ded=$a->alumnosAnotados(2);
 echo '<pre>'; print_r($ded); echo '</pre>';
 echo(strtotime("next Monday") . "<br>");
-echo 'verdaderofalso';
+echo 'hayAvisosProfesor';
 echo $a->hayAvisosProfesor($ded);
-echo"anotados:";
+echo"detallealumnosAnotados:";
 $t= $a->detallealumnosAnotados(2);
 echo '<pre>'; print_r($t); echo '</pre>';
-
+echo $a->buscarMateriaDeHoradeconsulta(2);
 
 ?>
 

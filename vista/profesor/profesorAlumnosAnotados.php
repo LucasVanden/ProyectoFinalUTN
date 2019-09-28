@@ -6,6 +6,7 @@ if (isset($_SESSION['user_id'])) {
 }
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $profesorControlador;
+$idhora=$_POST['Notificaridhora'];
 ?>
 
 <!DOCTYPE html>
@@ -24,12 +25,14 @@ require_once $DIR . $profesorControlador;
             <h2 style="align-content: center">Detalle de Alumnos Anotados</h2>
             <form action="profesorAlumnosAnotados.php" method="POST">        
             <div>
-                <h2>Administración Gerencial</h2>
-                
-                <?php
+            <?php
                  $a = new Profesorcontrolador();
-                 $detalles=$a->detallealumnosAnotados($_POST['Notificaridhora'])
+                 $detalles=$a->detallealumnosAnotados($idhora);
+                 $nombMateria=$a->buscarMateriaDeHoradeconsulta($idhora);
                  ?>
+                <h2><?php echo $nombMateria ?></h2>
+                
+             
                 <table id="tablaAlumnosAnotadosMateria" onclick="">
                     <thead>                    
                         <th></th>

@@ -237,10 +237,25 @@ class Profesorcontrolador extends conexion
                 }      
             }
             return $listaDetallesAnotados;
-    }
+        }
 
 
-
+        function buscarMateriaDeHoradeconsulta($idhora){
+          
+            $conn = $this->getconexion();
+            $stmt = $conn->prepare("SELECT fk_materia FROM horadeconsulta where id_horadeconsulta=$idhora "); 
+            $stmt->execute();
+           
+                while($row = $stmt->fetch()) {
+                    $temp=$row['fk_materia'];
+                    $stmt = $conn->prepare("SELECT nombreMateria FROM materia where id_materia=$temp "); 
+                    $stmt->execute();
+                    while($row = $stmt->fetch()) {
+                        $mat= $row['nombreMateria'];
+                    }
+                    }
+                return $mat;
+                }
 
 
 
