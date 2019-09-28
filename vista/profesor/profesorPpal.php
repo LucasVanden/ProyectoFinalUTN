@@ -73,41 +73,31 @@ require_once $DIR . $profesorControlador;
                         <th>Cantidad</th>
                         <th>Notificar</th>
                     </thead>
+                   <?php 
+                   $alumnosanotados = $a->alumnosAnotados(02);//<---------------------------------id session
+                  ?>
                     <tbody>
-                        <tr>
+                     <?php  foreach ($alumnosanotados as $hora): ?>   
+                       
+                     <tr>
                             <td>
-                                Administración Gerencial
+                            <?php echo $hora->getMateria()->getnombreMateria() ?>
                             </td>
                             <td>
-                                Jueves
+                            <?php echo $hora->getHorarioDeConsulta()->getdia()->getdia() ?>
                             </td>
                             <td>
-                                17:30
+                            <?php echo $hora->getHorarioDeConsulta()->gethora() ?>
                             </td>
                             <td>
-                                4
+                            <?php echo $hora->getcantidadAnotados() ?>
                             </td>
                             <td>
                                 <button id="buttonNotificar" name="Notificar"> Notificar </button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                Administración de Recursos
-                            </td>                                
-                            <td>
-                                Martes
-                            </td>
-                            <td>
-                                19:00
-                            </td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                <button id="buttonNotificar" name="Notificar"> Notificar </button>
-                            </td>
-                        </tr>                        
+                        <?php endforeach; 
+                            ?>                       
                     </tbody>
                 </table>
             </div>
