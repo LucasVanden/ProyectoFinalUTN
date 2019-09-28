@@ -100,9 +100,16 @@ require_once $DIR . $profesorControlador;
                             <td>
                                 <button name="Notificaridhora" type='submit' value=<?php echo $hora->getid_horadeconsulta()?> formaction=<?php echo $notificar?> > Notificar </button>
                             </td>
+                            <?php if ($hora->getcantidadAnotados()>0){ ?>
                             <td>
                                 <button name="Notificaridhora" type='submit' value=<?php echo $hora->getid_horadeconsulta()?> formaction=<?php echo $anotados?> > Ver </button>
                             </td>
+                            <?php } else { 
+                                echo  '<td bgcolor="Lime">';
+                                echo "No anotados";
+                                echo  '</td>';
+                                 }; ?>
+
                         </tr>
                         <?php endforeach; 
                             ?>                       

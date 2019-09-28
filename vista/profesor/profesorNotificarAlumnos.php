@@ -7,6 +7,7 @@ if (isset($_SESSION['user_id'])) {
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $profesorControlador;
 $profesorNotificar=$URL.$profesorCrearNotificacion;
+$idhora=$_POST['Notificaridhora'];
 ?>
 
 <!DOCTYPE html>
@@ -22,13 +23,17 @@ $profesorNotificar=$URL.$profesorCrearNotificacion;
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-         <form action=<?php echo $profesorNotificar?> method="POST">    
-            <h1>Enviar Notificación</h1>            
+         <form action=<?php echo $profesorNotificar?> method="POST">  
+         <?php
+                 $a = new Profesorcontrolador();
+                 $nombMateria=$a->buscarMateriaDeHoradeconsulta($idhora);
+                 ?>
+            <h1>Enviar Notificación a <?php echo $nombMateria ?> </h1>            
             <div>
                 <textarea name="cuerpoNotificacion" placeholder="Ingrese Contenido de la Notificación"rows="10" cols="80">Escribe aquí tu Notificación</textarea>
                 <br>
                 <br>
-                <input type='hidden' name='idhoradeconsulta' value = <?php echo $_POST['Notificaridhora']?>></input>
+                <input type='hidden' name='idhoradeconsulta' value = <?php echo $idhora?>></input>
                 <input type="submit" value="Enviar" name="Enviar"  />
                 <input type="submit" value="Cancelar" name="Cancelar"  />
             </div>
