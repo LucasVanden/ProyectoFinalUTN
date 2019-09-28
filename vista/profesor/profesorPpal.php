@@ -16,7 +16,7 @@ require_once $DIR . $profesorControlador;
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body background = <?php echo $URL.$fondo?>>
         <?php require './../partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
@@ -24,98 +24,139 @@ require_once $DIR . $profesorControlador;
         <h2>Estás Dictando:</h2>
         <form action="profesorPpal.php" method="POST">        
             <div>
-            <table align='center' class="table-mostrar" id="tablaMateria">
+                <table align='center' class="table-mostrar" id="tablaMateria">
                     <thead>
-                        <!--aca va cabecera de tabla-->
+                    <!--aca va cabecera de tabla-->
                     </thead>
                     <tbody>
                         <tr>
                             <th> Materias </th>
-                        </tr>
+                        </tr>   
                         <?php 
                         $a =new profesorControlador ;
                         $listaDedicaciones = $a->buscarMateriasProfesor(02);
-                        foreach ($listaDedicaciones as $dedicacion): ?> 
-                      
-                            <tr>
-                           <td> 
-                           <input type="submit" name="nombreMateriaSeleccionada" id='<?php echo $dedicacion->getid_dedicacion()?>'  value="<?php echo $dedicacion->getMateria()->getnombreMateria()?>" formaction="profesorEstablecerHorario.php" 
-                            onclick=""></input></td>
-                             </tr>
+                        foreach ($listaDedicaciones as $dedicacion): ?>   
+                        <tr>
+                            <td> 
+                                <input type="submit" name="nombreMateriaSeleccionada" id='<?php echo $dedicacion->getid_dedicacion()?>'  value="<?php echo $dedicacion->getMateria()->getnombreMateria()?>" formaction="profesorEstablecerHorario.php" 
+                            onclick=""></input>
+                            </td>
+                        </tr>
                         <?php endforeach; 
                             ?>
                     </tbody>
                 </table>
-            </div>            
-            <h2>Establecer Horario de Consulta:</h2>
-            <table>
-                <thead>
-                    
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <select name="MateriasDictando">                      
-                                <option>Administración de Recursos</option>
-                                <option>Administración Gerencial</option>
-                            </select> 
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            </div>
+            <div>            
+                <h2>Establecer Horario de Consulta:</h2>
+                <table>
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select name="MateriasDictando">                      
+                                    <option>Administración de Recursos</option>
+                                    <option>Administración Gerencial</option>
+                                </select> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div>                
                 <h2>Alumnos Anotados</h2>
-                <div>
-                    <table id="tablaAlumnosAnotados" onclick="">
-                        <thead>
+                <table id="tablaAlumnosAnotados" onclick="">
+                    <thead>
                         <th>Materia</th>
                         <th>Día</th>
                         <th>Hora</th>
                         <th>Cantidad</th>
                         <th>Notificar</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Administración Gerencial
-                                </td>
-                                <td>
-                                    Jueves
-                                </td>
-                                <td>
-                                    17:30
-                                </td>
-                                <td>
-                                    4
-                                </td>
-                                <td>
-                                    <button id="buttonNotificar" name="Notificar"> Notificar </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Administración de Recursos
-                                </td>                                
-                                <td>
-                                    Martes
-                                </td>
-                                <td>
-                                    19:00
-                                </td>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    <button id="buttonNotificar" name="Notificar"> Notificar </button>
-                                </td>
-                            </tr>                        
-                        </tbody>
-                    </table>
-                </div>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Administración Gerencial
+                            </td>
+                            <td>
+                                Jueves
+                            </td>
+                            <td>
+                                17:30
+                            </td>
+                            <td>
+                                4
+                            </td>
+                            <td>
+                                <button id="buttonNotificar" name="Notificar"> Notificar </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Administración de Recursos
+                            </td>                                
+                            <td>
+                                Martes
+                            </td>
+                            <td>
+                                19:00
+                            </td>
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                <button id="buttonNotificar" name="Notificar"> Notificar </button>
+                            </td>
+                        </tr>                        
+                    </tbody>
+                </table>
             </div>
             <div>
-                <h2>Mis Notificaciones</h2>
-                <h4> Usted no tiene Mensajes Nuevos</h4>
+            <br>
+            <h2>Mis Notificaciones</h2> <!-- desde aca acomodar con lo que viene-->
+            <?php $notificaciones= $a->notificaciones($misanotaciones); ?>
+            <?php if (count($notificaciones)>0){ ?>
+            <table  align='center' class="table-mostrar" id="tablaAvisos" onclick="" >
+                <thead>                    
+                    <th>Materia</th>
+                    <th>Alumno</th>
+                    <th>Fecha</th>
+                    <th>Mensaje</th>          
+                </thead>
+                <?php     
+                    foreach ($notificaciones as $hora): ?>   
+                <br>
+                <tr>     
+                    <td>
+                        <?php echo $hora->getMateria()->getnombreMateria(); ?>
+                    </td>
+                <td>
+                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getapellido(); ?> <!-- aca datos del alumno-->
+                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?> <!-- aca datos del alumno-->
+                </td>
+                    <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> <!-- aca mensaje del alumno-->
+                <td>
+                    <?php echo $aviso->getfechaAvisoProfesor() ?> <!-- aca fecha aviso del alumno-->
+                </td>
+                <td>
+                    <?php echo $aviso->getdetalleDescripcion() ?>
+                </td>
+                    <?php endforeach;
+                    ?>
+                </tr>
+                    <?php endforeach; 
+                    ?>
+                </table>
+                <?php } else { ?>
+                    <table align='center' class="table-mostrar" id="tablanotificaciones" onclick="" >
+                    <td>
+                        <?php echo "No hay notificaciones." ?>
+                    </td>
+                </table> 
+                    <?php }; ?>
+                <br>
+                <br>
+                <br>
             </div>
         </form>
     </body>
