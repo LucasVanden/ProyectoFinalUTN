@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-09-2019 a las 03:10:37
+-- Tiempo de generación: 28-09-2019 a las 04:06:35
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -113,7 +113,8 @@ INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAn
 (126, '2019-09-23', '12:31:11', 1, 73),
 (127, '2019-09-23', '12:33:25', 2, 73),
 (128, '2019-09-23', '12:33:29', 1, 73),
-(129, '2019-09-23', '21:59:04', 1, 79);
+(129, '2019-09-23', '21:59:04', 1, 79),
+(130, '2019-09-26', '01:12:24', 1, 80);
 
 -- --------------------------------------------------------
 
@@ -179,6 +180,14 @@ CREATE TABLE `dedicacion` (
   `cantidadHora` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `dedicacion`
+--
+
+INSERT INTO `dedicacion` (`id_dedicacion`, `tipo`, `cantidadHora`) VALUES
+(1, 'doble', 2),
+(2, 'simple', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -188,8 +197,17 @@ CREATE TABLE `dedicacion` (
 CREATE TABLE `dedicacion_materia_profesor` (
   `id_dedicacion_materia_profesor` int(20) NOT NULL,
   `fk_dedicacion` int(20) NOT NULL,
-  `fk_materia` int(20) NOT NULL
+  `fk_materia` int(20) NOT NULL,
+  `fk_profesor` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `dedicacion_materia_profesor`
+--
+
+INSERT INTO `dedicacion_materia_profesor` (`id_dedicacion_materia_profesor`, `fk_dedicacion`, `fk_materia`, `fk_profesor`) VALUES
+(1, 1, 1, 2),
+(2, 2, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -236,7 +254,8 @@ CREATE TABLE `detalleanotados` (
 INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `horaDetalleAnotados`, `tema`, `fk_alumno`, `fk_horadeconsulta`) VALUES
 (73, '2019-09-21', '18:47:47.000000', '', 1, 2),
 (78, '2019-09-21', '19:58:36.000000', '', 1, 3),
-(79, '2019-09-23', '21:59:04.000000', '', 1, 13);
+(79, '2019-09-23', '21:59:04.000000', '', 1, 13),
+(80, '2019-09-26', '01:12:24.000000', '', 1, 14);
 
 -- --------------------------------------------------------
 
@@ -311,7 +330,7 @@ INSERT INTO `horadeconsulta` (`id_horadeconsulta`, `fechaDesdeAnotados`, `fechaH
 (2, '2019-09-02', '2019-09-09', 1, 'pendiente', 'activo', 1, NULL, 1, 2),
 (3, '2019-09-13', '2019-09-20', 1, 'pendiente', 'activo', 2, NULL, 2, 3),
 (13, '2019-09-23', '2019-09-30', 1, 'pendiente', 'activo', 1, NULL, 11, 6),
-(14, '2019-09-23', '2019-09-30', 0, 'pendiente', 'activo', 1, NULL, 9, 5),
+(14, '2019-09-23', '2019-09-30', 1, 'pendiente', 'activo', 1, NULL, 9, 5),
 (15, '2019-09-23', '2019-09-30', 0, 'pendiente', 'activo', 1, NULL, 10, 4),
 (16, '2019-09-23', '2019-09-30', 0, 'pendiente', 'activo', 4, NULL, 12, 2);
 
@@ -569,7 +588,8 @@ ALTER TABLE `dedicacion`
 ALTER TABLE `dedicacion_materia_profesor`
   ADD PRIMARY KEY (`id_dedicacion_materia_profesor`) USING BTREE,
   ADD KEY `fk_dedicacion` (`fk_dedicacion`),
-  ADD KEY `fk_materia` (`fk_materia`);
+  ADD KEY `fk_materia` (`fk_materia`),
+  ADD KEY `fk_profesor` (`fk_profesor`);
 
 --
 -- Indices de la tabla `departamento`
@@ -705,7 +725,7 @@ ALTER TABLE `alumno`
 -- AUTO_INCREMENT de la tabla `anotadosestado`
 --
 ALTER TABLE `anotadosestado`
-  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 --
 -- AUTO_INCREMENT de la tabla `asueto`
 --
@@ -720,12 +740,12 @@ ALTER TABLE `avisoprofesor`
 -- AUTO_INCREMENT de la tabla `dedicacion`
 --
 ALTER TABLE `dedicacion`
-  MODIFY `id_dedicacion` int(16) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_dedicacion` int(16) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `dedicacion_materia_profesor`
 --
 ALTER TABLE `dedicacion_materia_profesor`
-  MODIFY `id_dedicacion_materia_profesor` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_dedicacion_materia_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
@@ -735,7 +755,7 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
-  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 --
 -- AUTO_INCREMENT de la tabla `dia`
 --
@@ -765,7 +785,7 @@ ALTER TABLE `horariodeconsulta`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
@@ -785,7 +805,7 @@ ALTER TABLE `privilegio`
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `id_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `turno`
 --
@@ -818,7 +838,8 @@ ALTER TABLE `avisoprofesor`
 --
 ALTER TABLE `dedicacion_materia_profesor`
   ADD CONSTRAINT `dedicacion_materia_profesor_ibfk_1` FOREIGN KEY (`fk_dedicacion`) REFERENCES `dedicacion` (`id_dedicacion`),
-  ADD CONSTRAINT `dedicacion_materia_profesor_ibfk_2` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`);
+  ADD CONSTRAINT `dedicacion_materia_profesor_ibfk_2` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`),
+  ADD CONSTRAINT `dedicacion_materia_profesor_ibfk_3` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`);
 
 --
 -- Filtros para la tabla `detalleanotados`
