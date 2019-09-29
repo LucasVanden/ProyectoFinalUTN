@@ -210,6 +210,9 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                                     <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?> 
                                 </td>
                                <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> 
+                               <tr>
+                               <td></td>
+                               <td></td>
                                <td>
                                     <?php
                                      echo $aviso->getfechaAvisoProfesor();
@@ -219,7 +222,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                                 <td>
                                     <?php echo $aviso->getdetalleDescripcion() ?>
                                 </td>
-                            
+                            </tr>
                                 <?php endforeach; 
                             ?>
                                
