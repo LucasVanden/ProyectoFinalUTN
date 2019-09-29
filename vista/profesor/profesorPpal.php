@@ -142,7 +142,10 @@ require_once $DIR . $profesorControlador;
                     <?php echo ""?> <!-- aca fecha aviso del alumno-->
                 </td>
                 <td>
-                    <?php echo $aviso->getfechaAvisoProfesor() ?> <!-- aca fecha aviso del alumno-->
+                    <?php echo $aviso->getfechaAvisoProfesor();
+                    echo " ";
+                    echo substr($aviso->gethoraAvisoProfesor(), 0, 5);
+                     ?> <!-- aca fecha aviso del alumno-->
                 </td>
                 <td>
                     <?php echo $aviso->getdetalleDescripcion() ?>

@@ -150,13 +150,14 @@ class Profesorcontrolador extends conexion
                 $hora->setMateria($mat);
             }
             $listaAvisos=array();
-            $stmt6 = $conn->prepare("SELECT id_avisoProfesor,detalleDescripcion,fechaAvisoProfesor FROM avisoprofesor where fk_horadeconsulta=$temphoraconsulta"); 
+            $stmt6 = $conn->prepare("SELECT id_avisoProfesor,detalleDescripcion,fechaAvisoProfesor,horaAvisoProfesor FROM avisoprofesor where fk_horadeconsulta=$temphoraconsulta"); 
             $stmt6->execute();
             while($row = $stmt6->fetch()) {
                 $aviso= new AvisoProfesor();
                 $aviso->setid_avisoProfesor($row['id_avisoProfesor']);
                 $aviso->setdetalleDescripcion($row['detalleDescripcion']);
                 $aviso->setfechaAvisoProfesor($row['fechaAvisoProfesor']);
+                $aviso->sethoraAvisoProfesor($row['horaAvisoProfesor']);
                 array_push($listaAvisos,$aviso);
             }
             $hora->setAvisoProfesor($listaAvisos);
