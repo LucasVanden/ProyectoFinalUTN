@@ -24,8 +24,8 @@ if(isset($_POST['Enviar'])){
         $fechahora="{$hora}:{$min}:{$seg}.000000";
         $fechadia= "{$fecha['year']}-{$mes}-{$dia}";
 
-            $stmt2 = $conexttion->prepare("INSERT INTO `avisoprofesor` (`id_avisoprofesor`, `fechaAvisoProfesor`, `detalleDescripcion`, `fk_horadeconsulta`)
-             VALUES (NULL, '$fechadia', '$mensaje', '$idhoradeconsulta');"); 
+            $stmt2 = $conexttion->prepare("INSERT INTO `avisoprofesor` (`id_avisoprofesor`, `fechaAvisoProfesor`,`horaAvisoProfesor`, `detalleDescripcion`, `fk_horadeconsulta`)
+             VALUES (NULL, '$fechadia', '$fechahora', '$mensaje', '$idhoradeconsulta');"); 
             $stmt2->execute();
         }
         $direccion= $URL . $profesorPpal;

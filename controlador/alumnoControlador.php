@@ -415,7 +415,7 @@ function AnotadoRepetido($idhora,$idalumno){
                                 $tempidhora=$row['id_horadeconsulta'];
                                 
 
-                                $stmt5 = $conn->prepare("SELECT id_avisoprofesor,fechaAvisoProfesor,detalleDescripcion FROM avisoprofesor where fk_horadeconsulta=$tempidhora"); 
+                                $stmt5 = $conn->prepare("SELECT id_avisoprofesor,fechaAvisoProfesor,detalleDescripcion,horaAvisoProfesor FROM avisoprofesor where fk_horadeconsulta=$tempidhora"); 
                                 $stmt5->execute();
 
                                 while($row = $stmt5->fetch()) {
@@ -423,6 +423,7 @@ function AnotadoRepetido($idhora,$idalumno){
                                     $aviso->setid_avisoprofesor($row['id_avisoprofesor']);
                                     $aviso->setfechaAvisoProfesor($row['fechaAvisoProfesor']);
                                     $aviso->setdetalleDescripcion($row['detalleDescripcion']);
+                                    $aviso->sethoraAvisoProfesor($row['horaAvisoProfesor']);
                                     array_push($listaAvisos,$aviso);
                                   
                                     

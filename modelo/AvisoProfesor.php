@@ -6,6 +6,7 @@ class AvisoProfesor
 	var $id_avisoprofesor;
 	var $detalleDescripcion;
 	var $fechaAvisoProfesor;
+	var $horaAvisoProfesor;
 
 	function AvisoProfesor()
 	{
@@ -18,6 +19,14 @@ class AvisoProfesor
 	function setid_avisoprofesor($newVal)
 	{
 		$this->id_avisoprofesor = $newVal;
+	}
+	function gethoraAvisoProfesor()
+	{
+		return $this->horaAvisoProfesor;
+	}
+	function sethoraAvisoProfesor($newVal)
+	{
+		$this->horaAvisoProfesor = $newVal;
 	}
 
 	function getdetalleDescripcion()

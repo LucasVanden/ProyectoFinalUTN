@@ -211,7 +211,10 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                                 </td>
                                <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> 
                                <td>
-                                    <?php echo $aviso->getfechaAvisoProfesor() ?>
+                                    <?php
+                                     echo $aviso->getfechaAvisoProfesor();
+                                     echo " ";
+                                     echo substr($aviso->gethoraAvisoProfesor(), 0, 5); ?>
                                 </td>
                                 <td>
                                     <?php echo $aviso->getdetalleDescripcion() ?>
