@@ -102,6 +102,8 @@ require_once $DIR . $profesorControlador;
                             </td>
                             <?php if ($hora->getcantidadAnotados()>0){ ?>
                             <td>
+                            <input type='hidden' name='dia' value=<?php echo $hora->getHorarioDeConsulta()->getdia()->getdia() ?>>
+                            <input type='hidden' name='hora' value=<?php echo $hora->getHorarioDeConsulta()->gethora() ?>>
                                 <button name="Notificaridhora" type='submit' value=<?php echo $hora->getid_horadeconsulta()?> formaction=<?php echo $anotados?> > Ver </button>
                             </td>
                             <?php } else { 

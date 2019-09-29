@@ -29,8 +29,14 @@ $idhora=$_POST['Notificaridhora'];
                  $a = new Profesorcontrolador();
                  $detalles=$a->detallealumnosAnotados($idhora);
                  $nombMateria=$a->buscarMateriaDeHoradeconsulta($idhora);
+
                  ?>
-                <h2><?php echo $nombMateria ?></h2>
+                <h2><?php echo $nombMateria;
+                 echo " ";
+                 echo $_POST['dia'];
+                 echo " ";
+                 echo $_POST['hora'];
+                ?></h2>
                 
              
                 <table id="tablaAlumnosAnotadosMateria" onclick="">
