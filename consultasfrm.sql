@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-09-2019 a las 04:06:35
+-- Tiempo de generación: 29-09-2019 a las 03:57:03
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -114,7 +114,12 @@ INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAn
 (127, '2019-09-23', '12:33:25', 2, 73),
 (128, '2019-09-23', '12:33:29', 1, 73),
 (129, '2019-09-23', '21:59:04', 1, 79),
-(130, '2019-09-26', '01:12:24', 1, 80);
+(130, '2019-09-26', '01:12:24', 1, 80),
+(131, '2019-09-28', '18:02:04', 2, 73),
+(132, '2019-09-28', '18:02:18', 1, 73),
+(133, '2019-09-28', '18:03:32', 1, 81),
+(134, '2019-09-28', '19:22:53', 1, 82),
+(135, '2019-09-28', '19:23:14', 2, 82);
 
 -- --------------------------------------------------------
 
@@ -158,15 +163,17 @@ CREATE TABLE `avisoprofesor` (
   `id_avisoprofesor` int(20) NOT NULL,
   `fechaAvisoProfesor` date NOT NULL,
   `detalleDescripcion` varchar(500) NOT NULL,
-  `fk_horadeconsulta` int(20) NOT NULL
+  `fk_horadeconsulta` int(20) NOT NULL,
+  `horaAvisoProfesor` time(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `avisoprofesor`
 --
 
-INSERT INTO `avisoprofesor` (`id_avisoprofesor`, `fechaAvisoProfesor`, `detalleDescripcion`, `fk_horadeconsulta`) VALUES
-(2, '2019-09-19', 'no habra consulta', 2);
+INSERT INTO `avisoprofesor` (`id_avisoprofesor`, `fechaAvisoProfesor`, `detalleDescripcion`, `fk_horadeconsulta`, `horaAvisoProfesor`) VALUES
+(7, '2019-09-28', 'test1', 2, '08:42:41.68583'),
+(8, '2019-09-28', 'test hora', 2, '22:38:25.00000');
 
 -- --------------------------------------------------------
 
@@ -252,10 +259,12 @@ CREATE TABLE `detalleanotados` (
 --
 
 INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `horaDetalleAnotados`, `tema`, `fk_alumno`, `fk_horadeconsulta`) VALUES
-(73, '2019-09-21', '18:47:47.000000', '', 1, 2),
+(73, '2019-09-21', '18:47:47.000000', 'Test tema', 1, 2),
 (78, '2019-09-21', '19:58:36.000000', '', 1, 3),
 (79, '2019-09-23', '21:59:04.000000', '', 1, 13),
-(80, '2019-09-26', '01:12:24.000000', '', 1, 14);
+(80, '2019-09-26', '01:12:24.000000', '', 1, 14),
+(81, '2019-09-28', '18:03:32.000000', 'test 2 mensajes', 4, 2),
+(82, '2019-09-28', '19:22:53.000000', '', 4, 16);
 
 -- --------------------------------------------------------
 
@@ -327,7 +336,7 @@ CREATE TABLE `horadeconsulta` (
 --
 
 INSERT INTO `horadeconsulta` (`id_horadeconsulta`, `fechaDesdeAnotados`, `fechaHastaAnotados`, `cantidadAnotados`, `estadoPresentismo`, `estadoVigencia`, `fk_materia`, `fk_presentismo`, `fk_horariodeconsulta`, `fk_profesor`) VALUES
-(2, '2019-09-02', '2019-09-09', 1, 'pendiente', 'activo', 1, NULL, 1, 2),
+(2, '2019-09-02', '2019-09-09', 2, 'pendiente', 'activo', 1, NULL, 1, 2),
 (3, '2019-09-13', '2019-09-20', 1, 'pendiente', 'activo', 2, NULL, 2, 3),
 (13, '2019-09-23', '2019-09-30', 1, 'pendiente', 'activo', 1, NULL, 11, 6),
 (14, '2019-09-23', '2019-09-30', 1, 'pendiente', 'activo', 1, NULL, 9, 5),
@@ -360,7 +369,7 @@ CREATE TABLE `horariocursado` (
 
 CREATE TABLE `horariodeconsulta` (
   `id_horariodeconsulta` int(20) NOT NULL,
-  `hora` varchar(10) NOT NULL,
+  `hora` char(5) NOT NULL,
   `activoDesde` date NOT NULL,
   `activoHasta` date NOT NULL,
   `semestre` int(11) NOT NULL,
@@ -374,7 +383,7 @@ CREATE TABLE `horariodeconsulta` (
 --
 
 INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`, `hora`, `activoDesde`, `activoHasta`, `semestre`, `fk_dia`, `fk_profesor`, `fk_materia`) VALUES
-(1, '17:30', '2019-09-01', '2019-12-30', 2, 1, 2, 1),
+(1, '17:30', '2019-09-01', '0000-00-00', 2, 1, 2, 1),
 (2, '18:30', '2019-09-19', '2019-09-26', 2, 5, 3, 2),
 (9, '14:00', '2019-09-23', '0000-00-00', 2, 4, 5, 1),
 (10, '19:00', '2019-09-23', '0000-00-00', 2, 3, 4, 1),
@@ -422,7 +431,8 @@ CREATE TABLE `materias_alumno` (
 INSERT INTO `materias_alumno` (`fk_alumno`, `fk_materia`) VALUES
 (1, 1),
 (1, 2),
-(1, 3);
+(1, 3),
+(4, 4);
 
 -- --------------------------------------------------------
 
@@ -440,7 +450,8 @@ CREATE TABLE `perfil` (
 --
 
 INSERT INTO `perfil` (`nombrePerfil`, `id_perfil`) VALUES
-('alumno', 1);
+('alumno', 1),
+('profesor', 2);
 
 -- --------------------------------------------------------
 
@@ -540,7 +551,8 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `contraseña`, `fk_alumno`, `fk_profesor`, `fk_perfil`) VALUES
 (6, '35821', '$2y$10$LTAsfQoxzhQXQOu88XBAoerUDbW7O68wNPrHz3x8gIc0Ddnyt61s6', 1, NULL, 1),
 (7, 'porte', '$2y$10$LHdyKE6JxmTVqA6T.mdYPOblig4zCJw.BeUbalTk21wSG/h89uaJW', 2, NULL, 1),
-(8, 'test', '$2y$10$jEshAdowgM5ekVRLD/b9YenbPegwO3aFY0vkwHU6KQ51rgBYg33ZK', 4, NULL, 1);
+(8, 'test', '$2y$10$jEshAdowgM5ekVRLD/b9YenbPegwO3aFY0vkwHU6KQ51rgBYg33ZK', 4, NULL, 1),
+(10, 'root', '$2y$10$PNwqEM24Ie1UMpkA999Z8eTrPa3.WRJ6UrU7U6sWDjCYEoP.qQs8K', NULL, 2, 2);
 
 --
 -- Índices para tablas volcadas
@@ -725,7 +737,7 @@ ALTER TABLE `alumno`
 -- AUTO_INCREMENT de la tabla `anotadosestado`
 --
 ALTER TABLE `anotadosestado`
-  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=136;
 --
 -- AUTO_INCREMENT de la tabla `asueto`
 --
@@ -735,7 +747,7 @@ ALTER TABLE `asueto`
 -- AUTO_INCREMENT de la tabla `avisoprofesor`
 --
 ALTER TABLE `avisoprofesor`
-  MODIFY `id_avisoprofesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_avisoprofesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `dedicacion`
 --
@@ -755,7 +767,7 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
-  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 --
 -- AUTO_INCREMENT de la tabla `dia`
 --
@@ -790,7 +802,7 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `id_perfil` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_perfil` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `presentismo`
 --
@@ -815,7 +827,7 @@ ALTER TABLE `turno`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_usuario` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Restricciones para tablas volcadas
 --
