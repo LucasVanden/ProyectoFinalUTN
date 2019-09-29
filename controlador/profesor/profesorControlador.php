@@ -257,8 +257,40 @@ class Profesorcontrolador extends conexion
                     }
                 return $mat;
                 }
-
-
+                function mayorMentorigual($horasql1,$signo,$hora2,$min2){
+                    $hora=  substr($horasql1, 0, 2);
+                    $min=substr($horasql1, 3, 2);
+                      //  $hora= date('H',$horasql1);
+                       // $min=date('i',$horasql1);
+                        switch ($signo) {
+                            case '>':
+                                if($hora>$hora2){
+                                    return true;}
+                                        elseif ($hora<$hora2) {
+                                            return false;}
+                                                elseif($min>$min2){return true;}
+                                                    elseif ($min<$min2){return false;}
+                                                        else return false;
+                                
+                                break;
+                            case '<':
+                                if($hora<$hora2){
+                                    return true;}
+                                        elseif ($hora>$hora2) {
+                                            return false;}
+                                                elseif($min<$min2){return true;}
+                                                    elseif ($min>$min2){return false;}
+                                                        else return false;
+                                break;
+                            case "==":
+                                if($hora==$hora2){
+                                    if ($min==$min2)
+                                        {return true;}
+                                }
+                                else return false;
+                                break;
+                        }
+                    }
 
 
 
