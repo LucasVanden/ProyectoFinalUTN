@@ -9,6 +9,12 @@ $dia1erSemestre1=$_POST['Dia1ersemestre1'];
 $hora1erSemestre1=$_POST['Horarioshora1ersemestre1'];
 $min1erSemestre1=$_POST['Horariomin1ersemestre1'];
 $idmateria=$_POST['idmateria'];
+
+
+comprobarContraturno($_SESSION['idprofesor'],$idmateria);
+$CM=comprobarSuperposiciónHorariaconotraMateria($_SESSION['idprofesor'],$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,1);
+$CC=comprobarSuperposiciónHorariaconotraConsulta($$_SESSION['idprofesor'],$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,1);
+
 //Comprobar que hora ingresada sea mayor o igual a 8:00 y menor o igual a 22:00
 // predefinido
 
@@ -140,6 +146,29 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado
        }
     }
 } 
+
+function ComprobaSiCoincidecondiaMesas($idmateria,$diaingresado){
+    $stmt = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where id_materia=$temmateria"); 
+    $stmt->execute();
+    while($row = $stmt->fetch()) {
+        $mat = new Materia();
+        $mat->setid_materia($row['id_materia']);
+        $mat->setnombreMateria($row['nombreMateria']);
+        $tempdia=$row['fk_dia'];
+    }
+    $stmt2 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempdia"); 
+    $stmt2->execute();
+    while($row = $stmt2->fetch()) {
+        $dia = new Dia();
+        $dia->setid_dia($row['id_dia']);
+        $dia->setdia($row['dia']);
+        $mat->setdia($dia);
+    }
+    if ($mat->getdia()-getdia()==$diaingresado){
+        return true;
+    }else{return false;
+    }
+}
 function mayorMentorigual($horasql1,$signo,$hora2,$min2){
 $hora=  substr($horasql1, 0, 2);
 $min=substr($horasql1, 3, 2);

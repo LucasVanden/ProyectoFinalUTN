@@ -109,5 +109,11 @@ echo $a->buscarMateriaDeHoradeconsulta(2);
 $tf=$a->mayorMentorigual("18:47:47.000000","==","18","47");
 if($tf){echo "true";}
 else echo "false";
+
+alert("Hello World");
+
+function alert($msg) {
+    echo "<script type='text/javascript'>alert('$msg');</script>";
+}
 ?>
 
