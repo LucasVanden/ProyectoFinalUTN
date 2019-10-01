@@ -47,11 +47,11 @@ function comprobarContraturno($idprofesor,$idmateria){
     }
 }
 
-function comprobarSuperposiciónHorariaconotramateria($idprofesor,$diaingresado,$horaingresada,$miningresado){
+function comprobarSuperposiciónHorariaconotraMateria($idprofesor,$diaingresado,$horaingresada,$miningresado,$semestreactual){
     $listaMateriasProfesor=array();
 
     $conn = $this->getconexion();
-    $stmt = $conn->prepare("SELECT id_horariocursado,HoraDesde,HoraHasta,comision,semestreAnual,fk_materia,fk_dia FROM horarioCursado where fk_profesor=$idprofesor"); 
+    $stmt = $conn->prepare("SELECT id_horariocursado,HoraDesde,HoraHasta,comision,semestreAnual,fk_materia,fk_dia FROM horarioCursado where fk_profesor=$idprofesor and semestre=$semestreactual"); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
         $HoradeCursado= new HoradeCursado();
@@ -97,6 +97,49 @@ function comprobarSuperposiciónHorariaconotramateria($idprofesor,$diaingresado,
     }
 } 
 
+
+function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado,$horaingresada,$miningresado,$semestreactual){
+    $listaConsultasProfesor=array();
+
+    $conn = $this->getconexion();
+    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_profesor=$idprofesor and $activoHasta=null and semestre=$semestreactual or semestre=3 "); 
+    $stmt2->execute();
+
+    while($row = $stmt2->fetch()) {
+        $hor = new HorarioDeConsulta();
+        $hor->setid_horariodeconsulta($row['id_horariodeconsulta']);
+        $hor->sethora($row['hora']);
+        $hor->setactivoDesde($row['activoDesde']);
+        $hor->setactivoHasta($row['activoHasta']);
+        $hor->setsemestre($row['semestre']);
+        $tempDia =$row['fk_dia'];
+
+            $stmt3 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
+            $stmt3->execute();
+            while($row = $stmt3->fetch()) {
+                $dia = new Dia();
+                $dia->setid_dia($row['id_dia']);
+                $dia->setdia($row['dia']);
+                $hor->setdia($dia);
+            }
+        }
+        array_push($listaConsultasProfesor,$hor);
+    
+    foreach ($listaConsultasProfesor as $horarioConsulta) {
+       if ($horarioConsulta->getdia()->getdia()==$diaingresado){
+          if(// se acaba antes de que empieze la calse, o empieza despues que termina la clase
+           !(mayorMentorigual($horarioConsulta->gethora(),">",$horaingresada+1 ,$miningresado )||
+            mayorMentorigual($horarioConsulta->gethora(),"==",$horaingresada+1 ,$miningresado )||
+
+            mayorMentorigual($horarioConsulta->gethora(),"<",$horaingresada-1 ,$miningresado )||
+            mayorMentorigual($horarioConsulta->gethora(),"==",$horaingresada-1 ,$miningresado ))
+          ){
+            return $horarioConsulta;
+            break;
+          }
+       }
+    }
+} 
 function mayorMentorigual($horasql1,$signo,$hora2,$min2){
 $hora=  substr($horasql1, 0, 2);
 $min=substr($horasql1, 3, 2);
