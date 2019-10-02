@@ -15,6 +15,11 @@ comprobarContraturno($_SESSION['idprofesor'],$idmateria);
 $CM=comprobarSuperposiciónHorariaconotraMateria($_SESSION['idprofesor'],$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,1);
 $CC=comprobarSuperposiciónHorariaconotraConsulta($$_SESSION['idprofesor'],$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,1);
 $TC=tieneCantidadDeCambiosDisponible($idProfesor,$semestre,$idmateria);
+ComprobaSiCoincidecondiaMesas($idmateria,$nombredia);
+secambia48hsantes($idprofesor,$idmateria,$semestre,$diaingresadonumero,$horaingresada);
+
+CambiarFechaHastaDeConsultaAnterior();
+crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingresadonumero,$idprofesor,$idmateria);
 
 //Comprobar que hora ingresada sea mayor o igual a 8:00 y menor o igual a 22:00
 // predefinido
@@ -260,6 +265,47 @@ function secambia48hsantes($idprofesor,$idmateria,$semestre,$diaingresadonumero,
             }
         }
     }
+}
+
+function CambiarFechaHastaDeConsultaAnterior($idmateria,$idprofesor,$semestre){
+    $conn = $this->getconexion();
+    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idPrfoesor and semestre=$semestre activoHasta='0000-00-00'"); 
+    $stmt2->execute();
+    while($row = $stmt2->fetch()) {
+        $hor = new HorarioDeConsulta();
+        $hor->setid_horariodeconsulta($row['id_horariodeconsulta']);
+        $hor->sethora($row['hora']);
+        $hor->setactivoDesde($row['activoDesde']);
+        $hor->setactivoHasta($row['activoHasta']);
+        $hor->setsemestre($row['semestre']);
+            
+            $tempProfesor =$row['fk_profesor'];
+
+            $stmt3 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
+            $stmt3->execute();
+            while($row = $stmt3->fetch()) {
+                $dia = new Dia();
+                $dia->setid_dia($row['id_dia']);
+                $dia->setdia($row['dia']);
+                $hor->setdia($dia);
+            }
+    }
+    if(isset($hor)){
+        $id=$hor->getid_gorariodeconsulta();
+        $fecha= date("Y-m-d");
+        $stmt = $conn->prepare("UPDATE horariodeconsulta SET activoHasta=$fechaActual  WHERE id_horadeconsulta=$id"); 
+        $stmt->execute();
+    }
+}
+
+function crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingresadonumero,$idprofesor,$idmateria){
+    $fecha= date("Y-m-d");
+    $hora= "{$horaingresada}:{$miningresado}";
+
+    $conn = $this->getconexion();
+    $stmt = $conn->prepare("INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`,`hora`,`activoDesde`,`activoHasta`,`semestre`,`fk_dia`,`fk_profesor`,`fk_materia`)
+    VALUES (null, '$hora', '$fecha' , null, '$semestre', '$diaingresadonumero','$idprofesor','$idmateria');");  
+    $stmt->execute();
 }
 function mayorMentorigual($horasql1,$signo,$hora2,$min2){
 $hora=  substr($horasql1, 0, 2);
