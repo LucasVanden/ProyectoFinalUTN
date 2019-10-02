@@ -14,6 +14,7 @@ $idmateria=$_POST['idmateria'];
 comprobarContraturno($_SESSION['idprofesor'],$idmateria);
 $CM=comprobarSuperposiciónHorariaconotraMateria($_SESSION['idprofesor'],$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,1);
 $CC=comprobarSuperposiciónHorariaconotraConsulta($$_SESSION['idprofesor'],$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,1);
+$TC=tieneCantidadDeCambiosDisponible($idProfesor,$semestre,$idmateria);
 
 //Comprobar que hora ingresada sea mayor o igual a 8:00 y menor o igual a 22:00
 // predefinido
@@ -167,6 +168,32 @@ function ComprobaSiCoincidecondiaMesas($idmateria,$diaingresado){
     if ($mat->getdia()-getdia()==$diaingresado){
         return true;
     }else{return false;
+    }
+}
+
+function tieneCantidadDeCambiosDisponible($idProfesor,$semestre,$idmateria){
+    $año= date('Y');
+    $mes= date('m');
+    if($mes<=6){
+        $semestreactual=1;
+    }else{
+        $semestreactual=2;
+    }
+    if($semestre==$semestreactual){
+        $fechadia= "{$año}-01-01";
+        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idPrfoesor semestre=$semestre "); 
+        $stmt2->execute();
+        $contador=0;
+        while($row = $stmt2->fetch()) {
+            $contador++;
+        }
+        if ($contador>2){
+            return false;
+        }else{
+            return true;
+        }
+    }else{
+        return true;
     }
 }
 function mayorMentorigual($horasql1,$signo,$hora2,$min2){
