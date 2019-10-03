@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-09-2019 a las 03:57:03
+-- Tiempo de generación: 04-10-2019 a las 01:39:44
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -326,7 +326,6 @@ CREATE TABLE `horadeconsulta` (
   `estadoPresentismo` varchar(50) NOT NULL,
   `estadoVigencia` varchar(50) NOT NULL,
   `fk_materia` int(20) NOT NULL,
-  `fk_presentismo` int(20) DEFAULT NULL,
   `fk_horariodeconsulta` int(20) NOT NULL,
   `fk_profesor` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -335,13 +334,15 @@ CREATE TABLE `horadeconsulta` (
 -- Volcado de datos para la tabla `horadeconsulta`
 --
 
-INSERT INTO `horadeconsulta` (`id_horadeconsulta`, `fechaDesdeAnotados`, `fechaHastaAnotados`, `cantidadAnotados`, `estadoPresentismo`, `estadoVigencia`, `fk_materia`, `fk_presentismo`, `fk_horariodeconsulta`, `fk_profesor`) VALUES
-(2, '2019-09-02', '2019-09-09', 2, 'pendiente', 'activo', 1, NULL, 1, 2),
-(3, '2019-09-13', '2019-09-20', 1, 'pendiente', 'activo', 2, NULL, 2, 3),
-(13, '2019-09-23', '2019-09-30', 1, 'pendiente', 'activo', 1, NULL, 11, 6),
-(14, '2019-09-23', '2019-09-30', 1, 'pendiente', 'activo', 1, NULL, 9, 5),
-(15, '2019-09-23', '2019-09-30', 0, 'pendiente', 'activo', 1, NULL, 10, 4),
-(16, '2019-09-23', '2019-09-30', 0, 'pendiente', 'activo', 4, NULL, 12, 2);
+INSERT INTO `horadeconsulta` (`id_horadeconsulta`, `fechaDesdeAnotados`, `fechaHastaAnotados`, `cantidadAnotados`, `estadoPresentismo`, `estadoVigencia`, `fk_materia`, `fk_horariodeconsulta`, `fk_profesor`) VALUES
+(2, '2019-09-02', '2019-09-09', 2, 'pendiente', 'completo', 1, 1, 2),
+(3, '2019-09-13', '2019-09-20', 1, 'pendiente', 'activo', 2, 2, 3),
+(13, '2019-09-23', '2019-09-30', 1, 'pendiente', 'activo', 1, 11, 6),
+(14, '2019-09-23', '2019-09-30', 1, 'pendiente', 'activo', 1, 9, 5),
+(15, '2019-09-23', '2019-09-30', 0, 'pendiente', 'activo', 1, 10, 4),
+(16, '2019-09-23', '2019-09-30', 0, 'pendiente', 'activo', 4, 12, 2),
+(18, '2019-10-14', '0000-00-00', 0, 'pendiente', 'activo', 1, 1, 4),
+(23, '2019-10-04', '2019-10-11', 0, 'pendiente', 'activo', 1, 19, 2);
 
 -- --------------------------------------------------------
 
@@ -353,7 +354,7 @@ CREATE TABLE `horariocursado` (
   `id_horariocursado` int(20) NOT NULL,
   `HoraDesde` date NOT NULL,
   `comision` varchar(50) NOT NULL,
-  `semestreAnula` varchar(50) NOT NULL,
+  `semestreAnual` varchar(50) NOT NULL,
   `fk_materia` int(20) NOT NULL,
   `HoraHasta` date NOT NULL,
   `fk_dia` int(20) NOT NULL,
@@ -388,7 +389,8 @@ INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`, `hora`, `activoDesde`, 
 (9, '14:00', '2019-09-23', '0000-00-00', 2, 4, 5, 1),
 (10, '19:00', '2019-09-23', '0000-00-00', 2, 3, 4, 1),
 (11, '09:00', '2019-09-23', '0000-00-00', 2, 4, 6, 1),
-(12, '18:30', '2019-09-23', '2019-09-30', 2, 3, 2, 4);
+(12, '18:30', '2020-09-23', '2019-09-30', 2, 3, 2, 4),
+(19, '8:00', '2019-10-04', '0000-00-00', 2, 5, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -464,7 +466,8 @@ CREATE TABLE `presentismo` (
   `fecha` date NOT NULL,
   `horaDesde` time NOT NULL,
   `horaHasta` time NOT NULL,
-  `fk_profesor` int(20) NOT NULL
+  `fk_profesor` int(20) NOT NULL,
+  `fk_horadeconsulta` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -528,6 +531,13 @@ CREATE TABLE `turno` (
   `HoraDesdeTurno` time NOT NULL,
   `HoraHastaTurno` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `turno`
+--
+
+INSERT INTO `turno` (`id_turno`, `nombre`, `HoraDesdeTurno`, `HoraHastaTurno`) VALUES
+(1, 'Mañana', '08:00:00', '13:00:00');
 
 -- --------------------------------------------------------
 
@@ -638,7 +648,6 @@ ALTER TABLE `horadeconsulta`
   ADD PRIMARY KEY (`id_horadeconsulta`),
   ADD KEY `fk_horariodeconsulta` (`fk_horariodeconsulta`),
   ADD KEY `fk_materia` (`fk_materia`),
-  ADD KEY `fk_presentismo` (`fk_presentismo`),
   ADD KEY `fk_profesor` (`fk_profesor`);
 
 --
@@ -687,7 +696,8 @@ ALTER TABLE `perfil`
 --
 ALTER TABLE `presentismo`
   ADD PRIMARY KEY (`id_presentismo`),
-  ADD KEY `fk_profesor` (`fk_profesor`);
+  ADD KEY `fk_profesor` (`fk_profesor`),
+  ADD KEY `fk_horadeconsulta` (`fk_horadeconsulta`);
 
 --
 -- Indices de la tabla `privilegio`
@@ -782,7 +792,7 @@ ALTER TABLE `estadoanotados`
 -- AUTO_INCREMENT de la tabla `horadeconsulta`
 --
 ALTER TABLE `horadeconsulta`
-  MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT de la tabla `horariocursado`
 --
@@ -792,12 +802,12 @@ ALTER TABLE `horariocursado`
 -- AUTO_INCREMENT de la tabla `horariodeconsulta`
 --
 ALTER TABLE `horariodeconsulta`
-  MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
@@ -822,7 +832,7 @@ ALTER TABLE `profesor`
 -- AUTO_INCREMENT de la tabla `turno`
 --
 ALTER TABLE `turno`
-  MODIFY `id_turno` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_turno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -866,7 +876,6 @@ ALTER TABLE `detalleanotados`
 ALTER TABLE `horadeconsulta`
   ADD CONSTRAINT `horadeconsulta_ibfk_1` FOREIGN KEY (`fk_horariodeconsulta`) REFERENCES `horariodeconsulta` (`id_horariodeconsulta`),
   ADD CONSTRAINT `horadeconsulta_ibfk_2` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`),
-  ADD CONSTRAINT `horadeconsulta_ibfk_3` FOREIGN KEY (`fk_presentismo`) REFERENCES `presentismo` (`id_presentismo`),
   ADD CONSTRAINT `horadeconsulta_ibfk_4` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`);
 
 --
@@ -904,7 +913,8 @@ ALTER TABLE `materias_alumno`
 -- Filtros para la tabla `presentismo`
 --
 ALTER TABLE `presentismo`
-  ADD CONSTRAINT `presentismo_ibfk_1` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`);
+  ADD CONSTRAINT `presentismo_ibfk_1` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`),
+  ADD CONSTRAINT `presentismo_ibfk_2` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`);
 
 --
 -- Filtros para la tabla `privilegioperfil`

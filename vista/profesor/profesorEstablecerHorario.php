@@ -6,6 +6,7 @@ if (isset($_SESSION['user_id'])) {
 }
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $profesorControlador;
+$crearHorario= $URL . $crearHorarioDeConsulta;
 ?>
 
 <!DOCTYPE html>
@@ -232,7 +233,8 @@ require_once $DIR . $profesorControlador;
             <div>
                 <br>
                 <input type='hidden' name="idmateria" value=<?php echo $idmateria?>></input>
-                <input type="submit" value="Establecer" name="Establecer" disabled="disabled" />
+                <input type="submit" value="Establecer" name="Establecer"  formaction=<?php echo $crearHorario?> />
+                
             </div>
         </form>
     </body>

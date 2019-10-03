@@ -1,25 +1,99 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR .$conexion);
+
+require_once ($DIR . $Alumno);
+require_once ($DIR . $Materia);
+require_once ($DIR . $HorarioDeConsulta);
+require_once ($DIR . $Profesor);
+require_once ($DIR . $HoraDeConsulta);
+require_once ($DIR . $Dia);
+require_once ($DIR . $turno);
+require_once ($DIR . $HorarioCursado);
+
+
 session_start();
 $con= new conexion();
-$conexttion=$con->getconexion();
+$conn = $con->getconexion();
 
 $dia1erSemestre1=$_POST['Dia1ersemestre1'];
 $hora1erSemestre1=$_POST['Horarioshora1ersemestre1'];
 $min1erSemestre1=$_POST['Horariomin1ersemestre1'];
 $idmateria=$_POST['idmateria'];
+//$idProfesor=$_SESSION['idprofesor'];
+$idProfesor=2;
+$idhorariodeconsultacreado=null;
+
+$semestreDeLaConsulta=2;
+$primera=primeraVezQueCargaHorario($idmateria,$idProfesor,$semestreDeLaConsulta);
+
+if ($primera){
+    $CM=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta);
+    $CC=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta);
+    $diaigualMesa=ComprobaSiCoincidecondiaMesas($idmateria,$dia1erSemestre1);
+
+    if(isset($CM)){
+        alert("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}");
+        }else{
+            if(isset($CC)){
+                alert("superposicion con consulta {$CC->getfk_materia()->getnombreMateria()} ");
+                //falta mostrar materia
+            }else{
+                        if($diaigualMesa){
+                            alet("Debe agregar una consulta especial para esa semana, ¿Desea continuar?");
+                        }
+                        if (!$primera){
+                            CambiarActivoDeHoraAnterior($idmateria,$idProfesor);    
+                            CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,$semestreDeLaConsulta);
+                        }
+                            crearHorarioDeConsulta($hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta,$dia1erSemestre1,$idProfesor,$idmateria);
+                            crearHoraDeConsulta($idmateria,$idProfesor,$idhorariodeconsultacreado,$dia1erSemestre1);
+                }
+            }
+}else{
+
+//$contraturno=comprobarContraturno($idProfesor,$idmateria);
+$CM=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta);
+$CC=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta);
+$TC=tieneCantidadDeCambiosDisponible($idProfesor,$semestreDeLaConsulta,$idmateria);
+$diaigualMesa=ComprobaSiCoincidecondiaMesas($idmateria,$dia1erSemestre1);
+$C48=secambia48hsantes($idProfesor,$idmateria,$semestreDeLaConsulta,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1);
+
+print($C48);
+print("pikachu");
+// if(!$contraturno){
+//     alert("falla contraturno");
+// }
+if(isset($CM)){
+    alert("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}");
+    }else{
+        if(isset($CC)){
+            alert("superposicion con consulta {$CC->getfk_materia()->getnombreMateria()} ");
+            //falta mostrar materia
+        }else{
+            if(!$TC){
+                alert("super la cantidad maxima de cambios por semestre");
+            }else{
+                if(!$C48){
+                    alert("No puede cambiar la hs de consulta en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla");
+                }else{
+                    if($diaigualMesa){
+                        alet("Debe agregar una consulta especial para esa semana, ¿Desea continuar?");
+                    }
+                    if (!$primera){
+                        CambiarActivoDeHoraAnterior($idmateria,$idProfesor);    
+                        CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,$semestreDeLaConsulta);
+                    }
+                    crearHorarioDeConsulta($hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta,$dia1erSemestre1,$idProfesor,$idmateria);
+                    crearHoraDeConsulta($idmateria,$idProfesor,$idhorariodeconsultacreado,$dia1erSemestre1);
+                }
+            }
+        }
+    }
+
+}
 
 
-comprobarContraturno($_SESSION['idprofesor'],$idmateria);
-$CM=comprobarSuperposiciónHorariaconotraMateria($_SESSION['idprofesor'],$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,1);
-$CC=comprobarSuperposiciónHorariaconotraConsulta($$_SESSION['idprofesor'],$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,1);
-$TC=tieneCantidadDeCambiosDisponible($idProfesor,$semestre,$idmateria);
-ComprobaSiCoincidecondiaMesas($idmateria,$nombredia);
-secambia48hsantes($idprofesor,$idmateria,$semestre,$diaingresadonumero,$horaingresada);
-
-CambiarFechaHastaDeConsultaAnterior();
-crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingresadonumero,$idprofesor,$idmateria);
 
 //Comprobar que hora ingresada sea mayor o igual a 8:00 y menor o igual a 22:00
 // predefinido
@@ -27,7 +101,8 @@ crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingresadonumer
 //comprobar que este en contraturno
 function comprobarContraturno($idprofesor,$idmateria){
 
-    $conn = $this->getconexion();
+    $con= new conexion();
+    $conn = $con->getconexion();
     $stmt = $conn->prepare("SELECT fk_turno FROM horarioCursado where fk_profesor=$idprofesor and fk_materia=$idmateria"); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
@@ -59,11 +134,12 @@ function comprobarContraturno($idprofesor,$idmateria){
     }
 }
 
-function comprobarSuperposiciónHorariaconotraMateria($idprofesor,$nombredia,$horaingresada,$miningresado,$semestre){
+function comprobarSuperposiciónHorariaconotraMateria($idprofesor,$diaingresadonumero,$horaingresada,$miningresado,$semestre){
     $listaMateriasProfesor=array();
 
-    $conn = $this->getconexion();
-    $stmt = $conn->prepare("SELECT id_horariocursado,HoraDesde,HoraHasta,comision,semestreAnual,fk_materia,fk_dia FROM horarioCursado where fk_profesor=$idprofesor and semestre=$semestre"); 
+    $con= new conexion();
+    $conn = $con->getconexion();
+    $stmt = $conn->prepare("SELECT id_horariocursado,HoraDesde,HoraHasta,comision,semestreAnual,fk_materia,fk_dia FROM horariocursado where fk_profesor=$idprofesor and semestreAnual=$semestre OR semestreAnual='anual'"); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
         $HoradeCursado= new HoradeCursado();
@@ -94,7 +170,7 @@ function comprobarSuperposiciónHorariaconotraMateria($idprofesor,$nombredia,$ho
         array_push($listaMateriasProfesor,$HoradeCursado);
     }
     foreach ($listaMateriasProfesor as $horarioCursado) {
-       if ($horarioCursado->getdia()->getdia()==$nombredia){
+       if ($horarioCursado->getdia()->getid_dia()==$diaingresadonumero){
           if(// se acaba antes de que empieze la calse, o empieza despues que termina la clase
            !(mayorMentorigual($horarioCursado->gethoraDesde(),">",$horaingresada+1 ,$miningresado )||
             mayorMentorigual($horarioCursado->gethoraDesde(),"==",$horaingresada+1 ,$miningresado )||
@@ -110,11 +186,11 @@ function comprobarSuperposiciónHorariaconotraMateria($idprofesor,$nombredia,$ho
 } 
 
 
-function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$nombredia,$horaingresada,$miningresado,$semestre){
+function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresadonumero,$horaingresada,$miningresado,$semestre){
     $listaConsultasProfesor=array();
-
-    $conn = $this->getconexion();
-    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_profesor=$idprofesor and $activoHasta=null and semestre=$semestre or semestre=3 "); 
+    $con= new conexion();
+    $conn = $con->getconexion();
+    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_profesor=$idprofesor and activoHasta='0000-00-00' and semestre=$semestre or semestre=3 "); 
     $stmt2->execute();
 
     while($row = $stmt2->fetch()) {
@@ -125,6 +201,7 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$nombredia,$h
         $hor->setactivoHasta($row['activoHasta']);
         $hor->setsemestre($row['semestre']);
         $tempDia =$row['fk_dia'];
+        $tempMateria =$row['fk_materia'];
 
             $stmt3 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
             $stmt3->execute();
@@ -134,11 +211,20 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$nombredia,$h
                 $dia->setdia($row['dia']);
                 $hor->setdia($dia);
             }
-        }
+            $stmt4 = $conn->prepare("SELECT id_materia,nombreMateria FROM materia where id_materia=$tempMateria"); 
+            $stmt4->execute();
+            while($row = $stmt4->fetch()) {
+                $mat = new Materia();
+                $mat->setid_materia($row['id_materia']);
+                $mat->setnombreMateria($row['nombreMateria']);
+                $hor->setfk_materia($mat);
+            }
         array_push($listaConsultasProfesor,$hor);
+        }
+        
     
     foreach ($listaConsultasProfesor as $horarioConsulta) {
-       if ($horarioConsulta->getdia()->getdia()==$nombredia){
+       if ($horarioConsulta->getdia()->getid_dia()==$diaingresadonumero){
           if(// se acaba antes de que empieze la calse, o empieza despues que termina la clase
            !(mayorMentorigual($horarioConsulta->gethora(),">",$horaingresada+1 ,$miningresado )||
             mayorMentorigual($horarioConsulta->gethora(),"==",$horaingresada+1 ,$miningresado )||
@@ -153,9 +239,10 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$nombredia,$h
     }
 } 
 
-function ComprobaSiCoincidecondiaMesas($idmateria,$nombredia){
-    $conn = $this->getconexion();
-    $stmt = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where id_materia=$temmateria"); 
+function ComprobaSiCoincidecondiaMesas($idmateria,$diaingresadonumero){
+    $con= new conexion();
+    $conn = $con->getconexion();
+    $stmt = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where id_materia=$idmateria"); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
         $mat = new Materia();
@@ -171,7 +258,7 @@ function ComprobaSiCoincidecondiaMesas($idmateria,$nombredia){
         $dia->setdia($row['dia']);
         $mat->setdia($dia);
     }
-    if ($mat->getdia()-getdia()==$nombredia){
+    if ($mat->getdia()->getid_dia()==$diaingresadonumero){
         return true;
     }else{
         return false;
@@ -179,6 +266,8 @@ function ComprobaSiCoincidecondiaMesas($idmateria,$nombredia){
 }
 
 function tieneCantidadDeCambiosDisponible($idProfesor,$semestre,$idmateria){
+    $con= new conexion();
+    $conn = $con->getconexion();
     $año= date('Y');
     $mes= date('m');
     if($mes<=6){
@@ -188,8 +277,7 @@ function tieneCantidadDeCambiosDisponible($idProfesor,$semestre,$idmateria){
     }
     if($semestre==$semestreactual){
         $fechadia= "{$año}-01-01";
-        $conn = $this->getconexion();
-        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idPrfoesor and semestre=$semestre and activoDesde>$fechadia"); 
+        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idProfesor and semestre=$semestre and activoDesde>$fechadia"); 
         $stmt2->execute();
         $contador=0;
         while($row = $stmt2->fetch()) {
@@ -205,16 +293,19 @@ function tieneCantidadDeCambiosDisponible($idProfesor,$semestre,$idmateria){
     }
 }
 
-function secambia48hsantes($idprofesor,$idmateria,$semestre,$diaingresadonumero,$horaingresada){
+function secambia48hsantes($idProfesor,$idmateria,$semestre,$diaingresadonumero,$horaingresada,$miningresado){
+    $con= new conexion();
+    $conn = $con->getconexion();
     $mes= date('m');
+    $hor;
     if($mes<=6){
         $semestreactual=1;
     }else{
         $semestreactual=2;
     }
     if($semestre==$semestreactual){
-        $conn = $this->getconexion();
-        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idPrfoesor and semestre=$semestre activoHasta='0000-00-00'"); 
+       
+        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idProfesor and semestre=$semestre and activoHasta='0000-00-00'"); 
         $stmt2->execute();
         while($row = $stmt2->fetch()) {
             $hor = new HorarioDeConsulta();
@@ -225,6 +316,7 @@ function secambia48hsantes($idprofesor,$idmateria,$semestre,$diaingresadonumero,
             $hor->setsemestre($row['semestre']);
                 
                 $tempProfesor =$row['fk_profesor'];
+                $tempDia=$row['fk_dia'];
 
                 $stmt3 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
                 $stmt3->execute();
@@ -236,40 +328,46 @@ function secambia48hsantes($idprofesor,$idmateria,$semestre,$diaingresadonumero,
                 }
         }
         //no se puede cambiar a un dia anterior al dia de consulta antes de la consulta. solo se puede cambiar con 2 o mas dias de anticipacion
-        $diaconsutla=$hor->getdia()->getdia();
+        $diaconsulta=$hor->getdia()->getid_dia();
         $diaActual= date('N');
 
-        if($diaconsutla==$diaingresadonumero){
-            if($diaActual<$diaconsutla-2||$diaActual>$diaconsulta){
+        if($diaconsulta==$diaingresadonumero){
+            echo "1";
+            echo $diaconsulta;
+            echo $diaingresadonumero;
+            if($diaActual<$diaconsulta-2||$diaActual>$diaconsulta){
+                echo "2";
                 return true;
             }else{
                 return false;
+                echo "3";
             }
-        }else{
-            if($diaActual>$diaconsulta){
+        }
+        elseif ($diaActual>$diaconsulta){
                 return true;
-            }else{
-                if($diaActual==$diaconsulta){
+                echo "4";
+            }
+        elseif ($diaActual==$diaconsulta){
                     $hora= date('H');
                     $min= date('i');
                     $seg= date('s');
-                    $fechahora="{$hora}:{$min}:{$seg}.000000";
+                    $fechahora="{$horaingresada}:{$miningresado}:00.000000";
                     if(mayorMentorigual($hor->gethora(),"<",$hora-1,$min)){
                         return true;
-                    }else{
-                        return false;
-                    }
-                }else{
-                    return false;
-                }
-            }
+                        }else{
+                            return false;
+                            echo "5";
+                        }
         }
+    }else{
+        return true;
     }
 }
-
 function CambiarFechaHastaDeConsultaAnterior($idmateria,$idprofesor,$semestre){
-    $conn = $this->getconexion();
-    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idPrfoesor and semestre=$semestre activoHasta='0000-00-00'"); 
+    $con= new conexion();
+    $conn = $con->getconexion();
+  
+    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idprofesor and semestre=$semestre and activoHasta='0000-00-00'"); 
     $stmt2->execute();
     while($row = $stmt2->fetch()) {
         $hor = new HorarioDeConsulta();
@@ -280,6 +378,7 @@ function CambiarFechaHastaDeConsultaAnterior($idmateria,$idprofesor,$semestre){
         $hor->setsemestre($row['semestre']);
             
             $tempProfesor =$row['fk_profesor'];
+            $tempDia=$row['fk_dia'];
 
             $stmt3 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
             $stmt3->execute();
@@ -291,22 +390,74 @@ function CambiarFechaHastaDeConsultaAnterior($idmateria,$idprofesor,$semestre){
             }
     }
     if(isset($hor)){
-        $id=$hor->getid_gorariodeconsulta();
-        $fecha= date("Y-m-d");
-        $stmt = $conn->prepare("UPDATE horariodeconsulta SET activoHasta=$fechaActual  WHERE id_horadeconsulta=$id"); 
+        $id=$hor->getid_horarioDeConsulta();
+        $fechaActual= date("Y-m-d");
+        $stmt = $conn->prepare("UPDATE horariodeconsulta SET activoHasta=$fechaActual  WHERE id_horariodeconsulta=$id"); 
         $stmt->execute();
     }
 }
 
 function crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingresadonumero,$idprofesor,$idmateria){
+    $con= new conexion();
+    $conn = $con->getconexion();
     $fecha= date("Y-m-d");
     $hora= "{$horaingresada}:{$miningresado}";
 
-    $conn = $this->getconexion();
+ 
     $stmt = $conn->prepare("INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`,`hora`,`activoDesde`,`activoHasta`,`semestre`,`fk_dia`,`fk_profesor`,`fk_materia`)
-    VALUES (null, '$hora', '$fecha' , null, '$semestre', '$diaingresadonumero','$idprofesor','$idmateria');");  
+    VALUES (null, '$hora', '$fecha' , '0000-00-00', '$semestre', '$diaingresadonumero','$idprofesor','$idmateria');");  
     $stmt->execute();
+    global $idhorariodeconsultacreado;
+    $idhorariodeconsultacreado = $conn->lastInsertId("horariodeconsulta");
 }
+
+function primeraVezQueCargaHorario($idmateria,$idprofesor,$semestre){
+    $con= new conexion();
+    $conn = $con->getconexion();
+   
+    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idprofesor and semestre=$semestre "); 
+    $stmt2->execute();
+    while($row = $stmt2->fetch()) {
+        $hor=($row['id_horariodeconsulta']);
+    }
+    if (isset($hor)){
+        return false;
+    }else{
+        return true;
+    }
+}
+
+function crearHoraDeConsulta($idmateria,$idprofesor,$idhorarioconsulta,$diaingresadonumero){
+    $con= new conexion();
+    $conn = $con->getconexion();
+    $fecha= date("Y-m-d");
+    global $idhorariodeconsultacreado;
+    $fechaHasta=nextfechaDia($diaingresadonumero);
+
+    $stmt = $conn->prepare("INSERT INTO `horadeconsulta` (`id_horadeconsulta`,`fechaDesdeAnotados`,`fechaHastaAnotados`,`cantidadAnotados`,
+    `estadoPresentismo`,`estadoVigencia`,`fk_materia`,`fk_horariodeconsulta`,`fk_profesor`)
+    VALUES (null, '$fecha', '$fechaHasta' , 0, 'pendiente', 'activo','$idmateria','$idhorariodeconsultacreado','$idprofesor');");  
+    $stmt->execute();
+
+}
+
+function CambiarActivoDeHoraAnterior($idmateria,$idprofesor){
+    $con= new conexion();
+    $conn = $con->getconexion();
+   
+    $stmt2 = $conn->prepare("SELECT id_horadeconsulta FROM horadeconsulta where fk_materia=$idmateria and fk_profesor=$idprofesor and estadoVigencia='activo'"); 
+    $stmt2->execute();
+        while($row = $stmt2->fetch()) {
+            $hora=($row['id_horadeconsulta']);
+    }
+    if(isset($hora)){
+        $id=$hora;
+        $fecha= date("Y-m-d");
+        $stmt = $conn->prepare("UPDATE horadeconsulta SET estadoVigencia='completo'  WHERE id_horadeconsulta=$id"); 
+        $stmt->execute();
+    }
+}
+
 function mayorMentorigual($horasql1,$signo,$hora2,$min2){
 $hora=  substr($horasql1, 0, 2);
 $min=substr($horasql1, 3, 2);
@@ -338,5 +489,30 @@ $min=substr($horasql1, 3, 2);
             else return false;
             break;
     }
+}
+
+function nextfechaDia($diaID){
+    switch ($diaID){
+        case '1':
+           $fecha= date("Y-m-d", strtotime("next Monday"));
+           break;
+        case '2':
+           $fecha= date("Y-m-d", strtotime("next Tuesday"));
+           break;
+        case '3':
+           $fecha= date("Y-m-d", strtotime("next Wednesday"));
+           break;
+        case '4':
+           $fecha= date("Y-m-d", strtotime("next Thursday"));
+           break;
+        case '5':
+           $fecha= date("Y-m-d", strtotime("next Friday"));
+           break;
+    }
+    return $fecha;
+}
+
+function alert($msg) {
+    echo "<script type='text/javascript'>alert('$msg');</script>";
 }
 ?>

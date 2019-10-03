@@ -292,6 +292,19 @@ class Profesorcontrolador extends conexion
                         }
                     }
 
+                    function temp(){
+
+                        echo "ULTIMO ID";
+                        $pikachu= new conexion();
+
+                        $pikachu= $this->getconexion();
+                        $stmt = $pikachu->prepare("INSERT INTO `materia` (`id_materia`,`nombreMateria`,`fk_departamento`,`fk_dia`)
+                        VALUES (null, 'materia','1','1');");  
+                        $stmt->execute();
+                        $id = $pikachu->lastInsertId("materia");
+                        echo $id;
+                    }
+
 
 
 

@@ -1,11 +1,6 @@
 <?php
 
 
-/**
- * @author Albana
- * @version 1.0
- * @created 29-Sep-2019 1:33:34
- */
 class Turno
 {
 	var $id_turno;
@@ -26,6 +21,7 @@ class Turno
 	{
 		$this->id_turno = $newVal;
 	}
+
 	function getnombre()
 	{
 		return $this->nombre;
@@ -52,6 +48,5 @@ class Turno
 	{
 		$this->horaHastaTurno = $newVal;
 	}
-
 }
 ?>

@@ -11,6 +11,7 @@ require_once ($DIR . $AnotadosEstado);
 require_once ($DIR . $DetalleAnotados);
 require_once ($DIR . $EstadoAnotados);
 require_once ($DIR . $AvisoProfesor);
+require_once ($DIR . $Dia);
 
 class AlumnoControlador extends conexion
 {

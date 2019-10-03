@@ -33,6 +33,9 @@ $AnotadosEstado='/modelo/AnotadosEstado.php';
 $DetalleAnotados='/modelo/DetalleAnotados.php';
 $EstadoAnotados='/modelo/EstadoAnotados.php';
 $AvisoProfesor='/modelo/AvisoProfesor.php';
+$Dia='/modelo/Dia.php';
+$turno='/modelo/Turno.php';
+$HorarioCursado='/modelo/HorarioCursado.php';
 
 $Dedicacion='/modelo/Dedicacion.php';
 $profesorControlador='/controlador/profesor/profesorControlador.php';
@@ -40,4 +43,5 @@ $profesorNotificarAlumno='/vista/profesor/profesorNotificarAlumnos.php';
 $profesorPpal='/vista/profesor/profesorPpal.php';
 $profesorCrearNotificacion='/controlador/profesor/profesorCrearNotificacion.php';
 $profesorAlumnosAnotados='/vista/profesor/profesorAlumnosAnotados.php';
+$crearHorarioDeConsulta='/controlador/profesor/crearHorarioDeConsulta.php';
 ?>
