@@ -7,6 +7,23 @@ if (isset($_SESSION['user_id'])) {
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $profesorControlador;
 $crearHorario= $URL . $crearHorarioDeConsulta;
+
+$D1S1=null;
+$H1S1=null;
+$M1S1=null;
+
+$D2S1=null;
+$H2S1=null;
+$M2S1=null;
+
+$D1S2=null;
+$H1S2=null;
+$M1S2=null;
+
+$D2S2=null;
+$H2S2=null;
+$M2S2=null;
+
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +40,43 @@ $crearHorario= $URL . $crearHorarioDeConsulta;
             <p> <?= $message ?></p>
         <?php endif; ?>
 
-        <?php $nommat= $_POST['nombreMateriaSeleccionada'];
+        <?php 
+        if (isset($_POST['nombreMateriaSeleccionada'])){
+           $nommat= $_POST['nombreMateriaSeleccionada'];
+           $_SESSION['nombreMateriaSeleccionadaEnPpal']=$nommat;
+        }else{
+            $nommat=$_SESSION['nombreMateriaSeleccionadaEnPpal'];
+        }
            $a=new profesorControlador();
            $idmateria= $a->buscarIDdeNombreMateria($nommat);
-           $dedicacion=$a->buscarDedicaciondeMateria($idmateria,2)//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
+           $dedicacion=$a->buscarDedicaciondeMateria($idmateria,2);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
+           $cargar=$a->buscarHorariosParallenarEnlosSelect($idmateria,2);
+           if(isset($cargar)){
+           foreach ($cargar as $horario) {
+              if($horario->getsemestre()==1){
+                  if(isset($D1S1)){
+                    $D1S2=$horario->getdia()->getid_dia();
+                    $H1S2=date("H", strtotime( $horario->gethora()));
+                    $M1S2=date("i", strtotime( $horario->gethora()));
+                  }else{
+                    $D1S1=$horario->getdia()->getid_dia();
+                    $H1S1=date("H", strtotime( $horario->gethora()));
+                    $M1S1=date("i", strtotime( $horario->gethora()));
+                  }
+              }
+              elseif($horario->getsemestre()==2){
+                if(isset($D2S1)){
+                    $D2S2=$horario->getdia()->getid_dia();
+                    $H2S2=date("H", strtotime( $horario->gethora()));
+                    $M2S2=date("i", strtotime( $horario->gethora()));
+                  }else{
+                    $D2S1=$horario->getdia()->getid_dia();
+                    $H2S1=date("H", strtotime( $horario->gethora()));
+                    $M2S1=date("i", strtotime( $horario->gethora()));
+                  }
+           }
+        }
+    }
            ?>
         <h2>Establecer Horario de Consulta:</h2>
         <form action="alumnoPpal.php" method="POST">
@@ -35,7 +85,7 @@ $crearHorario= $URL . $crearHorarioDeConsulta;
                     <tr>
                         <th>Nombre</th>
                         <td>
-                           <?php echo $_POST['nombreMateriaSeleccionada']?>
+                           <?php echo $nommat?>
 <!--                            <select name="Materias">                       
                                 <option>Administración de Recursos</option>
                                 <option>Administración Gerencial</option>
@@ -55,20 +105,20 @@ $crearHorario= $URL . $crearHorarioDeConsulta;
                         <th>Día</th>
                         <td>
                             <select name="Dia1ersemestre1">                       
-                                <option value=1>Lunes</option>
-                                <option value=2>Martes</option>
-                                <option value=3>Miércoles</option>
-                                <option value=4>Jueves</option>
-                                <option value=5>Viernes</option>
+                                <option <?php if($D1S1 == '1'){echo("selected");}?> value=1>Lunes</option>
+                                <option <?php if($D1S1 == '2'){echo("selected");}?> value=2>Martes</option>
+                                <option <?php if($D1S1 == '3'){echo("selected");}?> value=3>Miércoles</option>
+                                <option <?php if($D1S1 == '4'){echo("selected");}?> value=4>Jueves</option>
+                                <option <?php if($D1S1 == '5'){echo("selected");}?> value=5>Viernes</option>
                             </select>
                         </td>
                         <td>
                             <select name="Dia1ersemestre2">                       
-                                <option value=1>Lunes</option>
-                                <option value=2>Martes</option>
-                                <option value=3>Miércoles</option>
-                                <option value=4>Jueves</option>
-                                <option value=5>Viernes</option>
+                                <option <?php if($D1S2 == '1'){echo("selected");}?> value=1>Lunes</option>
+                                <option <?php if($D1S2 == '2'){echo("selected");}?> value=2>Martes</option>
+                                <option <?php if($D1S2 == '3'){echo("selected");}?> value=3>Miércoles</option>
+                                <option <?php if($D1S2 == '4'){echo("selected");}?> value=4>Jueves</option>
+                                <option <?php if($D1S2 == '5'){echo("selected");}?> value=5>Viernes</option>
                             </select>
                         </td>
                     </tr>                   
@@ -76,62 +126,56 @@ $crearHorario= $URL . $crearHorarioDeConsulta;
                         <th>Horario</th>                        
                         <td>
                             <select name="Horarioshora1ersemestre1">                       
-                                <option value='8'>8</option>
-                                <option value='9'>9</option>
-                                <option value='10'>10</option>
-                                <option value='11'>11</option>
-                                <option value='12'>12</option>
-                                <option value='13'>13</option>
-                                <option value='14'>14</option>
-                                <option value='15'>15</option>
-                                <option value='16'>16</option>
-                                <option value='17'>17</option>
-                                <option value='18'>18</option>
-                                <option value='19'>19</option>
-                                <option value='20'>20</option>
-                                <option value='21'>21</option>
-                                <option value='22'>22</option>
+                                <option <?php if($H1S1 == '08'){echo("selected");}?> value='08'>08</option>
+                                <option <?php if($H1S1 == '09'){echo("selected");}?> value='09'>09</option>
+                                <option <?php if($H1S1 == '10'){echo("selected");}?> value='10'>10</option>
+                                <option <?php if($H1S1 == '11'){echo("selected");}?> value='11'>11</option>
+                                <option <?php if($H1S1 == '12'){echo("selected");}?> value='12'>12</option>
+                                <option <?php if($H1S1 == '13'){echo("selected");}?> value='13'>13</option>
+                                <option <?php if($H1S1 == '14'){echo("selected");}?> value='14'>14</option>
+                                <option <?php if($H1S1 == '15'){echo("selected");}?> value='15'>15</option>
+                                <option <?php if($H1S1 == '16'){echo("selected");}?> value='16'>16</option>
+                                <option <?php if($H1S1 == '17'){echo("selected");}?> value='17'>17</option>
+                                <option <?php if($H1S1 == '18'){echo("selected");}?> value='18'>18</option>
+                                <option <?php if($H1S1 == '19'){echo("selected");}?> value='19'>19</option>
+                                <option <?php if($H1S1 == '20'){echo("selected");}?> value='20'>20</option>
+                                <option <?php if($H1S1 == '21'){echo("selected");}?> value='21'>21</option>
+                                <option <?php if($H1S1 == '22'){echo("selected");}?> value='22'>22</option>
                           
                             </select>:<select name="Horariomin1ersemestre1">                       
                              
-                                <option value='00'>00</option>
-                                <option value='15'>15</option>
-                                <option value='30'>30</option>
-                                <option value='45'>45</option>
+                                <option <?php if($M1S1 == '00'){echo("selected");}?> value='00'>00</option>
+                                <option <?php if($M1S1 == '15'){echo("selected");}?> value='15'>15</option>
+                                <option <?php if($M1S1 == '30'){echo("selected");}?> value='30'>30</option>
+                                <option <?php if($M1S1 == '45'){echo("selected");}?> value='45'>45</option>
               
                             </select>
                         </td>
                         <td>
-                            <select name="Horarios">                       
-                                <option value='8:00'>8:00</option>
-                                <option value='8:30'>8:30</option>
-                                <option value='9:00'>9:00</option>
-                                <option value='9:30'>9:30</option>
-                                <option value='10:00'>10:00</option>
-                                <option value='10:30'>10:30</option>
-                                <option value='11:00'>11:00</option>
-                                <option value='11:30'>11:30</option>
-                                <option value='12:00'>12:00</option>
-                                <option value='12:30'>12:30</option>
-                                <option value='13:00'>13:00</option>
-                                <option value='13:30'>13:30</option>
-                                <option value='14:00'>14:00</option>
-                                <option value='14:30'>14:30</option>
-                                <option value='15:00'>15:00</option>
-                                <option value='15:30'>15:30</option>
-                                <option value='16:00'>16:00</option>
-                                <option value='16:30'>16:30</option>
-                                <option value='17:00'>17:00</option>
-                                <option value='17:30'>17:30</option>
-                                <option value='18:00'>18:00</option>
-                                <option value='18:30'>18:30</option>
-                                <option value='19:00'>19:00</option>
-                                <option value='19:30'>19:30</option>
-                                <option value='20:00'>20:00</option>
-                                <option value='20:30'>20:30</option>
-                                <option value='21:00'>21:00</option>
-                                <option value='21:30'>21:30</option>
-                                <option value='22:00'>22:00</option>
+                        <select name="Horarioshora1ersemestre2">                       
+                                <option <?php if($H1S2 == '08'){echo("selected");}?> value='08'>08</option>
+                                <option <?php if($H1S2 == '09'){echo("selected");}?> value='09'>09</option>
+                                <option <?php if($H1S2 == '10'){echo("selected");}?> value='10'>10</option>
+                                <option <?php if($H1S2 == '11'){echo("selected");}?> value='11'>11</option>
+                                <option <?php if($H1S2 == '12'){echo("selected");}?> value='12'>12</option>
+                                <option <?php if($H1S2 == '13'){echo("selected");}?> value='13'>13</option>
+                                <option <?php if($H1S2 == '14'){echo("selected");}?> value='14'>14</option>
+                                <option <?php if($H1S2 == '15'){echo("selected");}?> value='15'>15</option>
+                                <option <?php if($H1S2 == '16'){echo("selected");}?> value='16'>16</option>
+                                <option <?php if($H1S2 == '17'){echo("selected");}?> value='17'>17</option>
+                                <option <?php if($H1S2 == '18'){echo("selected");}?> value='18'>18</option>
+                                <option <?php if($H1S2 == '19'){echo("selected");}?> value='19'>19</option>
+                                <option <?php if($H1S2 == '20'){echo("selected");}?> value='20'>20</option>
+                                <option <?php if($H1S2 == '21'){echo("selected");}?> value='21'>21</option>
+                                <option <?php if($H1S2 == '22'){echo("selected");}?> value='22'>22</option>
+                          
+                            </select>:<select name="Horariomin1ersemestre2">                       
+                             
+                                <option <?php if($M1S2 == '00'){echo("selected");}?> value='00'>00</option>
+                                <option <?php if($M1S2 == '15'){echo("selected");}?> value='15'>15</option>
+                                <option <?php if($M1S2 == '30'){echo("selected");}?> value='30'>30</option>
+                                <option <?php if($M1S2 == '45'){echo("selected");}?> value='45'>45</option>
+              
                             </select>
                         </td>
                     </tr>
@@ -142,89 +186,77 @@ $crearHorario= $URL . $crearHorarioDeConsulta;
                         <th>Día</th>
                         <td>
                             <select name="Dia2dosemestre1">                       
-                                <option value=1>Lunes</option>
-                                <option value=2>Martes</option>
-                                <option value=3>Miércoles</option>
-                                <option value=4>Jueves</option>
-                                <option value=5>Viernes</option>
+                                <option <?php if($D2S1 == '1'){echo("selected");}?> value=1>Lunes</option>
+                                <option <?php if($D2S1 == '2'){echo("selected");}?> value=2>Martes</option>
+                                <option <?php if($D2S1 == '3'){echo("selected");}?> value=3>Miércoles</option>
+                                <option <?php if($D2S1 == '4'){echo("selected");}?> value=4>Jueves</option>
+                                <option <?php if($D2S1 == '5'){echo("selected");}?> value=5>Viernes</option>
                             </select>
                         </td>
                         <td>
                             <select name="Dia2dosemestre2">                       
-                                <option value=1>Lunes</option>
-                                <option value=2>Martes</option>
-                                <option value=3>Miércoles</option>
-                                <option value=4>Jueves</option>
-                                <option value=5>Viernes</option>
+                                <option <?php if($D2S2 == '1'){echo("selected");}?> value=1>Lunes</option>
+                                <option <?php if($D2S2 == '2'){echo("selected");}?> value=2>Martes</option>
+                                <option <?php if($D2S2 == '3'){echo("selected");}?> value=3>Miércoles</option>
+                                <option <?php if($D2S2 == '4'){echo("selected");}?> value=4>Jueves</option>
+                                <option <?php if($D2S2 == '5'){echo("selected");}?> value=5>Viernes</option>
                             </select>
                         </td>
                     </tr>                   
                     <tr>
                         <th>Horario</th>                        
                         <td>
-                            <select name="Horarios">                       
-                                <option value='8:00'>8:00</option>
-                                <option value='8:30'>8:30</option>
-                                <option value='9:00'>9:00</option>
-                                <option value='9:30'>9:30</option>
-                                <option value='10:00'>10:00</option>
-                                <option value='10:30'>10:30</option>
-                                <option value='11:00'>11:00</option>
-                                <option value='11:30'>11:30</option>
-                                <option value='12:00'>12:00</option>
-                                <option value='12:30'>12:30</option>
-                                <option value='13:00'>13:00</option>
-                                <option value='13:30'>13:30</option>
-                                <option value='14:00'>14:00</option>
-                                <option value='14:30'>14:30</option>
-                                <option value='15:00'>15:00</option>
-                                <option value='15:30'>15:30</option>
-                                <option value='16:00'>16:00</option>
-                                <option value='16:30'>16:30</option>
-                                <option value='17:00'>17:00</option>
-                                <option value='17:30'>17:30</option>
-                                <option value='18:00'>18:00</option>
-                                <option value='18:30'>18:30</option>
-                                <option value='19:00'>19:00</option>
-                                <option value='19:30'>19:30</option>
-                                <option value='20:00'>20:00</option>
-                                <option value='20:30'>20:30</option>
-                                <option value='21:00'>21:00</option>
-                                <option value='21:30'>21:30</option>
-                                <option value='22:00'>22:00</option>
+                        <select name="Horarioshora2dosemestre1">                       
+                                <option <?php if($H2S1 == '08'){echo("selected");}?> value='08'>08</option>
+                                <option <?php if($H2S1 == '09'){echo("selected");}?> value='09'>09</option>
+                                <option <?php if($H2S1 == '10'){echo("selected");}?> value='10'>10</option>
+                                <option <?php if($H2S1 == '11'){echo("selected");}?> value='11'>11</option>
+                                <option <?php if($H2S1 == '12'){echo("selected");}?> value='12'>12</option>
+                                <option <?php if($H2S1 == '13'){echo("selected");}?> value='13'>13</option>
+                                <option <?php if($H2S1 == '14'){echo("selected");}?> value='14'>14</option>
+                                <option <?php if($H2S1 == '15'){echo("selected");}?> value='15'>15</option>
+                                <option <?php if($H2S1 == '16'){echo("selected");}?> value='16'>16</option>
+                                <option <?php if($H2S1 == '17'){echo("selected");}?> value='17'>17</option>
+                                <option <?php if($H2S1 == '18'){echo("selected");}?> value='18'>18</option>
+                                <option <?php if($H2S1 == '19'){echo("selected");}?> value='19'>19</option>
+                                <option <?php if($H2S1 == '20'){echo("selected");}?> value='20'>20</option>
+                                <option <?php if($H2S1 == '21'){echo("selected");}?> value='21'>21</option>
+                                <option <?php if($H2S1 == '22'){echo("selected");}?> value='22'>22</option>
+                          
+                            </select>:<select name="Horariomin1ersemestre1">                       
+                             
+                                <option <?php if($M2S1 == '00'){echo("selected");}?> value='00'>00</option>
+                                <option <?php if($M2S1 == '15'){echo("selected");}?> value='15'>15</option>
+                                <option <?php if($M2S1 == '30'){echo("selected");}?> value='30'>30</option>
+                                <option <?php if($M2S1 == '45'){echo("selected");}?> value='45'>45</option>
+              
                             </select>
                         </td>
                         <td>
-                            <select name="Horarios">                       
-                                <option value='8:00'>8:00</option>
-                                <option value='8:30'>8:30</option>
-                                <option value='9:00'>9:00</option>
-                                <option value='9:30'>9:30</option>
-                                <option value='10:00'>10:00</option>
-                                <option value='10:30'>10:30</option>
-                                <option value='11:00'>11:00</option>
-                                <option value='11:30'>11:30</option>
-                                <option value='12:00'>12:00</option>
-                                <option value='12:30'>12:30</option>
-                                <option value='13:00'>13:00</option>
-                                <option value='13:30'>13:30</option>
-                                <option value='14:00'>14:00</option>
-                                <option value='14:30'>14:30</option>
-                                <option value='15:00'>15:00</option>
-                                <option value='15:30'>15:30</option>
-                                <option value='16:00'>16:00</option>
-                                <option value='16:30'>16:30</option>
-                                <option value='17:00'>17:00</option>
-                                <option value='17:30'>17:30</option>
-                                <option value='18:00'>18:00</option>
-                                <option value='18:30'>18:30</option>
-                                <option value='19:00'>19:00</option>
-                                <option value='19:30'>19:30</option>
-                                <option value='20:00'>20:00</option>
-                                <option value='20:30'>20:30</option>
-                                <option value='21:00'>21:00</option>
-                                <option value='21:30'>21:30</option>
-                                <option value='22:00'>22:00</option>
+                        <select name="Horarioshora2dosemestre2">                       
+                                <option <?php if($H2S2 == '08'){echo("selected");}?> value='8'>8</option>
+                                <option <?php if($H2S2 == '09'){echo("selected");}?> value='9'>9</option>
+                                <option <?php if($H2S2 == '10'){echo("selected");}?> value='10'>10</option>
+                                <option <?php if($H2S2 == '11'){echo("selected");}?> value='11'>11</option>
+                                <option <?php if($H2S2 == '12'){echo("selected");}?> value='12'>12</option>
+                                <option <?php if($H2S2 == '13'){echo("selected");}?> value='13'>13</option>
+                                <option <?php if($H2S2 == '14'){echo("selected");}?> value='14'>14</option>
+                                <option <?php if($H2S2 == '15'){echo("selected");}?> value='15'>15</option>
+                                <option <?php if($H2S2 == '16'){echo("selected");}?> value='16'>16</option>
+                                <option <?php if($H2S2 == '17'){echo("selected");}?> value='17'>17</option>
+                                <option <?php if($H2S2 == '18'){echo("selected");}?> value='18'>18</option>
+                                <option <?php if($H2S2 == '19'){echo("selected");}?> value='19'>19</option>
+                                <option <?php if($H2S2 == '20'){echo("selected");}?> value='20'>20</option>
+                                <option <?php if($H2S2 == '21'){echo("selected");}?> value='21'>21</option>
+                                <option <?php if($H2S2 == '22'){echo("selected");}?> value='22'>22</option>
+                          
+                            </select>:<select name="Horariomin1ersemestre1">                       
+                             
+                                <option <?php if($M2S2 == '00'){echo("selected");}?> value='00'>00</option>
+                                <option <?php if($M2S2 == '15'){echo("selected");}?> value='15'>15</option>
+                                <option <?php if($M2S2 == '30'){echo("selected");}?> value='30'>30</option>
+                                <option <?php if($M2S2 == '45'){echo("selected");}?> value='45'>45</option>
+              
                             </select>
                         </td>
                     </tr>                   

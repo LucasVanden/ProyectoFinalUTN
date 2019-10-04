@@ -44,4 +44,4 @@ $profesorPpal='/vista/profesor/profesorPpal.php';
 $profesorCrearNotificacion='/controlador/profesor/profesorCrearNotificacion.php';
 $profesorAlumnosAnotados='/vista/profesor/profesorAlumnosAnotados.php';
 $crearHorarioDeConsulta='/controlador/profesor/crearHorarioDeConsulta.php';
-?>
+$mensajesCrearHoraDeConsulta='/vista/profesor/mensajesCrearHoraDeConsulta.php';

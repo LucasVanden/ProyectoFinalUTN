@@ -26,30 +26,34 @@ $idhorariodeconsultacreado=null;
 
 $semestreDeLaConsulta=2;
 $primera=primeraVezQueCargaHorario($idmateria,$idProfesor,$semestreDeLaConsulta);
-
+$ejecuta=true;
+$mensajes=array();
 if ($primera){
     $CM=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta);
     $CC=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta);
     $diaigualMesa=ComprobaSiCoincidecondiaMesas($idmateria,$dia1erSemestre1);
 
     if(isset($CM)){
-        alert("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}");
-        }else{
-            if(isset($CC)){
-                alert("superposicion con consulta {$CC->getfk_materia()->getnombreMateria()} ");
-                //falta mostrar materia
-            }else{
-                        if($diaigualMesa){
-                            alet("Debe agregar una consulta especial para esa semana, ¿Desea continuar?");
-                        }
-                        if (!$primera){
-                            CambiarActivoDeHoraAnterior($idmateria,$idProfesor);    
-                            CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,$semestreDeLaConsulta);
-                        }
-                            crearHorarioDeConsulta($hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta,$dia1erSemestre1,$idProfesor,$idmateria);
-                            crearHoraDeConsulta($idmateria,$idProfesor,$idhorariodeconsultacreado,$dia1erSemestre1);
-                }
-            }
+       // alert("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}");
+        array_push($mensajes,("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}"));
+        $ejecuta=false;
+    }
+    if(isset($CC)){
+       // alert("superposicion con consulta {$CC->getfk_materia()->getnombreMateria()} ");
+        array_push($mensajes,("superposicion con materia {$CC->getfk_materia()->getnombreMateria()}"));
+        $ejecuta=false;
+    }
+    //falta mostrar materia
+    if($diaigualMesa){
+        alert("Debe agregar una consulta especial para esa semana, ¿Desea continuar?");
+        $ejecuta=false;
+        }
+
+    if($ejecuta){    
+    crearHorarioDeConsulta($hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta,$dia1erSemestre1,$idProfesor,$idmateria);
+    crearHoraDeConsulta($idmateria,$idProfesor,$idhorariodeconsultacreado,$dia1erSemestre1);
+
+    }
 }else{
 
 //$contraturno=comprobarContraturno($idProfesor,$idmateria);
@@ -59,39 +63,49 @@ $TC=tieneCantidadDeCambiosDisponible($idProfesor,$semestreDeLaConsulta,$idmateri
 $diaigualMesa=ComprobaSiCoincidecondiaMesas($idmateria,$dia1erSemestre1);
 $C48=secambia48hsantes($idProfesor,$idmateria,$semestreDeLaConsulta,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1);
 
-print($C48);
-print("pikachu");
+
 // if(!$contraturno){
 //     alert("falla contraturno");
 // }
 if(isset($CM)){
-    alert("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}");
-    }else{
-        if(isset($CC)){
-            alert("superposicion con consulta {$CC->getfk_materia()->getnombreMateria()} ");
-            //falta mostrar materia
-        }else{
-            if(!$TC){
-                alert("super la cantidad maxima de cambios por semestre");
-            }else{
-                if(!$C48){
-                    alert("No puede cambiar la hs de consulta en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla");
-                }else{
-                    if($diaigualMesa){
-                        alet("Debe agregar una consulta especial para esa semana, ¿Desea continuar?");
-                    }
-                    if (!$primera){
-                        CambiarActivoDeHoraAnterior($idmateria,$idProfesor);    
-                        CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,$semestreDeLaConsulta);
-                    }
-                    crearHorarioDeConsulta($hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta,$dia1erSemestre1,$idProfesor,$idmateria);
-                    crearHoraDeConsulta($idmateria,$idProfesor,$idhorariodeconsultacreado,$dia1erSemestre1);
-                }
-            }
-        }
+   // alert("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}");
+    array_push($mensajes,("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}"));
+    $ejecuta=false;
     }
-
+if(isset($CC)){
+    //alert("superposicion con consulta {$CC->getfk_materia()->getnombreMateria()} ");
+    array_push($mensajes,("superposicion con materia {$CC->getfk_materia()->getnombreMateria()}"));
+    $ejecuta=false;
+            //falta mostrar materia
+    }
+if(!$TC){
+   // alert("supera la cantidad maxima de cambios por semestre");
+    array_push($mensajes,("supera la cantidad maxima de cambios por semestre"));
+    $ejecuta=false;
+    }
+if(!$C48){
+    //alert("No puede cambiar la hs de consulta en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla");
+    array_push($mensajes,("No puede cambiar la hs de consulta en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
+    $ejecuta=false;
+    }
+if($diaigualMesa){
+    alert("Debe agregar una consulta especial para esa semana, ¿Desea continuar?");
+    array_push($mensajes,("Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
+    $ejecuta=false;
 }
+if($ejecuta){
+    array_push($mensajes,("Se Creo Correctamente"));
+    CambiarActivoDeHoraAnterior($idmateria,$idProfesor);    
+    CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,$semestreDeLaConsulta);
+    crearHorarioDeConsulta($hora1erSemestre1,$min1erSemestre1,$semestreDeLaConsulta,$dia1erSemestre1,$idProfesor,$idmateria);
+    crearHoraDeConsulta($idmateria,$idProfesor,$idhorariodeconsultacreado,$dia1erSemestre1);
+    }
+}
+
+$_SESSION['mensajesCrearHorario']=$mensajes;
+$direccion = $URL.$mensajesCrearHoraDeConsulta;
+header_remove();
+header("Location: $direccion");
 
 
 
