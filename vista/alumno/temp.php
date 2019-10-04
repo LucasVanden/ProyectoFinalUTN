@@ -115,6 +115,11 @@ alert("Hello World");
 function alert($msg) {
     echo "<script type='text/javascript'>alert('$msg');</script>";
 }
-$a->temp();
+$t=$a->horarioIngresadoIgualAlAnterior(5,'08','00',2,2,1);
+if($t){
+    echo "TRUE";
+}else{
+    echo "FLASE";
+}
 ?>
 

@@ -334,6 +334,20 @@ function buscarHorariosParallenarEnlosSelect($idmateria,$idprofesor){
                         echo $id;
                     }
 
+                    function horarioIngresadoIgualAlAnterior($diaingresadonumero,$horaingresada,$miningresado,$semestreDeLaConsulta,$idprofesor,$idmateria){
+                      $igual=false;
+                        $con= new conexion();
+                        $hora="{$horaingresada}:{$miningresado}";
+                        $conn = $con->getconexion();
+                        $stmt = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia 
+                        FROM horariodeconsulta 
+                        where fk_profesor=$idprofesor and fk_materia=$idmateria and activoHasta='0000-00-00' and semestre=$semestreDeLaConsulta and hora='$hora' and fk_dia='$diaingresadonumero'"); 
+                        $stmt->execute();
+                         while($row = $stmt->fetch()) {
+                          $igual= true;
+                        }
+                      return $igual;
+                    }
 
 
 

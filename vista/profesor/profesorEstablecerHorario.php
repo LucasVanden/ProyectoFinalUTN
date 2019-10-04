@@ -223,7 +223,7 @@ $M2S2=null;
                                 <option <?php if($H2S1 == '21'){echo("selected");}?> value='21'>21</option>
                                 <option <?php if($H2S1 == '22'){echo("selected");}?> value='22'>22</option>
                           
-                            </select>:<select name="Horariomin1ersemestre1">                       
+                            </select>:<select name="Horariomin2dosemestre1">                       
                              
                                 <option <?php if($M2S1 == '00'){echo("selected");}?> value='00'>00</option>
                                 <option <?php if($M2S1 == '15'){echo("selected");}?> value='15'>15</option>
@@ -234,8 +234,8 @@ $M2S2=null;
                         </td>
                         <td>
                         <select name="Horarioshora2dosemestre2">                       
-                                <option <?php if($H2S2 == '08'){echo("selected");}?> value='8'>8</option>
-                                <option <?php if($H2S2 == '09'){echo("selected");}?> value='9'>9</option>
+                                <option <?php if($H2S2 == '08'){echo("selected");}?> value='08'>8</option>
+                                <option <?php if($H2S2 == '09'){echo("selected");}?> value='09'>9</option>
                                 <option <?php if($H2S2 == '10'){echo("selected");}?> value='10'>10</option>
                                 <option <?php if($H2S2 == '11'){echo("selected");}?> value='11'>11</option>
                                 <option <?php if($H2S2 == '12'){echo("selected");}?> value='12'>12</option>
@@ -250,7 +250,7 @@ $M2S2=null;
                                 <option <?php if($H2S2 == '21'){echo("selected");}?> value='21'>21</option>
                                 <option <?php if($H2S2 == '22'){echo("selected");}?> value='22'>22</option>
                           
-                            </select>:<select name="Horariomin1ersemestre1">                       
+                            </select>:<select name="Horariomin2dosemestre2">                       
                              
                                 <option <?php if($M2S2 == '00'){echo("selected");}?> value='00'>00</option>
                                 <option <?php if($M2S2 == '15'){echo("selected");}?> value='15'>15</option>

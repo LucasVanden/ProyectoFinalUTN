@@ -19,6 +19,19 @@ $conn = $con->getconexion();
 $dia1erSemestre1=$_POST['Dia1ersemestre1'];
 $hora1erSemestre1=$_POST['Horarioshora1ersemestre1'];
 $min1erSemestre1=$_POST['Horariomin1ersemestre1'];
+
+$dia1erSemestre2=$_POST['Dia1ersemestre2'];
+$hora1erSemestre2=$_POST['Horarioshora1ersemestre2'];
+$min1erSemestre2=$_POST['Horariomin1ersemestre2'];
+
+$Dia2dosemestre1=$_POST['Dia2dosemestre1'];
+$hora2doSemestre1=$_POST['Horarioshora2dosemestre1'];
+$min2doSemestre1=$_POST['Horariomin2dosemestre1'];
+
+$Dia2dosemestre2=$_POST['Dia2dosemestre2'];
+$hora2doSemestre2=$_POST['Horarioshora2dosemestre2'];
+$min2doSemestre2=$_POST['Horariomin2dosemestre2'];
+
 $idmateria=$_POST['idmateria'];
 //$idProfesor=$_SESSION['idprofesor'];
 $idProfesor=2;
@@ -471,6 +484,21 @@ function CambiarActivoDeHoraAnterior($idmateria,$idprofesor){
         $stmt->execute();
     }
 }
+//auxiliares
+function horarioIngresadoIgualAlAnterior($diaingresadonumero,$horaingresada,$miningresado,$semestreDeLaConsulta,$idprofesor,$idmateria){
+    $igual=false;
+      $con= new conexion();
+      $hora="{$horaingresada}:{$miningresado}";
+      $conn = $con->getconexion();
+      $stmt = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia 
+      FROM horariodeconsulta 
+      where fk_profesor=$idprofesor and fk_materia=$idmateria and activoHasta='0000-00-00' and semestre=$semestreDeLaConsulta and hora='$hora' and fk_dia='$diaingresadonumero'"); 
+      $stmt->execute();
+       while($row = $stmt->fetch()) {
+        $igual= true;
+      }
+    return $igual;
+  }
 
 function mayorMentorigual($horasql1,$signo,$hora2,$min2){
 $hora=  substr($horasql1, 0, 2);
