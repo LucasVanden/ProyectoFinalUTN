@@ -261,7 +261,8 @@ class Profesorcontrolador extends conexion
 function buscarHorariosParallenarEnlosSelect($idmateria,$idprofesor){
     $ListaHorariosDeConsulta=array();
     $conn = $this->getconexion();
-    $stmt = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,semestre,fk_dia,n FROM horariodeconsulta where fk_profesor=$idprofesor AND fk_materia=$idmateria AND activoHasta='0000-00-00'" ); 
+    $stmt = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,semestre,fk_dia,n FROM horariodeconsulta
+     where fk_profesor=$idprofesor AND fk_materia=$idmateria AND activoHasta='0000-00-00'" ); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
         

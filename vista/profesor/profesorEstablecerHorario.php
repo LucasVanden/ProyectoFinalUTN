@@ -265,6 +265,7 @@ $M2S2=null;
             <div>
                 <br>
                 <input type='hidden' name="idmateria" value=<?php echo $idmateria?>></input>
+                <input type='hidden' name="dedicacion" value=<?php echo $dedicacion->gettipo()?>></input>
                 <input type="submit" value="Establecer" name="Establecer"  formaction=<?php echo $crearHorario?> />
                 
             </div>
