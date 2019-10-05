@@ -89,9 +89,14 @@ $diaMesa22=$_POST['MesaDia2dosemestre2'];
 $horaMesa22=$_POST['MesaHorarioshora2dosemestre2'];
 $minMesa22=$_POST['MesaHorariomin2dosemestre2'];
 }
+if(isset($_POST['idmateria'])){
 $idmateria=$_POST['idmateria'];
+$_SESSION['idmateria']=$idmateria;
+}else{
+    $idmateria=$_SESSION['idmateria'];
+}
 //$idProfesor=$_SESSION['idprofesor'];
-$idProfesor=2;
+$idProfesor="2";
 $idhorariodeconsultacreado=null;
 $idhorarioAcambiar=null;
 
@@ -119,7 +124,7 @@ if($mes<=6){
 if ($_POST['dedicacion']==$nombreDedicacion){
     $dedicaciondoble=true;
 }else{
-    $dedicaciondoble=true;//CAMBIAR A FALSE------------------------------------------------------------
+    $dedicaciondoble=false;//CAMBIAR A FALSE------------------------------------------------------------
 }
 
 if ($primera){
@@ -203,6 +208,88 @@ if ($primera){
         array_push($mensajes,("Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         $ejecuta=false;
     }
+    if($ejecutaHorarioMesa){
+        $repetidomesa11=horarioIngresadoIgualAlAnterior($diaMesa11,$horaMesa11,$minMesa11,31,$idProfesor,$idmateria,1);
+        if(!$repetidomesa11){
+            $ejecutamesa11=true;
+            $CM11=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa11,$horaMesa11,$minMesa11,1);
+            $CC11=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa,$horaMesa11,$minMesa11,1,$idmateria,1,31);
+            $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,1);
+        
+            if(isset($CM11)){
+                array_push($mensajes,("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                }
+            if(isset($CC11)){
+                array_push($mensajes,("superposicion con materia {$CC->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                }
+            if(!$C4811){
+                array_push($mensajes,("No puede cambiar el horario de consulta de la consulta previa a messas 1 semana antes"));
+                $ejecuta=false;
+                }
+        }
+        $repetidomesa21=horarioIngresadoIgualAlAnterior($diaMesa21,$horaMesa21,$minMesa21,32,$idProfesor,$idmateria,1);
+        if(!$repetidomesa21){
+            $ejecutamesa21=true;
+            $CM21=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa21,$horaMesa21,$minMesa21,1);
+            $CC21=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa21,$horaMesa21,$minMesa21,2,$idmateria,1,32);
+            $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,1);
+        
+            if(isset($CM21)){
+                array_push($mensajes,("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                }
+            if(isset($CC21)){
+                array_push($mensajes,("superposicion con materia {$CC->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                }
+            if(!$C4821){
+                array_push($mensajes,("No puede cambiar el horario de consulta de la consulta previa a messas 1 semana antes"));
+                $ejecuta=false;
+                }
+        }
+        $repetidomesa12=horarioIngresadoIgualAlAnterior($diaMesa12,$horaMesa12,$minMesa12,31,$idProfesor,$idmateria,2);
+        if(!$repetidomesa12){
+            $ejecutamesa12=true;
+            $CM12=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa12,$horaMesa12,$minMesa12,1);
+            $CC12=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa12,$horaMesa12,$minMesa12,1,$idmateria,2,31);
+            $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,2);
+        
+            if(isset($CM12)){
+                array_push($mensajes,("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                }
+            if(isset($CC12)){
+                array_push($mensajes,("superposicion con materia {$CC->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                }
+            if(!$C4812){
+                array_push($mensajes,("No puede cambiar el horario de consulta de la consulta previa a messas 1 semana antes"));
+                $ejecuta=false;
+                }
+        }
+        $repetidomesa22=horarioIngresadoIgualAlAnterior($diaMesa22,$horaMesa22,$minMesa22,32,$idProfesor,$idmateria,2);
+        if(!$repetidomesa22){
+            $ejecutamesa22=true;
+            $CM22=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa22,$horaMesa22,$minMesa22,1);
+            $CC22=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa22,$horaMesa22,$minMesa22,2,$idmateria,2,32);
+            $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,2);
+        
+            if(isset($CM22)){
+                array_push($mensajes,("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                }
+            if(isset($CC22)){
+                array_push($mensajes,("superposicion con materia {$CC->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                }
+            if(!$C4822){
+                array_push($mensajes,("No puede cambiar el horario de consulta de la consulta previa a messas 1 semana antes"));
+                $ejecuta=false;
+                }
+        }
+    }
     }
     if($ejecuta){    
     array_push($mensajes,("Se Creo Correctamente"));   
@@ -227,6 +314,35 @@ if ($primera){
         crearHoraDeConsulta($idmateria,$idProfesor,$idhorariodeconsultacreado,$dia2doSemestre2);
         }
     }
+    if($ejecutaHorarioMesa){
+        if($ejecutamesa11){
+         CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,31,1);
+         crearHorarioDeConsulta($horaMesa11,$minMesa11,31,$diaMesa11,$idProfesor,$idmateria,1);
+        }
+        if($ejecutamesa21){
+         CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,32,1);
+         crearHorarioDeConsulta($horaMesa21,$minMesa21,32,$diaMesa21,$idProfesor,$idmateria,1);
+        }
+        if ($dedicaciondoble){
+         if($ejecutamesa12){
+             CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,31,2);
+             crearHorarioDeConsulta($horaMesa12,$minMesa12,31,$diaMesa12,$idProfesor,$idmateria,2);
+            }
+            if($ejecutamesa22){
+             CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,32,2);
+             crearHorarioDeConsulta($horaMesa22,$minMesa22,32,$diaMesa22,$idProfesor,$idmateria,2);
+            }
+        }
+     }
+     if($dedicaciondoble){
+        if($repetido11&&$repetido12&&$repetido21&&$repetido22){
+            array_push($mensajes,("No realizo ningun cambio"));
+        }
+    }elseif($repetido11&$repetido21){
+            array_push($mensajes,("No realizo ningun cambio"));
+        }else{
+            array_push($mensajes,("Se Creo Correctamente 12 3{$repetido11}{$repetido12}{$repetido21}{$repetido22}"));
+        }
     }
 }
 else{
@@ -338,7 +454,7 @@ if(!$repetido11){
     $CC11=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,1,$idmateria,1);
     $TC11=tieneCantidadDeCambiosDisponible($idProfesor,1,$idmateria);
     $diaigualMesa11=ComprobaSiCoincidecondiaMesas($idmateria,$dia1erSemestre1);
-    $C4811=secambia48hsantes($idProfesor,$idmateria,1,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1);
+    $C4811=secambia48hsantes($idProfesor,$idmateria,1,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,1);
 
     if(isset($CM11)){
         array_push($mensajes,("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}"));
@@ -371,7 +487,7 @@ if(!$repetido12){
     $CC12=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2,1,$idmateria,2);
     $TC12=tieneCantidadDeCambiosDisponible($idProfesor,1,$idmateria);
     $diaigualMesa12=ComprobaSiCoincidecondiaMesas($idmateria,$dia1erSemestre2);
-    $C4812=secambia48hsantes($idProfesor,$idmateria,1,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2);
+    $C4812=secambia48hsantes($idProfesor,$idmateria,1,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2,2);
 
     if(isset($CM12)){
         array_push($mensajes,("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}"));
@@ -403,7 +519,7 @@ if(!$repetido21){
     $CC21=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia2doSemestre1,$hora2doSemestre1,$min2doSemestre1,2,$idmateria,1);
     $TC21=tieneCantidadDeCambiosDisponible($idProfesor,2,$idmateria);
     $diaigualMesa21=ComprobaSiCoincidecondiaMesas($idmateria,$dia2doSemestre1);
-    $C4821=secambia48hsantes($idProfesor,$idmateria,2,$dia2doSemestre1,$hora2doSemestre1,$min2doSemestre1);
+    $C4821=secambia48hsantes($idProfesor,$idmateria,2,$dia2doSemestre1,$hora2doSemestre1,$min2doSemestre1,1);
 
     if(isset($CM21)){
         array_push($mensajes,("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}"));
@@ -431,11 +547,11 @@ if(!$repetido21){
 if($dedicaciondoble){
 if(!$repetido22){
     $ejecuta22=true;
-    $CM21=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2,2);
-    $CC21=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2,2,$idmateria,2);
-    $TC21=tieneCantidadDeCambiosDisponible($idProfesor,2,$idmateria);
-    $diaigualMesa21=ComprobaSiCoincidecondiaMesas($idmateria,$dia2doSemestre2);
-    $C4821=secambia48hsantes($idProfesor,$idmateria,2,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2);
+    $CM22=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2,2);
+    $CC22=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2,2,$idmateria,2);
+    $TC22=tieneCantidadDeCambiosDisponible($idProfesor,2,$idmateria);
+    $diaigualMesa22=ComprobaSiCoincidecondiaMesas($idmateria,$dia2doSemestre2);
+    $C4822=secambia48hsantes($idProfesor,$idmateria,2,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2,2);
 
     if(isset($CM22)){
         array_push($mensajes,("superposicion con materia {$CM->getfk_materia()->getnombreMateria()}"));
@@ -524,11 +640,15 @@ if($ejecuta){
        }
     }
 
-    if($repetido11&&$repetido12&&$repetido21&&$repetido22){
-        array_push($mensajes,("No realizo ningun cambio"));
-    }else{
-    array_push($mensajes,("Se Creo Correctamente 12 3{$repetido11}{$repetido12}{$repetido21}{$repetido22}"));
-    }
+    if($dedicaciondoble){
+        if($repetido11&&$repetido12&&$repetido21&&$repetido22){
+            array_push($mensajes,("No realizo ningun cambio"));
+        }
+    }elseif($repetido11&$repetido21){
+            array_push($mensajes,("No realizo ningun cambio"));
+        }else{
+            array_push($mensajes,("Se Creo Correctamente 12 3{$repetido11}{$repetido12}{$repetido21}{$repetido22}"));
+        }
     }
 }
 
@@ -637,8 +757,8 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado
     $conn = $con->getconexion();
 
     //--buscar la hr consulta q estoy cambiando para excliurla
-    $idExcluir;
-    $semtemp;
+    $idExcluir=null;
+    $semtemp=null;
     if($mesa){
         $semtemp=$mesa;
     }else{
@@ -758,7 +878,7 @@ function tieneCantidadDeCambiosDisponible($idProfesor,$semestre,$idmateria){
     }
 }
 
-function secambia48hsantes($idProfesor,$idmateria,$semestre,$diaingresadonumero,$horaingresada,$miningresado){
+function secambia48hsantes($idProfesor,$idmateria,$semestre,$diaingresadonumero,$horaingresada,$miningresado,$n){
     $con= new conexion();
     $conn = $con->getconexion();
     $mes= date('m');
@@ -771,7 +891,7 @@ function secambia48hsantes($idProfesor,$idmateria,$semestre,$diaingresadonumero,
     if($semestre==$semestreactual){
        
         $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta
-         where fk_materia=$idmateria and fk_profesor=$idProfesor and semestre=$semestre and activoHasta='0000-00-00'"); 
+         where fk_materia=$idmateria and fk_profesor=$idProfesor and semestre=$semestre and activoHasta='0000-00-00' and n=$n"); 
         $stmt2->execute();
         while($row = $stmt2->fetch()) {
             $hor = new HorarioDeConsulta();
