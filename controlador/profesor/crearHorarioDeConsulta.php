@@ -217,7 +217,7 @@ if($dedicaciondoble){
 if(!$repetido12){
     $ejecuta12=true;
     $CM12=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2,1);
-    $CC12=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre,1,$idmateria,2);
+    $CC12=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2,1,$idmateria,2);
     $TC12=tieneCantidadDeCambiosDisponible($idProfesor,1,$idmateria);
     $diaigualMesa12=ComprobaSiCoincidecondiaMesas($idmateria,$dia1erSemestre2);
     $C4812=secambia48hsantes($idProfesor,$idmateria,1,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2);
@@ -451,7 +451,7 @@ function comprobarSuperposiciónHorariaconotraMateria($idprofesor,$diaingresadon
 } 
 
 
-function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresadonumero,$horaingresada,$miningresado,$semestre,$idmateriam,$n){
+function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresadonumero,$horaingresada,$miningresado,$semestre,$idmateria,$n){
     $listaConsultasProfesor=array();
     $con= new conexion();
     $conn = $con->getconexion();
@@ -470,7 +470,7 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado
 
     while($row = $stmt2->fetch()) {
         $hor = new HorarioDeConsulta();
-        $hor->setsetid_horarioDeConsulta($row['id_horariodeconsulta']);
+        $hor->setid_horarioDeConsulta($row['id_horariodeconsulta']);
         $hor->sethora($row['hora']);
         $hor->setactivoDesde($row['activoDesde']);
         $hor->setactivoHasta($row['activoHasta']);
