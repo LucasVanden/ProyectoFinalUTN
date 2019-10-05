@@ -292,8 +292,7 @@ if ($primera){
     }
     }
     if($ejecuta){    
-    array_push($mensajes,("Se Creo Correctamente"));   
-         
+
         crearHorarioDeConsulta($hora1erSemestre1,$min1erSemestre1,1,$dia1erSemestre1,$idProfesor,$idmateria,1);
         if($semestreactual==1){
         crearHoraDeConsulta($idmateria,$idProfesor,$idhorariodeconsultacreado,$dia1erSemestre1);
@@ -316,20 +315,16 @@ if ($primera){
     }
     if($ejecutaHorarioMesa){
         if($ejecutamesa11){
-         CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,31,1);
          crearHorarioDeConsulta($horaMesa11,$minMesa11,31,$diaMesa11,$idProfesor,$idmateria,1);
         }
         if($ejecutamesa21){
-         CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,32,1);
          crearHorarioDeConsulta($horaMesa21,$minMesa21,32,$diaMesa21,$idProfesor,$idmateria,1);
         }
         if ($dedicaciondoble){
          if($ejecutamesa12){
-             CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,31,2);
              crearHorarioDeConsulta($horaMesa12,$minMesa12,31,$diaMesa12,$idProfesor,$idmateria,2);
             }
             if($ejecutamesa22){
-             CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,32,2);
              crearHorarioDeConsulta($horaMesa22,$minMesa22,32,$diaMesa22,$idProfesor,$idmateria,2);
             }
         }
