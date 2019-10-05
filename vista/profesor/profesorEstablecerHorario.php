@@ -54,7 +54,7 @@ $M2S2=null;
            if(isset($cargar)){
            foreach ($cargar as $horario) {
               if($horario->getsemestre()==1){
-                  if(isset($D1S1)){
+                  if($horario->getn()==2){
                     $D1S2=$horario->getdia()->getid_dia();
                     $H1S2=date("H", strtotime( $horario->gethora()));
                     $M1S2=date("i", strtotime( $horario->gethora()));
@@ -65,7 +65,7 @@ $M2S2=null;
                   }
               }
               elseif($horario->getsemestre()==2){
-                if(isset($D2S1)){
+                if($horario->getn()==2){
                     $D2S2=$horario->getdia()->getid_dia();
                     $H2S2=date("H", strtotime( $horario->gethora()));
                     $M2S2=date("i", strtotime( $horario->gethora()));

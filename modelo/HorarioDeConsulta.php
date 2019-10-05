@@ -11,6 +11,7 @@ class HorarioDeConsulta
 	var $semestre;
 	var $Profesor;
 	var $fk_materia;
+	var $n;
 	var $m_HorarioDeConsultaEstado;
 	var $m_Aula;
 
@@ -25,6 +26,15 @@ class HorarioDeConsulta
 	function setid_horarioDeConsulta($newVal)
 	{
 		$this->id_horarioDeConsulta = $newVal;
+	}
+
+	function getn()
+	{
+		return $this->n;
+	}
+	function setn($newVal)
+	{
+		$this->n = $newVal;
 	}
 	function getfk_materia()
 	{

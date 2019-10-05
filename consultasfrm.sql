@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2019 a las 01:39:44
+-- Tiempo de generación: 05-10-2019 a las 06:18:06
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -376,21 +376,22 @@ CREATE TABLE `horariodeconsulta` (
   `semestre` int(11) NOT NULL,
   `fk_dia` int(20) NOT NULL,
   `fk_profesor` int(20) NOT NULL,
-  `fk_materia` int(20) NOT NULL
+  `fk_materia` int(20) NOT NULL,
+  `n` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `horariodeconsulta`
 --
 
-INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`, `hora`, `activoDesde`, `activoHasta`, `semestre`, `fk_dia`, `fk_profesor`, `fk_materia`) VALUES
-(1, '17:30', '2019-09-01', '0000-00-00', 2, 1, 2, 1),
-(2, '18:30', '2019-09-19', '2019-09-26', 2, 5, 3, 2),
-(9, '14:00', '2019-09-23', '0000-00-00', 2, 4, 5, 1),
-(10, '19:00', '2019-09-23', '0000-00-00', 2, 3, 4, 1),
-(11, '09:00', '2019-09-23', '0000-00-00', 2, 4, 6, 1),
-(12, '18:30', '2020-09-23', '2019-09-30', 2, 3, 2, 4),
-(19, '8:00', '2019-10-04', '0000-00-00', 2, 5, 2, 1);
+INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`, `hora`, `activoDesde`, `activoHasta`, `semestre`, `fk_dia`, `fk_profesor`, `fk_materia`, `n`) VALUES
+(1, '17:30', '2019-09-01', '0000-00-00', 2, 1, 2, 1, 1),
+(2, '18:30', '2019-09-19', '2019-09-26', 2, 5, 3, 2, 1),
+(9, '14:00', '2019-09-23', '0000-00-00', 2, 4, 5, 1, 1),
+(10, '19:00', '2019-09-23', '0000-00-00', 2, 3, 4, 1, 1),
+(11, '09:00', '2019-09-23', '0000-00-00', 2, 4, 6, 1, 1),
+(12, '18:30', '2020-09-23', '2019-09-30', 2, 3, 2, 4, 1),
+(19, '08:00', '2019-10-04', '0000-00-00', 2, 5, 2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -807,7 +808,7 @@ ALTER TABLE `horariodeconsulta`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
