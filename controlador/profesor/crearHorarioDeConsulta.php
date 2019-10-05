@@ -37,9 +37,8 @@ $idmateria=$_POST['idmateria'];
 $idProfesor=2;
 $idhorariodeconsultacreado=null;
 $idhorarioAcambiar=null;
-$semestreDeLaConsulta=2;
 
-$primera=primeraVezQueCargaHorario($idmateria,$idProfesor,$semestreDeLaConsulta);
+$primera=primeraVezQueCargaHorario($idmateria,$idProfesor);
 $ejecuta=true;
 $ejecuta11=false;
 $ejecuta12=false;
@@ -677,11 +676,11 @@ function crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingre
     $idhorariodeconsultacreado = $conn->lastInsertId("horariodeconsulta");
 }
 
-function primeraVezQueCargaHorario($idmateria,$idprofesor,$semestre){
+function primeraVezQueCargaHorario($idmateria,$idprofesor){
     $con= new conexion();
     $conn = $con->getconexion();
    
-    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idprofesor and semestre=$semestre "); 
+    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idprofesor"); 
     $stmt2->execute();
     while($row = $stmt2->fetch()) {
         $hor=($row['id_horariodeconsulta']);
