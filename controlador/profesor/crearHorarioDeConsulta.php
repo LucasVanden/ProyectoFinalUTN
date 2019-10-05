@@ -230,7 +230,7 @@ if ($primera){
             $ejecutamesa21=true;
             $CM21=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa21,$horaMesa21,$minMesa21,1);
             $CC21=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa21,$horaMesa21,$minMesa21,2,$idmateria,1,32);
-            $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,1);
+            $C4821=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,1);
         
             if(isset($CM21)){
                 array_push($mensajes,("superposicion del  horario del 2do semestre con materia {$CM21->getfk_materia()->getnombreMateria()}"));
@@ -250,7 +250,7 @@ if ($primera){
             $ejecutamesa12=true;
             $CM12=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa12,$horaMesa12,$minMesa12,1);
             $CC12=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa12,$horaMesa12,$minMesa12,1,$idmateria,2,31);
-            $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,2);
+            $C4812=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,2);
         
             if(isset($CM12)){
                 array_push($mensajes,("superposicion del segundo horario del 1er semestre con materia {$CM12->getfk_materia()->getnombreMateria()}"));
@@ -270,7 +270,7 @@ if ($primera){
             $ejecutamesa22=true;
             $CM22=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa22,$horaMesa22,$minMesa22,1);
             $CC22=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa22,$horaMesa22,$minMesa22,2,$idmateria,2,32);
-            $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,2);
+            $C4822=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,2);
         
             if(isset($CM22)){
                 array_push($mensajes,("superposicion del segundo horario del 2do semestre con materia {$CM22->getfk_materia()->getnombreMateria()}"));
@@ -383,7 +383,7 @@ if($ejecutaHorarioMesa){
         $ejecutamesa21=true;
         $CM21=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa21,$horaMesa21,$minMesa21,1);
         $CC21=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa21,$horaMesa21,$minMesa21,2,$idmateria,1,32);
-        $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,1);
+        $C4821=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,1);
     
         if(isset($CM21)){
             array_push($mensajes,("superposicion  del horario especial de dia de mesas del 2do semestre con materia {$CM21->getfk_materia()->getnombreMateria()}"));
@@ -403,7 +403,7 @@ if($ejecutaHorarioMesa){
         $ejecutamesa12=true;
         $CM12=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa12,$horaMesa12,$minMesa12,1);
         $CC12=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa12,$horaMesa12,$minMesa12,1,$idmateria,2,31);
-        $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,2);
+        $C4812=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,2);
     
         if(isset($CM12)){
             array_push($mensajes,("superposicion del segundo horario especial de dia de mesas del 1er semestre con materia {$CM12->getfk_materia()->getnombreMateria()}"));
@@ -423,7 +423,7 @@ if($ejecutaHorarioMesa){
         $ejecutamesa22=true;
         $CM22=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa22,$horaMesa22,$minMesa22,1);
         $CC22=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa22,$horaMesa22,$minMesa22,2,$idmateria,2,32);
-        $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,2);
+        $C4822=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,2);
     
         if(isset($CM22)){
             array_push($mensajes,("superposicion del segundo horario especial de dia de mesasdel 2do semestre con materia {$CM22->getfk_materia()->getnombreMateria()}"));
