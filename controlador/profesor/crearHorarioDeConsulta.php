@@ -16,7 +16,7 @@ $con= new conexion();
 $conn = $con->getconexion();
 $nombreDedicacion="doble";
 
-if($_POST['Establecer']){
+if(isset($_POST['Establecer'])){
     $dia1erSemestre1=$_POST['Dia1ersemestre1'];
     $hora1erSemestre1=$_POST['Horarioshora1ersemestre1'];
     $min1erSemestre1=$_POST['Horariomin1ersemestre1'];
@@ -71,7 +71,7 @@ if($_POST['Establecer']){
             $min2doSemestre2=$_SESSION['Horariomin2dosemestre2'];
         } 
 }
-if($_POST['mesa']){
+if(isset($_POST['mesa'])){
 $ejecutaHorarioMesa=true;
 $diaMesa11=$_POST['MesaDia1ersemestre1'];
 $horaMesa11=$_POST['MesaHorarioshora1ersemestre1'];
@@ -120,7 +120,7 @@ if($mes<=6){
 }else{
     $semestreactual=2;
 }
-
+$dedicaciondoble=null;
 if ($_POST['dedicacion']==$nombreDedicacion){
     $dedicaciondoble=true;
 }else{
@@ -362,7 +362,7 @@ if($ejecutaHorarioMesa){
     if(!$repetidomesa11){
         $ejecutamesa11=true;
         $CM11=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa11,$horaMesa11,$minMesa11,1);
-        $CC11=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa,$horaMesa11,$minMesa11,1,$idmateria,1,31);
+        $CC11=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa11,$horaMesa11,$minMesa11,1,$idmateria,1,31);
         $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,1);
     
         if(isset($CM11)){
@@ -1067,7 +1067,7 @@ function comprobarCambioDeHorarioMesa($idProfesor,$idmateria,$semestre,$semestre
     }
     if($semestre==$semestreactual){
         $stmt1 = $conn->prepare("SELECT fk_horariodeconsulta FROM horadeconsulta 
-        where fk_materia=$idmateria and fk_profesor=$idprofesor and estadoVigencia='activo'"); 
+        where fk_materia=$idmateria and fk_profesor=$idProfesor and estadoVigencia='activo'"); 
         while($row = $stmt1->fetch()) {
             $horaconsulta=$row['fk_horariodeconsulta'];
             

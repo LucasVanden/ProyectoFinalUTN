@@ -29,6 +29,7 @@ $HM2S2=null;
 $MM2S2=null;
 
 $mensj= $_SESSION['mensajesCrearHorario'];
+$postdedicacion= $_POST['dedicacion'];
 
 
 if(isset($_SESSION['horariosdeMesasAagregar'])){
@@ -289,6 +290,7 @@ foreach ($cargar as $horario) {
                 </table>
          <?php endif; ?>
 <!-- asd -->
+            <input type='hidden' name="dedicacion" value=<?php echo $postdedicacion?>></input>
             <input type="submit" name="mesa" value="Aceptar" formaction=<?php echo $Aceptar?> >
             </div>
             </form>
