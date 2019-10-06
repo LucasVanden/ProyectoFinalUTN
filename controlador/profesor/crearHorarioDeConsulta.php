@@ -14,8 +14,8 @@ require_once ($DIR . $HorarioCursado);
 session_start();
 $con= new conexion();
 $conn = $con->getconexion();
-$nombreDedicacion="doble";
-
+$nombreDedicacion="1";
+$_SESSION['seEnvioLosDatosParaLaConsultaEnSemanaDeMesa']=null;
 if(isset($_POST['Establecer'])){
     $dia1erSemestre1=$_POST['Dia1ersemestre1'];
     $hora1erSemestre1=$_POST['Horarioshora1ersemestre1'];
@@ -52,6 +52,8 @@ if(isset($_POST['Establecer'])){
             $_SESSION['Horariomin2dosemestre2']=$min2doSemestre2;
         }
 }else{
+    $_SESSION['seEnvioLosDatosParaLaConsultaEnSemanaDeMesa']=true;
+    $seEnvioLosDatosParaLaConsultaEnSemanaDeMesa=true;
     $dia1erSemestre1=$_SESSION['Dia1ersemestre1'];
     $hora1erSemestre1=$_SESSION['Horarioshora1ersemestre1'];
     $min1erSemestre1=$_SESSION['Horariomin1ersemestre1'];
@@ -665,7 +667,7 @@ if($ejecuta){
     }
 
     }
-    
+
     if($dedicaciondoble&&$repetido11&&$repetido12&&$repetido21&&$repetido22){
             array_push($mensajes,"No realizo ningun cambio 1");
     }elseif(!$dedicaciondoble&&$repetido11&&$repetido21){
@@ -848,6 +850,9 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado
 } 
 
 function ComprobaSiCoincidecondiaMesas($idmateria,$diaingresadonumero){
+    if(isset($_SESSION['seEnvioLosDatosParaLaConsultaEnSemanaDeMesa'])){
+        return false;
+    }else{
     $con= new conexion();
     $conn = $con->getconexion();
     $stmt = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where id_materia=$idmateria"); 
@@ -872,7 +877,7 @@ function ComprobaSiCoincidecondiaMesas($idmateria,$diaingresadonumero){
         return false;
     }
 }
-
+}
 function tieneCantidadDeCambiosDisponible($idProfesor,$semestre,$idmateria){
     $con= new conexion();
     $conn = $con->getconexion();
@@ -982,14 +987,12 @@ function CambiarFechaHastaDeConsultaAnterior($idmateria,$idprofesor,$semestre,$n
     while($row = $stmt2->fetch()) {
         $hor = new HorarioDeConsulta();
         $hor->setid_horariodeconsulta($row['id_horariodeconsulta']);
-
-    }
-    if(isset($hor)){
+        //--
         global $idhorarioAcambiar;
         $id=$hor->getid_horarioDeConsulta();
         $idhorarioAcambiar=$id;
         $fechaActual= date("Y-m-d");
-        $stmt = $conn->prepare("UPDATE horariodeconsulta SET activoHasta=$fechaActual  WHERE id_horariodeconsulta=$id"); 
+        $stmt = $conn->prepare("UPDATE horariodeconsulta SET activoHasta='$fechaActual'  WHERE id_horariodeconsulta=$id"); 
         $stmt->execute();
     }
 }

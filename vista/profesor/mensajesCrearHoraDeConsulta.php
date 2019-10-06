@@ -49,6 +49,9 @@ if($activo11||$activo12||$activo21||$activo22){
     $Aceptar = $URL.$crearHorarioDeConsulta;}else{
     $Aceptar = $URL.$profesorPpal;
     }
+    if(isset( $_SESSION['seEnvioLosDatosParaLaConsultaEnSemanaDeMesa'])){
+        $Aceptar = $URL.$profesorPpal;
+    }
 
 $volver= $URL . $profesorPpal;
 $nommat=$_SESSION['nombreMateriaSeleccionadaEnPpal'];

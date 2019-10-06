@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id'])) {
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $profesorControlador;
 $crearHorario= $URL . $crearHorarioDeConsulta;
-$nombrededicacion="doble";
+$nombrededicacion="1";
 $D1S1=null;
 $H1S1=null;
 $M1S1=null;
@@ -52,7 +52,7 @@ $M2S2=null;
            $dedicacion=$a->buscarDedicaciondeMateria($idmateria,2);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
            
            $dedicaciondoble=false;
-           if($dedicacion->gettipo()==$nombrededicacion){
+           if($dedicacion->getid_dedicacion()==$nombrededicacion){
             $dedicaciondoble=true;
            }
           
@@ -279,7 +279,7 @@ $M2S2=null;
             <div>
                 <br>
                 <input type='hidden' name="idmateria" value=<?php echo $idmateria?>></input>
-                <input type='hidden' name="dedicacion" value=<?php echo $dedicacion->gettipo()?>></input>
+                <input type='hidden' name="dedicacion" value=<?php echo $dedicacion->getid_dedicacion()?>></input>
                 <input type="submit" value="Establecer" name="Establecer"  formaction=<?php echo $crearHorario?> />
                 
             </div>
