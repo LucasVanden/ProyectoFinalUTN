@@ -29,8 +29,11 @@ $HM2S2=null;
 $MM2S2=null;
 
 $mensj= $_SESSION['mensajesCrearHorario'];
+if(isset($_POST['dedicacion'])){
 $postdedicacion= $_POST['dedicacion'];
-
+}else{
+    $postdedicacion=$_SESSION['dedicacionParaqueNoExploteMensaje'];
+}
 
 if(isset($_SESSION['horariosdeMesasAagregar'])){
     $mesas=$_SESSION['horariosdeMesasAagregar'];
