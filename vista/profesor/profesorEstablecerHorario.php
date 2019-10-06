@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id'])) {
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $profesorControlador;
 $crearHorario= $URL . $crearHorarioDeConsulta;
-
+$nombrededicacion="doble";
 $D1S1=null;
 $H1S1=null;
 $M1S1=null;
@@ -50,6 +50,12 @@ $M2S2=null;
            $a=new profesorControlador();
            $idmateria= $a->buscarIDdeNombreMateria($nommat);
            $dedicacion=$a->buscarDedicaciondeMateria($idmateria,2);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
+           
+           $dedicaciondoble=false;
+           if($dedicacion->gettipo()==$nombrededicacion){
+            $dedicaciondoble=true;
+           }
+          
            $cargar=$a->buscarHorariosParallenarEnlosSelect($idmateria,2);
            if(isset($cargar)){
            foreach ($cargar as $horario) {
@@ -112,6 +118,7 @@ $M2S2=null;
                                 <option <?php if($D1S1 == '5'){echo("selected");}?> value=5>Viernes</option>
                             </select>
                         </td>
+                        <?php if($dedicaciondoble): ?>  
                         <td>
                             <select name="Dia1ersemestre2">                       
                                 <option <?php if($D1S2 == '1'){echo("selected");}?> value=1>Lunes</option>
@@ -121,6 +128,7 @@ $M2S2=null;
                                 <option <?php if($D1S2 == '5'){echo("selected");}?> value=5>Viernes</option>
                             </select>
                         </td>
+                        <?php endif; ?>
                     </tr>                   
                     <tr>
                         <th>Horario</th>                        
@@ -151,6 +159,7 @@ $M2S2=null;
               
                             </select>
                         </td>
+                        <?php if($dedicaciondoble): ?>  
                         <td>
                         <select name="Horarioshora1ersemestre2">                       
                                 <option <?php if($H1S2 == '08'){echo("selected");}?> value='08'>08</option>
@@ -178,6 +187,7 @@ $M2S2=null;
               
                             </select>
                         </td>
+                        <?php endif; ?>
                     </tr>
                     <tr>
                         <th>Segundo Semestre</th>
@@ -193,6 +203,7 @@ $M2S2=null;
                                 <option <?php if($D2S1 == '5'){echo("selected");}?> value=5>Viernes</option>
                             </select>
                         </td>
+                        <?php if($dedicaciondoble): ?>  
                         <td>
                             <select name="Dia2dosemestre2">                       
                                 <option <?php if($D2S2 == '1'){echo("selected");}?> value=1>Lunes</option>
@@ -202,6 +213,7 @@ $M2S2=null;
                                 <option <?php if($D2S2 == '5'){echo("selected");}?> value=5>Viernes</option>
                             </select>
                         </td>
+                        <?php endif; ?>
                     </tr>                   
                     <tr>
                         <th>Horario</th>                        
@@ -232,6 +244,7 @@ $M2S2=null;
               
                             </select>
                         </td>
+                        <?php if($dedicaciondoble): ?>  
                         <td>
                         <select name="Horarioshora2dosemestre2">                       
                                 <option <?php if($H2S2 == '08'){echo("selected");}?> value='08'>8</option>
@@ -259,6 +272,7 @@ $M2S2=null;
               
                             </select>
                         </td>
+                        <?php endif; ?>
                     </tr>                   
                 </table>
             </div>

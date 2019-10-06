@@ -358,12 +358,12 @@ if ($primera){
     }
     if($dedicaciondoble){
         if($repetido11&&$repetido12&&$repetido21&&$repetido22){
-            array_push($mensajes,("No realizo ningun cambio"));
+            array_push($mensajes,"No realizo ningun cambio");
         }
     }elseif($repetido11&&$repetido21){
-            array_push($mensajes,("No realizo ningun cambio"));
+            array_push($mensajes,"No realizo ningun cambio");
         }else{
-            array_push($mensajes,("Se Creo Correctamente "));
+            array_push($mensajes,"Se Creo Correctamente ");
         }
 }
 else{
@@ -665,15 +665,14 @@ if($ejecuta){
     }
 
     }
-    if($dedicaciondoble){
-        if($repetido11&&$repetido12&&$repetido21&&$repetido22){
-            array_push($mensajes,("No realizo ningun cambio 1"));
-        }
-    }elseif($repetido11&&$repetido21){
-            array_push($mensajes,("No realizo ningun cambio 2"));
-        }else{
-            array_push($mensajes,("Se Creo Correctamente"));
-        }
+    
+    if($dedicaciondoble&&$repetido11&&$repetido12&&$repetido21&&$repetido22){
+            array_push($mensajes,"No realizo ningun cambio 1");
+    }elseif(!$dedicaciondoble&&$repetido11&&$repetido21){
+            array_push($mensajes,"No realizo ningun cambio 2");
+    }else{ 
+            array_push($mensajes,"Se Creo Correctamente");
+         }     
 }
 
 $_SESSION['mensajesCrearHorario']=$mensajes;
