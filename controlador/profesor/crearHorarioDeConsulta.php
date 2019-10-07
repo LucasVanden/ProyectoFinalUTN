@@ -113,7 +113,9 @@ $_SESSION['idmateria']=$idmateria;
     $idmateria=$_SESSION['idmateria'];
 }
 //$idProfesor=$_SESSION['idprofesor'];
-$idProfesor="2";
+
+
+$idProfesor=$_SESSION['idProfesor'];
 $idhorariodeconsultacreado=null;
 $idhorarioAcambiar=null;
 

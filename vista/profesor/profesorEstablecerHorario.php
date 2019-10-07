@@ -7,7 +7,12 @@ if (isset($_SESSION['user_id'])) {
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $profesorControlador;
 $crearHorario= $URL . $crearHorarioDeConsulta;
+
+
+$idProfesor=$_SESSION['idProfesor'];
+// id de la decicacion que le corresponden 2 horas de consulta
 $nombrededicacion="1";
+
 $D1S1=null;
 $H1S1=null;
 $M1S1=null;
@@ -47,16 +52,16 @@ $M2S2=null;
         }else{
             $nommat=$_SESSION['nombreMateriaSeleccionadaEnPpal'];
         }
-           $a=new profesorControlador();
+          $a=new Profesorcontrolador();
            $idmateria= $a->buscarIDdeNombreMateria($nommat);
-           $dedicacion=$a->buscarDedicaciondeMateria($idmateria,2);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
+           $dedicacion=$a->buscarDedicaciondeMateria($idmateria,$idProfesor);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
            
            $dedicaciondoble=false;
            if($dedicacion->getid_dedicacion()==$nombrededicacion){
             $dedicaciondoble=true;
            }
           
-           $cargar=$a->buscarHorariosParallenarEnlosSelect($idmateria,2);
+           $cargar=$a->buscarHorariosParallenarEnlosSelect($idmateria,$idProfesor);
            if(isset($cargar)){
            foreach ($cargar as $horario) {
               if($horario->getsemestre()==1){

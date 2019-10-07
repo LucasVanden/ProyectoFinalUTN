@@ -6,6 +6,13 @@ if (isset($_SESSION['usuario_id'])) {
 }
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $profesorControlador;
+
+
+$idusuario=$_SESSION['usuario'];
+$a=new profesorControlador();
+$idProfesor=$a->buscarProfesorDeUsuario($idusuario);
+$_SESSION['idProfesor']=$idProfesor;
+
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +45,7 @@ require_once $DIR . $profesorControlador;
                         </tr>   
                         <?php 
                         $a =new profesorControlador ;
-                        $listaDedicaciones = $a->buscarMateriasProfesor(02);
+                        $listaDedicaciones = $a->buscarMateriasProfesor($idProfesor);
                         foreach ($listaDedicaciones as $dedicacion): ?>   
                         <tr>
                             <td> 
@@ -79,7 +86,7 @@ require_once $DIR . $profesorControlador;
                         <th>Ver detelles</th>
                     </thead>
                    <?php 
-                   $alumnosanotados = $a->alumnosAnotados(02);//<---------------------------------id session
+                   $alumnosanotados = $a->alumnosAnotados($idProfesor);//<---------------------------------id session
                   ?>
                     <tbody>
                      <?php  foreach ($alumnosanotados as $hora): ?>   

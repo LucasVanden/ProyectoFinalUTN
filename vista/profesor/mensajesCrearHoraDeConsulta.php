@@ -4,7 +4,7 @@ require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR .$conexion);
 require_once $DIR . $profesorControlador;
 
-
+$idProfesor=$_SESSION['idProfesor'];
 
 
 $activo11=false;
@@ -57,8 +57,8 @@ $volver= $URL . $profesorPpal;
 $nommat=$_SESSION['nombreMateriaSeleccionadaEnPpal'];
 $a=new profesorControlador();
 $idmateria= $a->buscarIDdeNombreMateria($nommat);
-$dedicacion=$a->buscarDedicaciondeMateria($idmateria,2);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
-$cargar=$a->buscarHorariosParallenarEnlosSelect($idmateria,2);
+$dedicacion=$a->buscarDedicaciondeMateria($idmateria,$idProfesor);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
+$cargar=$a->buscarHorariosParallenarEnlosSelect($idmateria,$idProfesor);
 if(isset($cargar)){
 foreach ($cargar as $horario) {
    if($horario->getsemestre()==31){

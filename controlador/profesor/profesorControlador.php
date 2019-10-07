@@ -323,19 +323,18 @@ function buscarHorariosParallenarEnlosSelect($idmateria,$idprofesor){
                         }
                     }
 
-                    function temp(){
-
-                        echo "ULTIMO ID";
-                        $pikachu= new conexion();
-
-                        $pikachu= $this->getconexion();
-                        $stmt = $pikachu->prepare("INSERT INTO `materia` (`id_materia`,`nombreMateria`,`fk_departamento`,`fk_dia`)
-                        VALUES (null, 'materia','1','1');");  
+                    function buscarProfesorDeUsuario($idusuario){
+                        $conn = $this->getconexion();
+                        $stmt = $conn->prepare("SELECT fk_profesor FROM usuario where id_usuario=$idusuario"); 
                         $stmt->execute();
-                        $id = $pikachu->lastInsertId("materia");
-                        echo $id;
-                    }
+                        $idprofesor=null;
+                        while($row = $stmt->fetch()) {
+                           $idprofesor=$row['fk_profesor'];
+                        }
+                       return $idprofesor;
+                        }
 
+//creo q esta en Crear.php
                     function horarioIngresadoIgualAlAnterior($diaingresadonumero,$horaingresada,$miningresado,$semestreDeLaConsulta,$idprofesor,$idmateria){
                       $igual=false;
                         $con= new conexion();
@@ -352,7 +351,7 @@ function buscarHorariosParallenarEnlosSelect($idmateria,$idprofesor){
                     }
 
 
-
+       
 
 
 
