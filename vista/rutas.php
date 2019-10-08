@@ -45,3 +45,8 @@ $profesorCrearNotificacion='/controlador/profesor/profesorCrearNotificacion.php'
 $profesorAlumnosAnotados='/vista/profesor/profesorAlumnosAnotados.php';
 $crearHorarioDeConsulta='/controlador/profesor/crearHorarioDeConsulta.php';
 $mensajesCrearHoraDeConsulta='/vista/profesor/mensajesCrearHoraDeConsulta.php';
+
+$asistenciaProfesor='/vista/asistencia/asistenciaProfesor.php';
+$asistenciaAlumno='/vista/asistencia/asistenciaAlumno.php';
+$AsistenciaControlador='/controlador/asistencia/AsistenciaControlador.php';
+$AsistirProfesor='/controlador/asistencia/AsistirProfesor.php';
