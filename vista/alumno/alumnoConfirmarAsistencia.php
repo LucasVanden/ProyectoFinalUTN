@@ -29,7 +29,7 @@ $crearanotacion= $URL .$crearAnotacion;
         ?>
         <form action=<?php echo $crearanotacion ?> method="POST">
         
-            <textarea placeholder="Ingrese su tema (opcional)" name="textarea" rows="10" cols="50"></textarea>
+            <textarea placeholder="Ingrese su tema (opcional)" name="textarea" rows="10" cols="80"></textarea>
             <input name="idhora" type="hidden" value=<?php echo $idhora ?> > </button>
             <br>
             <br>

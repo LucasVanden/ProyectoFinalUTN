@@ -32,7 +32,7 @@ $_SESSION['idProfesor']=$idProfesor;
         $notificar= $URL . $profesorNotificarAlumno; 
         $anotados= $URL . $profesorAlumnosAnotados; 
         ?>
-        <h2>Estás Dictando:</h2>
+        <h2>Establecer Horario de Consulta:</h2>
         <form action="profesorPpal.php" method="POST">        
             <div>
                 <table align='center' class="table-mostrar" id="tablaMateria">
@@ -58,32 +58,16 @@ $_SESSION['idProfesor']=$idProfesor;
                     </tbody>
                 </table>
             </div>
-            <div>            
-                <h2>Establecer Horario de Consulta:</h2>
-                <table>
-                    <thead></thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <select name="MateriasDictando">                      
-                                    <option>Administración de Recursos</option>
-                                    <option>Administración Gerencial</option>
-                                </select> 
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
             <div>                
                 <h2>Alumnos Anotados</h2>
-                <table id="tablaAlumnosAnotados" onclick="">
+                <table align='center' id="tablaAlumnosAnotados" onclick="">
                     <thead>
                         <th>Materia</th>
                         <th>Día</th>
                         <th>Hora</th>
                         <th>Cantidad</th>
                         <th>Notificar</th>
-                        <th>Ver detelles</th>
+                        <th>Ver detalles</th>
                     </thead>
                    <?php 
                    $alumnosanotados = $a->alumnosAnotados($idProfesor);//<---------------------------------id session

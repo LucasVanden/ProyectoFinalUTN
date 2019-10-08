@@ -18,7 +18,7 @@ $idhora=$_POST['Notificaridhora'];
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body  background = <?php echo $URL.$fondo?>>
         <?php require './../partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
@@ -28,12 +28,12 @@ $idhora=$_POST['Notificaridhora'];
                  $a = new Profesorcontrolador();
                  $nombMateria=$a->buscarMateriaDeHoradeconsulta($idhora);
                  ?>
-            <h1>Enviar Notificación a <?php echo $nombMateria ?> </h1>            
+            <h1>Enviar Notificación a Alumnos de <?php echo $nombMateria ?> </h1>            
             <div>
-                <textarea name="cuerpoNotificacion" placeholder="Ingrese Contenido de la Notificación"rows="10" cols="80">Escribe aquí tu Notificación</textarea>
+                <textarea name="cuerpoNotificacion" placeholder="Ingrese Contenido de la Notificación" rows="10" cols="80"></textarea>
                 <br>
                 <br>
-                <input type='hidden' name='idhoradeconsulta' value = <?php echo $idhora?>></input>
+                <input type='hidden' name='idhoradeconsulta' value = <?php echo $idhora?>>
                 <input type="submit" value="Enviar" name="Enviar"  />
                 <input type="submit" value="Cancelar" name="Cancelar"  />
             </div>

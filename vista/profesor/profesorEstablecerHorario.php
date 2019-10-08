@@ -92,7 +92,7 @@ $M2S2=null;
         <h2>Establecer Horario de Consulta:</h2>
         <form action="alumnoPpal.php" method="POST">
             <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF">  
+                <table align='center' id="tablaBuscar" style="border-color: #FFFFFF">  
                     <tr>
                         <th>Nombre</th>
                         <td>
@@ -285,8 +285,7 @@ $M2S2=null;
                 <br>
                 <input type='hidden' name="idmateria" value=<?php echo $idmateria?>></input>
                 <input type='hidden' name="dedicacion" value=<?php echo $dedicacion->getid_dedicacion()?>></input>
-                <input type="submit" value="Establecer" name="Establecer"  formaction=<?php echo $crearHorario?> />
-                
+                <input type="submit" value="Establecer" name="Establecer"  formaction=<?php echo $crearHorario?> />                
             </div>
         </form>
     </body>
