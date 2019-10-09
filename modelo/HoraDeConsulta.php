@@ -16,8 +16,8 @@ class HoraDeConsulta
 	var $HorarioDeConsulta;
 	var $tempiddetalle;
 	var $AvisoProfesor;
-	var $m_Presentismo;
-	var $m_DetalleAnotados;
+	var $Presentismo;
+	var $DetalleAnotados;
 
 	function HoraDeConsulta()
 	{
@@ -31,6 +31,26 @@ class HoraDeConsulta
 	{
 		$this->id_horadeconsulta = $newVal;
 	}
+
+	
+	function getPresentismo()
+	{
+		return $this->Presentismo;
+	}
+	function setPresentismo($newVal)
+	{
+		$this->Presentismo = $newVal;
+	}
+
+	function getDetalleAnotados()
+	{
+		return $this->DetalleAnotados;
+	}
+	function setDetalleAnotados($newVal)
+	{
+		$this->DetalleAnotados = $newVal;
+	}
+
 	function getMateria()
 	{
 		return $this->Materia;
@@ -121,9 +141,6 @@ class HoraDeConsulta
 		$this->HorarioDeConsulta = $newVal;
 	}
 
-	function setDetalleAnotados()
-	{
-	}
 
 	function incrementarAnotados()
 	{

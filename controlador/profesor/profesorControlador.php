@@ -12,7 +12,7 @@ require_once ($DIR . $DetalleAnotados);
 require_once ($DIR . $EstadoAnotados);
 require_once ($DIR . $AvisoProfesor);
 require_once ($DIR . $Dedicacion);
-
+date_default_timezone_set('America/Argentina/Mendoza');
 class Profesorcontrolador extends conexion
 {
 

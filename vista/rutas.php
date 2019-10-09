@@ -50,3 +50,5 @@ $asistenciaProfesor='/vista/asistencia/asistenciaProfesor.php';
 $asistenciaAlumno='/vista/asistencia/asistenciaAlumno.php';
 $AsistenciaControlador='/controlador/asistencia/AsistenciaControlador.php';
 $AsistirProfesor='/controlador/asistencia/AsistirProfesor.php';
+
+$AsistirAlumno='/controlador/asistencia/AsistirAlumno.php';

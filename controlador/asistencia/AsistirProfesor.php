@@ -7,7 +7,7 @@ session_start();
 $idMateria= $_POST['idmateria'];
 $idProfesor= $_SESSION['idProfesor'];
 $idhoradeconsulta=$_POST['asistir'];
-
+date_default_timezone_set('America/Argentina/Mendoza');
 echo $idhoradeconsulta;
 $con= new conexion();
 $conn=$con->getconexion();

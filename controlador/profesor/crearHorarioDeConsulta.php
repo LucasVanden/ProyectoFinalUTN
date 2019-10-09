@@ -15,6 +15,7 @@ session_start();
 $con= new conexion();
 $conn = $con->getconexion();
 $nombreDedicacion="1";
+date_default_timezone_set('America/Argentina/Mendoza');
 $_SESSION['seEnvioLosDatosParaLaConsultaEnSemanaDeMesa']=null;
 if(isset($_POST['Establecer'])){
     $dia1erSemestre1=$_POST['Dia1ersemestre1'];
