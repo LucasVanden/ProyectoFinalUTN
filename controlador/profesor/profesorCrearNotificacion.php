@@ -2,12 +2,21 @@
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR .$conexion);
 require_once ($DIR. $email);
+
+require_once ($DIR . $DetalleAnotados);
+require_once ($DIR . $Alumno);
+require_once ($DIR . $AnotadosEstado);
+require_once ($DIR . $EstadoAnotados);
+
+
+
+
 session_start();
 $con= new conexion();
 $conexttion=$con->getconexion();
 
 $idhoradeconsulta= $_POST['idhoradeconsulta'];
-$idProfesor=$_SESSION['idProfesor'];
+$idprofesor=$_SESSION['idProfesor'];
 $mensaje= $_POST['cuerpoNotificacion'];
 $materia=$_POST['materia'];
 
@@ -39,8 +48,9 @@ if(isset($_POST['Enviar'])){
         
 function enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor){
     $listaDetalles=array();
+    $con= new conexion();
     $conn = $con->getconexion();
-    $stmt = $conn->prepare("SELECT id_detalleanotados,fk_alumno FROM detalleanotados where fk_horadeconsulta=$idhora"); 
+    $stmt = $conn->prepare("SELECT id_detalleanotados,fk_alumno FROM detalleanotados where fk_horadeconsulta=$idhoradeconsulta"); 
     $stmt->execute();
         while($row = $stmt->fetch()) {
                 $detalle = new Detalleanotados();
@@ -49,7 +59,7 @@ function enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor){
                 $tempAlumno=$row['fk_alumno'];
                 $Estados=array();
 
-                $stmt = $conn->prepare("SELECT id_alumno,legajo,apellido,nombre,email,fechaNacimientoAlumno,telefonoAlumno FROM alumno where id_alumno=$id"); 
+                $stmt = $conn->prepare("SELECT id_alumno,legajo,apellido,nombre,email,fechaNacimientoAlumno,telefonoAlumno FROM alumno where id_alumno=$tempAlumno"); 
                 $stmt->execute();
                 while($row = $stmt->fetch()) {
                     $alum = new Alumno();

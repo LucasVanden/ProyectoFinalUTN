@@ -11,6 +11,9 @@ require_once ($DIR . $Dia);
 require_once ($DIR . $turno);
 require_once ($DIR . $HorarioCursado);
 require_once ($DIR. $email);
+require_once ($DIR . $DetalleAnotados);
+require_once ($DIR . $AnotadosEstado);
+require_once ($DIR . $EstadoAnotados);
 
 session_start();
 $con= new conexion();
@@ -1203,7 +1206,7 @@ function enviarMailAAlumnosAnotados($idhoradeconsulta,$idmateria,$idprofesor){
     $listaDetalles=array();
     $con= new conexion();
     $conn = $con->getconexion();
-    $stmt = $conn->prepare("SELECT id_detalleanotados,fk_alumno FROM detalleanotados where fk_horadeconsulta=$idhora"); 
+    $stmt = $conn->prepare("SELECT id_detalleanotados,fk_alumno FROM detalleanotados where fk_horadeconsulta=$idhoradeconsulta"); 
     $stmt->execute();
         while($row = $stmt->fetch()) {
                 $detalle = new Detalleanotados();
@@ -1212,7 +1215,7 @@ function enviarMailAAlumnosAnotados($idhoradeconsulta,$idmateria,$idprofesor){
                 $tempAlumno=$row['fk_alumno'];
                 $Estados=array();
 
-                $stmt = $conn->prepare("SELECT id_alumno,legajo,apellido,nombre,email,fechaNacimientoAlumno,telefonoAlumno FROM alumno where id_alumno=$id"); 
+                $stmt = $conn->prepare("SELECT id_alumno,legajo,apellido,nombre,email,fechaNacimientoAlumno,telefonoAlumno FROM alumno where id_alumno=$tempAlumno"); 
                 $stmt->execute();
                 while($row = $stmt->fetch()) {
                     $alum = new Alumno();
