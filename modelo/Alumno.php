@@ -88,7 +88,7 @@ class Alumno extends conexion
 
 	function getemail()
 	{
-		return $this->e-mail;
+		return $this->email;
 	}
 
 	function gettelefonoAlumno()

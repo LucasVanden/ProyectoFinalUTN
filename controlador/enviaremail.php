@@ -26,7 +26,9 @@ try {
 
     //Recipients
     $mail->setFrom('no-reply@howcode.org');
-    $mail->addAddress($destino);    
+    foreach ($destino as $email) {
+        $mail->addAddress($destino);    
+    }
 
     $mail->isHTML(true);
     $mail->Subject = 'Anotaciones Consulta';

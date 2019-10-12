@@ -89,37 +89,43 @@ require $DIR.'/controlador/profesor/profesorControlador.php';
 // }
 
 
-$a =new profesorControlador ;
-// $listaDedicaciones = $a->buscarMateriasProfesor(2);
-// echo '<pre>'; print_r($listaDedicaciones); echo '</pre>';
-echo 'buscarHorariodeConsultadeMateriadeProfesor'.'<br>';
-$ded=$a->buscarHorariodeConsultadeMateriadeProfesor(1,2);
-echo '<pre>'; print_r($ded); echo '</pre>';
-echo 'alumnosAnotados'.'<br>';
-$ded=$a->alumnosAnotados(2);
-echo '<pre>'; print_r($ded); echo '</pre>';
-echo(strtotime("next Monday") . "<br>");
-echo 'hayAvisosProfesor';
-echo $a->hayAvisosProfesor($ded);
-echo"detallealumnosAnotados:";
-$t= $a->detallealumnosAnotados(2);
-echo '<pre>'; print_r($t); echo '</pre>';
-echo $a->buscarMateriaDeHoradeconsulta(2);
+// $a =new profesorControlador ;
+// // $listaDedicaciones = $a->buscarMateriasProfesor(2);
+// // echo '<pre>'; print_r($listaDedicaciones); echo '</pre>';
+// echo 'buscarHorariodeConsultadeMateriadeProfesor'.'<br>';
+// $ded=$a->buscarHorariodeConsultadeMateriadeProfesor(1,2);
+// echo '<pre>'; print_r($ded); echo '</pre>';
+// echo 'alumnosAnotados'.'<br>';
+// $ded=$a->alumnosAnotados(2);
+// echo '<pre>'; print_r($ded); echo '</pre>';
+// echo(strtotime("next Monday") . "<br>");
+// echo 'hayAvisosProfesor';
+// echo $a->hayAvisosProfesor($ded);
+// echo"detallealumnosAnotados:";
+// $t= $a->detallealumnosAnotados(2);
+// echo '<pre>'; print_r($t); echo '</pre>';
+// echo $a->buscarMateriaDeHoradeconsulta(2);
 
-$tf=$a->mayorMentorigual("18:47:47.000000","==","18","47");
-if($tf){echo "true";}
-else echo "false";
+// $tf=$a->mayorMentorigual("18:47:47.000000","==","18","47");
+// if($tf){echo "true";}
+// else echo "false";
 
-alert("Hello World");
+// alert("Hello World");
 
-function alert($msg) {
-    echo "<script type='text/javascript'>alert('$msg');</script>";
-}
-$t=$a->horarioIngresadoIgualAlAnterior(5,'08','00',2,2,1);
-if($t){
-    echo "TRUE";
-}else{
-    echo "FLASE";
+// function alert($msg) {
+//     echo "<script type='text/javascript'>alert('$msg');</script>";
+// }
+// $t=$a->horarioIngresadoIgualAlAnterior(5,'08','00',2,2,1);
+// if($t){
+//     echo "TRUE";
+// }else{
+//     echo "FLASE";
+// }
+
+
+$variable="pikachu";
+foreach ($variable as $key) {
+   echo "P";
 }
 ?>
 

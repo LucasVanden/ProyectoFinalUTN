@@ -112,7 +112,10 @@ $idalumno= $_SESSION['idalumno'];
 
     }
         $body="$alumapellido $alumnombre se ha anotado a $nombreMateria el dia $dia a las $hora";
-        $err=enviaremail($emailprofesor,$body);
+
+        $emails=array();
+        array_push($emails,$emailprofesor);
+        $err=enviaremail($emails,$body);
 
 
         $direccion = $URL.$alumnoPpal;
