@@ -72,6 +72,8 @@ echo '$_SESSION["falloComprobacion'.$_SESSION["falloComprobacion"];
 echo ' $_SESSION["falloComprobacionMesa"]'.$_SESSION["falloComprobacionMesa"];
 echo $Aceptar;
 
+
+
 $volver= $URL . $profesorPpal;
 $nommat=$_SESSION['nombreMateriaSeleccionadaEnPpal'];
 $a=new profesorControlador();

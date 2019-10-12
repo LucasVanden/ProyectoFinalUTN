@@ -194,6 +194,7 @@ if ($primera){
     if($diaigualMesa11){
         array_push($mensajes,("La consulta del 1er semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         $ejecuta=false;
+        array_push($mesas,(11));
         $_SESSION["igualMesa"]=true;
     }
     if($dedicaciondoble){    
@@ -213,6 +214,7 @@ if ($primera){
     if($diaigualMesa12){
         array_push($mensajes,("La segunda consulta del 1er semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         $ejecuta=false;
+        array_push($mesas,(12));
         $_SESSION["igualMesa"]=true;
     }
     }
@@ -232,6 +234,7 @@ if ($primera){
     if($diaigualMesa21){
         array_push($mensajes,("La consulta del 2do semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         $ejecuta=false;
+        array_push($mesas,(21));
         $_SESSION["igualMesa"]=true;
     }
     if($dedicaciondoble){
@@ -251,6 +254,7 @@ if ($primera){
     if($diaigualMesa22){
         array_push($mensajes,("La segunda consulta del 2do semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         $ejecuta=false;
+        array_push($mesas,(22));
         $_SESSION["igualMesa"]=true;
     }
     if($ejecutaHorarioMesa){
