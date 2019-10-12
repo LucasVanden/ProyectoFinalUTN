@@ -55,17 +55,22 @@ if($activo11||$activo12||$activo21||$activo22){
 
 if($_SESSION["falloComprobacion"]){
     $Aceptar= $URL.$EstablecerHorario;
+    $valueButton="Volver";
 }
 
 if((!$_SESSION["falloComprobacion"])&&$_SESSION["igualMesa"]){
     $Aceptar=  $URL.$crearHorarioDeConsulta;
+    $valueButton="Continuar";
 }
 if((!$_SESSION["falloComprobacion"])&&$_SESSION["igualMesa"]&& $_SESSION["falloComprobacionMesa"]){
     $Aceptar=  $URL.$crearHorarioDeConsulta;
+    $valueButton="Continuar";
 }
 if($_SESSION["Ejecuto"]){
     $Aceptar= $URL.$profesorPpal;
+    $valueButton="Aceptar";
 }
+
 
 echo '$_SESSION["igualMesa"]'.$_SESSION["igualMesa"]; 
 echo '$_SESSION["falloComprobacion'.$_SESSION["falloComprobacion"];
@@ -321,7 +326,7 @@ foreach ($cargar as $horario) {
          <?php endif; ?>
 <!-- asd -->
             <input type='hidden' name="dedicacion" value=<?php echo $postdedicacion?>></input>
-            <input type="submit" name="mesa" value="Aceptar" formaction=<?php echo $Aceptar?> >
+            <input type="submit" name="mesa" value=<?php echo $valueButton ?> formaction=<?php echo $Aceptar?> >
             </div>
             </form>
     </body>
