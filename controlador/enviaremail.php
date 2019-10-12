@@ -27,7 +27,7 @@ try {
     //Recipients
     $mail->setFrom('no-reply@howcode.org');
     foreach ($destino as $email) {
-        $mail->addAddress($destino);    
+        $mail->addAddress($email);    
     }
 
     $mail->isHTML(true);
