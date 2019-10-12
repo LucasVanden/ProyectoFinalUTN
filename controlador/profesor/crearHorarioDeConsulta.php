@@ -394,9 +394,11 @@ if ($primera){
     }
     if($dedicaciondoble){
         if($repetido11&&$repetido12&&$repetido21&&$repetido22){
+            $mensajes=array();
             array_push($mensajes,"No realizo ningun cambio");
         }
     }elseif($repetido11&&$repetido21){
+            $mensajes=array();
             array_push($mensajes,"No realizo ningun cambio");
         }
 }
@@ -736,8 +738,10 @@ if($ejecuta){
     }
 
     if($dedicaciondoble&&$repetido11&&$repetido12&&$repetido21&&$repetido22){
+            $mensajes=array();
             array_push($mensajes,"No realizo ningun cambio 1");
     }elseif(!$dedicaciondoble&&$repetido11&&$repetido21){
+            $mensajes=array();
             array_push($mensajes,"No realizo ningun cambio 2");
     };     
 }
