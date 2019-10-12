@@ -1,7 +1,7 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
-
+require_once ($DIR. $email);
 $con= new conexion();
 $conexttion=$con->getconexion();
       
