@@ -53,6 +53,25 @@ if($activo11||$activo12||$activo21||$activo22){
         $Aceptar = $URL.$profesorPpal;
     }
 
+if($_SESSION["falloComprobacion"]){
+    $Aceptar= $URL.$EstablecerHorario;
+}
+
+if((!$_SESSION["falloComprobacion"])&&$_SESSION["igualMesa"]){
+    $Aceptar=  $URL.$crearHorarioDeConsulta;
+}
+if((!$_SESSION["falloComprobacion"])&&$_SESSION["igualMesa"]&& $_SESSION["falloComprobacionMesa"]){
+    $Aceptar=  $URL.$crearHorarioDeConsulta;
+}
+if($_SESSION["Ejecuto"]){
+    $Aceptar= $URL.$profesorPpal;
+}
+
+echo '$_SESSION["igualMesa"]'.$_SESSION["igualMesa"]; 
+echo '$_SESSION["falloComprobacion'.$_SESSION["falloComprobacion"];
+echo ' $_SESSION["falloComprobacionMesa"]'.$_SESSION["falloComprobacionMesa"];
+echo $Aceptar;
+
 $volver= $URL . $profesorPpal;
 $nommat=$_SESSION['nombreMateriaSeleccionadaEnPpal'];
 $a=new profesorControlador();
@@ -111,7 +130,7 @@ foreach ($cargar as $horario) {
             <form action="profesorEstablecerHorario.php" method="POST">     
             <div>
 <!-- as -->
-
+<?php if($_SESSION['igualMesa']): ?>
 <?php if($_SESSION['horariosdeMesasAagregar']): ?>
         <table id="tablaBuscar" style="border-color: #FFFFFF">  
                                 
@@ -294,6 +313,7 @@ foreach ($cargar as $horario) {
                         </td>
                     </tr>                   
                 </table>
+         <?php endif; ?>
          <?php endif; ?>
 <!-- asd -->
             <input type='hidden' name="dedicacion" value=<?php echo $postdedicacion?>></input>

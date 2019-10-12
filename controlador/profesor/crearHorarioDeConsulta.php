@@ -17,6 +17,11 @@ $conn = $con->getconexion();
 $nombreDedicacion="1";
 date_default_timezone_set('America/Argentina/Mendoza');
 $_SESSION['seEnvioLosDatosParaLaConsultaEnSemanaDeMesa']=null;
+$_SESSION["igualMesa"]=false;
+$_SESSION["falloComprobacion"]=false;
+$_SESSION["falloComprobacionMesa"]=false;
+$_SESSION["Ejecuto"]=false;
+
 if(isset($_POST['Establecer'])){
     $dia1erSemestre1=$_POST['Dia1ersemestre1'];
     $hora1erSemestre1=$_POST['Horarioshora1ersemestre1'];
@@ -159,11 +164,13 @@ if ($primera){
         if(!$HI){
             array_push($mensajes,("Los Horarios Ingresados del 1 semestre se superponen"));
             $ejecuta=false;
+            $_SESSION["falloComprobacion"]=true;
         }
         $HI2=los2HorariosAsignadosDifierenEn1Hs($dia2doSemestre1,$hora2doSemestre1,$min2doSemestre1,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2);
         if(!$HI2){
             array_push($mensajes,("Los Horarios Ingresados del 2 semestre se superponen"));
             $ejecuta=false;
+            $_SESSION["falloComprobacion"]=true;
         }
     }
 
@@ -173,14 +180,17 @@ if ($primera){
     if(isset($CM11)){
         array_push($mensajes,("superposicion del  horario del 1er semestre con materia {$CM11->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(isset($CC11)){
         array_push($mensajes,("superposicion del  horario del 1er semestre con consulta de {$CC11->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa11){
         array_push($mensajes,("La consulta del 1er semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         $ejecuta=false;
+        $_SESSION["igualMesa"]=true;
     }
     if($dedicaciondoble){    
     $CM12=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2,1);
@@ -189,14 +199,17 @@ if ($primera){
     if(isset($CM12)){
         array_push($mensajes,("superposicion del segundo horario del 1er semestre con materia {$CM12->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(isset($CC12)){
         array_push($mensajes,("superposicion del segundo horario del 1er semestre con consulta de {$CC12->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa12){
         array_push($mensajes,("La segunda consulta del 1er semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         $ejecuta=false;
+        $_SESSION["igualMesa"]=true;
     }
     }
     $CM21=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia2doSemestre1,$hora2doSemestre1,$min2doSemestre1,2);
@@ -205,14 +218,17 @@ if ($primera){
     if(isset($CM21)){
         array_push($mensajes,("superposicion del  horario del 2do semestre con materia{$CM21->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(isset($CC21)){
         array_push($mensajes,("superposicion del  horario del 2do semestre con consulta de {$CC21->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa21){
         array_push($mensajes,("La consulta del 2do semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         $ejecuta=false;
+        $_SESSION["igualMesa"]=true;
     }
     if($dedicaciondoble){
     $CM22=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2,2);
@@ -221,14 +237,17 @@ if ($primera){
     if(isset($CM22)){
         array_push($mensajes,("superposicion del segundo horario del 2do semestre con materia {$CM22->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(isset($CC22)){
         array_push($mensajes,("superposicion del segundo horario del 2do semestre con consulta de{$CC22->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa22){
         array_push($mensajes,("La segunda consulta del 2do semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         $ejecuta=false;
+        $_SESSION["igualMesa"]=true;
     }
     if($ejecutaHorarioMesa){
         if($existemesa11){
@@ -242,14 +261,17 @@ if ($primera){
                 if(isset($CM11)){
                     array_push($mensajes,("superposicion del  horario del 1er semestre con materia {$CM11->getfk_materia()->getnombreMateria()}"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
                 if(isset($CC11)){
                     array_push($mensajes,("superposicion del  horario del 1er semestre con consulta de {$CC11->getfk_materia()->getnombreMateria()}"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
                 if(!$C4811){
                     array_push($mensajes,("No puede cambiar el horario especial de dia de mesas especial del 1er semestre de mesas 1 semana antes de la consulta"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
             }
         }
@@ -264,14 +286,17 @@ if ($primera){
                 if(isset($CM21)){
                     array_push($mensajes,("superposicion del  horario del 2do semestre con materia {$CM21->getfk_materia()->getnombreMateria()}"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
                 if(isset($CC21)){
                     array_push($mensajes,("superposicion del  horario del 2do semestre con consulta de  {$CC21->getfk_materia()->getnombreMateria()}"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
                 if(!$C4821){
                     array_push($mensajes,("No puede cambiar el horario especial de dia de mesas especial del 2do semestre de mesas 1 semana antes de la consulta"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
             }
         }
@@ -286,14 +311,17 @@ if ($primera){
                 if(isset($CM12)){
                     array_push($mensajes,("superposicion del segundo horario del 1er semestre con materia {$CM12->getfk_materia()->getnombreMateria()}"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
                 if(isset($CC12)){
                     array_push($mensajes,("superposicion del segundo horario del 1er semestre con consulta de  {$CC12->getfk_materia()->getnombreMateria()}"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
                 if(!$C4812){
                     array_push($mensajes,("No puede cambiar el segundo horario especial de dia de mesas especial del 1er semestre de mesas 1 semana antes de la consulta"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
             }
         }
@@ -308,21 +336,24 @@ if ($primera){
                 if(isset($CM22)){
                     array_push($mensajes,("superposicion del segundo horario del 2do semestre con materia {$CM22->getfk_materia()->getnombreMateria()}"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
                 if(isset($CC22)){
                     array_push($mensajes,("superposicion del segundo horario del 2do semestre con consulta de  {$CC22->getfk_materia()->getnombreMateria()}"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
                 if(!$C4822){
                     array_push($mensajes,("No puede cambiar el segundo horario especial de dia de mesas especial del 2do semestre de mesas 1 semana antes de la consulta"));
                     $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
                     }
             }
         }
     }
     }
-    if($ejecuta){    
-
+    if($ejecuta){
+        $_SESSION["Ejecuto"]=true;
         crearHorarioDeConsulta($hora1erSemestre1,$min1erSemestre1,1,$dia1erSemestre1,$idProfesor,$idmateria,1);
         if($semestreactual==1){
         crearHoraDeConsulta($idmateria,$idProfesor,$idhorariodeconsultacreado,$dia1erSemestre1);
@@ -359,7 +390,7 @@ if ($primera){
             }
         }
      }
- 
+     array_push($mensajes,"Se Creo Correctamente ");
     }
     if($dedicaciondoble){
         if($repetido11&&$repetido12&&$repetido21&&$repetido22){
@@ -367,8 +398,6 @@ if ($primera){
         }
     }elseif($repetido11&&$repetido21){
             array_push($mensajes,"No realizo ningun cambio");
-        }else{
-            array_push($mensajes,"Se Creo Correctamente ");
         }
 }
 else{
@@ -378,11 +407,13 @@ if($dedicaciondoble){
     if(!$HI){
         array_push($mensajes,("Los Horarios Ingresados del 1 semestre se superponen"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
     }
     $HI2=los2HorariosAsignadosDifierenEn1Hs($dia2doSemestre1,$hora2doSemestre1,$min2doSemestre1,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2);
     if(!$HI2){
         array_push($mensajes,("Los Horarios Ingresados del 2 semestre se superponen"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
     }
 }
 if($dedicaciondoble){
@@ -393,94 +424,107 @@ $repetido11=horarioIngresadoIgualAlAnterior($dia1erSemestre1,$hora1erSemestre1,$
 $repetido21=horarioIngresadoIgualAlAnterior($dia2doSemestre1,$hora2doSemestre1,$min2doSemestre1,2,$idProfesor,$idmateria,1);
 
 if($ejecutaHorarioMesa){
+
     if($existemesa11){
-    $repetidomesa11=horarioIngresadoIgualAlAnterior($diaMesa11,$horaMesa11,$minMesa11,31,$idProfesor,$idmateria,1);
-    if(!$repetidomesa11){
-        $ejecutamesa11=true;
-        $CM11=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa11,$horaMesa11,$minMesa11,1);
-        $CC11=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa11,$horaMesa11,$minMesa11,1,$idmateria,1,31);
-        $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,1);
-    
-        if(isset($CM11)){
-            array_push($mensajes,("superposicion del horario especial de dia de mesas del 1er semestre con materia {$CM11->getfk_materia()->getnombreMateria()}"));
-            $ejecuta=false;
-            }
-        if(isset($CC11)){
-            array_push($mensajes,("superposicion del horario especial de dia de mesas del 1er semestre con consulta de {$CC11->getfk_materia()->getnombreMateria()}"));
-            $ejecuta=false;
-            }
-        if(!$C4811){
-            array_push($mensajes,("No puede cambiar el horario especial de dia de mesas especial del 1er semestre de mesas 1 semana antes de la consulta"));
-            $ejecuta=false;
-            }
-    }
-}
-if($existemesa21){
-    $repetidomesa21=horarioIngresadoIgualAlAnterior($diaMesa21,$horaMesa21,$minMesa21,32,$idProfesor,$idmateria,1);
-    if(!$repetidomesa21){
-        $ejecutamesa21=true;
-        $CM21=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa21,$horaMesa21,$minMesa21,1);
-        $CC21=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa21,$horaMesa21,$minMesa21,2,$idmateria,1,32);
-        $C4821=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,1);
-    
-        if(isset($CM21)){
-            array_push($mensajes,("superposicion  del horario especial de dia de mesas del 2do semestre con materia {$CM21->getfk_materia()->getnombreMateria()}"));
-            $ejecuta=false;
-            }
-        if(isset($CC21)){
-            array_push($mensajes,("superposicion del horarioespecial de dia de mesas del 2do semestre con consulta de {$CC21->getfk_materia()->getnombreMateria()}"));
-            $ejecuta=false;
-            }
-        if(!$C4821){
-            array_push($mensajes,("No puede cambiar el horario especial del 2do semestre de mesas 1 semana antes de la consulta"));
-            $ejecuta=false;
+            $repetidomesa11=horarioIngresadoIgualAlAnterior($diaMesa11,$horaMesa11,$minMesa11,31,$idProfesor,$idmateria,1);
+            if(!$repetidomesa11){
+                $ejecutamesa11=true;
+                $CM11=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa11,$horaMesa11,$minMesa11,1);
+                $CC11=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa11,$horaMesa11,$minMesa11,1,$idmateria,1,31);
+                $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,1);
+            
+                if(isset($CM11)){
+                    array_push($mensajes,("superposicion del horario especial de dia de mesas del 1er semestre con materia {$CM11->getfk_materia()->getnombreMateria()}"));
+                    $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
+                    }
+                if(isset($CC11)){
+                    array_push($mensajes,("superposicion del horario especial de dia de mesas del 1er semestre con consulta de {$CC11->getfk_materia()->getnombreMateria()}"));
+                    $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
+                    }
+                if(!$C4811){
+                    array_push($mensajes,("No puede cambiar el horario especial de dia de mesas especial del 1er semestre de mesas 1 semana antes de la consulta"));
+                    $ejecuta=false;
+                    $_SESSION["falloComprobacionMesa"]=true;
+                    }
             }
     }
-}
-if($existemesa12){
-    $repetidomesa12=horarioIngresadoIgualAlAnterior($diaMesa12,$horaMesa12,$minMesa12,31,$idProfesor,$idmateria,2);
-    if(!$repetidomesa12){
-        $ejecutamesa12=true;
-        $CM12=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa12,$horaMesa12,$minMesa12,1);
-        $CC12=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa12,$horaMesa12,$minMesa12,1,$idmateria,2,31);
-        $C4812=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,2);
-    
-        if(isset($CM12)){
-            array_push($mensajes,("superposicion del segundo horario especial de dia de mesas del 1er semestre con materia {$CM12->getfk_materia()->getnombreMateria()}"));
-            $ejecuta=false;
-            }
-        if(isset($CC12)){
-            array_push($mensajes,("superposicion del segundo horario especial de dia de mesas del 1er semestre con consulta de {$CC12->getfk_materia()->getnombreMateria()}"));
-            $ejecuta=false;
-            }
-        if(!$C4812){
-            array_push($mensajes,("No puede cambiar el segundo horario especial de dia de mesas especial del 1er semestre de mesas 1 semana antes de la consulta"));
-            $ejecuta=false;
-            }
+    if($existemesa21){
+        $repetidomesa21=horarioIngresadoIgualAlAnterior($diaMesa21,$horaMesa21,$minMesa21,32,$idProfesor,$idmateria,1);
+        if(!$repetidomesa21){
+            $ejecutamesa21=true;
+            $CM21=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa21,$horaMesa21,$minMesa21,1);
+            $CC21=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa21,$horaMesa21,$minMesa21,2,$idmateria,1,32);
+            $C4821=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,1);
+        
+            if(isset($CM21)){
+                array_push($mensajes,("superposicion  del horario especial de dia de mesas del 2do semestre con materia {$CM21->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                $_SESSION["falloComprobacionMesa"]=true;
+                }
+            if(isset($CC21)){
+                array_push($mensajes,("superposicion del horarioespecial de dia de mesas del 2do semestre con consulta de {$CC21->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                $_SESSION["falloComprobacionMesa"]=true;
+                }
+            if(!$C4821){
+                array_push($mensajes,("No puede cambiar el horario especial del 2do semestre de mesas 1 semana antes de la consulta"));
+                $ejecuta=false;
+                $_SESSION["falloComprobacionMesa"]=true;
+                }
+        }
     }
-}
-if($existemesa22){
-    $repetidomesa22=horarioIngresadoIgualAlAnterior($diaMesa22,$horaMesa22,$minMesa22,32,$idProfesor,$idmateria,2);
-    if(!$repetidomesa22){
-        $ejecutamesa22=true;
-        $CM22=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa22,$horaMesa22,$minMesa22,1);
-        $CC22=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa22,$horaMesa22,$minMesa22,2,$idmateria,2,32);
-        $C4822=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,2);
-    
-        if(isset($CM22)){
-            array_push($mensajes,("superposicion del segundo horario especial de dia de mesasdel 2do semestre con materia {$CM22->getfk_materia()->getnombreMateria()}"));
-            $ejecuta=false;
-            }
-        if(isset($CC22)){
-            array_push($mensajes,("superposicion del segundo horario especial de dia de mesas del 2do semestre con consulta de {$CC22->getfk_materia()->getnombreMateria()}"));
-            $ejecuta=false;
-            }
-        if(!$C4822){
-            array_push($mensajes,("No puede cambiar el segundo horario especial del 2do semestre de mesas 1 semana antes de la consulta"));
-            $ejecuta=false;
-            }
+    if($existemesa12){
+        $repetidomesa12=horarioIngresadoIgualAlAnterior($diaMesa12,$horaMesa12,$minMesa12,31,$idProfesor,$idmateria,2);
+        if(!$repetidomesa12){
+            $ejecutamesa12=true;
+            $CM12=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa12,$horaMesa12,$minMesa12,1);
+            $CC12=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa12,$horaMesa12,$minMesa12,1,$idmateria,2,31);
+            $C4812=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,2);
+        
+            if(isset($CM12)){
+                array_push($mensajes,("superposicion del segundo horario especial de dia de mesas del 1er semestre con materia {$CM12->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                $_SESSION["falloComprobacionMesa"]=true;
+                }
+            if(isset($CC12)){
+                array_push($mensajes,("superposicion del segundo horario especial de dia de mesas del 1er semestre con consulta de {$CC12->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                $_SESSION["falloComprobacionMesa"]=true;
+                }
+            if(!$C4812){
+                array_push($mensajes,("No puede cambiar el segundo horario especial de dia de mesas especial del 1er semestre de mesas 1 semana antes de la consulta"));
+                $ejecuta=false;
+                $_SESSION["falloComprobacionMesa"]=true;
+                }
+        }
     }
-}
+    if($existemesa22){
+        $repetidomesa22=horarioIngresadoIgualAlAnterior($diaMesa22,$horaMesa22,$minMesa22,32,$idProfesor,$idmateria,2);
+        if(!$repetidomesa22){
+            $ejecutamesa22=true;
+            $CM22=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa22,$horaMesa22,$minMesa22,1);
+            $CC22=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa22,$horaMesa22,$minMesa22,2,$idmateria,2,32);
+            $C4822=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,2,32,2);
+        
+            if(isset($CM22)){
+                array_push($mensajes,("superposicion del segundo horario especial de dia de mesasdel 2do semestre con materia {$CM22->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                $_SESSION["falloComprobacionMesa"]=true;
+                }
+            if(isset($CC22)){
+                array_push($mensajes,("superposicion del segundo horario especial de dia de mesas del 2do semestre con consulta de {$CC22->getfk_materia()->getnombreMateria()}"));
+                $ejecuta=false;
+                $_SESSION["falloComprobacionMesa"]=true;
+                }
+            if(!$C4822){
+                array_push($mensajes,("No puede cambiar el segundo horario especial del 2do semestre de mesas 1 semana antes de la consulta"));
+                $ejecuta=false;
+                $_SESSION["falloComprobacionMesa"]=true;
+                }
+        }
+    }
 }
 if(!$repetido11){
     $ejecuta11=true;
@@ -493,24 +537,28 @@ if(!$repetido11){
     if(isset($CM11)){
         array_push($mensajes,("superposicion del  horario del 1er semestre con materia {$CM11->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(isset($CC11)){
         array_push($mensajes,("superposicion del  horario del 1er semestre con consulta de {$CC11->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(!$TC11){
         array_push($mensajes,("supera la cantidad maxima de cambios por semestre"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(!$C4811){
         array_push($mensajes,("No puede cambiar la hs de consulta  del 1er semestre en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa11){
         array_push($mensajes,("La consulta del 1er semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         array_push($mesas,(11));
-
         $ejecuta=false;
+        $_SESSION["igualMesa"]=true;
     }
 }
 if($dedicaciondoble){
@@ -525,23 +573,28 @@ if(!$repetido12){
     if(isset($CM12)){
         array_push($mensajes,("superposicion del segundo horario del 1er semestre con materia {$CM12->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(isset($CC12)){
         array_push($mensajes,("superposicion del  segundo horario del 1er semestre con consulta de {$CC12->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(!$TC12){
         array_push($mensajes,("supera la cantidad maxima de cambios por semestre"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(!$C4812){
         array_push($mensajes,("No puede cambiar la segunda hs de consulta  del 1er semestre en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa12){
         array_push($mensajes,("La segunda consulta del 1er semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         array_push($mesas,(12));
         $ejecuta=false;
+        $_SESSION["igualMesa"]=true;
     }
 }
 }
@@ -556,23 +609,28 @@ if(!$repetido21){
     if(isset($CM21)){
         array_push($mensajes,("superposicion del  horario del 2do semestre con materia {$CM21->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(isset($CC21)){
         array_push($mensajes,("superposicion del  horario del 2do semestre con consulta de {$CC21->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(!$TC21){
         array_push($mensajes,("supera la cantidad maxima de cambios por semestre"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(!$C4821){
         array_push($mensajes,("No puede cambiar la hs de consulta  del 2d0 semestre en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa21){
         array_push($mensajes,("La consulta del 2do semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         array_push($mesas,(21));
         $ejecuta=false;
+        $_SESSION["igualMesa"]=true;
     }
 }
 if($dedicaciondoble){
@@ -587,27 +645,33 @@ if(!$repetido22){
     if(isset($CM22)){
         array_push($mensajes,("superposicion del  segundo horario del 2do semestre con materia {$CM22->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(isset($CC22)){
         array_push($mensajes,("superposicion del segundo horario del 2do semestre con consulta de {$CC22->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(!$TC22){
         array_push($mensajes,("supera la cantidad maxima de cambios por semestre"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if(!$C4822){
         array_push($mensajes,("No puede cambiar la segunda hs de consulta  del 2do semestre en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
         $ejecuta=false;
+        $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa22){
         array_push($mensajes,("La segunda consulta del 2do semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
         array_push($mesas,(22));
         $ejecuta=false;
+        $_SESSION["igualMesa"]=true;
     }
 }
 }
 if($ejecuta){
+    $_SESSION["Ejecuto"]=true;
     if($ejecuta11){
         CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,1,1);
         if($semestreactual==1){
@@ -668,16 +732,14 @@ if($ejecuta){
            }
        }
     }
-
+    array_push($mensajes,"Se Creo Correctamente");
     }
 
     if($dedicaciondoble&&$repetido11&&$repetido12&&$repetido21&&$repetido22){
             array_push($mensajes,"No realizo ningun cambio 1");
     }elseif(!$dedicaciondoble&&$repetido11&&$repetido21){
             array_push($mensajes,"No realizo ningun cambio 2");
-    }else{ 
-            array_push($mensajes,"Se Creo Correctamente");
-         }     
+    };     
 }
 
 $_SESSION['mensajesCrearHorario']=$mensajes;
