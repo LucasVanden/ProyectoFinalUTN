@@ -132,6 +132,7 @@ foreach ($cargar as $horario) {
             <form action="profesorEstablecerHorario.php" method="POST">     
             <div>
 <!-- as -->
+<?php if(!$_SESSION['falloComprobacion']): ?>
 <?php if($_SESSION['igualMesa']): ?>
 <?php if($_SESSION['horariosdeMesasAagregar']): ?>
         <table id="tablaBuscar" style="border-color: #FFFFFF">  
@@ -315,6 +316,7 @@ foreach ($cargar as $horario) {
                         </td>
                     </tr>                   
                 </table>
+         <?php endif; ?>
          <?php endif; ?>
          <?php endif; ?>
 <!-- asd -->
