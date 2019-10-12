@@ -40,13 +40,13 @@ if(isset($_POST['Enviar'])){
              VALUES (NULL, '$fechadia', '$fechahora', '$mensaje', '$idhoradeconsulta');"); 
             $stmt2->execute();
 
-            enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor);
+            enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor,$mensaje,$materia);
         }
-        $direccion= $URL . $profesorPpal;
-        header("Location: $direccion");
+         $direccion= $URL . $profesorPpal;
+         header("Location: $direccion");
 
         
-function enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor){
+function enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor,$mensaje,$materia){
     $listaDetalles=array();
     $con= new conexion();
     $conn = $con->getconexion();
