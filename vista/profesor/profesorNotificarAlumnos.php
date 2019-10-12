@@ -34,6 +34,7 @@ $idhora=$_POST['Notificaridhora'];
                 <br>
                 <br>
                 <input type='hidden' name='idhoradeconsulta' value = <?php echo $idhora?>>
+                <input type='hidden' name='materia' value = <?php echo $nombMateria?>>
                 <input type="submit" value="Enviar" name="Enviar"  />
                 <input type="submit" value="Cancelar" name="Cancelar"  />
             </div>
