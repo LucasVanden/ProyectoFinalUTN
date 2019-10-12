@@ -42,8 +42,8 @@ if(isset($_POST['Enviar'])){
 
             enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor,$mensaje,$materia);
         }
-         $direccion= $URL . $profesorPpal;
-         header("Location: $direccion");
+          $direccion= $URL . $profesorPpal;
+          header("Location: $direccion");
 
         
 function enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor,$mensaje,$materia){
@@ -59,9 +59,9 @@ function enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor,$mensaje,$mate
                 $tempAlumno=$row['fk_alumno'];
                 $Estados=array();
 
-                $stmt = $conn->prepare("SELECT id_alumno,legajo,apellido,nombre,email,fechaNacimientoAlumno,telefonoAlumno FROM alumno where id_alumno=$tempAlumno"); 
-                $stmt->execute();
-                while($row = $stmt->fetch()) {
+                $stmt2 = $conn->prepare("SELECT id_alumno,legajo,apellido,nombre,email,fechaNacimientoAlumno,telefonoAlumno FROM alumno where id_alumno=$tempAlumno"); 
+                $stmt2->execute();
+                while($row = $stmt2->fetch()) {
                     $alum = new Alumno();
                     $alum->setid_alumno($row['id_alumno']);
                     $alum->setlegajo($row['legajo']);
@@ -73,18 +73,18 @@ function enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor,$mensaje,$mate
                     $detalle->setAlumno($alum);
                 }
 
-                $stmt2 = $conn->prepare("SELECT id_anotadoestado,fechaAnotadosEstado,horaAnotadosEstado,fk_estadoanotados FROM anotadosestado where fk_detalleanotados=$iddetalle "); 
-                $stmt2->execute();
-                while($row = $stmt2->fetch()) {
+                $stmt3 = $conn->prepare("SELECT id_anotadoestado,fechaAnotadosEstado,horaAnotadosEstado,fk_estadoanotados FROM anotadosestado where fk_detalleanotados=$iddetalle "); 
+                $stmt3->execute();
+                while($row = $stmt3->fetch()) {
                     $anotado = new AnotadosEstado();
                     $anotado->setid_anotadosEstado($row['id_anotadoestado']);
                     $anotado->setfechaAnotadosEstado($row['fechaAnotadosEstado']);
                     $anotado->sethoraAnotadosEstado($row['horaAnotadosEstado']);
                     $idnombreestado=$row['fk_estadoanotados'];
 
-                    $stmt3 = $conn->prepare("SELECT nombreEstado,id_estadoanotados FROM estadoanotados where id_estadoanotados=$idnombreestado "); 
-                    $stmt3->execute();
-                    while($row = $stmt3->fetch()) {
+                    $stmt4 = $conn->prepare("SELECT nombreEstado,id_estadoanotados FROM estadoanotados where id_estadoanotados=$idnombreestado "); 
+                    $stmt4->execute();
+                    while($row = $stmt4->fetch()) {
                         $estado = new EstadoAnotados();
                         $estado->setnombreEstado($row['nombreEstado']);
                         $estado->setid_estadoanotados($row['id_estadoanotados']);
@@ -98,12 +98,13 @@ function enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor,$mensaje,$mate
         }
         $listaEmails=array();
     foreach ($listaDetalles as $detalle) {
+   
         $listaEstado=$detalle->getAnotadosEstado();
         if  ( end($listaEstado)->getEstadoAnotados()->getnombreEstado()=="Anotado") {
            array_push($listaEmails,$detalle->getAlumno()->getemail());
         }    
     }
-   
+  
     $stmt = $conn->prepare("SELECT nombre,apellido FROM profesor where id_profesor=$idprofesor"); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
