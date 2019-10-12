@@ -116,6 +116,7 @@ $_SESSION['idProfesor']=$idProfesor;
             <table  align='center' class="table-mostrar" id="tablaAvisos" onclick="" >
                 <thead>                    
                     <th>Materia</th>
+                    <th>Dia</th>
                     <th>Fecha</th>
                     <th>Mensaje</th>          
                 </thead>
@@ -126,9 +127,13 @@ $_SESSION['idProfesor']=$idProfesor;
                     <td>
                         <?php echo $hora->getMateria()->getnombreMateria(); ?>
                     </td>
+                    <td>    <?php echo $hora->getHorariodeConsulta()->getdia()->getdia(); ?>
+                               <?php echo $hora->getHorariodeConsulta()->gethora(); ?>
+                               </td>
              
                     <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> <!-- aca mensaje del alumno-->
                 <tr>    
+                <td></td>
                 <td>
                     <?php echo ""?> <!-- aca fecha aviso del alumno-->
                 </td>
