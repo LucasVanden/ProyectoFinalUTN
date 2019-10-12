@@ -1201,7 +1201,8 @@ return $comprobacion;
 
 function enviarMailAAlumnosAnotados($idhoradeconsulta,$idmateria,$idprofesor){
     $listaDetalles=array();
-    $conn = $this->getconexion();
+    $con= new conexion();
+    $conn = $con->getconexion();
     $stmt = $conn->prepare("SELECT id_detalleanotados,fk_alumno FROM detalleanotados where fk_horadeconsulta=$idhora"); 
     $stmt->execute();
         while($row = $stmt->fetch()) {

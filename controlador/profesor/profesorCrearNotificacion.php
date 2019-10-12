@@ -39,7 +39,7 @@ if(isset($_POST['Enviar'])){
         
 function enviarMailAAlumnosAnotados($idhoradeconsulta,$idprofesor){
     $listaDetalles=array();
-    $conn = $this->getconexion();
+    $conn = $con->getconexion();
     $stmt = $conn->prepare("SELECT id_detalleanotados,fk_alumno FROM detalleanotados where fk_horadeconsulta=$idhora"); 
     $stmt->execute();
         while($row = $stmt->fetch()) {
