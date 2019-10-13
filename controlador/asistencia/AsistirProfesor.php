@@ -170,7 +170,7 @@ function buscarAsuetos(){
     }
     return $listaAsuetos;
 }
-function siguienteHorario($Asuetos,$idhoradeconsulta,$idMateria){
+function siguienteHorario($Asuetos,$idhoradeconsulta,$idMateria,$idProfesor){
 
     $con= new conexion();
     $conn=$con->getconexion();
@@ -221,7 +221,7 @@ function siguienteHorario($Asuetos,$idhoradeconsulta,$idMateria){
                 }
     }
    
-  
+
  
    $dia=date('N');
    $proximaConsulta=nextfechaDia($dia);
@@ -235,12 +235,20 @@ function siguienteHorario($Asuetos,$idhoradeconsulta,$idMateria){
    }
     $n=$hora->getn();
  //BUscar siguiente Horario a asignar
-        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idprofesor semestre=$semestreactual and n=$n"); 
+        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor semestre=$semestreactual and n=$n"); 
         $stmt2->execute();
         while($row = $stmt->fetch()) {
             $idhorarioconsulta=$row['id_horariodeconsulta'];
+            $fk_dia=$row['fk_dia'];
         }
+       $desde= $hora->getfechaHastaAnotados();
+       $hasta= nextfechaDia($desde);
+
  //crear hora de consulta y asignarle ese horario
+ $stmt = $conn->prepare("INSERT INTO `horadeconsulta` (`id_horadeconsulta`,`fechaDesdeAnotados`,`fechaHastaAnotados`,`cantidadAnotados`,
+ `estadoPresentismo`,`estadoVigencia`,`fk_materia`,`fk_horariodeconsulta`,`fk_profesor`)
+ VALUES (null, '$desde', '$hasta' , 0, 'pendiente', 'activo','$idmateria','$idhorarioconsulta','$idProfesor');");  
+ $stmt->execute();
 
 }  
 
