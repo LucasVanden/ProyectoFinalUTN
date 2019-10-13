@@ -36,6 +36,7 @@ $AvisoProfesor='/modelo/AvisoProfesor.php';
 $Dia='/modelo/Dia.php';
 $turno='/modelo/Turno.php';
 $HorarioCursado='/modelo/HorarioCursado.php';
+$Asueto='/modelo/Asueto.php';
 
 $Dedicacion='/modelo/Dedicacion.php';
 $profesorControlador='/controlador/profesor/profesorControlador.php';
