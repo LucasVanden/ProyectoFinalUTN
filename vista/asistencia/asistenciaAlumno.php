@@ -49,7 +49,7 @@ $asisitrAlumno=$URL.$AsistirAlumno;
                         foreach ($listaHora as $Hora): ?>   
 
 
-                        <?php if ($Hora->getPresentismo()): ?>
+                        <?php if (null!==($Hora->getPresentismo())): ?>
                         <tr>
                             <td> 
                                 <?php echo $Hora->getMateria()->getnombreMateria()?>
@@ -65,7 +65,7 @@ $asisitrAlumno=$URL.$AsistirAlumno;
                             <td>
                             <!-- nose xq no quiere recibir el id desde el boton, pero si desde el input hidden caundo en alumno ppal si anda -->
                             <input type="hidden" name="asistir" value=<?php echo $Hora->getDetalleAnotados()->getid_detalleanotados();?>>
-                            <button type="submit" name"asistir2" formaction=<?php echo $asisitrAlumno?> onclick="return confirm('Marcar Horario de <?php echo $Hora->getMateria()->getnombreMateria()?>?')"> Dar Presente</button>
+                            <button type="submit" name="asistir2" formaction=<?php echo $asisitrAlumno?> onclick="return confirm('Marcar Horario de <?php echo $Hora->getMateria()->getnombreMateria()?>?')"> Dar Presente</button>
                             </td>
                             </tr>
                             <?php endif; ?>

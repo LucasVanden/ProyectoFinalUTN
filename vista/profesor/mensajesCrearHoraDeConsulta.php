@@ -71,12 +71,12 @@ if($_SESSION["Ejecuto"]){
     $valueButton="Aceptar";
 }
 
-
-echo '$_SESSION["igualMesa"]'.$_SESSION["igualMesa"]; 
-echo '$_SESSION["falloComprobacion'.$_SESSION["falloComprobacion"];
-echo ' $_SESSION["falloComprobacionMesa"]'.$_SESSION["falloComprobacionMesa"];
-echo $Aceptar;
-
+//debug
+//echo '$_SESSION["igualMesa"]'.$_SESSION["igualMesa"]; 
+//echo '$_SESSION["falloComprobacion'.$_SESSION["falloComprobacion"];
+//echo ' $_SESSION["falloComprobacionMesa"]'.$_SESSION["falloComprobacionMesa"];
+//echo $Aceptar;
+//
 
 
 $volver= $URL . $profesorPpal;
@@ -121,7 +121,7 @@ foreach ($cargar as $horario) {
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body background = <?php echo $URL.$fondo?>>
         <?php require './../partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>

@@ -124,7 +124,7 @@ function tienePresentismo($idhoradeconsulta){
     }
 
 
-    function BuscarMateriasAAsistir($idalumno){
+function BuscarMateriasAAsistir($idalumno){
             $ListDetalles=array();
             $conn = $this->getconexion();
             $stmt = $conn->prepare("SELECT id_detalleanotados,fk_horadeconsulta FROM detalleanotados where fk_alumno=$idalumno "); 
