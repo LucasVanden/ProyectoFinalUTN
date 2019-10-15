@@ -33,7 +33,7 @@ $asistirprofesor=$URL.$AsistirProfesor;
         <?php
         ?>
         <h2>Estás Dictando:</h2>
-        <form action=<?php echo $asistirprofesor?> method="POST">        
+          
             <div>
                 <table align='center' class="table-mostrar" id="tablaMateria">
                     <thead>
@@ -47,7 +47,8 @@ $asistirprofesor=$URL.$AsistirProfesor;
                         $a =new Asistenciacontrolador ;
                         $listaDedicaciones = $a->buscarMateriasProfesor($idProfesor);
                         foreach ($listaDedicaciones as $dedicacion): ?>   
-                        
+
+                      
                         <?php $listaHorariosDecosnulta=$a->buscarHorasConsulta($idProfesor,$dedicacion->getMateria()->getid_materia()) ?>
                         <input type="hidden" name="idmateria" value=<?php echo $dedicacion->getMateria()->getid_materia() ?>>
                         <?php foreach ($listaHorariosDecosnulta as $hora): ?>  
@@ -72,12 +73,15 @@ $asistirprofesor=$URL.$AsistirProfesor;
                             <?php ?>
                             <td>
                             <!-- nose xq no quiere recibir el id desde el boton, pero si desde el input hidden caundo en alumno ppal si anda -->
+                            <form action=<?php echo $asistirprofesor?> method="POST">     
+                            <input type="hidden" name="idmateria" value=<?php echo $dedicacion->getMateria()->getid_materia() ?>>
                             <input type="hidden" name="asistir" value=<?php echo $hora->getid_horadeconsulta();?>>
-                            <button type="submit" name"asistir2" formaction=<?php echo $asistirprofesor?> onclick="return confirm('Marcar Horario de <?php echo $dedicacion->getMateria()->getnombreMateria()?>?')"> <?php echo $nombreBoton?></button>
+                            <button type="submit" name"asistir2" value=<?php echo $hora->getid_horadeconsulta();?> formaction=<?php echo $asistirprofesor?> onclick="return confirm('Marcar Horario de <?php echo $dedicacion->getMateria()->getnombreMateria()?>?')"> <?php echo $nombreBoton?></button>
+                            </form>
                             </td>
                             </tr>
                             <?php endif; ?>
-                        
+                      
                         <?php endforeach; ?>
                         <?php endforeach; ?>
                           
@@ -85,7 +89,7 @@ $asistirprofesor=$URL.$AsistirProfesor;
                 </table>
             </div>
             <br>
-        </form>
+     
     </body>
     <footer>
         <?php require './../partials/footer.php'; ?>      

@@ -2,15 +2,19 @@
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
 
-require $DIR.'/controlador/PHPMailer/src/Exception.php';
-require $DIR.'/controlador/PHPMailer/src/PHPMailer.php';
-require $DIR.'/controlador/PHPMailer/src/SMTP.php';
+// require $DIR.'/controlador/PHPMailer/src/Exception.php';
+// require $DIR.'/controlador/PHPMailer/src/PHPMailer.php';
+// require $DIR.'/controlador/PHPMailer/src/SMTP.php';
 
-require $DIR.'/controlador/alumnoControlador.php';
-require $DIR.'/controlador/profesor/profesorControlador.php';
+// require $DIR.'/controlador/alumnoControlador.php';
+// require $DIR.'/controlador/profesor/profesorControlador.php';
+require $DIR.$conexion;
+require $DIR.$Asueto;
+
+
 
 // $cont =new alumnoControlador();
 // $temporal = $cont->buscarAlumno(1);
@@ -123,9 +127,24 @@ require $DIR.'/controlador/profesor/profesorControlador.php';
 // }
 
 
-$variable="pikachu";
-foreach ($variable as $key) {
-   echo "P";
+ echo '<pre>'; print_r(buscarAsuetos()); echo '</pre>';   
+
+function buscarAsuetos(){
+    $con= new conexion();
+    $conn=$con->getconexion();
+    $listaAsuetos=array();
+    $año=date("Y");
+    $fecha="{$año}-01-01";
+    $stmt = $conn->prepare("SELECT horaDesdeAsueto,horaHastaAsueto,fechaAsueto FROM asueto");
+    $stmt->execute(); 
+    while($row = $stmt->fetch()){
+        $asueto= new Asueto();
+        $asueto->setfechaAsueto($row['fechaAsueto']);
+        $asueto->sethoraDesdeAsueto($row['horaDesdeAsueto']);
+        $asueto->sethoraHastaAsueto($row['horaHastaAsueto']);
+        array_push($listaAsuetos,$asueto);
+    }
+    return $listaAsuetos;
 }
 ?>
 

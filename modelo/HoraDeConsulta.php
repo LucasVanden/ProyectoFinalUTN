@@ -78,9 +78,9 @@ class HoraDeConsulta
 		$this->tempiddetalle = $newVal;
 	}
 
-	function getfechaAnotados()
+	function getfechaDesdeAnotados()
 	{
-		return $this->fechaAnotados;
+		return $this->fechaDesdeAnotados;
 	}
 
 	function getfechaHastaAnotados()
@@ -89,9 +89,9 @@ class HoraDeConsulta
 	}
 
 
-	function setfechaAnotados($newVal)
+	function setfechaDesdeAnotados($newVal)
 	{
-		$this->fechaAnotados = $newVal;
+		$this->fechaDesdeAnotados = $newVal;
 	}
 
 	function setfechaHastaAnotados($newVal)

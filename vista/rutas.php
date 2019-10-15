@@ -37,7 +37,7 @@ $Dia='/modelo/Dia.php';
 $turno='/modelo/Turno.php';
 $HorarioCursado='/modelo/HorarioCursado.php';
 $Asueto='/modelo/Asueto.php';
-$fechaMesa='/modelo/FechaMesa.php';
+$FechaMesa='/modelo/FechaMesa.php';
 
 $Dedicacion='/modelo/Dedicacion.php';
 $profesorControlador='/controlador/profesor/profesorControlador.php';
@@ -55,3 +55,6 @@ $AsistenciaControlador='/controlador/asistencia/AsistenciaControlador.php';
 $AsistirProfesor='/controlador/asistencia/AsistirProfesor.php';
 
 $AsistirAlumno='/controlador/asistencia/AsistirAlumno.php';
+
+$demonio='/controlador/asistencia/Demonio.php';
+$dem='/vista/asistencia/demonio.php';
