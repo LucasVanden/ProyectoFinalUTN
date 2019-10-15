@@ -1,6 +1,6 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-require_once ($DIR .$conexion);
+require_once ($DIR . $conexion);
 
 require_once ($DIR . $Alumno);
 require_once ($DIR . $Materia);
@@ -10,7 +10,7 @@ require_once ($DIR . $HoraDeConsulta);
 require_once ($DIR . $Dia);
 require_once ($DIR . $turno);
 require_once ($DIR . $HorarioCursado);
-require_once ($DIR. $email);
+require_once ($DIR . $email);
 require_once ($DIR . $DetalleAnotados);
 require_once ($DIR . $AnotadosEstado);
 require_once ($DIR . $EstadoAnotados);
@@ -809,7 +809,7 @@ function comprobarSuperposiciónHorariaconotraMateria($idprofesor,$diaingresadon
     $stmt = $conn->prepare("SELECT id_horariocursado,HoraDesde,HoraHasta,comision,semestreAnual,fk_materia,fk_dia FROM horariocursado where fk_profesor=$idprofesor and semestreAnual=$semestre OR semestreAnual='anual'"); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
-        $HoradeCursado= new HoradeCursado();
+        $HoradeCursado= new HorarioCursado();
         $HoradeCursado->setid_horariocursado($row['id_horariocursado']);
         $HoradeCursado->sethoraDesde($row['HoraDesde']);
         $HoradeCursado->sethoraHasta($row['HoraHasta']);

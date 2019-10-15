@@ -7,7 +7,7 @@ class HorarioCursado
 	var $horaHasta;
 	var $dia;
 	var $comision;
-	var $semestralAnula;
+	var $semestreAnual;
 	var $Profesor;
 	var $Turno;
 	var $fk_materia;
@@ -36,14 +36,14 @@ class HorarioCursado
 		$this->fk_materia = $newVal;
 	}
 
-	function getsemestralAnula()
+	function getsemestreAnual()
 	{
-		return $this->semestralAnula;
+		return $this->semestreAnual;
 	}
 
-	function setsemestralAnula($newVal)
+	function setsemestreAnual($newVal)
 	{
-		$this->semestralAnula = $newVal;
+		$this->semestreAnual = $newVal;
 	}
 	function gethoraDesde()
 	{
