@@ -58,3 +58,5 @@ $AsistirAlumno='/controlador/asistencia/AsistirAlumno.php';
 
 $demonio='/controlador/asistencia/Demonio.php';
 $dem='/vista/asistencia/demonio.php';
+
+$ReportesControlador='/controlador/reportes/ReportesControlador.php';

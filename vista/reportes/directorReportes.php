@@ -4,8 +4,9 @@ if (isset($_SESSION['user_id'])) {
     header('Location: /PFProyect');
     footer('Location: /PFProyect');
 }
-require './../dbPFprueba.php';
-require './../rutas.php';
+require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once ($DIR.$conexion);
+require_once ($DIR.$ReportesControlador);
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +65,7 @@ require './../rutas.php';
             <p> <?= $message ?></p>
         <?php endif; ?>
         <h2>Obtener Reportes sobre Horarios de Consulta:</h2>
-        <form action="alumnoPpal.php" method="POST"> <!-- -->
+        <form action="directorReportes.php" method="POST"> <!-- -->
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  
                     <tr>
@@ -103,40 +104,52 @@ require './../rutas.php';
                                 <option>Alumnos por Profesor por Materia</option>
                             </select>
                         </td>
-                    </tr>                  
-                </table>
-            </div>
-            <div>
-                <br>
-                <input type="submit" value="Obtener" name="Obtener" disabled="disabled" />
-            </div>        
-                <table align="center" cellpadding="0" cellspacing="0" border="0">
-                <tbody align="center">
-                    <tr>
-                    <td valign="bottom"><div style="vertical-align:text-top">25</div><div class="barrasv" style="height:31.6px; background-color:#BDDA4C">&nbsp;</div></td>
-                    <td valign="bottom"><div style="vertical-align:text-top">40</div><div class="barrasv" style="height:43.5px; background-color:#FF9A68">&nbsp;</div></td>
-                    <td valign="bottom"><div style="vertical-align:text-top">15</div><div class="barrasv" style="height:15.8px; background-color:#69ABBF">&nbsp;</div></td>
-                    <td valign="bottom"><div style="vertical-align:text-top">2</div><div class="barrasv" style="height:1.9px; background-color:#FFDE68">&nbsp;</div></td>
-                    <td valign="bottom"><div style="vertical-align:text-top">7</div><div class="barrasv" style="height:6.9px; background-color:#AB6487">&nbsp;</div></td>
-                    </tr>
-                    <tr>
-                    <td class="bordetd">31.6%</td>
-                    <td class="bordetd">43.5%</td>
-                    <td class="bordetd">15.8%</td>
-                    <td class="bordetd">1.9%</td>
-                    <td class="bordetd">6.9%</td>
-                    </tr>
-                    <tr id="etiq">
-                    <td><div class="verticalmente">Barra 1</div></td>
-                    <td><div class="verticalmente">Barra 2 </div></td>
-                    <td><div class="verticalmente">Barra 3</div></td>
-                    <td><div class="verticalmente">Barra 4</div></td>
-                    <td><div class="verticalmente">Barra 5</div></td>
-                    </tr>
-                </tbody>
-                </table>
-        </form>
-    </body>
+                    </tr>   
+                    </div> 
+                    </table>
+                    <div>  <input type="submit" value="Obtener" name="Obtener"  /></div>
+                    </form>
+                    <?php     
+
+
+$c=new ReportesControlador();
+$AlumnosPorMateria=$c->AlumnosPorMateria(1,'0000-00-00','2025-00-00');
+$etiquetas=$AlumnosPorMateria[0];
+$valores=$AlumnosPorMateria[1];
+$labels=$c->auxiliarLabels($etiquetas);
+$data=$c->auxiliarValores($valores);
+$label="'".$_POST['reporte']."'";
+echo $_POST['reporte'];
+echo '<pre>'; print_r($etiquetas); echo '</pre>';   
+echo '<pre>'; print_r($valores); echo '</pre>';   
+?>
+
+
+<div id="container" style="width: 25%;">
+<canvas id="myChart" ></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: <?php echo $labels?>,
+        datasets: [{
+            label: <?php echo $label?>,
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: <?php echo $data?>,
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+</script>
     <footer>
         <?php require './../partials/footer.php'; ?>     
     </footer>  
