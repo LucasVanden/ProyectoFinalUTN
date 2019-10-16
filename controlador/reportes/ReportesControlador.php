@@ -79,6 +79,63 @@ class ReportesControlador extends conexion
     
         return $respuesta;
     }
+    function AlumnosPorProfesorPorMateria($idmateria,$fechaDesde,$fechaHasta){
+        $conn = $this->getconexion();
+        $listraNombreProfesor=array();
+        $listaCantidadPresentesProfesor=array();
+        $stmt = $conn->prepare("SELECT id_materia,nombreMateria FROM materia where id_materia=$idmateria"); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+            $idmat=$row['id_materia'];
+            $mat=$row['nombreMateria'];
+
+            $stmt2 = $conn->prepare("SELECT DISTINCT fk_profesor FROM horariodeconsulta "); 
+            $stmt2->execute();
+            while($row = $stmt2->fetch()) {
+                $fk_profesor=$row['fk_profesor'];
+                
+                $stmt3 = $conn->prepare("SELECT apellido,nombre FROM profesor where id_profesor=$fk_profesor"); 
+                $stmt3->execute();
+                while($row = $stmt3->fetch()) {
+                    $apellido=$row['apellido'];
+                    $nombre=$row['nombre'];
+                }
+                $Nombreprofesor=$apellido." ".$nombre;
+                $cantidadAsitencia=0;
+
+                $stmt4 = $conn->prepare("SELECT id_horadeconsulta FROM horadeconsulta where fk_materia=$idmat and fk_profesor=$fk_profesor and fechaDesdeAnotados>='$fechaDesde' and fechaHastaAnotados<='$fechaHasta'"); 
+                $stmt4->execute();
+                while($row = $stmt4->fetch()) {
+                
+                    $horadeconsulta=$row['id_horadeconsulta'];
+
+                    $stmt5 = $conn->prepare("SELECT id_detalleanotados FROM detalleanotados where fk_horadeconsulta=$horadeconsulta"); 
+                    $stmt5->execute();
+                    while($row = $stmt5->fetch()) {
+                        
+                            $detalle=$row['id_detalleanotados'];
+                
+                            $stmt6 = $conn->prepare("SELECT id_anotadoestado,fechaAnotadosEstado,horaAnotadosEstado,fk_estadoanotados FROM anotadosestado where fk_detalleanotados=$detalle "); 
+                            $stmt6->execute();
+                            while($row = $stmt6->fetch()) {
+                            
+                                $idnombreestado=$row['fk_estadoanotados'];
+                                if($idnombreestado==4){ //4 -> PRESENTE
+                                    $cantidadAsitencia++;
+                                }
+                            }
+                        }
+                }
+           array_push($listraNombreProfesor,$Nombreprofesor);
+           array_push($listaCantidadPresentesProfesor,$cantidadAsitencia);
+        }
+    }
+        $respuesta=array();
+        array_push($respuesta,$listraNombreProfesor);
+        array_push($respuesta,$listaCantidadPresentesProfesor);
+    
+        return $respuesta;
+    }
 
 
 }

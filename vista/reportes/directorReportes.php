@@ -113,7 +113,7 @@ require_once ($DIR.$ReportesControlador);
 
 
 $c=new ReportesControlador();
-$AlumnosPorMateria=$c->AlumnosPorMateria(1,'0000-00-00','2025-00-00');
+$AlumnosPorMateria=$c->AlumnosPorProfesorPorMateria(1,'0000-00-00','2025-00-00');
 $etiquetas=$AlumnosPorMateria[0];
 $valores=$AlumnosPorMateria[1];
 $labels=$c->auxiliarLabels($etiquetas);
@@ -143,6 +143,11 @@ var chart = new Chart(ctx, {
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: <?php echo $data?>,
+        },{
+            label: ["pikachu"],
+            backgroundColor: 'rgb('+Math.trunc(Math.random()*255)+','+Math.trunc(Math.random()*255)+','+Math.trunc(Math.random()*255)+')',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [1],
         }]
     },
 
