@@ -349,11 +349,19 @@ function buscarHorariosParallenarEnlosSelect($idmateria,$idprofesor){
                         }
                       return $igual;
                     }
-
-
-       
-
-
+function idpofesoraNombre($idprofesor){
+    $con= new conexion();
+    $conn = $con->getconexion();
+    $stmt3 = $conn->prepare("SELECT apellido,nombre FROM profesor where id_profesor=$idprofesor"); 
+    $stmt3->execute();
+    while($row = $stmt3->fetch()) {
+        $apellido=$row['apellido'];
+        $nombre=$row['nombre'];
+    }
+    $Nombreprofesor=$apellido." ".$nombre;
+        
+    return $Nombreprofesor;
+}
 
 
 

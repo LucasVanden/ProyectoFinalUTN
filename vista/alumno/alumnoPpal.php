@@ -14,6 +14,13 @@ require_once $DIR . $alumnoControlador;
 require_once $DIR . $departamentoMaterias;
 $eliminar= $URL . $eliminarAnotacion;
 $depatartamentomaterias= $URL.$departamentoMaterias;
+
+$a =new AlumnoControlador ;
+$idusuario=$_SESSION['usuario'];
+$idalumno= $a->buscarAlumnoDeUsuario($idusuario);
+$alumno = $a->buscarAlumno($idalumno);
+$_SESSION['idalumno']=$idalumno;
+$_SESSION['nombre']=$a->idAlumnoaNombre($idalumno);
 ?>
 
 <!DOCTYPE html>
@@ -55,11 +62,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                             <th> Materias </th>
                         </tr>
                         <?php 
-                        $a =new AlumnoControlador ;
-                        $idusuario=$_SESSION['usuario'];
-                        $idalumno= $a->buscarAlumnoDeUsuario($idusuario);
-                        $alumno = $a->buscarAlumno($idalumno);
-                        $_SESSION['idalumno']=$idalumno;
+     
                         foreach ($alumno[0]->getMateria() as $materia): ?> 
                       
                             <tr>

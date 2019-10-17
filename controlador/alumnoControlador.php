@@ -508,4 +508,18 @@ function AnotadoRepetido($idhora,$idalumno){
             return $lista;
             }
 
+            function idAlumnoaNombre($idalumno){
+                $con= new conexion();
+                $conn = $con->getconexion();
+                $stmt3 = $conn->prepare("SELECT apellido,nombre FROM alumno where id_alumno=$idalumno"); 
+                $stmt3->execute();
+                while($row = $stmt3->fetch()) {
+                    $apellido=$row['apellido'];
+                    $nombre=$row['nombre'];
+                }
+                $NombreAlumno=$apellido." ".$nombre;
+                    
+                return $NombreAlumno;
+            }
+
 }?>

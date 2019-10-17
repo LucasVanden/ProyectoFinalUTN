@@ -12,7 +12,7 @@ $idusuario=$_SESSION['usuario'];
 $a=new profesorControlador();
 $idProfesor=$a->buscarProfesorDeUsuario($idusuario);
 $_SESSION['idProfesor']=$idProfesor;
-
+$_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@ $_SESSION['idProfesor']=$idProfesor;
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body background = <?php echo $URL.$fondo?>>
-        <?php require './../partials/header.php' ?>
+        <?php require './../partials/headerp.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
