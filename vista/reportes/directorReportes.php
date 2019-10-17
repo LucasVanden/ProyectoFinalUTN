@@ -86,7 +86,7 @@ if(isset($_POST['reporte2'])){
                         <td>
                             <select id="reporte" name="reporte2">                       
                                 <option <?php if($opcion == 1){echo("selected");}?> value='1'>Alumnos por Materia</option>
-                                <option <?php if($opcion == 2){echo("selected");}?> value=2>Materia Ranking</option>
+                                <option <?php if($opcion == 2){echo("selected");}?> value=2>Alumnos por Departamento</option>
                                 <option <?php if($opcion == 3){echo("selected");}?> value =3>Alumnos por Profesor por Materia</option>
                             </select>
                         </td>
