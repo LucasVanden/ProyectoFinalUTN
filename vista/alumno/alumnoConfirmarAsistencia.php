@@ -1,10 +1,14 @@
 <?php
-session_start();
-if (isset($_SESSION['usuario_id'])) {
-    header('Location: /PFProyect');
-    footer('Location: /PFProyect');
-}
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+session_start();
+if(!isset($_SESSION['rol'])){
+    header('location: '. $URL.$login);
+}else{
+    if($_SESSION['rol'] != 1){
+        header('location: '. $URL.$login);
+    }
+}
+
 $crearanotacion= $URL .$crearAnotacion;
 ?>
 

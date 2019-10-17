@@ -6,6 +6,7 @@ $URL='http://localhost/ProyectoFinalUTN';
 $logo="/vista//partials/logo.png";
 $fondo="/vista/fondoCuerpo.jpg";
 
+$loginasistencia='vista/asistencia/login.php';
 $login='/vista/login.php';
 $email='/controlador/enviaremail.php';
 

@@ -1,10 +1,13 @@
 <?php
 session_start();
-if (isset($_SESSION['usuario_id'])) {
-    header('Location: /PFProyect');
-    footer('Location: /PFProyect');
-}
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+if(!isset($_SESSION['rol'])){
+    header('location: '. $URL.$loginasistencia);
+}else{
+    if($_SESSION['rol'] != 2){
+        header('location: '. $URL.$loginasistencia);
+    }
+}
 require_once $DIR . $AsistenciaControlador;
 date_default_timezone_set('America/Argentina/Mendoza');
 
