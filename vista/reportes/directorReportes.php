@@ -9,7 +9,7 @@ require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
 $depatartamentomaterias= $URL.$departamentoMaterias;
 $grafico=false;
-
+$etiquetas=true;
 if(isset($_POST['departamentos'])){
 $dep=$_POST['departamentos'];}else{
     $dep="pikachu";
@@ -108,8 +108,7 @@ if(isset($_POST['reporte2'])){
                         <?php 
 
                      $a="<script>document.writeln(materia)</script>";
-                     echo $a;
-                     echo "pikachu";
+              
                      
                         if (true): ?>   
                             <td>                       
@@ -117,9 +116,23 @@ if(isset($_POST['reporte2'])){
                                     </select> 
                                     <script>
                                 
+                                    $("#reporte").change(function() {
+                                        if (($("#reporte").val())==3){
+                                    $("#second-choice").load("<?php echo $depatartamentomaterias.'?choice='?>"+ $("#first-choice").val())}else{
+                                        $("#second-choice").empty();
+                                    }
+                                    }).change();
+                                    
+                                    
                                     $("#first-choice").change(function() {
-                                    $("#second-choice").load("<?php echo $depatartamentomaterias.'?choice='?>"+ $("#first-choice").val());
-                                    }).change();</script>
+                                        if (($("#reporte").val())==3){
+                                    $("#second-choice").load("<?php echo $depatartamentomaterias.'?choice='?>"+ $("#first-choice").val())}else{
+                                        $("#second-choice").empty();
+                                    }
+                                    }).change();
+                                    
+                                    
+                                    </script>
 
                             </td>
                             <?php endif; ?>
@@ -159,16 +172,18 @@ $data=$c->auxiliarValores($valores);
 
 //$label="'".$_POST['reporte2']."'";
 $label="'"."Cantidad Alumnos"."'";
-echo $_POST['reporte2'];
 
-echo '<pre>'; print_r($etiquetas); echo '</pre>';   
-echo '<pre>'; print_r($valores); echo '</pre>';   
-echo $_POST["fechaHasta"];
+//echo $_POST['reporte2'];
+//echo '<pre>'; print_r($etiquetas); echo '</pre>';   
+//echo '<pre>'; print_r($valores); echo '</pre>';   
+
 $grafico=isset($_POST["Obtener"]);
 
 }
+if (empty($etiquetas)): ?>   
+No hay datos
+<?php endif; ?>
 
-?>
   <?php if ($grafico): ?>
 
 <div id="container" style="width: 25%;">
