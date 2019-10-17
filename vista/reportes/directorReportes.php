@@ -7,6 +7,11 @@ if (isset($_SESSION['user_id'])) {
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
+$depatartamentomaterias= $URL.$departamentoMaterias;
+$grafico=false;
+
+$d=date("Y-m-d");
+$fecha="'".$d."'";
 ?>
 
 <!DOCTYPE html>
@@ -16,50 +21,10 @@ require_once ($DIR.$ReportesControlador);
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
-        <style type="text/css">
-            table {
-                font:11px/120% Verdana, Arial, Helvetica, sans-serif;
-                color:#777777;	
-            }
-            .barrasv {
-                width:2.5em;
-                text-shadow:#CCCCCC 0.1em 0.1em 0.1em;
-                border-radius:5px;
-                -moz-border-radius:5px;
-                -webkit-border-radius:5px;
-                box-shadow:1px 1px 1px black;
-                -webkit-box-shadow:1px 1px 1px black;
-                -moz-box-shadow:1px 1px 1px black;
-                margin-bottom:1px;
-            }
-            .verticalmente {
-                position:relative; 
-                transform:rotate(-90deg);
-                -o-transform:rotate(-90deg);
-                -webkit-transform:rotate(-90deg);
-                -moz-transform:rotate(-90deg);
-                -ms-filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-                filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-                writing-mode:tb-rl;
-                filter:flipv fliph;
-                margin:0 -1em;
-            }
-            #etiq td {
-                height:7em;
-                width:3em;
-                font-weight:bold;
-            }
-            .bordetd {
-                border-top: 1px solid #777777;
-                border-bottom: 1px solid #777777;
-                margin-left: 1px;
-                margin-right: 1px;
-                padding-top:1px;
-                padding-bottom:1px;
-            }            
-        </style>
+ 
     </head>
     <body background = <?php echo $URL.$fondo?>>
+    <script src="jquery.js"></script>
         <?php require './../partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
@@ -70,40 +35,78 @@ require_once ($DIR.$ReportesControlador);
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  
                     <tr>
                         <th>Departamento</th>
-                        <td>
-                            <select name="Departamentos">                       
-                                <option>Sistemas</option>
-                                <option>Básicas</option>
-                            </select>
-                        </td>
+                        <td>                                
+                                <select id="first-choice" name="departamentos">
+
+                                       <?php 
+                                       $a=new ReportesControlador();
+                               $listadepartamento = $a->BuscarDepartamento();
+                               foreach ($listadepartamento as $departamento): ?> 
+                                <option value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
+                                <?php endforeach; 
+                               ?>
+                                </select>
+                            </td>
+
                     </tr>
                     <tr>
                         <th>Fecha Desde</th>
                         <td>
-                            <select name="fechaDEsde">                       
-                                <option>01 de Marzo</option>
-                                <option>15 de Julio</option>
-                            </select>
+                        <input type="date" id="f1" name="fechaDesde" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fecha;?>>   
                         </td>
                     </tr>                   
                     <tr>
                         <th>Fecha Hasta</th>
                         <td>
-                            <select name="fechaHasta">                       
-                                <option>15 de Julio</option>
-                                <option>01 de Marzo</option>                                
+                           
+                        <input type="date" id="f2" name="fechaHasta" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value=<?php echo $fecha;?>">                
+                             
                             </select>
                         </td>
                     </tr>                   
                     <tr>
                         <th>Tipo de Reporte</th>
                         <td>
-                            <select name="reporte">                       
-                                <option>Alumnos por Materia</option>
-                                <option>Materia Ranking</option>
-                                <option>Alumnos por Profesor por Materia</option>
+                            <select id="reporte" name="reporte2">                       
+                                <option value='1'>Alumnos por Materia</option>
+                                <option value=2>Materia Ranking</option>
+                                <option value =3>Alumnos por Profesor por Materia</option>
                             </select>
                         </td>
+
+
+                        <script>
+                              $("#reporte").change(function() {   
+                          if (($("#reporte").val())==3){
+                            materia=1;}else{
+                            materia=2;
+                            }
+                            //alert(materia);
+                        }).change();
+                        </script>
+
+                
+            
+         
+                        <?php 
+
+                     $a="<script>document.writeln(materia)</script>";
+                     echo $a;
+                     echo "pikachu";
+                     
+                        if (true): ?>   
+                            <td>                       
+                                    <select id="second-choice" name="Materias">
+                                    </select> 
+                                    <script>
+                                
+                                    $("#first-choice").change(function() {
+                                    $("#second-choice").load("<?php echo $depatartamentomaterias.'?choice='?>"+ $("#first-choice").val());
+                                    }).change();</script>
+
+                            </td>
+                            <?php endif; ?>
+                            
                     </tr>   
                     </div> 
                     </table>
@@ -111,19 +114,45 @@ require_once ($DIR.$ReportesControlador);
                     </form>
                     <?php     
 
-
+if(isset($_POST["Obtener"])){
+$fechaDesde=$_POST["fechaDesde"];
+$fechaHasta=$_POST["fechaHasta"];
 $c=new ReportesControlador();
-$AlumnosPorMateria=$c->AlumnosPorProfesorPorMateria(1,'0000-00-00','2025-00-00');
+switch ($_POST["reporte2"]) {
+    case '1':
+         $AlumnosPorMateria=$c->AlumnosPorMateria($_POST["departamentos"],$fechaDesde,$fechaHasta);
+        break;
+    case '2':
+        $AlumnosPorMateria=$c->AlumnosPorDepartamento($fechaDesde,$fechaHasta);
+        break;
+    case '3':
+        $AlumnosPorMateria=$c->AlumnosPorProfesorPorMateria($_POST["Materias"],$fechaDesde,$fechaHasta);
+        break;
+    default:
+       
+        break;
+}
+
+
 $etiquetas=$AlumnosPorMateria[0];
 $valores=$AlumnosPorMateria[1];
+
 $labels=$c->auxiliarLabels($etiquetas);
 $data=$c->auxiliarValores($valores);
-$label="'".$_POST['reporte']."'";
-echo $_POST['reporte'];
+
+//$label="'".$_POST['reporte2']."'";
+$label="'"."Cantidad Alumnos"."'";
+echo $_POST['reporte2'];
+
 echo '<pre>'; print_r($etiquetas); echo '</pre>';   
 echo '<pre>'; print_r($valores); echo '</pre>';   
-?>
+echo $_POST["fechaHasta"];
+$grafico=isset($_POST["Obtener"]);
 
+}
+
+?>
+  <?php if ($grafico): ?>
 
 <div id="container" style="width: 25%;">
 <canvas id="myChart" ></canvas>
@@ -140,20 +169,17 @@ var chart = new Chart(ctx, {
         labels: <?php echo $labels?>,
         datasets: [{
             label: <?php echo $label?>,
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: <?php echo $data?>,
-        },{
-            label: ["pikachu"],
             backgroundColor: 'rgb('+Math.trunc(Math.random()*255)+','+Math.trunc(Math.random()*255)+','+Math.trunc(Math.random()*255)+')',
             borderColor: 'rgb(255, 99, 132)',
-            data: [1],
+            data: <?php echo $data?>,
         }]
     },
 
     // Configuration options go here
     options: {}
 });
+<?php endif; ?>
+
 </script>
     <footer>
         <?php require './../partials/footer.php'; ?>     

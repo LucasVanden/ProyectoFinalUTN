@@ -89,7 +89,7 @@ class ReportesControlador extends conexion
             $idmat=$row['id_materia'];
             $mat=$row['nombreMateria'];
 
-            $stmt2 = $conn->prepare("SELECT DISTINCT fk_profesor FROM horariodeconsulta "); 
+            $stmt2 = $conn->prepare("SELECT DISTINCT fk_profesor FROM horariodeconsulta where fk_materia='$idmat'"); 
             $stmt2->execute();
             while($row = $stmt2->fetch()) {
                 $fk_profesor=$row['fk_profesor'];
@@ -136,7 +136,70 @@ class ReportesControlador extends conexion
     
         return $respuesta;
     }
+    function AlumnosPorDepartamento($fechaDesde,$fechaHasta){
+        $conn = $this->getconexion();
+        $listaNombreDepartamento=array();
+        $listaCantidadPresentesDepartamento=array();
 
+        $stmt0 = $conn->prepare("SELECT id_departamento,nombre FROM departamento"); 
+        $stmt0->execute();
+        while($row = $stmt0->fetch()) {
+            $id_departamento=$row['id_departamento'];
+            $nombre=$row['nombre'];
+            $cantidadAsitencia=0;
+
+            $stmt = $conn->prepare("SELECT id_materia,nombreMateria FROM materia where fk_departamento=$id_departamento"); 
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $idmat=$row['id_materia'];
+                $mat=$row['nombreMateria'];
+
+                    $stmt4 = $conn->prepare("SELECT id_horadeconsulta FROM horadeconsulta where fk_materia=$idmat and fechaDesdeAnotados>='$fechaDesde' and fechaHastaAnotados<='$fechaHasta'"); 
+                    $stmt4->execute();
+                    while($row = $stmt4->fetch()) {
+                    
+                        $horadeconsulta=$row['id_horadeconsulta'];
+
+                        $stmt5 = $conn->prepare("SELECT id_detalleanotados FROM detalleanotados where fk_horadeconsulta=$horadeconsulta"); 
+                        $stmt5->execute();
+                        while($row = $stmt5->fetch()) {
+                            
+                                $detalle=$row['id_detalleanotados'];
+                    
+                                $stmt6 = $conn->prepare("SELECT id_anotadoestado,fechaAnotadosEstado,horaAnotadosEstado,fk_estadoanotados FROM anotadosestado where fk_detalleanotados=$detalle "); 
+                                $stmt6->execute();
+                                while($row = $stmt6->fetch()) {
+                                
+                                    $idnombreestado=$row['fk_estadoanotados'];
+                                    if($idnombreestado==4){ //4 -> PRESENTE
+                                        $cantidadAsitencia++;
+                                    }
+                                }
+                            }
+                    }
+            }
+           array_push($listaNombreDepartamento,$nombre);
+           array_push($listaCantidadPresentesDepartamento,$cantidadAsitencia);
+    }
+        $respuesta=array();
+        array_push($respuesta,$listaNombreDepartamento);
+        array_push($respuesta,$listaCantidadPresentesDepartamento);
+    
+        return $respuesta;
+    }
+    function BuscarDepartamento(){
+        $listaDepartamento=array();
+        $conn = $this->getconexion();
+        $stmt = $conn->prepare("SELECT id_departamento,nombre FROM departamento ORDER BY nombre "); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+            $dep = new Departamento();
+            $dep->setid_departamento($row['id_departamento']);
+            $dep->setnombre($row['nombre']);
+           array_push($listaDepartamento,$dep);
+        }
+        return $listaDepartamento;
+    }
 
 }
 ?>
