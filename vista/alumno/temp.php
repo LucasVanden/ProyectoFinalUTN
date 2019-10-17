@@ -138,7 +138,15 @@ require_once ($DIR . $Dedicacion);
 // }
 
 
- echo '<pre>'; print_r(BuscarMateriasAAsistir(1)); echo '</pre>';   
+ //echo '<pre>'; print_r(BuscarMateriasAAsistir(1)); echo '</pre>';   
+ $con= new conexion();
+ $conn=$con->getconexion();
+
+ $stmt = $conn->prepare("SELECT id_detalleanotados,fk_horadeconsulta FROM detalleanotados where fk_alumno=1 "); 
+ $stmt->execute();
+ if($stmt->rowCount() == 0) {
+echo "vacio";
+ }
  function BuscarMateriasAAsistir($idalumno){
     $con= new conexion();
     $conn=$con->getconexion();
