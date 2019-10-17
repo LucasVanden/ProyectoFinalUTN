@@ -10,8 +10,25 @@ require_once ($DIR.$ReportesControlador);
 $depatartamentomaterias= $URL.$departamentoMaterias;
 $grafico=false;
 
-$d=date("Y-m-d");
-$fecha="'".$d."'";
+if(isset($_POST['departamentos'])){
+$dep=$_POST['departamentos'];}else{
+    $dep="pikachu";
+}
+if(isset($_POST['fechaDesde'])){
+    $fechadesde=$_POST['fechaDesde'];}else{
+        $d=date("Y-m-d");
+        $fechadesde="'".$d."'";
+    }
+if(isset($_POST['fechaHasta'])){
+        $fechahasta=$_POST['fechaHasta'];}else{
+            $d=date("Y-m-d");
+            $fechahasta="'".$d."'";
+        }
+if(isset($_POST['reporte2'])){
+            $opcion=$_POST['reporte2'];}else{
+                $opcion=1;
+            }        
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +59,7 @@ $fecha="'".$d."'";
                                        $a=new ReportesControlador();
                                $listadepartamento = $a->BuscarDepartamento();
                                foreach ($listadepartamento as $departamento): ?> 
-                                <option value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
+                                <option <?php if($dep == $departamento->getid_departamento()){echo("selected");}?> value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
                                 <?php endforeach; 
                                ?>
                                 </select>
@@ -52,14 +69,14 @@ $fecha="'".$d."'";
                     <tr>
                         <th>Fecha Desde</th>
                         <td>
-                        <input type="date" id="f1" name="fechaDesde" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fecha;?>>   
+                        <input type="date" id="f1" name="fechaDesde" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechadesde;?>>   
                         </td>
                     </tr>                   
                     <tr>
                         <th>Fecha Hasta</th>
                         <td>
                            
-                        <input type="date" id="f2" name="fechaHasta" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value=<?php echo $fecha;?>">                
+                        <input type="date" id="f2" name="fechaHasta" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value=<?php echo $fechahasta;?>>                
                              
                             </select>
                         </td>
@@ -68,9 +85,9 @@ $fecha="'".$d."'";
                         <th>Tipo de Reporte</th>
                         <td>
                             <select id="reporte" name="reporte2">                       
-                                <option value='1'>Alumnos por Materia</option>
-                                <option value=2>Materia Ranking</option>
-                                <option value =3>Alumnos por Profesor por Materia</option>
+                                <option <?php if($opcion == 1){echo("selected");}?> value='1'>Alumnos por Materia</option>
+                                <option <?php if($opcion == 2){echo("selected");}?> value=2>Materia Ranking</option>
+                                <option <?php if($opcion == 3){echo("selected");}?> value =3>Alumnos por Profesor por Materia</option>
                             </select>
                         </td>
 
