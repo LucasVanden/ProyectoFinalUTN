@@ -23,16 +23,26 @@ foreach ($listaHoras as $hora) {
             //continue;
        }else{
            //hubo presentismo
+           if(existePresentismo($hora->getid_horadeconsulta())){    
+                $presentismo=buscarPresentismo($hora->getid_horadeconsulta());
+                    if(huboTardanza($presentismo,$hora-getHorarioDeConsulta()->gethora())){
+                        crearTardanza($hora,$presentismo,$hora-getHorarioDeConsulta()->gethora());
+                    }
+            }else{
+                //crear ausente
+                crearAusente($hora);
+            }
        }
     }else{
         //hubo presentismo
         if(existePresentismo($hora->getid_horadeconsulta())){
             $presentismo=buscarPresentismo($hora->getid_horadeconsulta());
             if(huboTardanza($presentismo,$hora-getHorarioDeConsulta()->gethora())){
-              //crear tardanza
+                crearTardanza($hora,$presentismo,$hora-getHorarioDeConsulta()->gethora());
             }
         }else{
             //crear ausente
+            crearAusente($hora);
         }
     }
     cambiarEstadoPresentismo($hora->getid_horadeconsulta());
@@ -208,10 +218,47 @@ function huboTardanza($presentismo,$horarioHora){
     }
     return $res;
 }
-function crearTardanza(){
+function crearTardanza($hora,$presentismo,$horanumero){
+    $con= new conexion();
+    $conn=$con->getconexion();
 
+    $fecha=$hora->getfechaHastaAnotados();
+    $fk_horadeconsulta=$hora->getid_horadeconsulta();
+    $fk_materia=$hora->getMateria()->getid_materia();
+    $fk_profesor=$hora->getprofesor()->getid_profesor();
+    $fk_departamento=$hora->getMateria()->getfk_departamento();
+
+    $min=calcularMinutosTarde($presentismo,$horanumero);
+
+    $stmt = $conn->prepare("INSERT INTO `falta` (`id_falta`, `fechaFalta`, `tipo`, `min`,`fk_horadeconsulta`,`fk_materia`,`fk_profesor`,`fk_departamento`) 
+    VALUES (NULL, '$fecha', 'Tardanza' , '$minutos','$fk_horadeconsulta','$fk_materia','$fk_profesor','$fk_departamento');");  
+    $stmt->execute();
 }
-function crearAusente(){
-    
+function calcularMinutosTarde($presentismo,$horanumero){
+    $min='00:00';
+    $min2='00:00';
+    $horariofin=date('H:i',strtotime($horanumero.'+1 hour'));
+    if( mayorMentorigual($presentismo->gethoraDesde(),'>',$horarioHora)){
+       $min=date("H:i",strtotime($presentismo->gethoraDesde())-strtotime($horanumero));
+    }
+    if( mayorMentorigual($presentismo->gethoraHasta(),'<',$horariofin)){
+        $min2=date("H:i",strtotime($horafin)-strtotime($presentismo->gethoraHasta()));
+    }
+    $res=date("H:i",strtotime($min)+strtotime($min2));
+    return $res;
+}
+function crearAusente($hora){
+    $con= new conexion();
+    $conn=$con->getconexion();
+
+    $fecha=$hora->getfechaHastaAnotados();
+    $fk_horadeconsulta=$hora->getid_horadeconsulta();
+    $fk_materia=$hora->getMateria()->getid_materia();
+    $fk_profesor=$hora->getprofesor()->getid_profesor();
+    $fk_departamento=$hora->getMateria()->getfk_departamento();
+
+    $stmt = $conn->prepare("INSERT INTO `falta` (`id_falta`, `fechaFalta`, `tipo`, `min`,`fk_horadeconsulta`,`fk_materia`,`fk_profesor`,`fk_departamento`) 
+    VALUES (NULL, '$fecha', 'Falta' , null,'$fk_horadeconsulta','$fk_materia','$fk_profesor','$fk_departamento');");  
+    $stmt->execute();
 }
 ?>
