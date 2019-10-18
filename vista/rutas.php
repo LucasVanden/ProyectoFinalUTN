@@ -39,6 +39,7 @@ $turno='/modelo/Turno.php';
 $HorarioCursado='/modelo/HorarioCursado.php';
 $Asueto='/modelo/Asueto.php';
 $FechaMesa='/modelo/FechaMesa.php';
+$Presentismo='/modelo/Presentismo.php';
 
 $Dedicacion='/modelo/Dedicacion.php';
 $profesorControlador='/controlador/profesor/profesorControlador.php';

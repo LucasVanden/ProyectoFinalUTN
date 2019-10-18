@@ -18,6 +18,7 @@ class HoraDeConsulta
 	var $AvisoProfesor;
 	var $Presentismo;
 	var $DetalleAnotados;
+	var $profesor;
 
 	function HoraDeConsulta()
 	{
@@ -30,6 +31,15 @@ class HoraDeConsulta
 	function setid_horadeconsulta($newVal)
 	{
 		$this->id_horadeconsulta = $newVal;
+	}
+
+	function getprofesor()
+	{
+		return $this->profesor;
+	}
+	function setprofesor($newVal)
+	{
+		$this->profesor = $newVal;
 	}
 
 	

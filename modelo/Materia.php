@@ -6,10 +6,10 @@ class Materia
 	var $nombreMateria;
 	var $dia;
 	//var $m_Horario Cursado;
-	var $m_CarreRA;
+	var $fk_departamento;
 	var $HorarioDeConsulta;
 	var $HoraDeConsulta;
-	var $m_Mesas;
+
 
 	function Materia()
 	{
@@ -22,6 +22,15 @@ class Materia
 	function setid_materia($newVal)
 	{
 		$this->id_materia = $newVal;
+	}
+
+	function getfk_departamento()
+	{
+		return $this->fk_departamento;
+	}
+	function setfk_departamento($newVal)
+	{
+		$this->fk_departamento = $newVal;
 	}
 
 
