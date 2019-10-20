@@ -62,3 +62,14 @@ $demonio='/controlador/asistencia/Demonio.php';
 $dem='/vista/asistencia/demonio.php';
 
 $ReportesControlador='/controlador/reportes/ReportesControlador.php';
+
+$controladorAsuetosReceso='/controlador/administrador/controladorAsuetosReceso.php';
+$controladorAsuetoFeriado='/controlador/administrador/controladorAsuetoFeriado.php';
+$controladorAsuetoAsueto='/controlador/administrador/controladorAsuetoAsueto.php';
+$controladorBorrarAsueto='/controlador/administrador/controladorBorrarAsueto.php';
+
+$AsuetoMenu='/vista/administrador/MenuAsuetos.php';
+$asutosReceso='/vista/administrador/AsuetosReceso.php';
+$asutosFeriado='/vista/administrador/Asuetoferiado.php';
+$AsuetoAsueto='/vista/administrador/AsuetoAsueto.php';
+$BorrarAsueto='/vista/administrador/BorrarAsueto.php';
