@@ -53,9 +53,6 @@ $_SESSION['profesor']=$idprofesor;
  $horarios=$a->buscarHorariosParallenarEnlosSelect($idmateria,$idprofesor);
  
    ?>
-
-        ?>
-
        
         <h3>Horarios de Consulta</h3>
        

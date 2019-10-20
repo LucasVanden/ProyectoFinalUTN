@@ -6,6 +6,7 @@ session_start();
 
 require_once $DIR . $alumnoControlador;
 require_once $DIR . $departamentoMaterias;
+require_once $DIR . $controladorCambiarAula;
 $depatartamentomaterias= $URL.$departamentoMaterias;
 $buscarProfesoresDeMateriaSeleccionada= $URL.$buscarProfesoresDeMateriaSeleccionada;
 
@@ -19,7 +20,7 @@ $_SESSION['Materias']=null;
 
 $_SESSION['profesor']=null;
 
-$a =new AlumnoControlador ;
+$a =new controladorCambiarAula();
 
 ?>
 

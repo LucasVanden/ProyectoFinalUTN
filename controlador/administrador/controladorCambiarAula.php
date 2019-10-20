@@ -65,5 +65,18 @@ class controladorCambiarAula extends conexion
             return $ListaHorariosDeConsulta;
     }
 
+    function BuscarDepartamento(){
+        $listaDepartamento=array();
+        $conn = $this->getconexion();
+        $stmt = $conn->prepare("SELECT id_departamento,nombre FROM departamento ORDER BY nombre "); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+            $dep = new Departamento();
+            $dep->setid_departamento($row['id_departamento']);
+            $dep->setnombre($row['nombre']);
+           array_push($listaDepartamento,$dep);
+        }
+        return $listaDepartamento;
+    }
 }
 ?>
