@@ -1081,8 +1081,8 @@ function crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingre
     $hora= "{$horaingresada}:{$miningresado}";
 
  
-    $stmt = $conn->prepare("INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`,`hora`,`activoDesde`,`activoHasta`,`semestre`,`fk_dia`,`fk_profesor`,`fk_materia`,`n`)
-    VALUES (null, '$hora', '$fecha' , '0000-00-00', '$semestre', '$diaingresadonumero','$idprofesor','$idmateria','$n');");  
+    $stmt = $conn->prepare("INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`,`hora`,`activoDesde`,`activoHasta`,`semestre`,`fk_dia`,`fk_profesor`,`fk_materia`,`n`,`fk_aula`)
+    VALUES (null, '$hora', '$fecha' , '0000-00-00', '$semestre', '$diaingresadonumero','$idprofesor','$idmateria','$n','1');");  
     $stmt->execute();
     global $idhorariodeconsultacreado;
     $idhorariodeconsultacreado = $conn->lastInsertId("horariodeconsulta");

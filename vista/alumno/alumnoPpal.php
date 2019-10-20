@@ -148,6 +148,7 @@ $_SESSION['nombre']=$a->idAlumnoaNombre($idalumno);
                             <th>Profesor</th>
                             <th>Día</th>
                             <th>Horario</th>
+                            <th>Aula</th>
                             <th>Acciones</th>
                         </thead>
                         <tbody style="text-align: left">
@@ -169,6 +170,13 @@ $_SESSION['nombre']=$a->idAlumnoaNombre($idalumno);
                                 <td>
                                     <?php echo $hora->getHorariodeConsulta()->gethora(); ?>
                                 </td>
+                                <td>
+                                <?php echo $hora->getHorarioDeConsulta()->getfk_aula()->getcuerpoAula();
+                                echo " nivel: ";
+                                echo $hora->getHorarioDeConsulta()->getfk_aula()->getnivelAula();
+                                echo " aula: ";
+                                echo $hora->getHorarioDeConsulta()->getfk_aula()->getnumeroAula(); ?>
+                            </td>
                                 <td>
                                     <button type="submit" id="buttonBorrar" name="idDetalle" value=  <?php echo $hora->gettempiddetalle(); ?> formaction=<?php echo $eliminar?> onclick="return confirm('Esta seguro que desea eliminarse')"> Eliminar </button>
                                 </td>

@@ -12,6 +12,7 @@ require_once ($DIR . $DetalleAnotados);
 require_once ($DIR . $EstadoAnotados);
 require_once ($DIR . $AvisoProfesor);
 require_once ($DIR . $Dia);
+require_once ($DIR . $Aula);
 date_default_timezone_set('America/Argentina/Mendoza');
 class AlumnoControlador extends conexion
 {
@@ -159,7 +160,7 @@ return $mat;
                     
                 $tempidhorario =$row['fk_horariodeconsulta'];
                 
-                $stmt3 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
+                $stmt3 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia,fk_aula FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
                 $stmt3->execute();
 
                     while($row = $stmt3->fetch()) {
@@ -171,6 +172,7 @@ return $mat;
                         $hor->setactivoHasta($row['activoHasta']);
                         $hor->setsemestre($row['semestre']);
                             
+                            $tempfkaula=$row['fk_aula'];
                             $tempDia =$row['fk_dia'];
                             $tempProfesor =$row['fk_profesor'];
         
@@ -190,6 +192,16 @@ return $mat;
                                 $prof->setapellido($row['apellido']);
                                 $prof->setnombre($row['nombre']);
                                 $hor->setprofesor($prof);
+                            }
+                            $stmt6 = $conn->prepare("SELECT id_aula,cuerpoAula,nivelAula,numeroAula FROM aula where id_aula=$tempfkaula"); 
+                            $stmt6->execute();
+                            while($row = $stmt6->fetch()) {
+                                $aula = new Aula();
+                                $aula->setid_aula($row['id_aula']);
+                                $aula->setcuerpoAula($row['cuerpoAula']);
+                                $aula->setnivelAula($row['nivelAula']);
+                                $aula->setnumeroAula($row['numeroAula']);
+                                $hor->setfk_aula($aula);
                             }
                         $hora->setHorarioDeConsulta($hor);
                         }
@@ -266,7 +278,7 @@ return $mat;
                 $tempidhorario =$row['fk_horariodeconsulta'];
                 $temporalMateriaid =$row['fk_materia'];
 
-                  $stmt3 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
+                  $stmt3 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia,fk_aula FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
                   $stmt3->execute();
 
                     while($row = $stmt3->fetch()) {
@@ -278,6 +290,7 @@ return $mat;
                         $hor->setactivoHasta($row['activoHasta']);
                         $hor->setsemestre($row['semestre']);
                     
+                            $tempfkaula=$row['fk_aula'];
                             $tempDia =$row['fk_dia'];
 
                             $stmt4 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
@@ -287,6 +300,16 @@ return $mat;
                                 $dia->setid_dia($row['id_dia']);
                                 $dia->setdia($row['dia']);
                                 $hor->setdia($dia);
+                            }
+                            $stmt6 = $conn->prepare("SELECT id_aula,cuerpoAula,nivelAula,numeroAula FROM aula where id_aula=$tempfkaula"); 
+                            $stmt6->execute();
+                            while($row = $stmt6->fetch()) {
+                                $aula = new Aula();
+                                $aula->setid_aula($row['id_aula']);
+                                $aula->setcuerpoAula($row['cuerpoAula']);
+                                $aula->setnivelAula($row['nivelAula']);
+                                $aula->setnumeroAula($row['numeroAula']);
+                                $hor->setfk_aula($aula);
                             }
                 $hora->setHorarioDeConsulta($hor);
                 array_push($listaHorarios,$hora);
@@ -440,7 +463,7 @@ function AnotadoRepetido($idhora,$idalumno){
                                     $hora->setMateria($mat);
                                 }
 
-                                $stmt6 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
+                                $stmt6 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia,fk_aula FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
                                 $stmt6->execute();
 
                                     while($row = $stmt6->fetch()) {
@@ -452,6 +475,7 @@ function AnotadoRepetido($idhora,$idalumno){
                                         $hor->setactivoHasta($row['activoHasta']);
                                         $hor->setsemestre($row['semestre']);
                                             
+                                            $tempfkaula=$row['fk_aula'];
                                             $tempDia =$row['fk_dia'];
                                             $tempProfesor =$row['fk_profesor'];
 
@@ -471,6 +495,16 @@ function AnotadoRepetido($idhora,$idalumno){
                                                 $prof->setapellido($row['apellido']);
                                                 $prof->setnombre($row['nombre']);
                                                 $hor->setprofesor($prof);
+                                            }
+                                            $stmt9 = $conn->prepare("SELECT id_aula,cuerpoAula,nivelAula,numeroAula FROM aula where id_aula=$tempfkaula"); 
+                                            $stmt9->execute();
+                                            while($row = $stmt9->fetch()) {
+                                                $aula = new Aula();
+                                                $aula->setid_aula($row['id_aula']);
+                                                $aula->setcuerpoAula($row['cuerpoAula']);
+                                                $aula->setnivelAula($row['nivelAula']);
+                                                $aula->setnumeroAula($row['numeroAula']);
+                                                $hor->setfk_aula($aula);
                                             }
                                         $hora->setHorarioDeConsulta($hor);
                                         }

@@ -40,6 +40,7 @@ require_once $DIR .$alumnoControlador;
                         <th>Materia</th>
                         <th>Día</th>
                         <th>Horario</th>
+                        <th>Aula</th>
                         <th>Asistir</th>
                     </thead>
                     <tbody>
@@ -56,6 +57,13 @@ require_once $DIR .$alumnoControlador;
                                 <td>
                                     <?php echo $horadeconsulta->getHorarioDeConsulta()->getHora(); ?>
                                 </td>
+                                <td>
+                                <?php echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getcuerpoAula();
+                                echo " nivel: ";
+                                echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getnivelAula();
+                                echo " aula: ";
+                                echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getnumeroAula(); ?>
+                            </td>
                                       <?php
                                       
                             $idHora=$horadeconsulta->getid_horadeconsulta();

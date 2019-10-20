@@ -65,6 +65,7 @@ require_once $DIR .$alumnoControlador;
                         <th>Día</th>
                         <th>Horario</th>
                         <th>Profesor</th>
+                        <th>Aula</th>
                         <th>Asistir</th>
                     </thead>
                     <body style="text-align: center" background = <?php echo $URL.$fondo?>>
@@ -82,6 +83,13 @@ require_once $DIR .$alumnoControlador;
                             <td>
                                 <?php echo $horadeconsulta->getHorarioDeConsulta()->getProfesor()->getnombre(); ?>
                                 <?php echo $horadeconsulta->getHorarioDeConsulta()->getProfesor()->getapellido(); ?>
+                            </td>
+                            <td>
+                                <?php echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getcuerpoAula();
+                                echo " nivel: ";
+                                echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getnivelAula();
+                                echo " aula: ";
+                                echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getnumeroAula(); ?>
                             </td>
                            
                             <?php
