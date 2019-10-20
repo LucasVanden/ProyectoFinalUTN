@@ -10,7 +10,7 @@ require_once ($DIR.$ReportesControlador);
 $controladorMesas= $URL.$controladorMesas;
 $controladorBuscarMesa= $URL.$controladorBuscarMesa;
 $controladorEliminarMesa= $URL.$controladorEliminarMesa;
-$Menu= $URL.$MenuIndex;
+$MenuIndex= $URL.$MenuIndex;
 
 $fechaMesaIngresar="'".date("Y-m-d")."'";
 if(isset($_SESSION['FechaMesaIngresada'])){
@@ -66,7 +66,7 @@ if(isset($_SESSION['fechasBuscadas'])){
 
                     </tr>    
                                 <div>  <input type="submit" value="Buscar fecha Mesas" name="Buscar" formaction=<?php echo $controladorBuscarMesa ?> /></div>
-                                <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $MenuIndex ?> /></div>
+                                <!-- <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $MenuIndex ?> /></div> -->
                     </form>
 
     <?php if ($buscar): ?>

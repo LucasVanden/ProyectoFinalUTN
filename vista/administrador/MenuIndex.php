@@ -46,8 +46,8 @@ $_SESSION['fechasBuscadas']=null;
                         </td>
                         <td>   <div>  <input type="submit" value="Mesas" name="Obtener" formaction=<?php echo $Mesas ?> /></div></td>
                 
-                        <td>   <div>  <input type="submit" value="Asuetos" name="Obtener" formaction=<?php echo $AsuetoAsueto ?> /></div></td>
-                        <td>   <div>  <input type="submit" value="Borrar fecha" name="Obtener" formaction=<?php echo $BorrarAsueto ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Otro" name="Obtener" formaction=<?php echo $AsuetoAsueto ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Otro" name="Obtener" formaction=<?php echo $BorrarAsueto ?> /></div></td>
                     </tr>                   
                     </form>
 

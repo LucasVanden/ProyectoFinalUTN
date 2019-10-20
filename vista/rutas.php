@@ -78,4 +78,4 @@ $asutosFeriado='/vista/administrador/Asuetoferiado.php';
 $AsuetoAsueto='/vista/administrador/AsuetoAsueto.php';
 $BorrarAsueto='/vista/administrador/BorrarAsueto.php';
 $Mesas='/vista/administrador/Mesas.php';
-$MenuIndex='/vista/administrador/MenuIndex.php.php';
+$MenuIndex='/vista/administrador/MenuIndex.php';
