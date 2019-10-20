@@ -40,6 +40,7 @@ $HorarioCursado='/modelo/HorarioCursado.php';
 $Asueto='/modelo/Asueto.php';
 $FechaMesa='/modelo/FechaMesa.php';
 $Presentismo='/modelo/Presentismo.php';
+$Aula='/modelo/Aula.php';
 
 $Dedicacion='/modelo/Dedicacion.php';
 $profesorControlador='/controlador/profesor/profesorControlador.php';
@@ -71,6 +72,11 @@ $controladorBuscarAsuetos='/controlador/administrador/controladorBuscarAsuetos.p
 $controladorMesas='/controlador/administrador/controladorMesas.php';
 $controladorBuscarMesa='/controlador/administrador/controladorBuscarMesa.php';
 $controladorEliminarMesa='/controlador/administrador/controladorEliminarMesa.php';
+$buscarProfesoresDeMateriaSeleccionada='/controlador/administrador/buscarProfesoresDeMateriaSeleccionada.php';
+$controladorCambiarAula='/controlador/administrador/controladorCambiarAula.php';
+$setearAula='/controlador/administrador/setearAula.php';
+
+
 
 $AsuetoMenu='/vista/administrador/MenuAsuetos.php';
 $asutosReceso='/vista/administrador/AsuetosReceso.php';
@@ -79,3 +85,5 @@ $AsuetoAsueto='/vista/administrador/AsuetoAsueto.php';
 $BorrarAsueto='/vista/administrador/BorrarAsueto.php';
 $Mesas='/vista/administrador/Mesas.php';
 $MenuIndex='/vista/administrador/MenuIndex.php';
+$EditarAultaAsignada='/vista/administrador/EditarAultaAsignada.php';
+$SeleccionEditarAulaAsignada='/vista/administrador/SeleccionEditarAulaAsignada.php';

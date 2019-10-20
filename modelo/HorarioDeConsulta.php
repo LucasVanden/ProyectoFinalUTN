@@ -13,7 +13,7 @@ class HorarioDeConsulta
 	var $fk_materia;
 	var $n;
 	var $m_HorarioDeConsultaEstado;
-	var $m_Aula;
+	var $fk_aula;
 
 	function HorarioDeConsulta()
 	{
@@ -98,6 +98,15 @@ class HorarioDeConsulta
 	function setProfesor($newVal)
 	{
 		$this->profesor = $newVal;
+	}
+
+	function getfk_aula()
+	{
+		return $this->fk_aula;
+	}
+	function setfk_aula($newVal)
+	{
+		$this->fk_aula = $newVal;
 	}
 
 }

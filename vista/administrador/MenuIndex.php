@@ -1,9 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['user_id'])) {
-    header('Location: /PFProyect');
-    footer('Location: /PFProyect');
-}
+
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
@@ -12,7 +9,7 @@ $MenuIndex= $URL.$MenuIndex;
 
 $AsuetosMenu= $URL.$AsuetoMenu;
 $Mesas= $URL.$Mesas;
-$AsuetoAsueto=$URL.$AsuetoAsueto;
+$EditarAultaAsignada=$URL.$EditarAultaAsignada;
 $BorrarAsueto=$URL.$BorrarAsueto;
 
 $_SESSION['comprobacion']=null;
@@ -46,7 +43,7 @@ $_SESSION['fechasBuscadas']=null;
                         </td>
                         <td>   <div>  <input type="submit" value="Mesas" name="Obtener" formaction=<?php echo $Mesas ?> /></div></td>
                 
-                        <td>   <div>  <input type="submit" value="Otro" name="Obtener" formaction=<?php echo $AsuetoAsueto ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Editar Aulta Asignada" name="Obtener" formaction=<?php echo $EditarAultaAsignada ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Otro" name="Obtener" formaction=<?php echo $BorrarAsueto ?> /></div></td>
                     </tr>                   
                     </form>
