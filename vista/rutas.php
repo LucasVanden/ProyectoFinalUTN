@@ -75,6 +75,8 @@ $controladorEliminarMesa='/controlador/administrador/controladorEliminarMesa.php
 $buscarProfesoresDeMateriaSeleccionada='/controlador/administrador/buscarProfesoresDeMateriaSeleccionada.php';
 $controladorCambiarAula='/controlador/administrador/controladorCambiarAula.php';
 $setearAula='/controlador/administrador/setearAula.php';
+$abmcrearAula='/controlador/administrador/abmcrearAula.php';
+$borrarAula='/controlador/administrador/borrarAula.php';
 
 
 
@@ -87,3 +89,4 @@ $Mesas='/vista/administrador/Mesas.php';
 $MenuIndex='/vista/administrador/MenuIndex.php';
 $EditarAultaAsignada='/vista/administrador/EditarAultaAsignada.php';
 $SeleccionEditarAulaAsignada='/vista/administrador/SeleccionEditarAulaAsignada.php';
+$ABMAula='/vista/administrador/ABMAula.php';
