@@ -25,7 +25,7 @@ $HoraHasta="'23:30'";
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require './../partials/header.php' ?>
+        <?php require './../partials/headera.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>

@@ -7,12 +7,18 @@ if (isset($_SESSION['user_id'])) {
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
-$controladorBorrarAsueto= $URL.$controladorBorrarAsueto;
-$controladorBuscarAsuetos= $URL.$controladorBuscarAsuetos;
-$Menu= $URL.$AsuetoMenu;
+$controladorMesas= $URL.$controladorMesas;
+$controladorBuscarMesa= $URL.$controladorBuscarMesa;
+$controladorEliminarMesa= $URL.$controladorEliminarMesa;
+$Menu= $URL.$MenuIndex;
+
+$fechaMesaIngresar="'".date("Y-m-d")."'";
+if(isset($_SESSION['FechaMesaIngresada'])){
+ $fechaMesaIngresar=$_SESSION['FechaMesaIngresada'];
+ }
 
 
-$fechadesdeVerano="'".date("Y-m-d")."'";
+
 $año=date('Y'); 
 $buscar=false;
 if(isset($_SESSION['fechasBuscadas'])){
@@ -35,21 +41,21 @@ if(isset($_SESSION['fechasBuscadas'])){
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Cargar Feriado</h2>
-        <form action=<?php echo $controladorBorrarAsueto ?> method="POST"> <!-- -->
+        <h2>Cargar Fecha de Mesa</h2>
+        <form action=<?php echo $controladorMesas ?> method="POST"> <!-- -->
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  
                    
                     <tr>
                         <th>Fecha Feriado</th>
                         <td>
-                        <input type="date" id="f1" name="fechaAborrar" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechadesdeVerano;?>>   
+                        <input type="date" id="f1" name="fechaMesa" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechaMesaIngresar;?>>   
                         </td>
 
                     </tr>                   
 
                 </table>
-                    <div>  <input type="submit" value="Borrar" name="Obtener" formaction=<?php echo $controladorBorrarAsueto ?> /></div>
+                    <div>  <input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorMesas ?> /></div>
 
         <tr>
                         <th>Buscar Asuetos</th>
@@ -59,8 +65,8 @@ if(isset($_SESSION['fechasBuscadas'])){
                         <br>
 
                     </tr>    
-                                <div>  <input type="submit" value="Buscar Asuetos" name="Buscar" formaction=<?php echo $controladorBuscarAsuetos ?> /></div>
-                                <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
+                                <div>  <input type="submit" value="Buscar fecha Mesas" name="Buscar" formaction=<?php echo $controladorBuscarMesa ?> /></div>
+                                <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $MenuIndex ?> /></div>
                     </form>
 
     <?php if ($buscar): ?>
@@ -70,7 +76,7 @@ if(isset($_SESSION['fechasBuscadas'])){
 foreach ($_SESSION['fechasBuscadas'] as $fecha): ?> 
 <tr>
 <td>
-<input type="submit" value=<?php echo $fecha?> name="fechaAborrar" formaction=<?php echo $controladorBorrarAsueto ?> onclick="return confirm('Esta seguro que desea eliminar fecha <?php echo $fecha?> ')"> Eliminar</input>
+<input type="submit" value=<?php echo $fecha?> name="fechaAborrar" formaction=<?php echo $controladorEliminarMesa ?> onclick="return confirm('Esta seguro que desea eliminar fecha <?php echo $fecha?> ')"> Eliminar</input>
 </td>
 </tr>
 

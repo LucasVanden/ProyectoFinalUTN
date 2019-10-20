@@ -30,7 +30,7 @@ $_SESSION['fechasBuscadas']=null;
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require './../partials/header.php' ?>
+        <?php require './../partials/headera.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -48,6 +48,7 @@ $_SESSION['fechasBuscadas']=null;
                 
                         <td>   <div>  <input type="submit" value="Asuetos" name="Obtener" formaction=<?php echo $AsuetoAsueto ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Borrar fecha" name="Obtener" formaction=<?php echo $BorrarAsueto ?> /></div></td>
+
                     </tr>                   
                     </form>
 

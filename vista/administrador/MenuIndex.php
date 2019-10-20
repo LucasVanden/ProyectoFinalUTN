@@ -7,11 +7,16 @@ if (isset($_SESSION['user_id'])) {
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
-$controladorAsuetoFeriado= $URL.$controladorAsuetoFeriado;
-$Menu= $URL.$AsuetoMenu;
 
-$fechadesdeVerano="'".date("Y-m-d")."'";
+$MenuIndex= $URL.$MenuIndex;
 
+$AsuetosMenu= $URL.$AsuetoMenu;
+$Mesas= $URL.$Mesas;
+$AsuetoAsueto=$URL.$AsuetoAsueto;
+$BorrarAsueto=$URL.$BorrarAsueto;
+
+$_SESSION['comprobacion']=null;
+$_SESSION['fechasBuscadas']=null;
 ?>
 
 <!DOCTYPE html>
@@ -29,22 +34,21 @@ $fechadesdeVerano="'".date("Y-m-d")."'";
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Cargar Feriado</h2>
-        <form action=<?php echo $controladorAsuetoFeriado ?> method="POST"> <!-- -->
+        <h2>Asutos</h2>
+        <form action=<?php echo $MenuIndex ?> method="POST"> <!-- -->
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  
-                   
+             
                     <tr>
-                        <th>Fecha Feriado</th>
+                       
                         <td>
-                        <input type="date" id="f1" name="fechaFeriado" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechadesdeVerano;?>>   
+                        <div>  <input type="submit" value="Asuetos" name="Obtener" formaction=<?php echo $AsuetosMenu ?>  /></div>
                         </td>
-
+                        <td>   <div>  <input type="submit" value="Mesas" name="Obtener" formaction=<?php echo $Mesas ?> /></div></td>
+                
+                        <td>   <div>  <input type="submit" value="Asuetos" name="Obtener" formaction=<?php echo $AsuetoAsueto ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Borrar fecha" name="Obtener" formaction=<?php echo $BorrarAsueto ?> /></div></td>
                     </tr>                   
-
-                </table>
-                    <div>  <input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorAsuetoFeriado ?> /></div>
-                    <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
                     </form>
 
 

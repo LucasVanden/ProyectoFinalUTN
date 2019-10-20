@@ -68,9 +68,14 @@ $controladorAsuetoFeriado='/controlador/administrador/controladorAsuetoFeriado.p
 $controladorAsuetoAsueto='/controlador/administrador/controladorAsuetoAsueto.php';
 $controladorBorrarAsueto='/controlador/administrador/controladorBorrarAsueto.php';
 $controladorBuscarAsuetos='/controlador/administrador/controladorBuscarAsuetos.php';
+$controladorMesas='/controlador/administrador/controladorMesas.php';
+$controladorBuscarMesa='/controlador/administrador/controladorBuscarMesa.php';
+$controladorEliminarMesa='/controlador/administrador/controladorEliminarMesa.php';
 
 $AsuetoMenu='/vista/administrador/MenuAsuetos.php';
 $asutosReceso='/vista/administrador/AsuetosReceso.php';
 $asutosFeriado='/vista/administrador/Asuetoferiado.php';
 $AsuetoAsueto='/vista/administrador/AsuetoAsueto.php';
 $BorrarAsueto='/vista/administrador/BorrarAsueto.php';
+$Mesas='/vista/administrador/Mesas.php';
+$MenuIndex='/vista/administrador/MenuIndex.php.php';
