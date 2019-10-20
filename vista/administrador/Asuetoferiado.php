@@ -8,7 +8,7 @@ require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
 $controladorAsuetoFeriado= $URL.$controladorAsuetoFeriado;
-
+$Menu= $URL.$AsuetoMenu;
 
 $fechadesdeVerano="'".date("Y-m-d")."'";
 
@@ -44,6 +44,7 @@ $fechadesdeVerano="'".date("Y-m-d")."'";
 
                 </table>
                     <div>  <input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorAsuetoFeriado ?> /></div>
+                    <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
                     </form>
 
 

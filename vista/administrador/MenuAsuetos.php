@@ -16,6 +16,7 @@ $AsuetoAsueto=$URL.$AsuetoAsueto;
 $BorrarAsueto=$URL.$BorrarAsueto;
 
 $_SESSION['comprobacion']=null;
+$_SESSION['fechasBuscadas']=null;
 ?>
 
 <!DOCTYPE html>

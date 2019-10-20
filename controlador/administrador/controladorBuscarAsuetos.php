@@ -16,10 +16,6 @@ require_once ($DIR . $Presentismo);
 session_start();
 date_default_timezone_set('America/Argentina/Mendoza');
 
-$fechaaborrar=$_POST['fechaAborrar'];
-
-borrarFecha($fechaaborrar);
-
 $año=$_POST['año'];
 
 $fechas=buscarAsueto($año);
@@ -30,16 +26,6 @@ $_SESSION['fechasBuscadas']=$fechas;
 $direccion= $URL . $BorrarAsueto;
 header("Location: $direccion");
 
-
-function borrarFecha($fecha){
-    $con= new conexion();
-    $conn=$con->getconexion();
-
-        $stmt = $conn->prepare("DELETE FROM asueto WHERE  fechaAsueto= '$fecha'");  
-        $stmt->execute();
-    
-
-}
 function buscarAsueto($año){
     $con= new conexion();
     $conn=$con->getconexion();
@@ -55,4 +41,5 @@ function buscarAsueto($año){
         return $listaAsuetos;
 
 }
+
 ?>

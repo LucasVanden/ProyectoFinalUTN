@@ -8,6 +8,7 @@ require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
 $controladorAsuetosReceso= $URL.$controladorAsuetosReceso;
+$Menu= $URL.$AsuetoMenu;
 
 
 $fechadesdeVerano="'".date("Y")."-11-01"."'";
@@ -82,7 +83,8 @@ if(isset($_SESSION['comprobacion'])){
    echo  $_SESSION['comprobacion'];
 }
 ?>
-                    <div>  <input type="submit" value="Obtener" name="Obtener"  /></div>
+                    <div>  <input type="submit" value="Cargar" name="Obtener"  /></div>
+                    <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
                     </form>
 
 

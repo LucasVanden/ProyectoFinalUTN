@@ -67,6 +67,7 @@ $controladorAsuetosReceso='/controlador/administrador/controladorAsuetosReceso.p
 $controladorAsuetoFeriado='/controlador/administrador/controladorAsuetoFeriado.php';
 $controladorAsuetoAsueto='/controlador/administrador/controladorAsuetoAsueto.php';
 $controladorBorrarAsueto='/controlador/administrador/controladorBorrarAsueto.php';
+$controladorBuscarAsuetos='/controlador/administrador/controladorBuscarAsuetos.php';
 
 $AsuetoMenu='/vista/administrador/MenuAsuetos.php';
 $asutosReceso='/vista/administrador/AsuetosReceso.php';
