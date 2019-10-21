@@ -91,6 +91,10 @@ $BorrarMateria='/controlador/administrador/abmMateria.php/BorrarMateria.php';
 $crearMateria='/controlador/administrador/abmMateria.php/crearMateria.php';
 $mostrarMaterias='/controlador/administrador/abmMateria.php/mostrarMaterias.php';
 
+//Alta Profesor
+$altaProfesor='/vista/administrador/profesor/altaProfesor.php';
+$menuAltaProfesor='/vista/administrador/profesor/menuAltaProfesor.php';
+
 
 $AsuetoMenu='/vista/administrador/MenuAsuetos.php';
 $asutosReceso='/vista/administrador/AsuetosReceso.php';
