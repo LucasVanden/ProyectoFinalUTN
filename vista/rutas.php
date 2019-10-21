@@ -79,9 +79,17 @@ $abmcrearAula='/controlador/administrador/abmcrearAula.php';
 $borrarAula='/controlador/administrador/borrarAula.php';
 
 //ABM DEPARTAMENTO
+$abmDepartamento='/vista/administrador/ambDepartamento.php';
+
 $borrarDepartamento='/controlador/administrador/abmDepartamento/borrarDepartamento.php';
 $crearDepartamento='/controlador/administrador/abmDepartamento/crearDepartamento.php';
 
+//ABM materia
+$abmMateria='/vista/administrador/abmMateria.php';
+
+$BorrarMateria='/controlador/administrador/abmMateria.php/BorrarMateria.php';
+$crearMateria='/controlador/administrador/abmMateria.php/crearMateria.php';
+$mostrarMaterias='/controlador/administrador/abmMateria.php/mostrarMaterias.php';
 
 
 $AsuetoMenu='/vista/administrador/MenuAsuetos.php';
@@ -94,4 +102,5 @@ $MenuIndex='/vista/administrador/MenuIndex.php';
 $EditarAultaAsignada='/vista/administrador/EditarAultaAsignada.php';
 $SeleccionEditarAulaAsignada='/vista/administrador/SeleccionEditarAulaAsignada.php';
 $ABMAula='/vista/administrador/ABMAula.php';
-$abmDepartamento='/vista/administrador/ambDepartamento.php';
+
+

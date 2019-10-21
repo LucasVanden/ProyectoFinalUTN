@@ -78,5 +78,40 @@ class controladorAdministrador extends conexion
         }
         return $listaDepartamento;
     }
+    function BuscarMaterias($iddepartamento){
+        $ListaMaterias=array();
+        $conn = $this->getconexion();
+        $stmt2 = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where fk_departamento=$iddepartamento"); 
+        $stmt2->execute();
+        while($row = $stmt2->fetch()) {
+            $mat = new Materia();
+            $mat->setid_materia($row['id_materia']);
+            $mat->setnombreMateria($row['nombreMateria']);
+            $mat->setfk_departamento($row['fk_departamento']);
+            $tempDia=$row['fk_dia'];
+
+            $stmt4 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
+            $stmt4->execute();
+            while($row = $stmt4->fetch()) {
+                $dia = new Dia();
+                $dia->setid_dia($row['id_dia']);
+                $dia->setdia($row['dia']);
+                $mat->setdia($dia);
+            }
+
+            $stmt = $conn->prepare("SELECT id_departamento,nombre FROM departamento WHERE id_departamento=$iddepartamento "); 
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $dep = new Departamento();
+                $dep->setid_departamento($row['id_departamento']);
+                $dep->setnombre($row['nombre']);
+                $mat->setfk_departamento($dep);
+            }
+
+
+       array_push($ListaMaterias,$mat);
+    }
+    return $ListaMaterias;
+    }
 }
 ?>

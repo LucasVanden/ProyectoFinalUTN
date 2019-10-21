@@ -13,10 +13,15 @@ $EditarAultaAsignada=$URL.$EditarAultaAsignada;
 $BorrarAsueto=$URL.$BorrarAsueto;
 $ABMAula=$URL.$ABMAula;
 $abmDepartamento=$URL.$abmDepartamento;
+$abmMateria=$URL.$abmMateria;
 
 $_SESSION['comprobacion']=null;
 $_SESSION['fechasBuscadas']=null;
 $_SESSION['mostrarAulas']=null;
+
+$_SESSION['departamentos']=null;
+$_SESSION['idDepartamentoSeleccionado']=null;
+
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +54,7 @@ $_SESSION['mostrarAulas']=null;
                         <td>   <div>  <input type="submit" value="Editar Aulta Asignada" name="Obtener" formaction=<?php echo $EditarAultaAsignada ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Aulas" name="Obtener" formaction=<?php echo $ABMAula ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Departamento" name="Obtener" formaction=<?php echo $abmDepartamento ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Materia" name="" formaction=<?php echo $abmMateria ?> /></div></td>
                     </tr>                   
                     </form>
 
