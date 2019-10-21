@@ -14,7 +14,7 @@ require_once ($DIR . $AvisoProfesor);
 require_once ($DIR . $Dedicacion);
 require_once ($DIR . $Aula);
 date_default_timezone_set('America/Argentina/Mendoza');
-class controladorCambiarAula extends conexion
+class controladorAdministrador extends conexion
 {
 
     function BuscarAulas(){

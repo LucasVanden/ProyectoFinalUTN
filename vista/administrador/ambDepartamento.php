@@ -1,25 +1,23 @@
 <?php
 session_start();
-if (isset($_SESSION['user_id'])) {
-    header('Location: /PFProyect');
-    footer('Location: /PFProyect');
-}
+
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
 
 
-$abmcrearAula= $URL.$abmcrearAula;
+
 $Menu= $URL.$AsuetoMenu;
 $ABMAula= $URL.$ABMAula;
-$borrarAula=$URL.$borrarAula;
+
+$borrarDepartamento=$URL.$borrarDepartamento;
+$abmDepartamento=$URL.$abmDepartamento;
+$crearDepartamento=$URL.$crearDepartamento;
 
 $a=new controladorAdministrador();
-$aulas=$a->BuscarAulas();
+$departamentos=$a->BuscarDepartamento();
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html>
@@ -37,56 +35,38 @@ $aulas=$a->BuscarAulas();
             <p> <?= $message ?></p>
         <?php endif; ?>
         <h2>Cargar Aula</h2>
-        <form action=<?php echo $abmcrearAula ?> method="POST">
+        <form action=<?php echo $crearDepartamento ?> method="POST">
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  
                    
                     <tr>
-                        <th>Cuerpo</th>
+                        <th>Departamento</th>
                         <td>
-                        <input type="text" name="cuerpo"><br>
+                        <input type="text" name="departamento"><br>
                         </td>
-
-                    </tr>                   
-                    <th>Nivel</th>
-                        <td>
-                        <input type="number" name="nivel" min="-2" max="10" step="1" >
-                        </td>
-                        <br>
-
-                    </tr>   
-                    <th>Aula</th>
-                        <td>
-                        <input type="text" name="Aula"><br>
-                        </td>
-                        <br>
-
-                    </tr>   
+                    </tr>                  
                 </table>
                   </div>
-
- 
-                        <div>  <input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $abmcrearAula ?> /></div>
+                        <div>  <input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $crearDepartamento ?> /></div>
                          <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
                    
                          </form>
 
-                            <div>  <input type="submit" value="Mostrar Aulas" name="Buscar" formaction=<?php echo $ABMAula ?> onClick="myFunction()"/></div>
+                            <div>  <input type="submit" value="Mostrar Aulas" name="Buscar" formaction=<?php echo $abmDepartamento ?> onClick="myFunction()"/></div>
 
 
 
-<form action=<?php echo $borrarAula ?> method="POST">
+<form action=<?php echo $borrarDepartamento ?> method="POST">
 <div id="myDIV" >
 <table>
-    <?php foreach ($aulas as $aula): ?>
+    <?php foreach ($departamentos as $dep): ?>
        
         <tr>
         <td>
         <div>
-        <?php   echo $aula->getcuerpoAula() ?>
-        <?php   echo $aula->getnivelAula() ?>
-        <?php   echo $aula->getnumeroAula() ?>
-        <input type="submit" value=<?php echo $aula->getid_aula()?> name="borrarAula" formaction=<?php echo $borrarAula ?> onclick="return confirm('Esta seguro que desea eliminar aula <?php echo $fecha?> ')"> Eliminar</input>
+        <?php   echo $dep->getnombre() ?>
+        <button type="submit" value=<?php echo $dep->getid_departamento()?> name="borrarDepartamento" formaction=<?php echo $borrarDepartamento ?> onclick="return confirm('Esta seguro que desea eliminar departamento <?php echo $dep->getnombre()?> ')">Eliminar</button>
+      
         </div>
         </td>
         </tr>

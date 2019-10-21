@@ -6,7 +6,7 @@ session_start();
 
 require_once $DIR .$alumnoControlador;
 require_once $DIR .$profesorControlador;
-require_once $DIR .$controladorCambiarAula;
+require_once $DIR .$controladorAdministrador;
 $setearAula= $URL .$setearAula;
 $EditarAultaAsignada= $URL .$EditarAultaAsignada;
 
@@ -49,7 +49,7 @@ $_SESSION['profesor']=$idprofesor;
         <?php endif; ?>
 
 
- <?php $a = new controladorCambiarAula();
+ <?php $a = new controladorAdministrador();
  $horarios=$a->buscarHorariosParallenarEnlosSelect($idmateria,$idprofesor);
  
    ?>
