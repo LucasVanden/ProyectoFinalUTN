@@ -52,7 +52,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
   </head>
   <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
 
-    <?php require 'partials/header.php' ?>
+    <?php require $DIR.$header ?>
 
     <?php if (!empty($message)) : ?>
       <p> <?= $message ?></p>
@@ -81,6 +81,6 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
 
   </body>
   <footer>
-        <?php require 'partials/footer.php'; ?>      
+        <?php require $URL.$footer; ?>      
     </footer>
 </html>

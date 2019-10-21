@@ -6,6 +6,13 @@ $URL='http://localhost/ProyectoFinalUTN';
 $logo="/vista//partials/logo.png";
 $fondo="/vista/fondoCuerpo.jpg";
 
+$header="/vista/partials/header.php";
+$headera="/vista/partials/headera.php";
+$headerp="/vista/partials/headerp.php";
+$footer="/vista/partials/footer.php";
+
+$style="/vista/assert/css/style.css";
+
 $loginasistencia='vista/asistencia/login.php';
 $login='/vista/login.php';
 $email='/controlador/enviaremail.php';
@@ -95,6 +102,9 @@ $mostrarMaterias='/controlador/administrador/abmMateria.php/mostrarMaterias.php'
 $altaProfesor='/vista/administrador/profesor/altaProfesor.php';
 $menuAltaProfesor='/vista/administrador/profesor/menuAltaProfesor.php';
 
+//materiaProfesor
+$altaMateriaProfesor='/controlador/administrador/abmMateriaProfesor/altaMateriaProfesor.php';
+$asignarMateriaAProfesor='/vista/administrador/profesor/asignarMateriaAProfesor.php';
 
 $AsuetoMenu='/vista/administrador/MenuAsuetos.php';
 $asutosReceso='/vista/administrador/AsuetosReceso.php';
@@ -106,5 +116,3 @@ $MenuIndex='/vista/administrador/MenuIndex.php';
 $EditarAultaAsignada='/vista/administrador/EditarAultaAsignada.php';
 $SeleccionEditarAulaAsignada='/vista/administrador/SeleccionEditarAulaAsignada.php';
 $ABMAula='/vista/administrador/ABMAula.php';
-
-

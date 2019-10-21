@@ -7,7 +7,7 @@ require_once ($DIR.$ReportesControlador);
 
 $Menu= $URL.$AsuetoMenu;
 
-$altaProfesor= $URL.$altaProfesor;
+$asignarMateriaAProfesor= $URL.$asignarMateriaAProfesor;
 $AsuetosFeriado= $URL.$asutosFeriado;
 
 $_SESSION['comprobacion']=null;
@@ -25,7 +25,7 @@ $_SESSION['fechasBuscadas']=null;
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require './../partials/headera.php' ?>
+        <?php require $DIR.$header ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -39,7 +39,7 @@ $_SESSION['fechasBuscadas']=null;
                         <td>
                         <div>  <input type="submit" value="Alta Profesor" name="Obtener" formaction=<?php echo $altaProfesor ?>  /></div>
                         </td>
-                        <td>   <div>  <input type="submit" value="Asignar Materia a Profesor" name="Obtener" formaction=<?php echo $AsuetosFeriado ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Asignar Materia a Profesor" name="Obtener" formaction=<?php echo $asignarMateriaAProfesor ?> /></div></td>
                 
                         <td>   <div>  <input type="submit" value="Asuetos" name="Obtener" formaction=<?php echo $AsuetoAsueto ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Borrar fecha" name="Obtener" formaction=<?php echo $BorrarAsueto ?> /></div></td>
@@ -49,6 +49,6 @@ $_SESSION['fechasBuscadas']=null;
 
 
     <footer>
-        <?php require './../partials/footer.php'; ?>     
+        <?php require $DIR.$footer; ?>     
     </footer>  
 </html>

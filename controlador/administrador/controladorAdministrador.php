@@ -113,5 +113,37 @@ class controladorAdministrador extends conexion
     }
     return $ListaMaterias;
     }
+    function BuscarProfesor(){
+        $listaProfesor=array();
+        $conn = $this->getconexion();
+        $stmt = $conn->prepare("SELECT id_profesor,nombre,apellido,email FROM profesor ORDER BY apellido "); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+            $prof = new Profesor();
+            $prof->setid_profesor($row['id_profesor']);
+            $prof->setapellido($row['apellido']);
+            $prof->setnombre($row['nombre']);
+            $prof->setemail($row['email']);
+           array_push($listaProfesor,$prof);
+        }
+        return $listaProfesor;
+    }
+
+    function BuscarDedicacion(){
+        $listaDedicacion=array();
+        $conn = $this->getconexion();
+        $stmt = $conn->prepare("SELECT id_dedicacion,tipo,cantidadHora FROM dedicacion"); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+            $ded = new Dedicacion();
+            $ded->setid_dedicacion($row['id_dedicacion']);
+            $ded->settipo($row['tipo']);
+            $ded->setcantidadHora($row['cantidadHora']);
+           array_push($listaDedicacion,$ded);
+        }
+        return $listaDedicacion;
+    }
+
+
 }
 ?>

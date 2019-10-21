@@ -35,7 +35,7 @@ $a =new controladorAdministrador();
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <!-- <body background=https://secure.img1-fg.wfcdn.com/im/78135171/resize-h505-w505%5Ecompr-r85/8470/84707680/Pokemon+Pikachu+Wall+Decal.jpg> -->
-        <?php require './../partials/header.php' ?>
+    <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -107,6 +107,6 @@ $a =new controladorAdministrador();
         </form>
     </body>
     <footer>
-        <?php require './../partials/footer.php'; ?>         
+    <?php require $DIR.$footer; ?>           
     </footer>  
 </html>

@@ -55,8 +55,8 @@ $_SESSION['idDepartamentoSeleccionado']=null;
                         <td>   <div>  <input type="submit" value="Editar Aulta Asignada" name="Obtener" formaction=<?php echo $EditarAultaAsignada ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Aulas" name="Obtener" formaction=<?php echo $ABMAula ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Departamento" name="Obtener" formaction=<?php echo $abmDepartamento ?> /></div></td>
-                        <td>   <div>  <input type="submit" value="Materia" name="" formaction=<?php echo $abmMateria ?> /></div></td>
-                        <td>   <div>  <input type="submit" value="Profesor" name="" menuAltaProfesor=<?php echo $abmMateria ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Materia" name="Obtener" formaction=<?php echo $abmMateria ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Profesor" name="Obtener" formaction=<?php echo $menuAltaProfesor ?> /></div></td>
                     </tr>                   
                     </form>
 

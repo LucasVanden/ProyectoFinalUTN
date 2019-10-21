@@ -31,7 +31,7 @@ if(isset($_SESSION['fechasBuscadas'])){
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require './../partials/headera.php' ?>
+    <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -80,6 +80,6 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
      <?php endif; ?>
     <footer>
-        <?php require './../partials/footer.php'; ?>     
+    <?php require $DIR.$footer; ?>     
     </footer>  
 </html>

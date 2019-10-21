@@ -30,7 +30,7 @@ $fechahastaInvierno="'".date("Y")."-07-01"."'";
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require './../partials/headera.php' ?>
+    <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -89,6 +89,6 @@ if(isset($_SESSION['comprobacion'])){
 
 
     <footer>
-        <?php require './../partials/footer.php'; ?>     
+    <?php require $DIR.$footer; ?>     
     </footer>  
 </html>

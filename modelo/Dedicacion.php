@@ -21,7 +21,7 @@ class Dedicacion
 	{
 		$this->id_dedicacion = $newVal;
 	}
-	
+
 	function gettipo()
 	{
 		return $this->tipo;
