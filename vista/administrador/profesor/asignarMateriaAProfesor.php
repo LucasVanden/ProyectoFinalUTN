@@ -9,6 +9,8 @@ $a=new controladorAdministrador();
 
 $altaMateriaAProfesor= $URL.$altaMateriaProfesor;
 $departamentoMaterias= $URL.$departamentoMaterias;
+$menuAltaProfesor= $URL.$menuAltaProfesor;
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +24,7 @@ $departamentoMaterias= $URL.$departamentoMaterias;
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require $DIR.$header ?>
+        <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -130,6 +132,7 @@ $departamentoMaterias= $URL.$departamentoMaterias;
                 <br>
                 <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
                 <input id=buttonBuscar type="submit" value="Asignar" formaction=<?php echo $altaMateriaAProfesor?> onclick="">
+                <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
             </div>
             <div>                     
         <tr>               

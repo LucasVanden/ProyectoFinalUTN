@@ -21,12 +21,12 @@ $_SESSION['fechasBuscadas']=null;
         <meta charset="utf-8">
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
  
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require $DIR.$header ?>
+        <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -43,7 +43,7 @@ $_SESSION['fechasBuscadas']=null;
                         <td>   <div>  <input type="submit" value="Asignar Materia a Profesor" name="Obtener" formaction=<?php echo $asignarMateriaAProfesor ?> /></div></td>
                 
                         <td>   <div>  <input type="submit" value="Baja Materia Profesor" name="Obtener" formaction=<?php echo $bajaMateriaProfesor ?> /></div></td>
-                        <td>   <div>  <input type="submit" value="Borrar fecha" name="Obtener" formaction=<?php echo $BorrarAsueto ?> /></div></td>
+            
 
                     </tr>                   
                     </form>

@@ -12,6 +12,7 @@ $darbajaMateriaProfesor= $URL.$darbajaMateriaProfesor;
 $buscarmateriasProfesor= $URL.$buscarmateriasProfesor;
 $bajaMateriaProfesor= $URL.$bajaMateriaProfesor;
 $eliminarHorariodeCursado= $URL.$eliminarHorariodeCursado;
+$menuAltaProfesor= $URL.$menuAltaProfesor;
 
 if(isset($_POST['profesor'])){
 $listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_POST['Materias']);
@@ -30,7 +31,7 @@ $listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require $DIR.$header ?>
+        <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -102,6 +103,7 @@ $listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_
                 <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
                 <input id=buttonBuscar type="submit" value="Eliminar Materia de Profesor" formaction=<?php echo $darbajaMateriaProfesor?> onclick="return confirm('Esta seguro que desea eliminar')" >
                 <input id=buttonBuscar type="submit" value="Ver Horario Cursado" formaction=<?php echo $bajaMateriaProfesor?> >
+                <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
             </div>
             <div>                     
         <tr>               

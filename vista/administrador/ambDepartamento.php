@@ -34,7 +34,7 @@ $departamentos=$a->BuscarDepartamento();
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Cargar Aula</h2>
+        <h2>Cargar Departamento</h2>
         <form action=<?php echo $crearDepartamento ?> method="POST">
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  
@@ -48,11 +48,10 @@ $departamentos=$a->BuscarDepartamento();
                 </table>
                   </div>
                         <div>  <input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $crearDepartamento ?> /></div>
-                         <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
                    
                          </form>
 
-                            <div>  <input type="submit" value="Mostrar Aulas" name="Buscar" formaction=<?php echo $abmDepartamento ?> onClick="myFunction()"/></div>
+                            <div>  <input type="submit" value="Mostrar Departamentos" name="Buscar" formaction=<?php echo $abmDepartamento ?> onClick="myFunction()"/></div>
 
 
 

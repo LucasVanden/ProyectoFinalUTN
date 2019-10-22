@@ -1,6 +1,9 @@
 <?php
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $conexion;
+
+$menuAltaProfesor= $URL.$menuAltaProfesor;
+
 $message = '';
 if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'])) {
   $con = new conexion();
@@ -48,11 +51,11 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     <meta charset="utf-8">
     <title>Alta Profesor</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+      <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
   <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
 
-    <?php require $DIR.$header ?>
+    <?php require $DIR.$headera ?>
 
     <?php if (!empty($message)) : ?>
       <p> <?= $message ?></p>
@@ -60,27 +63,22 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
 
     <h1>Alta Profesor</h1>
     <br>
-    <span>or <a href="signup.php">Alta Usuario</a></span>
-    <br>
     <form action="altaProfesor.php" method="POST">
     <br>
     legajo
       <input name="legajo" type="text" placeholder="legajo">
-      <br>
       nombre
       <input name="nombre" type="text" placeholder="nombre">
-      <br>
       apellido
       <input name="apellido" type="text" placeholder="apellido">
-      <br>
       email
       <input name="email" type="text" placeholder="email">
-      <br>
       <input type="submit" value="Enviar">
+      <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
     </form>
 
   </body>
   <footer>
-        <?php require $URL.$footer; ?>      
+        <?php require $DIR.$footer; ?>      
     </footer>
 </html>

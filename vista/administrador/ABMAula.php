@@ -67,7 +67,6 @@ $aulas=$a->BuscarAulas();
 
  
                         <div>  <input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $abmcrearAula ?> /></div>
-                         <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
                    
                          </form>
 

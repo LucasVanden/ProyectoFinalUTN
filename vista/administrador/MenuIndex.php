@@ -40,24 +40,29 @@ $_SESSION['idDepartamentoSeleccionado']=null;
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Asutos</h2>
+        <h2>menu?</h2>
         <form action=<?php echo $MenuIndex ?> method="POST"> <!-- -->
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  
              
-                    <tr>
-                       
+                    
+                        <tr>
                         <td>
                         <div>  <input type="submit" value="Asuetos" name="Obtener" formaction=<?php echo $AsuetosMenu ?>  /></div>
                         </td>
-                        <td>   <div>  <input type="submit" value="Mesas" name="Obtener" formaction=<?php echo $Mesas ?> /></div></td>
-                
+                        </tr>
+                        <tr>
+                        <td>   <div>  <input type="submit" value="Cargar Fecha de Mesa" name="Obtener" formaction=<?php echo $Mesas ?> /></div></td>
+                        </tr>
+                        <tr>
+                        <td>   <div>  <input type="submit" value="Cargar Aula" name="Obtener" formaction=<?php echo $ABMAula ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Editar Aulta Asignada" name="Obtener" formaction=<?php echo $EditarAultaAsignada ?> /></div></td>
-                        <td>   <div>  <input type="submit" value="Aulas" name="Obtener" formaction=<?php echo $ABMAula ?> /></div></td>
-                        <td>   <div>  <input type="submit" value="Departamento" name="Obtener" formaction=<?php echo $abmDepartamento ?> /></div></td>
+                        </tr>
+                        <tr>
+                        <td>   <div>  <input type="submit" value="Cargar Departamento" name="Obtener" formaction=<?php echo $abmDepartamento ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Materia" name="Obtener" formaction=<?php echo $abmMateria ?> /></div></td>
-                        <td>   <div>  <input type="submit" value="Profesor" name="Obtener" formaction=<?php echo $menuAltaProfesor ?> /></div></td>
-                    </tr>                   
+                        <td>   <div>  <input type="submit" value="Profesor" name="Obtener" formaction=<?php echo $menuAltaProfesor ?> /></div></td>       
+                        </tr>         
                     </form>
 
 

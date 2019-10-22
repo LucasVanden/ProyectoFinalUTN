@@ -34,7 +34,7 @@ $_SESSION['fechasBuscadas']=null;
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Asutos</h2>
+        <h2>Asuetos</h2>
         <form action=<?php echo $Menu ?> method="POST"> <!-- -->
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  

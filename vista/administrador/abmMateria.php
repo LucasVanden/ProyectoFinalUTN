@@ -94,7 +94,7 @@ foreach ($listadepartamento as $departamento): ?>
 
               
                   </div>
-                        <div>  <input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $crearMateria ?> /></div>
+                        <div>  <input type="submit" value="Cargar Materia" name="Buscar" formaction=<?php echo $crearMateria ?> /></div>
                        
 
                          <select id="first-choice" name="depBuscar">
