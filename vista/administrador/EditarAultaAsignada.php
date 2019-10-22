@@ -44,25 +44,18 @@ $a =new controladorAdministrador();
         <script src="./../js/funciones.js" type="text/javascript"></script>
 
 
-        <h2>Estás cursando:</h2>
+        <h2>Editar Aula Asignada:</h2>
         <form action="EdistarAulaAsignada.php" method="POST">        
       
             <div>
-                <br>
-                <h2>Buscar Otra Consulta</h2>
+         
                 <table align='center' class="table-buscar" id="tablaBuscar" style="border-color: #FFFFFF">  
                     <tr>
-                        <th>Por Profesor</th>
-                        <th colspan="2">Por Materia</th>
+                        <th>Departamento</th>
+                        <th>Materia</th>
+                        <th>Profesor</th>
                     </tr>
-                        <tr>
-                            <td>
-                                <h5>Seleccione Profesor</h5>
-                            </td>
-                            <td colspan="2">
-                                <h5>Seleccione Departamento despúes Materia</h5>
-                            </td>
-                        <tr>
+                       
                        
                             <td>                                
                                 <select id="first-choice" name="departamentos">
@@ -99,8 +92,8 @@ $a =new controladorAdministrador();
             <div>
                 <br>
                 <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
-                <input id=buttonBuscar type="submit" name="ButtonProfesor" value="Buscar Profesor" formaction=<?php echo $SeleccionEditarAulaAsignada?>>
-                <input type="submit" value="Buscar Materia" name="ButtonMateria" formaction=<?php echo $SeleccionEditarAulaAsignada?>>
+                <input id=buttonBuscar type="submit" name="ButtonProfesor" value="Aceptar" formaction=<?php echo $SeleccionEditarAulaAsignada?>>
+             
             </div>
             
               
