@@ -32,7 +32,7 @@ $HoraHasta="'23:30'";
         <h2>Cargar Asueto</h2>
         <form action=<?php echo $contAsuetoAsueto ?> method="POST"> <!-- -->
             <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF">  
+                <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
                    
                     <tr>
                         <th>Fecha Asueto</th>
@@ -62,7 +62,7 @@ if(isset($_SESSION['comprobacion'])){
    echo  $_SESSION['comprobacion'];
 }
 ?>
-                    <div>  <input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $contAsuetoAsueto ?> /></div>
+                    <div> <br> <input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $contAsuetoAsueto ?> /></div>
                     <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
                     </form>
 

@@ -32,7 +32,7 @@ $fechadesdeVerano="'".date("Y-m-d")."'";
         <h2>Cargar Feriado</h2>
         <form action=<?php echo $controladorAsuetoFeriado ?> method="POST"> <!-- -->
             <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF">  
+                <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
                    
                     <tr>
                         <th>Fecha Feriado</th>
@@ -43,7 +43,7 @@ $fechadesdeVerano="'".date("Y-m-d")."'";
                     </tr>                   
 
                 </table>
-                    <div>  <input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorAsuetoFeriado ?> /></div>
+                    <div>  <br><input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorAsuetoFeriado ?> /></div>
                     <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
                     </form>
 

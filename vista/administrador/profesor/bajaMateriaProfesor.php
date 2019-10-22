@@ -38,7 +38,7 @@ $listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_
         <h2>Dar Baja Materia Profesor</h2>
         <form action=<?php echo $bajaMateriaProfesor ?> method="POST"> <!-- -->
             <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF">  
+                <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
                 <tr>
                 <th>Profesor</th>
                             <td>
@@ -62,40 +62,8 @@ $listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_
                  $("#second-choice").load("<?php echo $buscarmateriasProfesor.'?choice='?>"+ $("#idprofesor").val());
                 }).change();</script>
 
-
                             </td>
-                            
-                           
-                        </tr>   
-                        
-<tr>
-<th>Dia de cursado</th>
-<td>
-<select id="second-choice" name="dia">
-
-<option value="1">Lunes</option>   
-<option value="2">Martes</option>   
-<option value="3">Miercoles</option>   
-<option value="4">Jueves</option>   
-<option value="5">Viernes</option>   
-</td>
-</tr>
-</select>
-                        <tr>
-                        <th>Hora Desde</th>
-                        <td>
-                        <input type="time" id="f1" name="horaDesde" value=08:00>
-                        </td>
-
-                    </tr>         
-                    <tr>
-                        <th>Hora Hasta</th>
-                        <td>
-                        <input type="time" id="f1" name="horaHasta" value=08:00> 
-                        </td>
-
-                    </tr>     
-
+                        </tr>    
                 </table>
             </div>
             <div>
@@ -110,13 +78,14 @@ $listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_
                     </form>
 <?php
 if(isset($_POST['profesor'])):?>
-   <?php  foreach ($listaMaterias as $horacursado) : ?>
-  <table>
+  <table align='center' class="table-mostrar">
 <th>Materia</th>
 <th>Profesor</th>
 <th>Dia</th>
 <th>Hora Desde</th>
-<th>Hora Hasta</th>  
+<th>Hora Hasta</th>
+   <?php  foreach ($listaMaterias as $horacursado) : ?>
+  
 <tr>
 <td><?php echo $horacursado->getfk_materia()->getnombreMateria()?></td>
 <td><?php echo $horacursado->getProfesor()->getApellido()." ".$horacursado->getProfesor()->getNombre()?></td>
@@ -127,8 +96,8 @@ if(isset($_POST['profesor'])):?>
 <button type="submit" value=<?php echo $horacursado->getid_HorarioCursado()?> name="idhoraCursado" formaction=<?php echo $eliminarHorariodeCursado ?> onclick="return confirm('Esta seguro que desea eliminar')"> Eliminar</button>
 </td>
 </tr>
-</table>
             <?php endforeach; ?>
+            </table>
       <?php   endif?>
  
     <footer>

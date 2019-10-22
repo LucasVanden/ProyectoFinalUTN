@@ -104,8 +104,8 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 
         <h1>Login</h1>
         <form action="login.php" method="POST">
-            Nombre de Usuario <input name="usuario" type="text" placeholder="Ingrese Usuario" required="">
-            Contraseña <input name="contraseña" type="password" placeholder="Ingrese Contraseña" required="">
+            Nombre de Usuario <input name="usuario" type="text" placeholder="Ingrese Usuario" required>
+            Contraseña <input name="contraseña" type="password" placeholder="Ingrese Contraseña" required>
             <div class="send-button">
                 <input type="submit" value="Ingresar">
             </div>        

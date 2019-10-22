@@ -16,14 +16,12 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
 
   $mensaje=null;
 
-
   $stmt2 = $conexttion->prepare("SELECT id_profesor FROM profesor where legajo='$legajo'");
   $stmt2->execute();
   while ($row = $stmt2->fetch()) {
     $profesor = ($row['id_profesor']);
   }
   if (isset($profesor)){$message="legajo existente";}else{
-
 
       $stmt = $conexttion->prepare("INSERT INTO `profesor` (`id_profesor`, `legajo`, `apellido`, `nombre`, `email`) 
     VALUES (NULL, '$legajo', '$apellido' , '$nombre', '$email');");
@@ -42,7 +40,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
   }
  
 }else{
-    $message= 'ingrese Legajo,nombre y apellido';
+    $message= 'Ingrese: legajo, nombre y apellido.';
 }
 ?>
 <!DOCTYPE html>
@@ -53,7 +51,8 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
       <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
-  <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
+  
+  <body background = <?php echo $URL.$fondo?>>
 
     <?php require $DIR.$headera ?>
 
@@ -61,22 +60,27 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
       <p> <?= $message ?></p>
     <?php endif; ?>
 
-    <h1>Alta Profesor</h1>
-    <br>
+    <h2>Alta Profesor</h2>
     <form action="altaProfesor.php" method="POST">
-    <br>
-    legajo
-      <input name="legajo" type="text" placeholder="legajo">
-      nombre
-      <input name="nombre" type="text" placeholder="nombre">
-      apellido
-      <input name="apellido" type="text" placeholder="apellido">
-      email
-      <input name="email" type="text" placeholder="email">
-      <input type="submit" value="Enviar">
-      <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
+        <div>
+          <label>Legajo: </label>
+          <input name="legajo" type="text" placeholder="legajo" requerid>
+        </div>
+        <div>
+          <label>Nombre: </label>
+              <input name="nombre" type="text" placeholder="nombre" requerid>
+        </div>
+        <div>
+          <label>Apellido: </label>        
+              <input name="apellido" type="text" placeholder="apellido" requerid>
+        </div>
+        <div>
+          <label>Email: </label>
+          <input name="email" type="text" placeholder="email" requerid>
+        </div>
+        <div><br><br><input type="submit" value="Enviar"></div>
+        <div><input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
     </form>
-
   </body>
   <footer>
         <?php require $DIR.$footer; ?>      

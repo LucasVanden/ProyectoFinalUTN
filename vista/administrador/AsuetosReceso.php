@@ -34,30 +34,24 @@ $fechahastaInvierno="'".date("Y")."-07-01"."'";
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Cargar Resesos</h2>
+        <h2>Cargar Recesos</h2>
         <form action=<?php echo $controladorAsuetosReceso ?> method="POST"> <!-- -->
             <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF">  
+                <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
                     <tr>
-                        <th>Reseso Verano</th>
-          
+                        <th>Receso Verano</th>          
                     </tr>
                     <tr>
                         <th>Fecha Desde</th>
                         <td>
                         <input type="date" id="f1" name="fechaDesdeVerano" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechadesdeVerano;?>>   
-                        </td>
-                
+                        </td>                
                         <th>Fecha Hasta</th>
-                        <td>
-                           
-                        <input type="date" id="f2" name="fechaHastaVerano" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value=<?php echo $fechahastaVerano;?>>                
-                             
-                            </select>
+                        <td>                           
+                        <input type="date" id="f2" name="fechaHastaVerano" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value=<?php echo $fechahastaVerano;?>>               
                         </td>
-                    </tr>                   
-                    </div> 
-         
+                    </tr>               
+         <tr><br></tr>
                     <tr>
                         <th>Reseso Invierno</th>
           
@@ -83,7 +77,7 @@ if(isset($_SESSION['comprobacion'])){
    echo  $_SESSION['comprobacion'];
 }
 ?>
-                    <div>  <input type="submit" value="Cargar" name="Obtener"  /></div>
+                    <div> <br><br> <input type="submit" value="Cargar" name="Obtener"  /></div>
                     <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
                     </form>
 

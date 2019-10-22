@@ -42,35 +42,30 @@ $departamentos=$a->BuscarDepartamento();
                     <tr>
                         <th>Departamento</th>
                         <td>
-                        <input type="text" name="departamento"><br>
+                        <input type="text" name="departamento" required><br>
                         </td>
                     </tr>                  
                 </table>
-                  </div>
-                        <div>  <input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $crearDepartamento ?> /></div>
-                   
-                         </form>
-
-                            <div>  <input type="submit" value="Mostrar Departamentos" name="Buscar" formaction=<?php echo $abmDepartamento ?> onClick="myFunction()"/></div>
-
+            </div>
+            <div><input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $crearDepartamento ?> /></div> 
+        </form>
+            <div>  <input type="submit" value="Mostrar Departamentos" name="Buscar" formaction=<?php echo $abmDepartamento ?> onClick="myFunction()"/></div>
 
 
 <form action=<?php echo $borrarDepartamento ?> method="POST">
 <div id="myDIV" >
 <table>
-    <?php foreach ($departamentos as $dep): ?>
-       
+    <?php foreach ($departamentos as $dep): ?>      
         <tr>
-        <td>
-        <div>
-        <?php   echo $dep->getnombre() ?>
-        <button type="submit" value=<?php echo $dep->getid_departamento()?> name="borrarDepartamento" formaction=<?php echo $borrarDepartamento ?> onclick="return confirm('Esta seguro que desea eliminar departamento <?php echo $dep->getnombre()?> ')">Eliminar</button>
-      
-        </div>
-        </td>
+            <td>
+                <div>
+                    <?php   echo $dep->getnombre() ?>
+                    <button type="submit" value=<?php echo $dep->getid_departamento()?> name="borrarDepartamento" formaction=<?php echo $borrarDepartamento ?> onclick="return confirm('Esta seguro que desea eliminar departamento <?php echo $dep->getnombre()?> ')">Eliminar</button>
+                </div>
+            </td>
         </tr>
-        <?php endforeach; ?>
-        </table>
+    <?php endforeach; ?>
+</table>
     
 </div>
 </form>

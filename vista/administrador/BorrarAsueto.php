@@ -38,20 +38,19 @@ if(isset($_SESSION['fechasBuscadas'])){
         <h2>Cargar Feriado</h2>
         <form action=<?php echo $controladorBorrarAsueto ?> method="POST"> <!-- -->
             <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF">  
+                <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
                    
                     <tr>
                         <th>Fecha Feriado</th>
                         <td>
                         <input type="date" id="f1" name="fechaAborrar" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechadesdeVerano;?>>   
                         </td>
-
                     </tr>                   
 
                 </table>
-                    <div>  <input type="submit" value="Borrar" name="Obtener" formaction=<?php echo $controladorBorrarAsueto ?> /></div>
+                    <div> <br> <input type="submit" value="Borrar" name="Obtener" formaction=<?php echo $controladorBorrarAsueto ?> /></div>
 
-        <tr>
+        <tr> <br>
                         <th>Buscar Asuetos</th>
                         <td>
                         <input type="number" name="año" min="1900" max="2200" step="1" value=<?php echo $año?> />
@@ -59,7 +58,7 @@ if(isset($_SESSION['fechasBuscadas'])){
                         <br>
 
                     </tr>    
-                                <div>  <input type="submit" value="Buscar Asuetos" name="Buscar" formaction=<?php echo $controladorBuscarAsuetos ?> /></div>
+                                <div> <br> <input type="submit" value="Buscar Asuetos" name="Buscar" formaction=<?php echo $controladorBuscarAsuetos ?> /></div>
                                 <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
                     </form>
 

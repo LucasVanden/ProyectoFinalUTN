@@ -49,7 +49,7 @@ if(isset($_POST['reporte2'])){
         <h2>Obtener Reportes sobre Horarios de Consulta:</h2>
         <form action="directorReportes.php" method="POST"> <!-- -->
             <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF">  
+                <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
                     <tr>
                         <th>Departamento</th>
                         <td>                                
@@ -129,8 +129,7 @@ if(isset($_POST['reporte2'])){
                                     $("#second-choice").load("<?php echo $depatartamentomaterias.'?choice='?>"+ $("#first-choice").val())}else{
                                         $("#second-choice").empty();
                                     }
-                                    }).change();
-                                    
+                                    }).change();                                   
                                     
                                     </script>
 
@@ -140,7 +139,7 @@ if(isset($_POST['reporte2'])){
                     </tr>   
                     </div> 
                     </table>
-                    <div>  <input type="submit" value="Obtener" name="Obtener"  /></div>
+                    <div>  <br><input type="submit" value="Obtener" name="Obtener"  /></div>
                     </form>
                     <?php     
 
@@ -186,7 +185,7 @@ No hay datos
 
   <?php if ($grafico): ?>
 
-<div id="container" style="width: 25%;">
+<div id="container" style="width:40%;">
 <canvas id="myChart" ></canvas>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -202,7 +201,7 @@ var chart = new Chart(ctx, {
         datasets: [{
             label: <?php echo $label?>,
             backgroundColor: 'rgb('+Math.trunc(Math.random()*255)+','+Math.trunc(Math.random()*255)+','+Math.trunc(Math.random()*255)+')',
-            borderColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(0, 0, 0)',
             data: <?php echo $data?>,
         }]
     },

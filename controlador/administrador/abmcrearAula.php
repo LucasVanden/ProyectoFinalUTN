@@ -21,6 +21,9 @@ $cuerpo=$_POST['cuerpo'];
 $nivel=$_POST['nivel'];
 $Aula=$_POST['Aula'];
 
+if($cuerpo=='' && $ni){
+
+}
 $con= new conexion();
 $conn=$con->getconexion();
 $stmt = $conn->prepare("INSERT INTO `aula` (`id_aula`,`cuerpoAula`,`nivelAula`,`numeroAula`)

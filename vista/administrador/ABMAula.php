@@ -39,89 +39,79 @@ $aulas=$a->BuscarAulas();
         <h2>Cargar Aula</h2>
         <form action=<?php echo $abmcrearAula ?> method="POST">
             <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF">  
-                   
+                <table id="tablaBuscar" style="border-color: #FFFFFF">                     
                     <tr>
                         <th>Cuerpo</th>
                         <td>
-                        <input type="text" name="cuerpo"><br>
+                            <input type="text" name="cuerpo" required><br>
                         </td>
-
-                    </tr>                   
-                    <th>Nivel</th>
+                    </tr>
+                    <tr>                   
+                        <th>Nivel</th>
                         <td>
-                        <input type="number" name="nivel" min="-2" max="10" step="1" >
+                            <input type="number" name="nivel" min="-2" max="10" step="1" required>
                         </td>
                         <br>
-
-                    </tr>   
-                    <th>Aula</th>
+                    </tr>
+                    <tr>   
+                        <th>Aula</th>
                         <td>
-                        <input type="text" name="Aula"><br>
+                            <input type="text" name="Aula" required><br>
                         </td>
                         <br>
-
                     </tr>   
                 </table>
-                  </div>
+            </div>
+            <div><input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $abmcrearAula ?> /></div>     
+        </form>
+            <div><input type="submit" value="Mostrar Aulas" name="Buscar" formaction=<?php echo $ABMAula ?> onClick="myFunction()"/></div>
+        
+        <form action=<?php echo $borrarAula ?> method="POST">
+            <div id="myDIV" >
+                <table>
+                    <?php foreach ($aulas as $aula): ?>
+                    <tr>
+                        <td>
+                            <div>
+                                <?php echo $aula->getcuerpoAula() ?>
+                                <?php echo $aula->getnivelAula() ?>
+                                <?php echo $aula->getnumeroAula() ?>
+                                <input type="submit" value=<?php echo $aula->getid_aula()?> name="borrarAula" formaction=<?php echo $borrarAula ?> onclick="return confirm('Esta seguro que desea eliminar aula <?php echo $fecha?> ')"> Eliminar</input>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>    
+            </div>
+        </form>
+        <script>
+            var x = document.getElementById("myDIV");
+            x.style.display = "none";
+        </script>
 
- 
-                        <div>  <input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $abmcrearAula ?> /></div>
-                   
-                         </form>
+        <?php if(isset($_SESSION['mostrarAulas'])) :?>
+        <script>
+            var x = document.getElementById("myDIV");
+            x.style.display = "block";
+        </script>
+        <?php endif; ?>
 
-                            <div>  <input type="submit" value="Mostrar Aulas" name="Buscar" formaction=<?php echo $ABMAula ?> onClick="myFunction()"/></div>
-
-
-
-<form action=<?php echo $borrarAula ?> method="POST">
-<div id="myDIV" >
-<table>
-    <?php foreach ($aulas as $aula): ?>
-       
-        <tr>
-        <td>
-        <div>
-        <?php   echo $aula->getcuerpoAula() ?>
-        <?php   echo $aula->getnivelAula() ?>
-        <?php   echo $aula->getnumeroAula() ?>
-        <input type="submit" value=<?php echo $aula->getid_aula()?> name="borrarAula" formaction=<?php echo $borrarAula ?> onclick="return confirm('Esta seguro que desea eliminar aula <?php echo $fecha?> ')"> Eliminar</input>
-        </div>
-        </td>
-        </tr>
-        <?php endforeach; ?>
-        </table>
-    
-</div>
-</form>
-<script>
- var x = document.getElementById("myDIV");
- x.style.display = "none";
-</script>
-
-<?php if(isset($_SESSION['mostrarAulas'])) :?>
-<script>
- var x = document.getElementById("myDIV");
- x.style.display = "block";
-</script>
-<?php endif; ?>
-
-
-
-<script>
-function myFunction() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-} 
-</script>
-                
-
-
-
+        <script>
+        function myFunction() {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+        } 
+        </script>
+            <!-- metodo vandenbosch para ver el fondo -->
+            <div>
+            <td>.</td><br>
+            <td>.</td>
+            </div>
+             <!-- metodo vandenbosch para ver el fondo -->
 </body>
     <footer>
     <?php require $DIR.$footer; ?>       

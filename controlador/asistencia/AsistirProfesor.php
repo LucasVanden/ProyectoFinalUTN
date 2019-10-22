@@ -1,7 +1,7 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-require_once ($DIR .$conexion);
-require_once ($DIR. $email);
+require_once ($DIR . $conexion);
+require_once ($DIR . $email);
 require_once ($DIR . $DetalleAnotados);
 require_once ($DIR . $Alumno);
 require_once ($DIR . $AnotadosEstado);
@@ -12,12 +12,10 @@ require_once ($DIR . $HoraDeConsulta);
 require_once ($DIR . $HorarioDeConsulta);
 require_once ($DIR . $Profesor);
 
-
-
 session_start();
 
-$idMateria= $_POST['idmateria'];
-$idProfesor= $_SESSION['idProfesor'];
+$idMateria=$_POST['idmateria'];
+$idProfesor=$_SESSION['idProfesor'];
 $idhoradeconsulta=$_POST['asistir'];
 date_default_timezone_set('America/Argentina/Mendoza');
 
@@ -26,26 +24,26 @@ $idpresentismo=buscarPresentismo($idhoradeconsulta);
 if(isset($idpresentismo)){
    setearHoraIngreso($idpresentismo);
 
-   $alumnosAusentes= buscarAlumnosAusentes($idhoradeconsulta);
+   $alumnosAusentes=buscarAlumnosAusentes($idhoradeconsulta);
     if (count($alumnosAusentes)>0){
         registrarAusentes($alumnosAusentes);
         notificarPorMailaAusentes($alumnosAusentes,$idMateria);
     }
    cambiarEstadoVigencia($idhoradeconsulta);
 
-   $hora= buscarHorarioDeConsultaActual($idhoradeconsulta);
+   $hora=buscarHorarioDeConsultaActual($idhoradeconsulta);
    $siguientehorario=calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor);
    crearSiguienteHoraDeConsulta($idMateria,$idProfesor,$siguientehorario);
 //INGRESO
 }else{
     setearHoraEgreso($idProfesor,$idhoradeconsulta);
 }
-// $direccion= $URL . $asistenciaProfesor;
-// header("Location: $direccion");
+$direccion=$URL . $asistenciaProfesor;
+header("Location: $direccion");
 
 function buscarAlumnosAusentes($idhoradeconsulta){
     $listaDetalles=array();
-    $con= new conexion();
+    $con = new conexion();
     $conn = $con->getconexion();
     $stmt = $conn->prepare("SELECT id_detalleanotados,fk_alumno FROM detalleanotados where fk_horadeconsulta=$idhoradeconsulta"); 
     $stmt->execute();
@@ -86,29 +84,27 @@ function buscarAlumnosAusentes($idhoradeconsulta){
                         $estado->setnombreEstado($row['nombreEstado']);
                         $estado->setid_estadoanotados($row['id_estadoanotados']);
                         $anotado->setEstadoAnotados($estado);       
-                    }
-                
-                        array_push($Estados,$anotado);
+                    }                
+                    array_push($Estados,$anotado);
                 }
                 $detalle->setAnotadosEstado($Estados);
                 array_push($listaDetalles,$detalle);
         }
 
         $listaAusentes=array();
-    foreach ($listaDetalles as $detalle) {
+        foreach ($listaDetalles as $detalle) {
    
-        $listaEstado=$detalle->getAnotadosEstado();
-        if  ( end($listaEstado)->getEstadoAnotados()->getnombreEstado()=="Anotado") {
-           array_push($listaAusentes,$detalle);
-        }    
-    }
+            $listaEstado=$detalle->getAnotadosEstado();
+            if  ( end($listaEstado)->getEstadoAnotados()->getnombreEstado()=="Anotado") {
+                array_push($listaAusentes,$detalle);
+            }    
+        }
   return $listaAusentes;
-
-
 }
+
 function registrarAusentes($listaAlumnosAusentes){
-    $con= new conexion();
-    $conn=$con->getconexion();
+    $con = new conexion();
+    $conn = $con->getconexion();
 
     $fechaActual= date("Y-m-d");
     $hora=date("H:i:s");
@@ -120,6 +116,7 @@ function registrarAusentes($listaAlumnosAusentes){
         $stmt->execute();
     }
 }
+
 function notificarPorMailaAusentes($listaAlumnosAusentes,$idMateria){
     $listaEmails=array();
     foreach ($listaAlumnosAusentes as $detalle) {
@@ -146,12 +143,14 @@ function notificarPorMailaAusentes($listaAlumnosAusentes,$idMateria){
     $body="El día {$fechaActual}, te ausentaste a la consulta de {$materia} del profesor {$nombreProfe}. Es necesario que si no vas a asistir lo notifiques antes de la fecha de la misma";
     enviaremail($listaEmails,$body);
 }
+
 function cambiarEstadoVigencia($idhora){
-    $con= new conexion();
+    $con = new conexion();
     $conn = $con->getconexion();
     $stmt = $conn->prepare("UPDATE horadeconsulta SET estadoVigencia = 'completo' WHERE id_horadeconsulta=$idhora"); 
     $stmt->execute();
 }
+
 function buscarAsuetos(){
     $con= new conexion();
     $conn=$con->getconexion();
@@ -169,8 +168,8 @@ function buscarAsuetos(){
     }
     return $listaAsuetos;
 }
-function buscarHorarioDeConsultaActual($idhoradeconsulta){
 
+function buscarHorarioDeConsultaActual($idhoradeconsulta){
     $con= new conexion();
     $conn=$con->getconexion();
 
@@ -195,32 +194,33 @@ function buscarHorarioDeConsultaActual($idhoradeconsulta){
                 $hor->setsemestre($row['semestre']);
                 $hor->setn($row['n']);
                     
-                    $tempDia =$row['fk_dia'];
-                    $tempProfesor =$row['fk_profesor'];
+                $tempDia =$row['fk_dia'];
+                $tempProfesor =$row['fk_profesor'];
 
-                    $stmt4 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
-                    $stmt4->execute();
-                    while($row = $stmt4->fetch()) {
-                        $dia = new Dia();
-                        $dia->setid_dia($row['id_dia']);
-                        $dia->setdia($row['dia']);
-                        $hor->setdia($dia);
-                    }
-
-                    $stmt5 = $conn->prepare("SELECT id_profesor,apellido,nombre FROM profesor where id_profesor=$tempProfesor"); 
-                    $stmt5->execute();
-                    while($row = $stmt5->fetch()) {
-                        $prof = new Profesor();
-                        $prof->setid_profesor($row['id_profesor']);
-                        $prof->setapellido($row['apellido']);
-                        $prof->setnombre($row['nombre']);
-                        $hor->setprofesor($prof);
-                    }
-                $hora->setHorarioDeConsulta($hor);
+                $stmt4 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
+                $stmt4->execute();
+                while($row = $stmt4->fetch()) {
+                    $dia = new Dia();
+                    $dia->setid_dia($row['id_dia']);
+                    $dia->setdia($row['dia']);
+                    $hor->setdia($dia);
                 }
+
+                $stmt5 = $conn->prepare("SELECT id_profesor,apellido,nombre FROM profesor where id_profesor=$tempProfesor"); 
+                $stmt5->execute();
+                while($row = $stmt5->fetch()) {
+                    $prof = new Profesor();
+                    $prof->setid_profesor($row['id_profesor']);
+                    $prof->setapellido($row['apellido']);
+                    $prof->setnombre($row['nombre']);
+                    $hor->setprofesor($prof);
+                }
+                $hora->setHorarioDeConsulta($hor);
+            }
     }
     return $hora;
 }  
+
 function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
     $con= new conexion();
     $conn=$con->getconexion();
@@ -243,9 +243,6 @@ function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
         while ($repetir) {
             $repetir=false;
             foreach ($asuetos as $feriado) {
-                //test bug
-                echo "entro al bucle";
-                //
                 if($proximaConsulta==$feriado->getfechaAsueto()){
                 $proximaConsulta= date('Y-m-d',strtotime($proximaConsulta.'+7 day'));
                 $repetir=true;
@@ -254,7 +251,6 @@ function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
         }
     }
    //comprobar si la siguiente consulta hay mesa
- 
      $diaMesa=buscardiaMesaDeMateria($idMateria);
      $diaproximaConsulta=date("N", strtotime($proximaConsulta));
 
@@ -266,29 +262,29 @@ function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
             }
         }
     }
-  //BUscar siguiente Horario a asignar
-         $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$semestreactual and n=$n"); 
-         $stmt2->execute();
-         while($row = $stmt2->fetch()) {
-             $idhorarioconsulta=$row['id_horariodeconsulta'];
-             $fk_dia=$row['fk_dia'];
-         }
-        $desde= $hora->getfechaHastaAnotados();
-        
-        //si es una consulta especial de mesa
+  //Buscar siguiente Horario a asignar
+    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$semestreactual and n=$n"); 
+    $stmt2->execute();
+    while($row = $stmt2->fetch()) {
+        $idhorarioconsulta=$row['id_horariodeconsulta'];
+        $fk_dia=$row['fk_dia'];
+    }
+    $desde= $hora->getfechaHastaAnotados();
+    
+    //si es una consulta especial de mesa
+    $hasta=$proximaConsulta;
+    if(($semestreactual=="31")||($semestreactual=="32"));{
         $hasta=$proximaConsulta;
-        if(($semestreactual=="31")||($semestreactual=="32"));{
-            $hasta=$proximaConsulta;
-            fechaDiaAnteriorAfecha($proximaConsulta,$fk_dia);
-        }
+        fechaDiaAnteriorAfecha($proximaConsulta,$fk_dia);
+    }
  
+    $siguenteconsulta=array();
+    array_push($siguenteconsulta,$idhorarioconsulta);
+    array_push($siguenteconsulta,$desde);
+    array_push($siguenteconsulta,$hasta);
+    return $siguenteconsulta;
+}
 
-        $siguenteconsulta=array();
-        array_push($siguenteconsulta,$idhorarioconsulta);
-        array_push($siguenteconsulta,$desde);
-        array_push($siguenteconsulta,$hasta);
-        return $siguenteconsulta;
-}       
 function crearSiguienteHoraDeConsulta($idMateria,$idProfesor,$siguientehorario){
  $con= new conexion();
  $conn=$con->getconexion();
@@ -297,22 +293,12 @@ function crearSiguienteHoraDeConsulta($idMateria,$idProfesor,$siguientehorario){
  $desde= $siguientehorario[1];
  $hasta= $siguientehorario[2];
 
- //test bug
- echo ("desde:".$desde. "<br>");
-
- echo ("hasta:".$hasta. "<br>");
-
- echo ("mat:".$idMateria. '<br>');
-
- echo ("idh:".$idhorarioconsulta. "<br>");
-
- echo ("idprof:".$idProfesor. "<br>");
- //
  $stmt = $conn->prepare("INSERT INTO `horadeconsulta` (`id_horadeconsulta`,`fechaDesdeAnotados`,`fechaHastaAnotados`,`cantidadAnotados`,
  `estadoPresentismo`,`estadoVigencia`,`fk_materia`,`fk_horariodeconsulta`,`fk_profesor`)
  VALUES (null, '$desde', '$hasta' , 0, 'pendiente', 'activo','$idMateria','$idhorarioconsulta','$idProfesor');");  
  $stmt->execute();
 }
+
 function nextfechaDia($diaID){
     switch ($diaID){
         case '1':
@@ -333,6 +319,7 @@ function nextfechaDia($diaID){
     }
     return $fecha;
 }
+
 function buscarFechaMesas(){
     $con= new conexion();
     $conn=$con->getconexion();
@@ -349,6 +336,7 @@ function buscarFechaMesas(){
     }
     return $listaMesas;
 }
+
 function setearHoraIngreso($idpresentismo){
     $con= new conexion();
     $conn=$con->getconexion();
@@ -356,6 +344,7 @@ function setearHoraIngreso($idpresentismo){
     $stmt2 = $conn->prepare("UPDATE presentismo SET HoraHasta = '$hora' WHERE id_presentismo=$idpresentismo"); 
     $stmt2->execute();
 }
+
 function setearHoraEgreso($idProfesor,$idhoradeconsulta){
     $con= new conexion();
     $conn=$con->getconexion();
@@ -366,6 +355,7 @@ function setearHoraEgreso($idProfesor,$idhoradeconsulta){
     VALUES (NULL, '$fechaActual', '$hora', '00:00:00','$idProfesor', '$idhoradeconsulta');"); 
     $stmt2->execute(); 
 }
+
 function buscarPresentismo($idhoradeconsulta){
     $con= new conexion();
     $conn=$con->getconexion();
@@ -377,6 +367,7 @@ function buscarPresentismo($idhoradeconsulta){
     }
     return $idpresentismo;
 }
+
 function buscardiaMesaDeMateria($idMateria){
     $con= new conexion();
     $conn=$con->getconexion();
@@ -395,6 +386,7 @@ function buscardiaMesaDeMateria($idMateria){
     }
     return $dia;
 }
+
 function fechaDiaAnteriorAfecha($fecha,$diaID){
     switch ($diaID){
         case '1':

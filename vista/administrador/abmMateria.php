@@ -57,12 +57,10 @@ $materias=$a->BuscarMaterias($idDepartamento);
         <h2>Cargar Materia</h2>
         <form action=<?php echo $crearMateria ?> method="POST">
             <div>
-             
-                   
                     <tr>
                         <th>Nombre Materia</th>
                         <td>
-                        <input type="text" name="nombreMateria"><br>
+                        <input type="text" name="nombreMateria" required><br>
                         </td>
                     </tr>    
                     
@@ -90,13 +88,12 @@ foreach ($listadepartamento as $departamento): ?>
 
 </select>
 </tr> 
-
-
-              
                   </div>
-                        <div>  <input type="submit" value="Cargar Materia" name="Buscar" formaction=<?php echo $crearMateria ?> /></div>
-                       
+                        <div><br><input type="submit" value="Cargar Materia" name="Buscar" formaction=<?php echo $crearMateria ?> /><br><br></div>
 
+                        
+                        
+                        <h2>Ver Materias</h2>
                          <select id="first-choice" name="depBuscar">
 <?php 
 $listadepartamento = $a->BuscarDepartamento();
@@ -106,7 +103,8 @@ foreach ($listadepartamento as $departamento): ?>
 <?php endforeach; 
 ?>
 </select>
-                         <div>  <input type="submit" value="Mostrar Materias" name="Buscar" formaction=<?php echo $mostrarMaterias ?> onClick="myFunction()"/></div>
+
+                         <div>  <br><input type="submit" value="Mostrar Materias" name="Buscar" formaction=<?php echo $mostrarMaterias ?> onClick="myFunction()"/></div>
                          </form>
 
                      
