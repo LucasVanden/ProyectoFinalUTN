@@ -3,6 +3,7 @@ require 'dbPFPrueba.php';
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . '/modelo/persistencia/conexion.php';
 $message = '';
+$exito=0;
 if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'])) {
   $con = new conexion();
   $conexttion = $con->getconexion();
@@ -14,7 +15,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
   $fecha = $_POST['fecha'];
   $telefono = $_POST['telefono'];
   $mensaje=null;
-
+ 
 
   $stmt2 = $conexttion->prepare("SELECT id_alumno FROM alumno where legajo='$legajo'");
   $stmt2->execute();
@@ -28,6 +29,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     VALUES (NULL, '$legajo', '$apellido' , '$nombre', '$email','$fecha','$telefono');");
     if ( $stmt->execute() ){
         $message="Alumno creado exitosamente";
+        $exito=1;
     }else{
         $message="Hubo un problema al crear al alumno";
     }
@@ -35,52 +37,90 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
   }
  
 }else{
+
     $message= 'ingrese Legajo,nombre y apellido';
 }
 ?>
 <!DOCTYPE html>
 <html>
   <head>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     <meta charset="utf-8">
     <title>Alta Alumno</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
+ 
   </head>
   <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
 
     <?php require 'partials/header.php' ?>
 
-    <?php if (!empty($message)) : ?>
-      <p> <?= $message ?></p>
-    <?php endif; ?>
+
 
     <h1>Alta Alumno</h1>
     <br>
     <span>or <a href="signup.php">Alta Usuario</a></span>
     <br>
     <form action="altaAlumno.php" method="POST">
-    <br>
-    legajo
-      <input name="legajo" type="text" placeholder="legajo">
-      <br>
-      nombre
-      <input name="nombre" type="text" placeholder="nombre">
-      <br>
-      apellido
-      <input name="apellido" type="text" placeholder="apellido">
-      <br>
-      email
-      <input name="email" type="text" placeholder="email">
-      <br>
-      fecha Nacimiento 
-      <input name="fecha" type="text" placeholder="AAAA-MM-DD">
-      <br>
-      telefono
-      <input name="telefono" type="text" placeholder="telefono">
-      <br>
+  
+    <tr>
+    <td>legajo</td>
+    
+      <td><input name="legajo" type="text" placeholder="legajo"></td>
+      </tr>
+
+      <tr>
+      <td>nombre</td>  
+      
+      <td><input name="nombre" type="text" placeholder="nombre"></td>
+      </tr>
+
+      <tr>
+      <td>apellido</td>
+      
+    <td>  <input name="apellido" type="text" placeholder="apellido"></td>
+      </tr>
+
+      <tr>
+      <td>email</td>
+      
+     <td> <input name="email" type="text" placeholder="email"></td>
+      </tr>
+
+      <tr>
+      <td>  fecha Nacimiento </td>
+    
+     <td> <input name="fecha" type="text" placeholder="AAAA-MM-DD"></td>
+      </tr>
+
+      <tr>
+      <td>telefono</td>
+      
+     <td> <input name="telefono" type="text" placeholder="telefono"></td>
+      </tr>
+     
       <input type="submit" value="Enviar">
     </form>
-
+    <br>
+    <?php if (!empty($message)) : ?>
+      <?php if ($exito) : ?>
+      <div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Alumno creado Exitosamente</h4>
+  <p>Se creo alumno <?php echo $_POST['nombre']?> </p>
+  <hr>
+  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+      </div>
+<?php else: ?>
+     <div class="alert alert-danger" role="alert">
+        <?php echo $message?>
+      </div>
+    <?php endif; ?>
+    <?php endif; ?>
   </body>
   <footer>
         <?php require 'partials/footer.php'; ?>      
