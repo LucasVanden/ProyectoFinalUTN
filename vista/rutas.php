@@ -104,7 +104,11 @@ $menuAltaProfesor='/vista/administrador/profesor/menuAltaProfesor.php';
 
 //materiaProfesor
 $altaMateriaProfesor='/controlador/administrador/abmMateriaProfesor/altaMateriaProfesor.php';
+$darbajaMateriaProfesor='/controlador/administrador/abmMateriaProfesor/darbajaMateriaProfesor.php';
+$buscarmateriasProfesor='/controlador/administrador/abmMateriaProfesor/buscarmateriasProfesor.php';
+$eliminarHorariodeCursado='/controlador/administrador/abmMateriaProfesor/eliminarHorariodeCursado.php';
 $asignarMateriaAProfesor='/vista/administrador/profesor/asignarMateriaAProfesor.php';
+$bajaMateriaProfesor='/vista/administrador/profesor/bajaMateriaProfesor.php';
 
 $AsuetoMenu='/vista/administrador/MenuAsuetos.php';
 $asutosReceso='/vista/administrador/AsuetosReceso.php';

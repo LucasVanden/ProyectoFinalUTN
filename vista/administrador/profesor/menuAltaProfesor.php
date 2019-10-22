@@ -6,9 +6,10 @@ require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
 
 $Menu= $URL.$AsuetoMenu;
-
+$altaProfesor=$URL.$altaProfesor;
 $asignarMateriaAProfesor= $URL.$asignarMateriaAProfesor;
 $AsuetosFeriado= $URL.$asutosFeriado;
+$bajaMateriaProfesor= $URL.$bajaMateriaProfesor;
 
 $_SESSION['comprobacion']=null;
 $_SESSION['fechasBuscadas']=null;
@@ -41,7 +42,7 @@ $_SESSION['fechasBuscadas']=null;
                         </td>
                         <td>   <div>  <input type="submit" value="Asignar Materia a Profesor" name="Obtener" formaction=<?php echo $asignarMateriaAProfesor ?> /></div></td>
                 
-                        <td>   <div>  <input type="submit" value="Asuetos" name="Obtener" formaction=<?php echo $AsuetoAsueto ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Baja Materia Profesor" name="Obtener" formaction=<?php echo $bajaMateriaProfesor ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Borrar fecha" name="Obtener" formaction=<?php echo $BorrarAsueto ?> /></div></td>
 
                     </tr>                   

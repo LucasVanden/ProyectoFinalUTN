@@ -13,6 +13,7 @@ require_once ($DIR . $EstadoAnotados);
 require_once ($DIR . $AvisoProfesor);
 require_once ($DIR . $Dedicacion);
 require_once ($DIR . $Aula);
+require_once ($DIR . $HorarioCursado);
 date_default_timezone_set('America/Argentina/Mendoza');
 class controladorAdministrador extends conexion
 {
@@ -144,6 +145,54 @@ class controladorAdministrador extends conexion
         return $listaDedicacion;
     }
 
+    function BuscarHorarioDeCursadodeProfesorMateria($idProfesor,$idMateria){
+
+        $listaMateriasProfesor=array();
+
+        $con= new conexion();
+        $conn = $con->getconexion();
+        $stmt = $conn->prepare("SELECT id_horariocursado,HoraDesde,HoraHasta,semestreAnual,fk_materia,fk_dia FROM horariocursado where fk_profesor=$idProfesor and fk_materia=$idMateria"); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+            $HoradeCursado= new HorarioCursado();
+            $HoradeCursado->setid_horariocursado($row['id_horariocursado']);
+            $HoradeCursado->sethoraDesde($row['HoraDesde']);
+            $HoradeCursado->sethoraHasta($row['HoraHasta']);
+            $HoradeCursado->setsemestreAnual($row['semestreAnual']);
+            $temmateria=$row['fk_materia'];
+            $tempDia=$row['fk_dia'];
+    
+            $stmt2 = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where id_materia=$temmateria"); 
+            $stmt2->execute();
+            while($row = $stmt2->fetch()) {
+                $mat = new Materia();
+                $mat->setid_materia($row['id_materia']);
+                $mat->setnombreMateria($row['nombreMateria']);
+                $HoradeCursado->setfk_materia($mat);
+            }
+            $stmt3 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
+            $stmt3->execute();
+            while($row = $stmt3->fetch()) {
+                $dia = new Dia();
+                $dia->setid_dia($row['id_dia']);
+                $dia->setdia($row['dia']);
+                $HoradeCursado->setdia($dia);
+            }
+            $stmt4 = $conn->prepare("SELECT id_profesor,nombre,apellido,email FROM profesor where id_profesor=$idProfesor"); 
+            $stmt4->execute();
+            while($row = $stmt4->fetch()) {
+                $prof = new Profesor();
+                $prof->setid_profesor($row['id_profesor']);
+                $prof->setapellido($row['apellido']);
+                $prof->setnombre($row['nombre']);
+                $prof->setemail($row['email']);
+                $HoradeCursado->setProfesor($prof);
+            }
+
+            array_push($listaMateriasProfesor,$HoradeCursado);
+        }
+        return $listaMateriasProfesor;
+    }
 
 }
 ?>

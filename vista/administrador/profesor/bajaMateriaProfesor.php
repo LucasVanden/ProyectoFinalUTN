@@ -8,7 +8,15 @@ require_once ($DIR.$controladorAdministrador);
 $a=new controladorAdministrador();
 
 $altaMateriaAProfesor= $URL.$altaMateriaProfesor;
-$departamentoMaterias= $URL.$departamentoMaterias;
+$darbajaMateriaProfesor= $URL.$darbajaMateriaProfesor;
+$buscarmateriasProfesor= $URL.$buscarmateriasProfesor;
+$bajaMateriaProfesor= $URL.$bajaMateriaProfesor;
+$eliminarHorariodeCursado= $URL.$eliminarHorariodeCursado;
+
+if(isset($_POST['profesor'])){
+$listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_POST['Materias']);
+// echo '<pre>'; print_r($listaMaterias); echo '</pre>';   
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,14 +34,14 @@ $departamentoMaterias= $URL.$departamentoMaterias;
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Asignar Materia a Profesor</h2>
-        <form action=<?php echo $altaMateriaAProfesor ?> method="POST"> <!-- -->
+        <h2>Dar Baja Materia Profesor</h2>
+        <form action=<?php echo $bajaMateriaProfesor ?> method="POST"> <!-- -->
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  
                 <tr>
                 <th>Profesor</th>
                             <td>
-                                <select name="profesor">
+                                <select id="idprofesor"name="profesor">
                                
                                 <?php 
                                $listaprofesores = $a->BuscarProfesor();
@@ -44,56 +52,19 @@ $departamentoMaterias= $URL.$departamentoMaterias;
 
                                 </select>                                
                             </td>
-                            <th>Departamento</th>
-                            <td>                                
-                                <select id="first-choice" name="departamentos">
-
-                                       <?php 
-                               $listadepartamento = $a->BuscarDepartamento();
-                               foreach ($listadepartamento as $departamento): ?> 
-                                <option value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
-                                <?php endforeach; 
-                               ?>
-                                </select>
-                            </td>
                             <th>Materia</th>
                             <td>                       
                                 <select id="second-choice" name="Materias">
                                 </select> 
                                 <script>
-                 $("#first-choice").change(function() {
-                 $("#second-choice").load("<?php echo $departamentoMaterias.'?choice='?>"+ $("#first-choice").val());
+                 $("#idprofesor").change(function() {
+                 $("#second-choice").load("<?php echo $buscarmateriasProfesor.'?choice='?>"+ $("#idprofesor").val());
                 }).change();</script>
 
 
                             </td>
                             
-                            <th>Semestral Anual</th>
-                            <td>
-                            <select id="second-choice" name="semestreAnual">
-
-<option value="1">1 semestre</option>   
-<option value="2">2 semestre</option>   
-<option value="anual">Anual</option>   
-
-</td>
-</tr>
-</select>
-
-                            <th>Dedicacion</th>
-                            <td>
-
-                            <select name="dedicacion">
-                               
-                               <?php 
-                              $listadedicacion = $a->BuscarDedicacion();
-                              foreach ($listadedicacion as $ded): ?> 
-                               <option value=<?php echo $ded->getid_dedicacion() ?>> <?php echo $ded->gettipo() ?></option>   
-                               <?php endforeach; 
-                              ?>
-
-                               </select>   
-                        </td>
+                           
                         </tr>   
                         
 <tr>
@@ -129,13 +100,35 @@ $departamentoMaterias= $URL.$departamentoMaterias;
             <div>
                 <br>
                 <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
-                <input id=buttonBuscar type="submit" value="Asignar" formaction=<?php echo $altaMateriaAProfesor?> onclick="">
+                <input id=buttonBuscar type="submit" value="Eliminar Materia de Profesor" formaction=<?php echo $darbajaMateriaProfesor?> onclick="return confirm('Esta seguro que desea eliminar')" >
+                <input id=buttonBuscar type="submit" value="Ver Horario Cursado" formaction=<?php echo $bajaMateriaProfesor?> >
             </div>
             <div>                     
         <tr>               
                     </form>
-
-
+<?php
+if(isset($_POST['profesor'])):?>
+   <?php  foreach ($listaMaterias as $horacursado) : ?>
+  <table>
+<th>Materia</th>
+<th>Profesor</th>
+<th>Dia</th>
+<th>Hora Desde</th>
+<th>Hora Hasta</th>  
+<tr>
+<td><?php echo $horacursado->getfk_materia()->getnombreMateria()?></td>
+<td><?php echo $horacursado->getProfesor()->getApellido()." ".$horacursado->getProfesor()->getNombre()?></td>
+<td><?php echo $horacursado->getdia()->getdia()?></td>
+<td><?php echo $horacursado->gethoraDesde()?></td>
+<td><?php echo $horacursado->gethoraHasta()?></td>
+<td>
+<button type="submit" value=<?php echo $horacursado->getid_HorarioCursado()?> name="idhoraCursado" formaction=<?php echo $eliminarHorariodeCursado ?> onclick="return confirm('Esta seguro que desea eliminar')"> Eliminar</button>
+</td>
+</tr>
+</table>
+            <?php endforeach; ?>
+      <?php   endif?>
+ 
     <footer>
         <?php require $DIR.$footer; ?>     
     </footer>  

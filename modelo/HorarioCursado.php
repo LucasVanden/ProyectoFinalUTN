@@ -20,10 +20,18 @@ class HorarioCursado
 	{
 		return $this->id_HorarioCursado;
 	}
-
 	function setid_HorarioCursado($newVal)
 	{
 		$this->id_HorarioCursado = $newVal;
+	}
+
+	function getProfesor()
+	{
+		return $this->Profesor;
+	}
+	function setProfesor($newVal)
+	{
+		$this->Profesor = $newVal;
 	}
 
 	function getfk_materia()
