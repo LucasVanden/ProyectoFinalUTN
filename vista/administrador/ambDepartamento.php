@@ -47,7 +47,7 @@ $departamentos=$a->BuscarDepartamento();
                     </tr>                  
                 </table>
             </div>
-            <div><input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $crearDepartamento ?> /></div> 
+            <div><input type="submit" value="Cargar Departamento" name="Buscar" formaction=<?php echo $crearDepartamento ?> /></div> 
         </form>
             <div>  <input type="submit" value="Mostrar Departamentos" name="Buscar" formaction=<?php echo $abmDepartamento ?> onClick="myFunction()"/></div>
 
