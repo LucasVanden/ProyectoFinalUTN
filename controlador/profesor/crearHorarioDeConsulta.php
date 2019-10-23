@@ -806,7 +806,7 @@ function comprobarSuperposiciónHorariaconotraMateria($idprofesor,$diaingresadon
 
     $con= new conexion();
     $conn = $con->getconexion();
-    $stmt = $conn->prepare("SELECT id_horariocursado,HoraDesde,HoraHasta,comision,semestreAnual,fk_materia,fk_dia FROM horariocursado where fk_profesor=$idprofesor and semestreAnual=$semestre OR semestreAnual='anual'"); 
+    $stmt = $conn->prepare("SELECT id_horariocursado,HoraDesde,HoraHasta,comision,semestreAnual,fk_materia,fk_dia FROM horariocursado where fk_profesor=$idprofesor and (semestreAnual=$semestre OR semestreAnual='anual')"); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
         $HoradeCursado= new HorarioCursado();
