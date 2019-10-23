@@ -53,7 +53,7 @@ $fechahastaInvierno="'".date("Y")."-07-01"."'";
                     </tr>               
          <tr><br></tr>
                     <tr>
-                        <th>Reseso Invierno</th>
+                        <th>Receso Invierno</th>
           
                     </tr>
                     <tr>
