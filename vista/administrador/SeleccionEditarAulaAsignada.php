@@ -24,8 +24,14 @@ $_SESSION['Materias']=$idmateria;
 if(isset($_SESSION['profesor'])){
     $idprofesor=$_SESSION['profesor'];
 }else{
+    if(isset($_POST['profesor'])){
 $idprofesor=$_POST['profesor'];  
 $_SESSION['profesor']=$idprofesor;
+}else{
+    $direccion= $EditarAultaAsignada;
+header("Location: $direccion");
+}
+
 }
 
 

@@ -7,7 +7,7 @@ session_start();
 require_once $DIR . $alumnoControlador;
 require_once $DIR . $departamentoMaterias;
 require_once $DIR . $controladorAdministrador;
-$depatartamentomaterias= $URL.$departamentoMaterias;
+$buscarDepartamentosconel1erovacio= $URL.$buscarDepartamentosconel1erovacio;
 $buscarProfesoresDeMateriaSeleccionada= $URL.$buscarProfesoresDeMateriaSeleccionada;
 
 
@@ -73,7 +73,7 @@ $a =new controladorAdministrador();
                                 </select> 
                                 <script>
                  $("#first-choice").change(function() {
-                 $("#second-choice").load("<?php echo $depatartamentomaterias.'?choice='?>"+ $("#first-choice").val());
+                 $("#second-choice").load("<?php echo $buscarDepartamentosconel1erovacio.'?choice='?>"+ $("#first-choice").val());
                 }).change();</script>
 
                             </td>
