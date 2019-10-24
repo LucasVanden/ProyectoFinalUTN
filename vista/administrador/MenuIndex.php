@@ -15,6 +15,7 @@ $ABMAula=$URL.$ABMAula;
 $abmDepartamento=$URL.$abmDepartamento;
 $abmMateria=$URL.$abmMateria;
 $menuAltaProfesor=$URL.$menuAltaProfesor;
+$backup=$URL.$backup;
 
 $_SESSION['comprobacion']=null;
 $_SESSION['fechasBuscadas']=null;
@@ -62,7 +63,13 @@ $_SESSION['idDepartamentoSeleccionado']=null;
                         <td>   <div>  <input type="submit" value="Cargar Departamento" name="Obtener" formaction=<?php echo $abmDepartamento ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Materia" name="Obtener" formaction=<?php echo $abmMateria ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Profesor" name="Obtener" formaction=<?php echo $menuAltaProfesor ?> /></div></td>       
-                        </tr>         
+                        </tr>        
+
+                             <tr>
+                        <td>
+                        <div>  <input type="submit" value="Backup" name="Obtener" formaction=<?php echo $backup ?>  /></div>
+                        </td>
+                        </tr> 
                     </form>
 
 

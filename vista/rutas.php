@@ -120,3 +120,4 @@ $MenuIndex='/vista/administrador/MenuIndex.php';
 $EditarAultaAsignada='/vista/administrador/EditarAultaAsignada.php';
 $SeleccionEditarAulaAsignada='/vista/administrador/SeleccionEditarAulaAsignada.php';
 $ABMAula='/vista/administrador/ABMAula.php';
+$backup='/vista/administrador/backup.php';
