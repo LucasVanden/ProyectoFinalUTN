@@ -56,8 +56,11 @@ $asistirprofesor=$URL.$AsistirProfesor;
                         <input type="hidden" name="idmateria" value=<?php echo $dedicacion->getMateria()->getid_materia() ?>>
                         <?php foreach ($listaHorariosDecosnulta as $hora): ?>  
 
-                  
-                        <?php if ($hora->getHorarioDeConsulta()->getdia()->getid_dia()==date("N")): ?>
+<!-- SI no anda la asistencia profesor fue aca -->
+
+                        <!--  < ?php if ($hora->getHorarioDeConsulta()->getdia()->getid_dia()==date("N")): ?> -->
+                        <?php if ($hora->getfechaHastaAnotados()==date("Y-m-d")): ?>
+<!-- hasta aca -->
                         <?php $nombreBoton="Marcar Ingreso";
                         if($a->tienePresentismo($hora->getid_horadeconsulta())){
                             $nombreBoton="Marcar Egreso";

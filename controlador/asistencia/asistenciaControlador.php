@@ -51,11 +51,12 @@ class Asistenciacontrolador extends conexion
 function buscarHorasConsulta($idprofesor,$idMateria){
     $listaHora=array();
     $conn = $this->getconexion();
-    $stmt2 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia FROM horadeconsulta where fk_profesor=$idprofesor and fk_materia=$idMateria and estadoVigencia='activo'"); 
+    $stmt2 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia,fechaHastaAnotados FROM horadeconsulta where fk_profesor=$idprofesor and fk_materia=$idMateria and estadoVigencia='activo'"); 
     $stmt2->execute();
     while($row = $stmt2->fetch()) {
         $hora = new HoraDeConsulta();
         $hora->setid_horadeconsulta($row['id_horadeconsulta']);
+        $hora->setfechaHastaAnotados($row['fechaHastaAnotados']);
 
         $tempidhorario =$row['fk_horariodeconsulta'];
         $temporalMateriaid =$row['fk_materia'];
@@ -188,10 +189,13 @@ function BuscarMateriasAAsistir($idalumno){
                                     $tempmaeria =$row['fk_materia'];
                                     $tempidhora=$row['id_horadeconsulta'];
                                     $hora->setPresentismo(false);
+                           
+
                                     $stmt9 = $conn->prepare("SELECT id_presentismo FROM presentismo where fk_horadeconsulta=$tempidhora and HoraHasta='00:00:00'"); 
                                     $stmt9->execute();
                                     while($row = $stmt9->fetch()) {
                                         $hora->setPresentismo(true);
+                                
                                     }
 
                                     $stmt5 = $conn->prepare("SELECT id_avisoprofesor,fechaAvisoProfesor,detalleDescripcion,horaAvisoProfesor FROM avisoprofesor where fk_horadeconsulta=$tempidhora"); 
@@ -253,10 +257,11 @@ function BuscarMateriasAAsistir($idalumno){
                                                 }
                                             $hora->setHorarioDeConsulta($hor);
                                             }
-                                                   
-                                    array_push($ListHoraDeConsulta,$hora);
-                                                    
+
+                                    if($hora->getPresentismo()){            
+                                        array_push($ListHoraDeConsulta,$hora);
                                     }
+                                }
                                    
                 } 
             }
