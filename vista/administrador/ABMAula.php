@@ -73,10 +73,10 @@ $aulas=$a->BuscarAulas();
                     <tr>
                         <td>
                             <div>
-                                <?php echo $aula->getcuerpoAula() ?>
-                                <?php echo $aula->getnivelAula() ?>
-                                <?php echo $aula->getnumeroAula() ?>
-                                <input type="submit" value=<?php echo $aula->getid_aula()?> name="borrarAula" formaction=<?php echo $borrarAula ?> onclick="return confirm('Esta seguro que desea eliminar aula <?php echo $fecha?> ')"> Eliminar</input>
+                                <?php echo "cuerpo ".$aula->getcuerpoAula() ?>
+                                <?php echo "nivel ".$aula->getnivelAula() ?>
+                                <?php echo "aula ".$aula->getnumeroAula() ?>
+                                <button type="submit" value=<?php echo $aula->getid_aula()?> name="borrarAula" formaction=<?php echo $borrarAula ?> onclick="return confirm('Esta seguro que desea eliminar aula <?php echo $fecha?> ')"> Eliminar</button>
                             </div>
                         </td>
                     </tr>

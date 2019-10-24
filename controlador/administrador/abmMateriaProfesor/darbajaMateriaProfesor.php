@@ -6,18 +6,17 @@ session_start();
 
 
 $profesor=$_POST['profesor'];
-$Materias=$_POST['Materias'];
+if(isset($_POST['Materias'])){
+    $Materias=$_POST['Materias'];
+    date_default_timezone_set('America/Argentina/Mendoza');
 
-date_default_timezone_set('America/Argentina/Mendoza');
+    $con= new conexion();
+    $conn=$con->getconexion();
 
-$con= new conexion();
-$conn=$con->getconexion();
+    $stmt = $conn->prepare("UPDATE dedicacion_materia_profesor SET eliminado = '1' WHERE fk_profesor=$profesor and fk_materia=$Materias"); 
+    $stmt->execute();
+}
 
-$stmt = $conn->prepare("UPDATE dedicacion_materia_profesor SET eliminado = '1' WHERE fk_profesor=$profesor and fk_materia=$Materias"); 
-$stmt->execute();
-
-
-
-$direccion= $URL . $SeleccionEditarAulaAsignada;
+$direccion= $URL . $bajaMateriaProfesor;
 header("Location: $direccion");
 ?>

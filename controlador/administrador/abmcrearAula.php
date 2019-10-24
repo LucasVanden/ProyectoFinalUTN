@@ -21,15 +21,19 @@ $cuerpo=$_POST['cuerpo'];
 $nivel=$_POST['nivel'];
 $Aula=$_POST['Aula'];
 
-if($cuerpo=='' && $ni){
 
-}
 $con= new conexion();
 $conn=$con->getconexion();
+
+$stmt = $conn->prepare("SELECT id_aula FROM aula where cuerpoAula='$cuerpo' and nivelAula='$nivel' and numeroAula='$Aula' "); 
+$stmt->execute();
+if($stmt->rowCount() == 0) {
+
 $stmt = $conn->prepare("INSERT INTO `aula` (`id_aula`,`cuerpoAula`,`nivelAula`,`numeroAula`)
 VALUES (null, '$cuerpo', '$nivel' , '$Aula');");  
 $stmt->execute();
 
+}
  $direccion= $URL . $ABMAula;
  header("Location: $direccion");
 

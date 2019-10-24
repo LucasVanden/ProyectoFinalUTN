@@ -15,8 +15,10 @@ $eliminarHorariodeCursado= $URL.$eliminarHorariodeCursado;
 $menuAltaProfesor= $URL.$menuAltaProfesor;
 
 if(isset($_POST['profesor'])){
+    if(isset($_POST['Materias'])){
 $listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_POST['Materias']);
 // echo '<pre>'; print_r($listaMaterias); echo '</pre>';   
+}
 }
 ?>
 
@@ -78,6 +80,7 @@ $listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_
                     </form>
 <?php
 if(isset($_POST['profesor'])):?>
+ <?php if(isset($_POST['Materias'])):?>
   <table align='center' class="table-mostrar">
 <th>Materia</th>
 <th>Profesor</th>
@@ -98,8 +101,10 @@ if(isset($_POST['profesor'])):?>
 </tr>
             <?php endforeach; ?>
             </table>
+            <?php  else: echo "No hay materias"; ?>
+            <?php endif?>
+     
       <?php   endif?>
- 
     <footer>
         <?php require $DIR.$footer; ?>     
     </footer>  

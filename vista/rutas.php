@@ -105,6 +105,7 @@ $crearDepartamento='/controlador/administrador/abmDepartamento/crearDepartamento
 $abmMateria='/vista/administrador/abmMateria.php';
 
 $BorrarMateria='/controlador/administrador/abmMateria.php/BorrarMateria.php';
+$editarmesaMateria='/controlador/administrador/abmMateria.php/editarmesaMateria.php';
 $crearMateria='/controlador/administrador/abmMateria.php/crearMateria.php';
 $mostrarMaterias='/controlador/administrador/abmMateria.php/mostrarMaterias.php';
 

@@ -25,9 +25,15 @@ $_SESSION['departamentos']=$departamentos;
 
 $con= new conexion();
 $conn=$con->getconexion();
+
+$stmt = $conn->prepare("SELECT id_materia FROM materia where nombreMateria='$nombreMateria' and fk_departamento='$departamentos' "); 
+$stmt->execute();
+if($stmt->rowCount() == 0) {
+
 $stmt = $conn->prepare("INSERT INTO `materia` (`id_materia`,`nombreMateria`,`fk_departamento`,`fk_dia`)
 VALUES (null, '$nombreMateria','$departamentos','$diaMesa');");  
 $stmt->execute();
+}
 
  $direccion= $URL . $abmMateria;
  header("Location: $direccion");

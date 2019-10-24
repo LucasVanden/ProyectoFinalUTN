@@ -73,10 +73,13 @@ if(isset($_SESSION['fechasBuscadas'])){
 <table>
 
 <?php
+
 foreach ($_SESSION['fechasBuscadas'] as $fecha): ?> 
 <tr>
 <td>
-<input type="submit" value=<?php echo $fecha?> name="fechaAborrar" formaction=<?php echo $controladorEliminarMesa ?> onclick="return confirm('Esta seguro que desea eliminar fecha <?php echo $fecha?> ')"> Eliminar</input>
+<?php   echo $fecha." " ?>
+<button type="submit" value=<?php echo $fecha?> name="fechaAborrar" formaction=<?php echo $controladorEliminarMesa ?> onclick="return confirm('Esta seguro que desea eliminar fecha <?php echo $fecha?> ')"> Eliminar</input>
+
 </td>
 </tr>
 

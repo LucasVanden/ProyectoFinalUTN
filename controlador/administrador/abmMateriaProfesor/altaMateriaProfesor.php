@@ -34,7 +34,7 @@ function crearMateriaProfesor($profesor,$Materias,$dedicacion,$dia,$horaDesde,$h
     $con= new conexion();
     $conn=$con->getconexion();
 
-    $stmt = $conn->prepare("SELECT id_dedicacion_materia_profesor FROM dedicacion_materia_profesor where fk_profesor=$profesor,fk_materia=$Materias"); 
+    $stmt = $conn->prepare("SELECT id_dedicacion_materia_profesor FROM dedicacion_materia_profesor where fk_profesor=$profesor and fk_materia=$Materias"); 
     if($stmt->rowCount() == 0) {
     
         $stmt = $conn->prepare("INSERT INTO `dedicacion_materia_profesor` (`id_dedicacion_materia_profesor`, `fk_dedicacion`, `fk_materia`, `fk_profesor`) 
