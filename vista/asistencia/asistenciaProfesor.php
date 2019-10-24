@@ -29,7 +29,7 @@ $asistirprofesor=$URL.$AsistirProfesor;
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body background = <?php echo $URL.$fondo?>>
-        <?php require './../partials/header.php' ?>
+    <?php require $DIR.$headerpasistencia?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>

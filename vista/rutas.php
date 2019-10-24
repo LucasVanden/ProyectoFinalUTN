@@ -7,16 +7,25 @@ $logo="/vista//partials/logo.png";
 $fondo="/vista/fondoCuerpo.jpg";
 
 $header="/vista/partials/header.php";
+$headerasistencia="/vista/partials/header.asistencia.php";
 $headera="/vista/partials/headera.php";
 $headerp="/vista/partials/headerp.php";
+$headerpasistencia="/vista/partials/headerp.asistencia.php";
 $footer="/vista/partials/footer.php";
 
 $style="/vista/assert/css/style.css";
 
-$loginasistencia='vista/asistencia/login.php';
+$loginasistencia='/vista/asistencia/login.php';
 $login='/vista/login.php';
+
+$logoutasistencia='/vista/logoutasistencia.php';
 $email='/controlador/enviaremail.php';
 
+$conexion='/modelo/persistencia/conexion.php';
+
+$asistenciaAlumno="/vista/asistencia/asistenciaAlumno.php";
+$asistenciaProfesor="/vista/asistencia/asistenciaProfesor.php";
+//ALUMNO
 $alumnoPpal="/vista/alumno/alumnoPpal.php";
 $alumnoagregarmateria='/vista/alumno/alumnoAgregarMateria.php';
 
@@ -28,9 +37,7 @@ $EliminarMateriaAlumno='/controlador/EliminarMateriaAlumno.php';
 $departamentoMaterias='/controlador/departamentoMaterias.php';
 $crearAnotacion='/controlador/crearAnotacion.php';
 
-$conexion='/modelo/persistencia/conexion.php';
-
-
+//MODELO
 $Alumno='/modelo/Alumno.php';
 $Materia='/modelo/Materia.php';
 $HorarioDeConsulta='/modelo/HorarioDeConsulta.php';
@@ -48,8 +55,9 @@ $Asueto='/modelo/Asueto.php';
 $FechaMesa='/modelo/FechaMesa.php';
 $Presentismo='/modelo/Presentismo.php';
 $Aula='/modelo/Aula.php';
-
 $Dedicacion='/modelo/Dedicacion.php';
+
+//PROFESOR
 $profesorControlador='/controlador/profesor/profesorControlador.php';
 $profesorNotificarAlumno='/vista/profesor/profesorNotificarAlumnos.php';
 $profesorPpal='/vista/profesor/profesorPpal.php';
@@ -59,6 +67,7 @@ $crearHorarioDeConsulta='/controlador/profesor/crearHorarioDeConsulta.php';
 $mensajesCrearHoraDeConsulta='/vista/profesor/mensajesCrearHoraDeConsulta.php';
 $EstablecerHorario='/vista/profesor/profesorEstablecerHorario.php';
 
+//ASISTENCIA
 $asistenciaProfesor='/vista/asistencia/asistenciaProfesor.php';
 $asistenciaAlumno='/vista/asistencia/asistenciaAlumno.php';
 $AsistenciaControlador='/controlador/asistencia/AsistenciaControlador.php';
@@ -68,6 +77,7 @@ $AsistirAlumno='/controlador/asistencia/AsistirAlumno.php';
 
 $demonio='/controlador/asistencia/Demonio.php';
 $dem='/vista/asistencia/demonio.php';
+
 
 $ReportesControlador='/controlador/reportes/ReportesControlador.php';
 

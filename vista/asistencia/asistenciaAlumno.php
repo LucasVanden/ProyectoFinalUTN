@@ -30,7 +30,7 @@ $asisitrAlumno=$URL.$AsistirAlumno;
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body background = <?php echo $URL.$fondo?>>
-        <?php require './../partials/header.php' ?>
+    <?php require $DIR.$headerasistencia ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
