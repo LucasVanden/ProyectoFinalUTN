@@ -35,8 +35,8 @@ if(isset($_SESSION['fechasBuscadas'])){
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Cargar Feriado</h2>
-        <form action=<?php echo $controladorBorrarAsueto ?> method="POST"> <!-- -->
+        <h2>Baja Feriado</h2>
+        <form action=<?php echo $controladorBorrarAsueto ?> method="POST">
             <div>
                 <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
                    

@@ -47,7 +47,7 @@ if(isset($_SESSION['fechasBuscadas'])){
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  
                    
                     <tr>
-                        <th>Fecha Feriado</th>
+                        <th>Fecha Mesa</th>
                         <td>
                         <input type="date" id="f1" name="fechaMesa" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechaMesaIngresar;?>>   
                         </td>
@@ -58,7 +58,7 @@ if(isset($_SESSION['fechasBuscadas'])){
                     <div>  <input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorMesas ?> /></div>
 
         <tr>
-                        <th>Buscar Asuetos</th>
+                        <th>Buscar mesas del año:</th>
                         <td>
                         <input type="number" name="año" min="1900" max="2200" step="1" value=<?php echo $año?> />
                         </td>
