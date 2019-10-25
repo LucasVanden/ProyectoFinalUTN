@@ -1080,9 +1080,22 @@ function crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingre
     $fecha= date("Y-m-d");
     $hora= "{$horaingresada}:{$miningresado}";
 
- 
+    
+    $stmt1 = $conn->prepare("SELECT fk_departamento FROM materia where id_materia='$idmateria' "); 
+    $stmt1->execute();
+    while($row = $stmt1->fetch()) {
+        $iddepartamento=$row['fk_departamento'];
+
+        $stmt2 = $conn->prepare("SELECT fk_aula FROM departamento WHERE id_departamento='$iddepartamento'"); 
+        $stmt2->execute();
+        while($row = $stmt2->fetch()) {
+            $aula=$row['fk_aula'];
+        }
+    }
+
+
     $stmt = $conn->prepare("INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`,`hora`,`activoDesde`,`activoHasta`,`semestre`,`fk_dia`,`fk_profesor`,`fk_materia`,`n`,`fk_aula`)
-    VALUES (null, '$hora', '$fecha' , '0000-00-00', '$semestre', '$diaingresadonumero','$idprofesor','$idmateria','$n','1');");  
+    VALUES (null, '$hora', '$fecha' , '0000-00-00', '$semestre', '$diaingresadonumero','$idprofesor','$idmateria','$n','$aula');");  
     $stmt->execute();
     global $idhorariodeconsultacreado;
     $idhorariodeconsultacreado = $conn->lastInsertId("horariodeconsulta");

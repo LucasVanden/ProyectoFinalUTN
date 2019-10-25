@@ -69,12 +69,13 @@ class controladorAdministrador extends conexion
     function BuscarDepartamento(){
         $listaDepartamento=array();
         $conn = $this->getconexion();
-        $stmt = $conn->prepare("SELECT id_departamento,nombre FROM departamento ORDER BY nombre "); 
+        $stmt = $conn->prepare("SELECT id_departamento,nombre,fk_aula FROM departamento ORDER BY nombre "); 
         $stmt->execute();
         while($row = $stmt->fetch()) {
             $dep = new Departamento();
             $dep->setid_departamento($row['id_departamento']);
             $dep->setnombre($row['nombre']);
+            $dep->setfk_aula($row['fk_aula']);
            array_push($listaDepartamento,$dep);
         }
         return $listaDepartamento;

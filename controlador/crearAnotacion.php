@@ -111,7 +111,7 @@ $idalumno= $_SESSION['idalumno'];
                 $alumnombre=($row['nombre']);
 
     }
-        $body="$alumapellido $alumnombre se ha anotado a $nombreMateria el dia $dia a las $hora";
+        $body="$alumapellido $alumnombre se ha anotado a la consulta de $nombreMateria del dia $dia a las $hora";
 
         $emails=array();
         array_push($emails,$emailprofesor);

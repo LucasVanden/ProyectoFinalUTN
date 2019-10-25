@@ -109,6 +109,7 @@ $abmDepartamento='/vista/administrador/ambDepartamento.php';
 
 $borrarDepartamento='/controlador/administrador/abmDepartamento/borrarDepartamento.php';
 $crearDepartamento='/controlador/administrador/abmDepartamento/crearDepartamento.php';
+$editarDepartamento='/controlador/administrador/abmDepartamento/editarDepartamento.php';
 
 //ABM materia
 $abmMateria='/vista/administrador/abmMateria.php';

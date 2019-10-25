@@ -10,6 +10,7 @@ class Departamento
 {
 	var $id_departamento;
 	var $nombre;
+	var $fk_aula;
 
 
 	function Departamento()
@@ -34,6 +35,15 @@ class Departamento
 	function setnombre($newVal)
 	{
 		$this->nombre = $newVal;
+	}
+
+	function getfk_aula()
+	{
+		return $this->fk_aula;
+	}
+	function setfk_aula($newVal)
+	{
+		$this->fk_aula = $newVal;
 	}
 
 }

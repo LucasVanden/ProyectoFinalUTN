@@ -18,11 +18,19 @@ require_once ($DIR . $Profesor);
 
 session_start();
 $departamento=$_POST['departamento'];
+$AulaAsignada=$_POST['AulaAsignada'];
 $con= new conexion();
 $conn=$con->getconexion();
-$stmt = $conn->prepare("INSERT INTO `departamento` (`id_departamento`,`nombre`)
-VALUES (null, '$departamento');");  
+
+$stmt = $conn->prepare("SELECT id_departamento FROM departamento WHERE nombre='$departamento'"); 
 $stmt->execute();
+if($stmt->rowCount() == 0) {
+
+    $stmt2 = $conn->prepare("INSERT INTO `departamento` (`id_departamento`,`nombre`,`fk_aula`)
+    VALUES (null, '$departamento','$AulaAsignada');");  
+    $stmt2->execute();
+}
+
 
  $direccion= $URL . $abmDepartamento;
  header("Location: $direccion");
