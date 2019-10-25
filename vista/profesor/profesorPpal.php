@@ -9,7 +9,7 @@ if(!isset($_SESSION['rol'])){
     }
 }
 require_once $DIR . $profesorControlador;
-
+$_SESSION['mensaje']=null;
 
 $idusuario=$_SESSION['usuario'];
 $a=new profesorControlador();
