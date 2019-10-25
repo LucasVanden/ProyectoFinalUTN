@@ -18,6 +18,9 @@ $style="/vista/assert/css/style.css";
 $loginasistencia='/vista/asistencia/login.php';
 $login='/vista/login.php';
 
+$cambiarContraseniaUsuario='/controlador/cambiarContraseniaUsuario.php';
+$vistacambiocontraseña='/vista/profesor/cambiarContrasenia.php';
+
 $logoutasistencia='/vista/logoutasistencia.php';
 $email='/controlador/enviaremail.php';
 
