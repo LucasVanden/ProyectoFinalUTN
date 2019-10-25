@@ -230,7 +230,7 @@ function crearTardanza($hora,$presentismo,$horanumero){
 
     $min=calcularMinutosTarde($presentismo,$horanumero);
 
-    $stmt = $conn->prepare("INSERT INTO `falta` (`id_falta`, `fechaFalta`, `tipo`, `min`,`fk_horadeconsulta`,`fk_materia`,`fk_profesor`,`fk_departamento`) 
+    $stmt = $conn->prepare("INSERT INTO `falta` (`id_falta`, `fechaFalta`, `tipo`, `minutos`,`fk_horadeconsulta`,`fk_materia`,`fk_profesor`,`fk_departamento`) 
     VALUES (NULL, '$fecha', 'Tardanza' , '$minutos','$fk_horadeconsulta','$fk_materia','$fk_profesor','$fk_departamento');");  
     $stmt->execute();
 }
@@ -257,7 +257,7 @@ function crearAusente($hora){
     $fk_profesor=$hora->getprofesor()->getid_profesor();
     $fk_departamento=$hora->getMateria()->getfk_departamento();
 
-    $stmt = $conn->prepare("INSERT INTO `falta` (`id_falta`, `fechaFalta`, `tipo`, `min`,`fk_horadeconsulta`,`fk_materia`,`fk_profesor`,`fk_departamento`) 
+    $stmt = $conn->prepare("INSERT INTO `falta` (`id_falta`, `fechaFalta`, `tipo`, `minutos`,`fk_horadeconsulta`,`fk_materia`,`fk_profesor`,`fk_departamento`) 
     VALUES (NULL, '$fecha', 'Falta' , null,'$fk_horadeconsulta','$fk_materia','$fk_profesor','$fk_departamento');");  
     $stmt->execute();
 }

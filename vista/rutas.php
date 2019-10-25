@@ -60,6 +60,7 @@ $FechaMesa='/modelo/FechaMesa.php';
 $Presentismo='/modelo/Presentismo.php';
 $Aula='/modelo/Aula.php';
 $Dedicacion='/modelo/Dedicacion.php';
+$Falta='/modelo/Falta.php';
 
 //PROFESOR
 $profesorControlador='/controlador/profesor/profesorControlador.php';
@@ -82,8 +83,12 @@ $AsistirAlumno='/controlador/asistencia/AsistirAlumno.php';
 $demonio='/controlador/asistencia/Demonio.php';
 $dem='/vista/asistencia/demonio.php';
 
-
+//REPORTES
 $ReportesControlador='/controlador/reportes/ReportesControlador.php';
+$buscarMateriasDepartamentoincluidoTodas='/controlador/reportes/buscarMateriasDepartamentoincluidoTodas.php';
+$directorReportes='/vista/reportes/directorReportes.php';
+$vistafaltas='/vista/reportes/faltas.php';
+$buscarfaltas='/controlador/reportes/buscarFaltas.php';
 
 $controladorAsuetosReceso='/controlador/administrador/controladorAsuetosReceso.php';
 $controladorAsuetoFeriado='/controlador/administrador/controladorAsuetoFeriado.php';
