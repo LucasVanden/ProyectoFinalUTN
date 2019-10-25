@@ -15,22 +15,26 @@ require_once ($DIR.$ReportesControlador);
 $buscarMateriasDepartamentoincluidoTodas= $URL.$buscarMateriasDepartamentoincluidoTodas;
 $buscarfaltas= $URL.$buscarfaltas;
   
-if(isset($_POST['departamentos'])){
-    $dep=$_POST['departamentos'];}else{
+
+
+
+
+if(isset($_SESSION['departamentos'])){
+    $dep=$_SESSION['departamentos'];}else{
         $dep="pikachu";
     }
-    if(isset($_POST['fechaDesde'])){
-        $fechadesde=$_POST['fechaDesde'];}else{
+    if(isset($_SESSION['fechaDesde'])){
+        $fechadesde=$_SESSION['fechaDesde'];}else{
             $d=date("Y-m-d");
             $fechadesde="'".$d."'";
         }
-    if(isset($_POST['fechaHasta'])){
-            $fechahasta=$_POST['fechaHasta'];}else{
+    if(isset($_SESSION['fechaHasta'])){
+            $fechahasta=$_SESSION['fechaHasta'];}else{
                 $d=date("Y-m-d");
                 $fechahasta="'".$d."'";
             }
-    if(isset($_POST['reporte2'])){
-                $opcion=$_POST['reporte2'];}else{
+    if(isset($_SESSION['reporte2'])){
+                $opcion=$_SESSION['reporte2'];}else{
                     $opcion=1;
                 }  
 ?>
@@ -50,7 +54,7 @@ if(isset($_POST['departamentos'])){
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Obtener Reportes sobre Horarios de Consulta:</h2>
+        <h2>Obtener Reportes Inasistencias:</h2>
         <form action="directorReportes.php" method="POST"> <!-- -->
             <div>
                 <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
@@ -112,7 +116,9 @@ if(isset($_POST['departamentos'])){
                     <?php     
  //echo '<pre>'; print_r($_SESSION["faltasBuscadas"]); echo '</pre>';   
 if(isset($_SESSION["faltasBuscadas"])) : ?>
-
+    <?php if(empty($_SESSION["faltasBuscadas"])) : ?>
+    No hay Faltas
+    <?php endif?>
 <table>
 <?php foreach ($_SESSION["faltasBuscadas"] as $falta): ?>
 
