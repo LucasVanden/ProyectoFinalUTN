@@ -20,6 +20,7 @@ $login='/vista/login.php';
 
 $cambiarContraseniaUsuario='/controlador/cambiarContraseniaUsuario.php';
 $vistacambiocontraseña='/vista/profesor/cambiarContrasenia.php';
+$cambiarContraseniaalumno='/vista/alumno/cambiarContrasenia.php';
 
 $logoutasistencia='/vista/logoutasistencia.php';
 $email='/controlador/enviaremail.php';

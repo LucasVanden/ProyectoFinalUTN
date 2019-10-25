@@ -6,7 +6,7 @@ $cambiarContraseniaUsuario=$URL.$cambiarContraseniaUsuario;
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
 }else{
-    if($_SESSION['rol'] != 2){
+    if($_SESSION['rol'] != 1){
         header('location: '. $URL.$login);
     }
 }
@@ -28,7 +28,7 @@ if(!isset($_SESSION['rol'])){
   </head>
   <body background = <?php echo $URL.$fondo?>>
 
-    <?php require $DIR.$headerp ?>
+    <?php require $DIR.$header ?>
 
     <?php if (!empty($message)) : ?>
       <p> <?= $message ?></p>
@@ -37,11 +37,11 @@ if(!isset($_SESSION['rol'])){
     <h1>Cambiar contraseña</h1>
 
 
-    <form action=cambiarContrasenia.php method="POST">
+    <form action=cambiarContraseniaalumno.php method="POST">
       <input name="contraseña" type="text" placeholder="Contraseña" required >
       <input name="nuevacontraseña" type="password" placeholder="Ingrese su nueva contraseña" required >
       <input name="confirma_contraseña" type="password" placeholder="Repita su nueva contraseña" required >
-      <input name="tipo" type="hidden" value="profesor" >
+      <input name="tipo" type="hidden" value="alumno" >
       <input type="submit" value="Enviar" formaction=<?php echo $cambiarContraseniaUsuario?>>
     </form>
 

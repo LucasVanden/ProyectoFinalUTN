@@ -20,7 +20,7 @@ $usuario=$_SESSION['usuario'];
     while($row = $stmt->fetch()) {
        $pass=$row['contraseña'];
     }
-    
+
     if (password_verify($contraseña,$pass)){
 
         if($nuevacontraseña==$confirma_contraseña){
@@ -40,8 +40,14 @@ $usuario=$_SESSION['usuario'];
 
 
 $_SESSION['contenidomensaje']=$mensaje;
-
+if($_POST['tipo']=="profesor"){
 $direccion= $URL . $vistacambiocontraseña;
 header("Location: $direccion");
+}
+if($_POST['tipo']=="alumno"){
+    $direccion= $URL . $cambiarContraseniaalumno;
+    header("Location: $direccion");
+    }
+
 
 ?>

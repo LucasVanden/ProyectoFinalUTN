@@ -5,4 +5,5 @@
 <?php endif; ?>
   <a href=<?php echo $URL."/vista/alumno/alumnoPpal.php"?>> <img src=<?php echo '"'.$URL.$logo.'"'?> width="75" height="75" /> </a>
   <TD><a href=<?php echo $URL."/vista/logout.php"?> style="float:right;" > - Salir -    &nbsp;&nbsp;  </a> </TD>
+  <TD><a href=<?php echo $URL.$cambiarContraseniaalumno?> style="float:right;" > - cambiar Contraseña -    &nbsp;&nbsp;  </a> </TD>
 </header>

@@ -21,6 +21,7 @@ $idalumno= $a->buscarAlumnoDeUsuario($idusuario);
 $alumno = $a->buscarAlumno($idalumno);
 $_SESSION['idalumno']=$idalumno;
 $_SESSION['nombre']=$a->idAlumnoaNombre($idalumno);
+$_SESSION['mensaje']=null;
 ?>
 
 <!DOCTYPE html>
