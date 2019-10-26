@@ -40,7 +40,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
   }
  
 }else{
-    $message= 'Ingrese: legajo, nombre y apellido.';
+    $message= 'Ingrese: legajo, nombre, apellido y e-mail.';
 }
 ?>
 <!DOCTYPE html>
@@ -49,12 +49,10 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     <meta charset="utf-8">
     <title>Alta Profesor</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-      <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
+    <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
-  
   <body background = <?php echo $URL.$fondo?>>
-
-    <?php require $DIR.$headera ?>
+  <?php require $DIR.$headera ?>
 
     <?php if (!empty($message)) : ?>
       <p> <?= $message ?></p>
@@ -62,22 +60,12 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
 
     <h2>Alta Profesor</h2>
     <form action="altaProfesor.php" method="POST">
-        <div>
-          <label>Legajo: </label>
-          <input name="legajo" type="text" placeholder="legajo" requerid>
-        </div>
-        <div>
-          <label>Nombre: </label>
-              <input name="nombre" type="text" placeholder="nombre" requerid>
-        </div>
-        <div>
-          <label>Apellido: </label>        
-              <input name="apellido" type="text" placeholder="apellido" requerid>
-        </div>
-        <div>
-          <label>Email: </label>
-          <input name="email" type="text" placeholder="email" requerid>
-        </div>
+        <p>
+          <label>Legajo: </label><input name="legajo" type="number" placeholder=" Legajo" min=1 requerid><br><br>
+          <label>Nombre: </label><input name="nombre" type="text1" placeholder=" Nombre" requerid><br><br>
+          <label>Apellido: </label><input name="apellido" type="text1" placeholder=" Apellido" requerid><br><br>
+          <label>E - mail: </label><input name="email" type="mail" placeholder="email@dominio.com" requerid><br><br>
+        </p>
         <div><br><br><input type="submit" value="Enviar"></div>
         <div><input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
     </form>

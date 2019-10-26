@@ -42,27 +42,25 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Registrese</title>
+    <title>Alta Usuario</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
-  <body background = http://192.168.43.84/ProyectoFinalUTN/vista/fondoCuerpo.jpg>
-
-    <?php require 'partials/header.php' ?>
-
-    <?php if (!empty($message)) : ?>
+  <body background = <?php echo $URL.$fondo?>>
+  <?php require $DIR.$header ?>
+  <?php if (!empty($message)) : ?>
       <p> <?= $message ?></p>
-    <?php endif; ?>
+  <?php endif; ?>
 
-    <h1>Registrese</h1>
-    <span>or <a href="login.php">Login</a></span>
-
+    <h1>Alta Usuario</h1>
     <form action="signup.php" method="POST">
       <input name="usuario" type="text" placeholder="Ingrese su usuario">
       <input name="contraseña" type="password" placeholder="Ingrese su contraseña">
       <input name="confirma_contraseña" type="password" placeholder="confirme su contraseña">
       <input name="alumno" type="text" placeholder="legajo">
       <input type="submit" value="Enviar">
+      <br>
+      <span>Si ya se registro como usuario, ingrese al sistema: <a href="login.php">Login</a></span>
     </form>
 
   </body>

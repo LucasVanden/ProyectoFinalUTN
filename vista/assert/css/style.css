@@ -18,6 +18,24 @@ body{
     padding: 0;
     font-family: 'Roboto', sans-serif;
     text-align: center;  
+    display: flex;
+    min-height: 100vh;
+    flex-wrap: wrap;
+}
+
+/* Footer */
+footer {
+    /*border-bottom: 2px solid #eee; */
+    /*padding: 2px 0 2px;*/
+    width: 100%;
+    text-align: center;
+    color:  #00000;
+    /*height: 40px;*/
+    /*bottom: 0;*/
+    /*position:absolute;*/
+    background-color:  #0000004f; 
+    align-self: flex-end;
+    line-height:3;
 }
 
 /* Input Forms*/
@@ -59,20 +77,6 @@ header {
 header a {
     text-decoration: none;
     color: #00000;
-}
-
-/* Footer */
-footer {
-    border-bottom: 2px solid #eee; 
-    padding: 2px 0 2px;
-    width: 100%;
-    text-align: center;
-    color:  #00000;
-    height: 40px;
-    bottom: 0;
-    position:absolute;
-    background-color:  #0000004f; 
-    align-self: flex-end;
 }
 
 table-mostrar, thead, td{

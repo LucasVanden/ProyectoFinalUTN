@@ -4,7 +4,7 @@ session_start();
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
-
+//antes de romper
 $a=new controladorAdministrador();
 
 $altaMateriaAProfesor= $URL.$altaMateriaProfesor;
