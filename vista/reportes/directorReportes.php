@@ -1,8 +1,11 @@
 <?php
 session_start();
-if (isset($_SESSION['user_id'])) {
-    header('Location: /PFProyect');
-    footer('Location: /PFProyect');
+if(!isset($_SESSION['rol'])){
+    header('location: '. $URL.$login);
+}else{
+    if($_SESSION['rol'] != 3 ){
+        header('location: '. $URL.$login);
+    }
 }
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
@@ -42,7 +45,7 @@ if(isset($_POST['reporte2'])){
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require './../partials/header.php' ?>
+    <?php require $DIR.$headerp ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
