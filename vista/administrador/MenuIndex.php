@@ -33,7 +33,53 @@ $_SESSION['idDepartamentoSeleccionado']=null;
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
- 
+        
+        <style type="text/css">
+            body{
+                padding:0px;
+                margin:0px;
+            }
+            .nav ul{
+                list-style: none;
+                margin:0;
+                padding:0;
+            }
+            .nav ul li {
+                padding:15px;
+                position:relative;
+                width: 150px;
+                vertical-align: middle;
+                background-color: #0098cb;
+                cursor:pointer;
+                border-top: 1px solid white;
+                -webkit-transition: all 0.3s;
+                -o-transition: all 0.3s;
+                transition: all 0.3s;
+            }
+            .nav ul li:{
+                background-color: #0098cb;
+            }
+            .nav > ul > li{
+                border-right: 1px solid yellow;
+            }
+            .nav ul ul{
+                transition: all 0.3s;
+                position: absolute;
+                opacity:0;
+                visibility: hidden;
+                left:100%;
+                top:-2%;
+                border-left: 1px solid yellow; 
+            }
+            .nav ul li:hover > ul{
+                opacity:1;
+                visibility: visible;
+            }
+            .nav ul li a {
+                color: white;
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
@@ -41,8 +87,37 @@ $_SESSION['idDepartamentoSeleccionado']=null;
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>menu?</h2>
-        <form action=<?php echo $MenuIndex ?> method="POST"> <!-- -->
+        <h2>Menú Administrador</h2>
+            <div class="nav">
+                <ul align='left'>
+                    <li><a href="<?php echo $AsuetosMenu ?>">Asuetos</a></li>
+                        <ul>
+                            <li><a href="http://localhost/ProyectoFinalUTN/vista/administrador/AsuetosReceso.php">Recesos</a></li>
+                            <li><a href="#">Feriados</a></li>
+                            <li><a href="#">Asuetos</a></li>
+                            <li><a href="#">Borrar Fecha</a></li>
+                        </ul>
+                    <li><a href="<?php echo $Mesas ?>">Mesas</a></li>
+                    <li><a href="<?php echo $ABMAula ?>">Aulas</a></li>
+                        <ul>
+                            <li><a href="#">Cargar Aulas</a></li>
+                            <li><a href="#">Mostrar Aulas</a></li>
+                        </ul>
+                    <li><a href="<?php echo $abmDepartamento ?>">Departamentos</a></li>
+                    <li><a href="<?php echo $abmMateria ?> ">Materias</a></li>
+                    <li><a href="<?php echo $menuAltaProfesor ?>">Profesores</a></li>
+                        <ul>
+                            <li><a href="#">Alta Profesor</a></li>
+                            <li><a href="#">Asignar Materia A Profesor</a></li>
+                            <li><a href="#">Baja Materia Profesor</a></li>
+                        </ul>
+                    <li><a href="<?php echo $backup ?>">Backup</a></li> 
+                </ul>
+            </div>
+
+
+
+<!--
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF">  
              
@@ -69,8 +144,7 @@ $_SESSION['idDepartamentoSeleccionado']=null;
                         <td>
                         <div>  <input type="submit" value="Backup" name="Obtener" formaction=<?php echo $backup ?>  /></div>
                         </td>
-                        </tr> 
-                    </form>
+                        </tr> -->
 
 
     <footer>

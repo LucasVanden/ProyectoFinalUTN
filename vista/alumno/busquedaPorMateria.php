@@ -11,6 +11,7 @@ if(!isset($_SESSION['rol'])){
 
 
 require_once $DIR .$alumnoControlador;
+$a = new alumnoControlador();
 ?>
 
 
@@ -31,7 +32,7 @@ require_once $DIR .$alumnoControlador;
         <?php endif; ?>
 
 
- <?php $a = new alumnoControlador();
+ <?php 
  
  if (isset($_POST['nombreMateriaSeleccionada'])){
   $id = $a->buscarIDdeNombreMateria($_POST["nombreMateriaSeleccionada"]);}
@@ -42,7 +43,7 @@ require_once $DIR .$alumnoControlador;
  
    ?>
         <?php
-         $a =new AlumnoControlador ;
+
          $mat = $a->buscarHorariosDeConsultaDeMateriaporhoraconsulta($id);
         ?>
 

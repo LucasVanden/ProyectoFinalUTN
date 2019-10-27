@@ -33,11 +33,15 @@ $MenuIndex= $URL.$MenuIndex;
                     
                         <tr>
                         <td>   <div>  <input type="submit" value="Volver" name="Obtener" formaction=<?php echo $MenuIndex ?> /></div></td>       
-                        </tr>         
-                    </form>
+                        </tr>   
+                        <tr>      
+                  
                     <IMG SRC="manquina de escribir invisible.gif">
-
-
+                    </tr>
+                    </table>
+    </div>
+    </form>
+</body>
     <footer>
         <?php require './../partials/footer.php'; ?>     
     </footer>  
