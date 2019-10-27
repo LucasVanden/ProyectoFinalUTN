@@ -105,6 +105,9 @@ $setearAula='/controlador/administrador/setearAula.php';
 $abmcrearAula='/controlador/administrador/abmcrearAula.php';
 $borrarAula='/controlador/administrador/borrarAula.php';
 
+$asignarDirector='/controlador/administrador/cargoDirector/asignarDirector.php';
+$eliminarDirecotr='/controlador/administrador/cargoDirector/eliminarDirecotr.php';
+
 $altaAlumno='/vista/administrador/altaAlumno.php';
 //ABM DEPARTAMENTO
 $abmDepartamento='/vista/administrador/ambDepartamento.php';
@@ -144,6 +147,7 @@ $EditarAultaAsignada='/vista/administrador/EditarAultaAsignada.php';
 $SeleccionEditarAulaAsignada='/vista/administrador/SeleccionEditarAulaAsignada.php';
 $ABMAula='/vista/administrador/ABMAula.php';
 $backup='/vista/administrador/backup.php';
+$subirCargoaDirector='/vista/administrador/subirCargoaDirector.php';
 
 
 $buscarDepartamentosconel1erovacio='/controlador/administrador/buscarDepartamentosconel1erovacio.php';

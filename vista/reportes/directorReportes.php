@@ -137,8 +137,9 @@ if(isset($_POST['reporte2'])){
                             <?php endif; ?>
                             
                     </tr>   
-                    </div> 
+                 
                     </table>
+                    </div> 
                     <div>  <br><input type="submit" value="Obtener" name="Obtener"  /></div>
                     </form>
                     <?php     
@@ -213,6 +214,6 @@ var chart = new Chart(ctx, {
 
 </script>
     <footer>
-        <?php require './../partials/footer.php'; ?>     
+    <?php require $DIR.$footer; ?>   
     </footer>  
 </html>

@@ -5,7 +5,7 @@ require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
 }else{
-    if($_SESSION['rol'] != 2){
+    if(!($_SESSION['rol'] == 2 || $_SESSION['rol']==3)){
         header('location: '. $URL.$login);
     }
 }
@@ -294,6 +294,6 @@ $M2S2=null;
         </form>
     </body>
     <footer>
-        <?php require './../partials/footer.php'; ?>   
+    <?php require $DIR.$footer; ?>     
     </footer>  
 </html>

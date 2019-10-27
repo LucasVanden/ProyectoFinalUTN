@@ -1,10 +1,9 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-session_start();
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
 }else{
-    if($_SESSION['rol'] != 2){
+    if(!($_SESSION['rol'] == 2 || $_SESSION['rol']==3)){
         header('location: '. $URL.$login);
     }
 }
@@ -339,6 +338,6 @@ foreach ($cargar as $horario) {
             </form>
     </body>
     <footer>
-        <?php require './../partials/footer.php'; ?>   
+    <?php require $DIR.$footer; ?>    
     </footer>  
 </html>

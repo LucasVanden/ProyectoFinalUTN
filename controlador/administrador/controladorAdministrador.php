@@ -130,6 +130,28 @@ class controladorAdministrador extends conexion
         }
         return $listaProfesor;
     }
+    function BuscarDirector(){
+        $listaProfesor=array();
+        $conn = $this->getconexion();
+
+        $stmt = $conn->prepare("SELECT fk_profesor FROM usuario where fk_perfil='3' "); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+            $fk_profesor=$row['fk_profesor'];
+
+            $stmt2 = $conn->prepare("SELECT id_profesor,nombre,apellido,email FROM profesor where id_profesor='$fk_profesor' ORDER BY apellido "); 
+            $stmt2->execute();
+            while($row = $stmt2->fetch()) {
+                $prof = new Profesor();
+                $prof->setid_profesor($row['id_profesor']);
+                $prof->setapellido($row['apellido']);
+                $prof->setnombre($row['nombre']);
+                $prof->setemail($row['email']);
+            array_push($listaProfesor,$prof);
+            }
+        }
+        return $listaProfesor;
+    }
 
     function BuscarDedicacion(){
         $listaDedicacion=array();

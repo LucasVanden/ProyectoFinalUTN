@@ -3,14 +3,14 @@ session_start();
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 $cambiarContraseniaUsuario=$URL.$cambiarContraseniaUsuario;
 
+require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
 }else{
-    if($_SESSION['rol'] != 2){
+    if(!($_SESSION['rol'] == 2 || $_SESSION['rol']==3)){
         header('location: '. $URL.$login);
     }
 }
-
 ?>
 
 <!DOCTYPE html>
