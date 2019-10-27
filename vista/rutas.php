@@ -90,6 +90,7 @@ $directorReportes='/vista/reportes/directorReportes.php';
 $vistafaltas='/vista/reportes/faltas.php';
 $buscarfaltas='/controlador/reportes/buscarFaltas.php';
 
+//ADMINISTRADOR
 $controladorAsuetosReceso='/controlador/administrador/controladorAsuetosReceso.php';
 $controladorAsuetoFeriado='/controlador/administrador/controladorAsuetoFeriado.php';
 $controladorAsuetoAsueto='/controlador/administrador/controladorAsuetoAsueto.php';
@@ -104,6 +105,7 @@ $setearAula='/controlador/administrador/setearAula.php';
 $abmcrearAula='/controlador/administrador/abmcrearAula.php';
 $borrarAula='/controlador/administrador/borrarAula.php';
 
+$altaAlumno='/vista/administrador/altaAlumno.php';
 //ABM DEPARTAMENTO
 $abmDepartamento='/vista/administrador/ambDepartamento.php';
 

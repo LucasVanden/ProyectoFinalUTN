@@ -16,6 +16,7 @@ $abmDepartamento=$URL.$abmDepartamento;
 $abmMateria=$URL.$abmMateria;
 $menuAltaProfesor=$URL.$menuAltaProfesor;
 $backup=$URL.$backup;
+$altaAlumno=$URL.$altaAlumno;
 
 $_SESSION['comprobacion']=null;
 $_SESSION['fechasBuscadas']=null;
@@ -111,6 +112,7 @@ $_SESSION['idDepartamentoSeleccionado']=null;
                             <li><a href="#">Asignar Materia A Profesor</a></li>
                             <li><a href="#">Baja Materia Profesor</a></li>
                         </ul>
+                    <li><a href="<?php echo $altaAlumno ?>">Alta alumno</a></li> 
                     <li><a href="<?php echo $backup ?>">Backup</a></li> 
                 </ul>
             </div>

@@ -1,7 +1,6 @@
 <?php
-require 'dbPFPrueba.php';
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-require_once $DIR . '/modelo/persistencia/conexion.php';
+require_once $DIR . $conexion;
 $message = '';
 $exito=0;
 if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'])) {
@@ -17,9 +16,9 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
   $mensaje=null;
  
 
-  $stmt2 = $conexttion->prepare("SELECT id_alumno FROM alumno where legajo='$legajo'");
-  $stmt2->execute();
-  while ($row = $stmt2->fetch()) {
+  $stmt0 = $conexttion->prepare("SELECT id_alumno FROM alumno where legajo='$legajo'");
+  $stmt0->execute();
+  while ($row = $stmt0->fetch()) {
     $alumno = ($row['id_alumno']);
   }
   if (isset($alumno)){$message="legajo existente";}else{
@@ -28,19 +27,27 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     $stmt = $conexttion->prepare("INSERT INTO `alumno` (`id_alumno`, `legajo`, `apellido`, `nombre`, `email`, `fechaNacimientoAlumno`,`telefonoAlumno`) 
     VALUES (NULL, '$legajo', '$apellido' , '$nombre', '$email','$fecha','$telefono');");
 
-    $contraseña = password_hash($legajo, PASSWORD_BCRYPT);
-    $stmt = $conexttion->prepare("INSERT INTO `usuario` (`id_usuario`, `usuario`, `contraseña`, `fk_alumno`, `fk_profesor`, `fk_perfil`) 
-    VALUES (NULL, '$legajo', '$contraseña' , '$alumno', NULL,1);");
-    $stmt->execute();
-
     if ( $stmt->execute() ){
         $message="Alumno creado exitosamente";
+        sleep(0.5);
+        $alumno = $conexttion->lastInsertId("alumno");
+        $contraseña = password_hash($legajo, PASSWORD_BCRYPT);
+
+        $stmt2 = $conexttion->prepare("SELECT usuario FROM usuario where usuario='$legajo'");
+        $stmt2->execute();
+        if($stmt2->rowCount() == 0) {
+
+        $stmt3 = $conexttion->prepare("INSERT INTO `usuario` (`id_usuario`, `usuario`, `contraseña`, `fk_alumno`, `fk_profesor`, `fk_perfil`) 
+        VALUES (NULL, '$legajo', '$contraseña' , '$alumno', NULL,1);");
+        $stmt3->execute();
+
         $exito=1;
     }else{
         $message="Hubo un problema al crear al alumno";
     }
 
   }
+}
  
 }else{
     $message= 'ingrese Legajo,nombre y apellido';
@@ -59,7 +66,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
   <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
   <body background = <?php echo $URL.$fondo?>>
-    <?php require 'partials/header.php' ?>
+  <?php require $DIR.$headera ?>
     <h1>Alta Alumno</h1>
     <form action="altaAlumno.php" method="POST">
       <p><br>
@@ -68,11 +75,10 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
         <label>Apellido:</label><input name="apellido" type="text1" placeholder=" Apellido" required><br>
         <label>e - mail:</label><input name="email" type="mail" placeholder=" email@dominio.com"><br>
         <label>Nacimiento:</label><input name="fecha" type="date" required><br>
-        <label>Teléfono:</label><input name="telefono" type="number" placeholder=" 555-555" min=1 max=999999><br>
+        <label>Teléfono:</label><input name="telefono" type="number" placeholder=" 555-555-5555" min=1 max=9999999999><br>
       </p>
       <input type="submit" value="Enviar">
       <br>
-      <span>Si ya te registraste como Alumno debes registrarte como Usuario: <a href="signup.php">Alta Usuario</a></span>
     </form>
     <br>
     <?php if (!empty($message)) : ?>
