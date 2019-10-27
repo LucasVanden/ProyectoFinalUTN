@@ -89,6 +89,6 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
      <?php endif; ?>
     <footer>
-        <?php require './../partials/footer.php'; ?>     
+       <?php require $DIR.$footer; ?>         
     </footer>  
 </html>

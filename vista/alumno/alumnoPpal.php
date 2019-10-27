@@ -30,7 +30,7 @@ $_SESSION['mensaje']=null;
         <meta charset="utf-8">
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
         
 <!-- IMPORTAR BOOSTRAP -->
 <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -42,7 +42,7 @@ $_SESSION['mensaje']=null;
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <!-- <body background=https://secure.img1-fg.wfcdn.com/im/78135171/resize-h505-w505%5Ecompr-r85/8470/84707680/Pokemon+Pikachu+Wall+Decal.jpg> -->
-        <?php require './../partials/header.php' ?>
+    <?php require $DIR.$header ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -267,6 +267,6 @@ $_SESSION['mensaje']=null;
         </form>
     </body>
     <footer>
-        <?php require './../partials/footer.php'; ?>         
+       <?php require $DIR.$footer; ?>             
     </footer>  
 </html>

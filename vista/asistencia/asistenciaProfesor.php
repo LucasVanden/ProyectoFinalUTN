@@ -98,6 +98,6 @@ $asistirprofesor=$URL.$AsistirProfesor;
      
     </body>
     <footer>
-        <?php require './../partials/footer.php'; ?>      
+       <?php require $DIR.$footer; ?>          
     </footer>  
 </html>

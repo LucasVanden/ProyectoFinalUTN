@@ -129,6 +129,6 @@ header("Location: $direccion");
      
     </body>
     <footer>
-        <?php require './../partials/footer.php'; ?>     
+       <?php require $DIR.$footer; ?>         
     </footer>  
 </html>

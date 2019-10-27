@@ -18,10 +18,10 @@ require_once $DIR .$alumnoControlador;
         <meta charset="utf-8">
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
     </head>
     <body background = <?php echo $URL.$fondo?>>
-        <?php require './../partials/header.php' ?>
+    <?php require $DIR.$header ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -95,6 +95,6 @@ require_once $DIR .$alumnoControlador;
         </form>
     </body>
     <footer>
-        <?php require './../partials/footer.php'; ?>          
+       <?php require $DIR.$footer; ?>              
     </footer>  
 </html>

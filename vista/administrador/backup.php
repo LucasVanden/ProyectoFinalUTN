@@ -16,7 +16,7 @@ $MenuIndex= $URL.$MenuIndex;
         <meta charset="utf-8">
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
  
     </head>
     <body background = <?php echo $URL.$fondo?>>
@@ -43,6 +43,6 @@ $MenuIndex= $URL.$MenuIndex;
     </form>
 </body>
     <footer>
-        <?php require './../partials/footer.php'; ?>     
+       <?php require $DIR.$footer; ?>         
     </footer>  
 </html>

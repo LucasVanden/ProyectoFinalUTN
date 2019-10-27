@@ -40,7 +40,7 @@ if(isset($_POST['reporte2'])){
         <meta charset="utf-8">
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
  
     </head>
     <body background = <?php echo $URL.$fondo?>>

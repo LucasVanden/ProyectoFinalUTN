@@ -4,10 +4,6 @@ require_once ($DIR . $Falta);
 require_once ($DIR . $Departamento);
 require_once ($DIR . $Profesor);
 session_start();
-if (isset($_SESSION['user_id'])) {
-    header('Location: /PFProyect');
-    footer('Location: /PFProyect');
-}
 
 require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
@@ -45,7 +41,7 @@ if(isset($_SESSION['departamentos'])){
         <meta charset="utf-8">
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
  
     </head>
     <body background = <?php echo $URL.$fondo?>>
@@ -148,6 +144,6 @@ if(isset($_SESSION["faltasBuscadas"])) : ?>
 <?php endif?>
 </script>
     <footer>
-        <?php require './../partials/footer.php'; ?>     
+       <?php require $DIR.$footer; ?>         
     </footer>  
 </html>
