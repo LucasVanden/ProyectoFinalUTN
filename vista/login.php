@@ -19,6 +19,10 @@ if (isset($_SESSION['rol'])) {
         header('location: '. $URL.'/vista/profesor/profesorPpal.php');
         break;
         //agregar director
+        case 4:
+        // $message = 'Entro al 2';
+             header('Location: '. $URL.'/vista/administrador/MenuIndex.php');
+         break;
         default:
     }
 }
@@ -83,6 +87,10 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
             // $message = 'Entro al 2';
                  header('Location: '. $URL.'/vista/profesor/profesorPpal.php');
              break;
+             case 4:
+             // $message = 'Entro al 2';
+                  header('Location: '. $URL.'/vista/administrador/MenuIndex.php');
+              break;
             default:
            // $message = 'Entro al default'. $perfil ;
         }

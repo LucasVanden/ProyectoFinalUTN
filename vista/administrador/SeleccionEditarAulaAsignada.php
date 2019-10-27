@@ -1,7 +1,14 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 session_start();
-
+if(!isset($_SESSION['rol'])){
+    header('location: '. $URL.$login);
+  }else{
+    if($_SESSION['rol'] != 4){
+        header('location: '. $URL.$login);
+    }
+  }
+  
 
 
 require_once $DIR .$alumnoControlador;
