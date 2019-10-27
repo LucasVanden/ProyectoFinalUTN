@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $conexion;
 

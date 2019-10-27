@@ -47,6 +47,16 @@ class Profesorcontrolador extends conexion
         return $listaDedicaciones;
     }
 
+    function buscarDiaDeMesaDeMateria($idMateria){
+
+        $conn = $this->getconexion();
+        $stmt = $conn->prepare("SELECT id_materia,fk_dia FROM materia where id_materia=$idMateria"); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+        $dia=$row['fk_dia'];
+            }
+        return $dia;
+    }
 
     function buscarIDdeNombreMateria($nombre){
         $conn = $this->getconexion();

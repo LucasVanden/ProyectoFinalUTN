@@ -199,7 +199,7 @@ if ($primera){
     }
     if($dedicaciondoble){    
     $CM12=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2,1);
-    $CC12=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre,1,$idmateria,2);
+    $CC12=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2,1,$idmateria,2);
     $diaigualMesa12=ComprobaSiCoincidecondiaMesas($idmateria,$dia1erSemestre2);
     if(isset($CM12)){
         array_push($mensajes,("superposicion del segundo horario del 1er semestre con materia {$CM12->getfk_materia()->getnombreMateria()}"));
@@ -207,6 +207,7 @@ if ($primera){
         $_SESSION["falloComprobacion"]=true;
         }
     if(isset($CC12)){
+       //  echo '<pre>'; print_r($CC12); echo '</pre>';   
         array_push($mensajes,("superposicion del segundo horario del 1er semestre con consulta de {$CC12->getfk_materia()->getnombreMateria()}"));
         $ejecuta=false;
         $_SESSION["falloComprobacion"]=true;
@@ -263,7 +264,7 @@ if ($primera){
             if(!$repetidomesa11){
                 $ejecutamesa11=true;
                 $CM11=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$diaMesa11,$horaMesa11,$minMesa11,1);
-                $CC11=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa,$horaMesa11,$minMesa11,1,$idmateria,1,31);
+                $CC11=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$diaMesa11,$horaMesa11,$minMesa11,1,$idmateria,1,31);
                 $C4811=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,1,31,1);
             
                 if(isset($CM11)){
@@ -836,6 +837,7 @@ function comprobarSuperposiciónHorariaconotraMateria($idprofesor,$diaingresadon
         }
         array_push($listaMateriasProfesor,$HoradeCursado);
     }
+    if($stmt->rowCount() == 0) {return null;}
     foreach ($listaMateriasProfesor as $horarioCursado) {
        if ($horarioCursado->getdia()->getid_dia()==$diaingresadonumero){
           if(// se acaba antes de que empieze la calse, o empieza despues que termina la clase
@@ -849,6 +851,9 @@ function comprobarSuperposiciónHorariaconotraMateria($idprofesor,$diaingresadon
             break;
           }
        }
+    }
+    if(count($listaMateriasProfesor)==0){
+        return NULL;
     }
 } 
 
@@ -875,7 +880,7 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado
     //--
     $mesaSemestre="3{$semestre}";
     $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta 
-    where fk_profesor=$idprofesor and activoHasta='0000-00-00' and semestre=$semestre or semestre='$mesaSemestre' "); 
+    where (fk_profesor=$idprofesor )and( activoHasta='0000-00-00' )and((semestre=$semestre) or (semestre='$mesaSemestre')) "); 
     $stmt2->execute();
 
     while($row = $stmt2->fetch()) {
@@ -907,6 +912,9 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado
             if($hor->getid_horarioDeConsulta()!==$idExcluir){
         array_push($listaConsultasProfesor,$hor);
             }
+        }
+        if($stmt2->rowCount() == 0) {
+            return null;
         }
         
     
