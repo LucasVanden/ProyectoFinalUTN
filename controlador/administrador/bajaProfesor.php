@@ -16,22 +16,22 @@ require_once ($DIR . $Presentismo);
 session_start();
 date_default_timezone_set('America/Argentina/Mendoza');
 
-$idAula=$_POST['borrarAula'];
+$idprofesor=$_POST['profesor'];
 
-borrarAula($idAula);
-
-
+bajaProfesor($idprofesor);
 
 
-$direccion= $URL . $ABMAula;
+
+
+$direccion= $URL . $bajaProfesor;
 header("Location: $direccion");
 
 $_SESSION['mostrarAulas']=true;
-function borrarAula($idAula){
+function bajaProfesor($idprofesor){
     $con= new conexion();
     $conn=$con->getconexion();
 
-        $stmt = $conn->prepare("UPDATE aula SET eliminado = '1' WHERE id_aula='$idAula'"); 
+        $stmt = $conn->prepare("UPDATE profesor SET eliminado = '1' WHERE id_profesor='$idprofesor'"); 
         $stmt->execute();
 }
 ?>

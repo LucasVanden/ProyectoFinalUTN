@@ -21,7 +21,7 @@ class controladorAdministrador extends conexion
     function BuscarAulas(){
 
         $conn = $this->getconexion();
-        $stmt = $conn->prepare("SELECT id_aula,cuerpoAula,nivelAula,numeroAula FROM aula"); 
+        $stmt = $conn->prepare("SELECT id_aula,cuerpoAula,nivelAula,numeroAula FROM aula where eliminado is null"); 
         $stmt->execute();
         $listaAulas=array();
         while($row = $stmt->fetch()) {
@@ -69,7 +69,7 @@ class controladorAdministrador extends conexion
     function BuscarDepartamento(){
         $listaDepartamento=array();
         $conn = $this->getconexion();
-        $stmt = $conn->prepare("SELECT id_departamento,nombre,fk_aula FROM departamento ORDER BY nombre "); 
+        $stmt = $conn->prepare("SELECT id_departamento,nombre,fk_aula FROM departamento where eliminado is null  ORDER BY nombre "); 
         $stmt->execute();
         while($row = $stmt->fetch()) {
             $dep = new Departamento();
@@ -83,7 +83,7 @@ class controladorAdministrador extends conexion
     function BuscarMaterias($iddepartamento){
         $ListaMaterias=array();
         $conn = $this->getconexion();
-        $stmt2 = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where fk_departamento=$iddepartamento"); 
+        $stmt2 = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where eliminado is null and fk_departamento=$iddepartamento"); 
         $stmt2->execute();
         while($row = $stmt2->fetch()) {
             $mat = new Materia();
@@ -118,7 +118,7 @@ class controladorAdministrador extends conexion
     function BuscarProfesor(){
         $listaProfesor=array();
         $conn = $this->getconexion();
-        $stmt = $conn->prepare("SELECT id_profesor,nombre,apellido,email FROM profesor ORDER BY apellido "); 
+        $stmt = $conn->prepare("SELECT id_profesor,nombre,apellido,email FROM profesor where eliminado is null ORDER BY apellido "); 
         $stmt->execute();
         while($row = $stmt->fetch()) {
             $prof = new Profesor();

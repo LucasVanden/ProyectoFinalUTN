@@ -31,7 +31,7 @@ function borrarMateria($idMateria){
     $con= new conexion();
     $conn=$con->getconexion();
 
-        $stmt = $conn->prepare("DELETE FROM materia WHERE  id_materia= '$idMateria'");  
+        $stmt = $conn->prepare("UPDATE materia SET eliminado = '1' WHERE id_materia='$idMateria'"); 
         $stmt->execute();
 }
 ?>

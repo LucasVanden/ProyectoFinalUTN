@@ -18,6 +18,7 @@ $altaProfesor=$URL.$altaProfesor;
 $asignarMateriaAProfesor= $URL.$asignarMateriaAProfesor;
 $AsuetosFeriado= $URL.$asutosFeriado;
 $bajaMateriaProfesor= $URL.$bajaMateriaProfesor;
+$bajaProfesor= $URL.$bajaProfesor;
 
 $_SESSION['comprobacion']=null;
 $_SESSION['fechasBuscadas']=null;
@@ -51,6 +52,7 @@ $_SESSION['fechasBuscadas']=null;
                         <td>   <div>  <input type="submit" value="Asignar Materia a Profesor" name="Obtener" formaction=<?php echo $asignarMateriaAProfesor ?> /></div></td>
                 
                         <td>   <div>  <input type="submit" value="Baja Materia Profesor" name="Obtener" formaction=<?php echo $bajaMateriaProfesor ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Baja Profesor" name="Obtener" formaction=<?php echo $bajaProfesor ?> /></div></td>
             
 
                     </tr>                   

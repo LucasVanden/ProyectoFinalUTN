@@ -243,7 +243,7 @@ return $mat;
     function BuscarDepartamento(){
         $listaDepartamento=array();
         $conn = $this->getconexion();
-        $stmt = $conn->prepare("SELECT id_departamento,nombre FROM departamento ORDER BY nombre "); 
+        $stmt = $conn->prepare("SELECT id_departamento,nombre FROM departamento where eliminado is null  ORDER BY nombre ");
         $stmt->execute();
         while($row = $stmt->fetch()) {
             $dep = new Departamento();

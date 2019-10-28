@@ -11,7 +11,7 @@ $conexttion=$con->getconexion();
     $conn = $conexttion;
     if (isset($_GET['choice'])){
     $choice = $_GET['choice'];
-    $stmt = $conn->prepare("SELECT id_materia,nombreMateria FROM materia where fk_departamento='$choice' ORDER BY nombreMateria "); 
+    $stmt = $conn->prepare("SELECT id_materia,nombreMateria FROM materia where eliminado is null and fk_departamento='$choice' ORDER BY nombreMateria "); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
         $dep = new Materia();

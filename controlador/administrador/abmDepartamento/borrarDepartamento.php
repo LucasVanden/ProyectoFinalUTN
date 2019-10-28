@@ -31,7 +31,7 @@ function borrarAula($idDepartamento){
     $con= new conexion();
     $conn=$con->getconexion();
 
-        $stmt = $conn->prepare("DELETE FROM departamento WHERE  id_departamento= '$idDepartamento'");  
+        $stmt = $conn->prepare("UPDATE departamento SET eliminado = '1' WHERE id_departamento='$idDepartamento'"); 
         $stmt->execute();
 }
 ?>
