@@ -23,6 +23,10 @@ if (isset($_SESSION['rol'])) {
         // $message = 'Entro al 2';
              header('Location: '. $URL.'/vista/administrador/MenuIndex.php');
          break;
+         case 5:
+         // $message = 'Entro al 2';
+              header('Location: '. $URL.'/vista/reportes/faltas.php');
+          break;
         default:
     }
 }
@@ -91,6 +95,10 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
              // $message = 'Entro al 2';
                   header('Location: '. $URL.'/vista/administrador/MenuIndex.php');
               break;
+              case 5:
+              // $message = 'Entro al 2';
+                   header('Location: '. $URL.'/vista/reportes/faltas.php');
+               break;
             default:
            // $message = 'Entro al default'. $perfil ;
         }

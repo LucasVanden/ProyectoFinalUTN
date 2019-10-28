@@ -4,7 +4,13 @@ require_once ($DIR . $Falta);
 require_once ($DIR . $Departamento);
 require_once ($DIR . $Profesor);
 session_start();
-
+if(!isset($_SESSION['rol'])){
+    header('location: '. $URL.$login);
+}else{
+    if($_SESSION['rol'] != 5 ){
+        header('location: '. $URL.$login);
+    }
+}
 require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
 
