@@ -109,6 +109,7 @@ $asignarDirector='/controlador/administrador/cargoDirector/asignarDirector.php';
 $eliminarDirecotr='/controlador/administrador/cargoDirector/eliminarDirecotr.php';
 
 $altaAlumno='/vista/administrador/altaAlumno.php';
+$altaPersonal='/vista/administrador/altaPersonal.php';
 //ABM DEPARTAMENTO
 $abmDepartamento='/vista/administrador/ambDepartamento.php';
 
