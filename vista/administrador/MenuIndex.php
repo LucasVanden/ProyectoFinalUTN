@@ -123,6 +123,7 @@ $_SESSION['idDepartamentoSeleccionado']=null;
                             <li><a href="#">Asignar Materia A Profesor</a></li>
                             <li><a href="#">Baja Materia Profesor</a></li>
                         </ul>
+                    <li><a href="<?php echo $EditarAultaAsignada ?>">Cambiar Aula de consulta</a></li> 
                     <li><a href="<?php echo $altaAlumno ?>">Alta alumno</a></li> 
                     <li><a href="<?php echo $subirCargoaDirector ?>">Cargo Director</a></li> 
                     <li><a href="<?php echo $CerrarhoraAusente ?>">Cerrar horas de Ausentes</a></li> 
