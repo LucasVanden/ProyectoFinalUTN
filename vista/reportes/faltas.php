@@ -105,25 +105,27 @@ if(isset($_SESSION['departamentos'])){
                       
        
                     </tr>   
-                    </div> 
+                 
                     </table>
+                    </div> 
                     <div>  <br><input type="submit" value="Obtener" name="Obtener" formaction=<?php echo $buscarfaltas?> /></div>
                     </form>
-                    <?php     
+<?php     
  //echo '<pre>'; print_r($_SESSION["faltasBuscadas"]); echo '</pre>';   
 if(isset($_SESSION["faltasBuscadas"])) : ?>
     <?php if(empty($_SESSION["faltasBuscadas"])) : ?>
     No hay Faltas
     <?php endif?>
 <table>
-<?php foreach ($_SESSION["faltasBuscadas"] as $falta): ?>
-
 <th>Legajo</th>
 <th>Profesor</th>
 <th>tipo</th>
 <th>cantidad</th>
 <th>fecha</th>
 <th>Materia</th>
+<?php foreach ($_SESSION["faltasBuscadas"] as $falta): ?>
+
+
 <tr>
   
         <div>
@@ -142,7 +144,6 @@ if(isset($_SESSION["faltasBuscadas"])) : ?>
 </table>  
 
 <?php endif?>
-</script>
     <footer>
        <?php require $DIR.$footer; ?>         
     </footer>  

@@ -25,8 +25,8 @@ foreach ($listaHoras as $hora) {
            //hubo presentismo
            if(existePresentismo($hora->getid_horadeconsulta())){    
                 $presentismo=buscarPresentismo($hora->getid_horadeconsulta());
-                    if(huboTardanza($presentismo,$hora-getHorarioDeConsulta()->gethora())){
-                        crearTardanza($hora,$presentismo,$hora-getHorarioDeConsulta()->gethora());
+                    if(huboTardanza($presentismo,$hora->getHorarioDeConsulta()->gethora())){
+                        crearTardanza($hora,$presentismo,$hora->getHorarioDeConsulta()->gethora());
                     }
             }else{
                 //crear ausente
@@ -37,8 +37,8 @@ foreach ($listaHoras as $hora) {
         //hubo presentismo
         if(existePresentismo($hora->getid_horadeconsulta())){
             $presentismo=buscarPresentismo($hora->getid_horadeconsulta());
-            if(huboTardanza($presentismo,$hora-getHorarioDeConsulta()->gethora())){
-                crearTardanza($hora,$presentismo,$hora-getHorarioDeConsulta()->gethora());
+            if(huboTardanza($presentismo,$hora->getHorarioDeConsulta()->gethora())){
+                crearTardanza($hora,$presentismo,$hora->getHorarioDeConsulta()->gethora());
             }
         }else{
             //crear ausente
@@ -59,7 +59,7 @@ function buscarHorasdeConsulta(){
         $hora->setid_horadeconsulta($row['id_horadeconsulta']);
         $hora->setfechaDesdeAnotados($row['fechaDesdeAnotados']);
         $hora->setfechaHastaAnotados($row['fechaHastaAnotados']);
-        $tempidhora=$row['id_horadeconsulta'];
+        $tempidhora=$row['fk_horariodeconsulta'];
         $tempProfesor=$row['fk_profesor'];
         $tempmateria=$row['fk_materia'];
 
@@ -74,7 +74,7 @@ function buscarHorasdeConsulta(){
         }
         $stmt3 = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where id_materia=$tempmateria"); 
         $stmt3->execute();
-        while($row = $stmt->fetch()) {
+        while($row = $stmt3->fetch()) {
             $mat = new Materia();
             $mat->setid_materia($row['id_materia']);
             $mat->setnombreMateria($row['nombreMateria']);
@@ -112,7 +112,7 @@ function buscarAsuetos(){
     $con= new conexion();
     $conn=$con->getconexion();
     $listaAsuetos=array();
-    date('Y',strtotime(date('Y-m-d').'-1 year'));
+    $año= date('Y',strtotime(date('Y-m-d').'-1 year'));
     $fecha="{$año}-01-01";
     $stmt = $conn->prepare("SELECT horaDesdeAsueto,horaHastaAsueto,fechaAsueto FROM asueto where fechaAsueto>$fecha"); 
     $stmt->execute();
@@ -231,21 +231,29 @@ function crearTardanza($hora,$presentismo,$horanumero){
     $min=calcularMinutosTarde($presentismo,$horanumero);
 
     $stmt = $conn->prepare("INSERT INTO `falta` (`id_falta`, `fechaFalta`, `tipo`, `minutos`,`fk_horadeconsulta`,`fk_materia`,`fk_profesor`,`fk_departamento`) 
-    VALUES (NULL, '$fecha', 'Tardanza' , '$minutos','$fk_horadeconsulta','$fk_materia','$fk_profesor','$fk_departamento');");  
+    VALUES (NULL, '$fecha', 'Tardanza' , '$min','$fk_horadeconsulta','$fk_materia','$fk_profesor','$fk_departamento');");  
     $stmt->execute();
 }
 function calcularMinutosTarde($presentismo,$horanumero){
     $min='00:00';
     $min2='00:00';
     $horariofin=date('H:i',strtotime($horanumero.'+1 hour'));
-    if( mayorMentorigual($presentismo->gethoraDesde(),'>',$horarioHora)){
+    if( mayorMentorigual($presentismo->gethoraDesde(),'>',$horanumero)){
        $min=date("H:i",strtotime($presentismo->gethoraDesde())-strtotime($horanumero));
     }
     if( mayorMentorigual($presentismo->gethoraHasta(),'<',$horariofin)){
         $min2=date("H:i",strtotime($horafin)-strtotime($presentismo->gethoraHasta()));
     }
     $res=date("H:i",strtotime($min)+strtotime($min2));
+
+    //BUG ACA
+    echo '<pre>'; print_r($res); echo '</pre>'; 
+    echo "   espacio  "  ;
+    echo $min;
+    echo $min2;
+
     return $res;
+    
 }
 function crearAusente($hora){
     $con= new conexion();

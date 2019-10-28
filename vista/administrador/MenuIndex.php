@@ -26,6 +26,8 @@ $menuAltaProfesor=$URL.$menuAltaProfesor;
 $backup=$URL.$backup;
 $altaAlumno=$URL.$altaAlumno;
 $subirCargoaDirector=$URL.$subirCargoaDirector;
+$CerrarhoraAusente=$URL.$CerrarhoraAusente;
+$calcularAsistencia=$URL.$calcularAsistencia;
 
 $_SESSION['comprobacion']=null;
 $_SESSION['fechasBuscadas']=null;
@@ -123,6 +125,8 @@ $_SESSION['idDepartamentoSeleccionado']=null;
                         </ul>
                     <li><a href="<?php echo $altaAlumno ?>">Alta alumno</a></li> 
                     <li><a href="<?php echo $subirCargoaDirector ?>">Cargo Director</a></li> 
+                    <li><a href="<?php echo $CerrarhoraAusente ?>">Cerrar horas de Ausentes</a></li> 
+                    <li><a href="<?php echo $calcularAsistencia ?>">calcular Asistencia</a></li> 
                     <li><a href="<?php echo $backup ?>">Backup</a></li> 
                 </ul>
             </div>

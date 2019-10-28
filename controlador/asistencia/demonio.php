@@ -35,7 +35,11 @@ if (count($listaHorasACerrar)>0){
         
     }
 }
-echo "ok";
+echo "ok";?>
+   <form action=<?php echo $URL.$MenuIndex ?> method="POST">
+<div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $URL.$MenuIndex ?> /></div>
+</form>
+<?php
 // $direccion= $URL . $asistenciaProfesor;
 // header("Location: $direccion");
 

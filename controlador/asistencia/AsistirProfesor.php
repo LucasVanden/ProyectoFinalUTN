@@ -140,7 +140,7 @@ function notificarPorMailaAusentes($listaAlumnosAusentes,$idMateria){
     }
     $nombreProfe=($nombre." ".$apellido);
     $fechaActual= date("Y-m-d");
-    $body="El día {$fechaActual}, te ausentaste a la consulta de {$materia} del profesor {$nombreProfe}. Es necesario que si no vas a asistir lo notifiques antes de la fecha de la misma";
+    $body="El día {$fechaActual}, te ausentaste a la consulta de {$materia} del profesor {$nombreProfe}. Es necesario que si no vas a asistir lo notifiques antes del día de la consulta";
     enviaremail($listaEmails,$body);
 }
 

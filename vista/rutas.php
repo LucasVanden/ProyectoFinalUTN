@@ -80,8 +80,8 @@ $AsistirProfesor='/controlador/asistencia/AsistirProfesor.php';
 
 $AsistirAlumno='/controlador/asistencia/AsistirAlumno.php';
 
-$demonio='/controlador/asistencia/Demonio.php';
-$dem='/vista/asistencia/demonio.php';
+$CerrarhoraAusente='/controlador/asistencia/Demonio.php';
+$calcularAsistencia='/controlador/asistencia/calcularAsistencia.php';
 
 //REPORTES
 $ReportesControlador='/controlador/reportes/ReportesControlador.php';
