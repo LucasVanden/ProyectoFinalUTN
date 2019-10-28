@@ -56,7 +56,7 @@ $departamentos=$a->BuscarDepartamento();
                         </td>
                     </tr>   
 
-                    
+                    <tr>
                    <td>
                             <select name="AulaAsignada"> 
                             <?php
@@ -70,17 +70,16 @@ $departamentos=$a->BuscarDepartamento();
                             <?php endforeach; ?>
                             </select>
                         </td>
-                                </tr>
-                              
+                        </tr>  
 
                 </table>
             </div>
-            <div><input type="submit" value="Cargar Departamento" name="Buscar" formaction=<?php echo $crearDepartamento ?> /></div> 
+            <div><input type="submit" value="Cargar Departamento" name="Buscar" formaction=<?php echo $crearDepartamento ?> ></input></div> 
         </form>
-            <div>  <input type="submit" value="Mostrar Departamentos" name="Buscar" formaction=<?php echo $abmDepartamento ?> onClick="myFunction()"/></div>
+            <div>  <input type="submit" value="Mostrar Departamentos" name="Buscar" formaction=<?php echo $abmDepartamento ?> onClick="myFunction()"></input></div>
 
 
-<form action=<?php echo $borrarDepartamento ?> method="POST">
+
 <div id="myDIV" >
 <table>
 <th>Departamento</th>
@@ -89,11 +88,11 @@ $departamentos=$a->BuscarDepartamento();
     <form action=<?php echo $editarDepartamento ?> method="POST">         
         <tr>
             <td>
-                <div>
+                
                     <?php   echo $dep->getnombre() ?>
                     <?php   echo $dep->getid_departamento() ?>
-                   </td>
-                    <td>
+            </td>
+            <td>
                             <select name="AulaAsignada"> 
                             <?php
                             $aulas=$a->BuscarAulas();
@@ -105,23 +104,24 @@ $departamentos=$a->BuscarDepartamento();
                             </option>
                             <?php endforeach; ?>
                             </select>
-                        </td>
-
-                              <td>
-                    <button type="submit" id="buttonAsistir" name="asignar" value=<?php echo $dep->getid_departamento()?> formaction=<?php echo $editarDepartamento?>> asignar </button>
-                    </form>
-                    </td> 
-
-                        <td>
-                    <button type="submit" value=<?php echo $dep->getid_departamento()?> name="borrarDepartamento" formaction=<?php echo $borrarDepartamento ?> onclick="return confirm('Esta seguro que desea eliminar departamento <?php echo $dep->getnombre()?> ')">Eliminar</button>
-                </div>
             </td>
+
+            <td>
+                    <button type="submit" id="buttonAsistir" name="asignar" value=<?php echo $dep->getid_departamento()?> formaction=<?php echo $editarDepartamento?>> asignar </button>
+    </form>
+            </td> 
+            <form action=<?php echo $borrarDepartamento ?> method="POST">
+            <td>
+                    <button type="submit" value=<?php echo $dep->getid_departamento()?> name="borrarDepartamento" formaction=<?php echo $borrarDepartamento ?> onclick="return confirm('Esta seguro que desea eliminar departamento <?php echo $dep->getnombre()?> ')">Eliminar</button>
+                
+            </td>
+            </form>
         </tr>
     <?php endforeach; ?>
 </table>
     
 </div>
-</form>
+
 <script>
  var x = document.getElementById("myDIV");
  x.style.display = "none";

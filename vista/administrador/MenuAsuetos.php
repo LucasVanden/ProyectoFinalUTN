@@ -29,8 +29,7 @@ $_SESSION['fechasBuscadas']=null;
         <meta charset="utf-8">
         <title>aHora</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
- 
+        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
@@ -45,18 +44,20 @@ $_SESSION['fechasBuscadas']=null;
              
                     <tr>
                        
-                        <td>
-                        <div>  <input type="submit" value="Recesos" name="Obtener" formaction=<?php echo $AsuetosReceso ?>  /></div>
-                        </td>
+                       
+                        <td> <div>  <input type="submit" value="Recesos" name="Obtener" formaction=<?php echo $AsuetosReceso ?>  /></div> </td>
+                       
                         <td>   <div>  <input type="submit" value="Feriado" name="Obtener" formaction=<?php echo $AsuetosFeriado ?> /></div></td>
                 
                         <td>   <div>  <input type="submit" value="Asuetos" name="Obtener" formaction=<?php echo $AsuetoAsueto ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Borrar fecha" name="Obtener" formaction=<?php echo $BorrarAsueto ?> /></div></td>
 
-                    </tr>                   
+                    </tr>     
+</table>
+</div>              
                     </form>
 
-
+ </body>
     <footer>
        <?php require $DIR.$footer; ?>         
     </footer>  

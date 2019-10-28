@@ -82,8 +82,7 @@ $listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_
                 <input id=buttonBuscar type="submit" value="Eliminar Materia de Profesor" formaction=<?php echo $darbajaMateriaProfesor?> onclick="return confirm('Esta seguro que desea eliminar')" >
                 <input id=buttonBuscar type="submit" value="Ver Horario Cursado" formaction=<?php echo $bajaMateriaProfesor?> >
                 <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
-            </div>
-            <div>                     
+            </div>                  
         <tr>               
                     </form>
 <?php

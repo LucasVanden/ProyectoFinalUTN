@@ -53,6 +53,7 @@ if(isset($_SESSION['fechasBuscadas'])){
                     </tr>                   
 
                 </table>
+</div>
                     <div> <br> <input type="submit" value="Borrar" name="Obtener" formaction=<?php echo $controladorBorrarAsueto ?> /></div>
 
         <tr> <br>
@@ -65,7 +66,7 @@ if(isset($_SESSION['fechasBuscadas'])){
                     </tr>    
                                 <div> <br> <input type="submit" value="Buscar Asuetos" name="Buscar" formaction=<?php echo $controladorBuscarAsuetos ?> /></div>
                                 <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
-                    </form>
+                    
 
     <?php if ($buscar): ?>
 <table>
@@ -74,7 +75,8 @@ if(isset($_SESSION['fechasBuscadas'])){
 foreach ($_SESSION['fechasBuscadas'] as $fecha): ?> 
 <tr>
 <td>
-<input type="submit" value=<?php echo $fecha?> name="fechaAborrar" formaction=<?php echo $controladorBorrarAsueto ?> onclick="return confirm('Esta seguro que desea eliminar fecha <?php echo $fecha?> ')"> Eliminar</input>
+<?php echo $fecha." "?>
+<button type="submit" value=<?php echo $fecha?> name="fechaAborrar" formaction=<?php echo $controladorBorrarAsueto ?> onclick="return confirm('Esta seguro que desea eliminar fecha <?php echo $fecha?> ')"> Eliminar</button>
 </td>
 </tr>
 
@@ -83,6 +85,7 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 </table>
 
      <?php endif; ?>
+     </form>
     <footer>
     <?php require $DIR.$footer; ?>     
     </footer>  

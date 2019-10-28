@@ -101,7 +101,7 @@ foreach ($listadepartamento as $departamento): ?>
                         <div><br><input type="submit" value="Cargar Materia" name="Buscar" formaction=<?php echo $crearMateria ?> /><br><br></div>
 
 </form>         
-<form action=<?php echo $abmMateria ?> method="POST">                  
+<form action=<?php echo $abmMateria ?> method="POST">              
                         <h2>Ver Materias</h2>
                          <select id="first-choice" name="depBuscar">
 <?php 
@@ -116,7 +116,7 @@ foreach ($listadepartamento as $departamento): ?>
                          <div>  <br><input type="submit" value="Mostrar Materias" name="Buscar" formaction=<?php echo $mostrarMaterias ?> onClick="myFunction()"/></div>
                        
 
-                     
+                       </form>
 
 
 
@@ -139,10 +139,11 @@ foreach ($listadepartamento as $departamento): ?>
         </select>
         <button type="submit" value=<?php echo $mat->getid_materia()?> name="BorraridMateria" formaction=<?php echo $editarmesaMateria ?> 
         onclick="return confirm('Cambiar día de mesa de <?php echo $mat->getNombreMateria()?> ')">Asignar</button>
-        </form>
+      
+
         <button type="submit" value=<?php echo $mat->getid_materia()?> name="BorraridMateria" formaction=<?php echo $BorrarMateria ?> 
         onclick="return confirm('Esta seguro que desea eliminar materia <?php echo $mat->getNombreMateria()?> ')">Eliminar</button>
-
+        </form>
         </div>
         </td>
         </tr>
@@ -150,7 +151,7 @@ foreach ($listadepartamento as $departamento): ?>
         </table>
     
 </div>
-</form>
+
 <script>
  var x = document.getElementById("myDIV");
  x.style.display = "none";

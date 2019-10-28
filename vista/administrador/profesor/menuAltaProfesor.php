@@ -55,7 +55,9 @@ $_SESSION['fechasBuscadas']=null;
                         <td>   <div>  <input type="submit" value="Baja Profesor" name="Obtener" formaction=<?php echo $bajaProfesor ?> /></div></td>
             
 
-                    </tr>                   
+                    </tr>  
+</table>         
+</div>        
                     </form>
 
 

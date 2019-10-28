@@ -48,9 +48,10 @@ $fechadesdeVerano="'".date("Y-m-d")."'";
                     </tr>                   
 
                 </table>
+</div>
                     <div>  <br><input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorAsuetoFeriado ?> /></div>
                     <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $Menu ?> /></div>
-                    </form>
+        </form>
 
 
     <footer>

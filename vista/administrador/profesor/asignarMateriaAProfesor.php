@@ -141,8 +141,7 @@ $menuAltaProfesor= $URL.$menuAltaProfesor;
                 <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
                 <input id=buttonBuscar type="submit" value="Asignar" formaction=<?php echo $altaMateriaAProfesor?> onclick="">
                 <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
-            </div>
-            <div>                     
+            </div>                   
         <tr>               
                     </form>
 

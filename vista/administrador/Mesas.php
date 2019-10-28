@@ -60,6 +60,7 @@ if(isset($_SESSION['fechasBuscadas'])){
                     </tr>                   
 
                 </table>
+</div>
                     <div>  <input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorMesas ?> /></div>
 
         <tr>
