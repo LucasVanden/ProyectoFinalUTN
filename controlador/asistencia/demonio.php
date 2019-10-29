@@ -20,7 +20,7 @@ date_default_timezone_set('America/Argentina/Mendoza');
 
 
 $listaHorasACerrar=buscarHorasACerrar();
-if (count($listaHorasACerrar)>0){
+if (count($listaHorasACerrar[0])>0){
     for ($i = 0; $i < count($listaHorasACerrar[0]); $i++) {
 
         $alumnosAusentes= buscarAlumnosAnotados($listaHorasACerrar[0][$i]);
@@ -30,16 +30,16 @@ if (count($listaHorasACerrar)>0){
     cambiarEstadoVigencia($listaHorasACerrar[0][$i]);
 
     $hora= buscarHorarioDeConsultaActual($listaHorasACerrar[0][$i]);
-    $siguientehorario=calcularSiguienteHorarioDeConsulta($hora,$listaHorasACerrar[1][$i],$$listaHorasACerrar[2][$i]);
-    crearSiguienteHoraDeConsulta($$listaHorasACerrar[1][$i],$$listaHorasACerrar[0][$i],$siguientehorario);
+    $siguientehorario=calcularSiguienteHorarioDeConsulta($hora,$listaHorasACerrar[1][$i],$listaHorasACerrar[2][$i]);
+    crearSiguienteHoraDeConsulta($listaHorasACerrar[1][$i],$listaHorasACerrar[0][$i],$siguientehorario);
         
     }
 }
 
 echo "Cerrando Horas de consulta...";
-
+echo '<pre>'; print_r($listaHorasACerrar); echo '</pre>';  
 $direccion= $URL . $MenuIndex;
-header("refresh:2;".$direccion); 
+//header("refresh:2;".$direccion); 
 // echo "ok";?>
     <!-- <form action=<?php echo $URL.$MenuIndex ?> method="POST">
  <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $URL.$MenuIndex ?> /></div>
@@ -55,20 +55,22 @@ function buscarHorasACerrar(){
     $fechaActual=date("Y-m-d");
     $con= new conexion();
     $conn = $con->getconexion();
-    $stmt = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fechaDesdeAnotados,fechaHastaAnotados,fk_materia,fk_profesor FROM horadeconsulta where estadoVigencia='activo' and fechaHastaAnotados<=$fechaActual "); 
+    $stmt = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fechaDesdeAnotados,fechaHastaAnotados,fk_materia,fk_profesor FROM horadeconsulta where estadoVigencia='activo' and fechaHastaAnotados<='$fechaActual' "); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
         $tempidhorario=$row['id_horadeconsulta'];
+        $tempHorario=$row['fk_horariodeconsulta'];
         $idmateria=$row['fk_materia'];
         $idprofesor=$row['fk_profesor'];
 
-        $stmt3 = $conn->prepare("SELECT id_horariodeconsulta,hora FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
-        $stmt3->execute();
-        while($row = $stmt3->fetch()) {
+        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora FROM horariodeconsulta where id_horariodeconsulta=$tempHorario");
+        $stmt2->execute();
+        while($row = $stmt2->fetch()) {
             $hora=$row['hora'];
             $h=date('H',strtotime(date('H:i:s').'-1 hour'));
             $m=date("i");
-            if(mayorMentorigual($hora,"<",$h,$m)){
+             if(mayorMentorigual($hora,"<",$h,$m)){
+            //    if(true){
                 $stmt3 = $conn->prepare("SELECT horaDesde,horaHasta FROM presentismo where fk_horadeconsulta=$tempidhorario");
                 $stmt3->execute();
                 if($stmt3->rowCount() == 0) {
@@ -269,6 +271,7 @@ function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
     $conn=$con->getconexion();
 
     $dia=date('N');
+ // $dia="5";
     $proximaConsulta=nextfechaDia($dia);
     $mesproximaConsulta=date("m", strtotime($proximaConsulta));
     
@@ -287,10 +290,13 @@ function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
             $repetir=false;
             foreach ($asuetos as $feriado) {
                 //test bug
-                echo "entro al bucle";
+                //echo "entro al bucle";
                 //
                 if($proximaConsulta==$feriado->getfechaAsueto()){
                 $proximaConsulta= date('Y-m-d',strtotime($proximaConsulta.'+7 day'));
+                echo "sumo 7";
+                echo $proximaConsulta;
+                echo $feriado->getfechaAsueto();
                 $repetir=true;
                 }
             }
@@ -426,7 +432,7 @@ function buscardiaMesaDeMateria($idMateria){
     $stmt2 = $conn->prepare("SELECT fk_dia FROM materia where id_materia=$idMateria"); 
     $stmt2->execute();
     while($row = $stmt2->fetch()) {
-        $fkdia=($row['fk_dia']);
+        $fkdia=$row['fk_dia'];
 
         $stmt3 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$fkdia"); 
         $stmt3->execute();
