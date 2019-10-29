@@ -138,7 +138,76 @@ require_once ($DIR . $Dedicacion);
 // }
 
 
- //echo '<pre>'; print_r(BuscarMateriasAAsistir(1)); echo '</pre>';   
+ //echo '<pre>'; print_r(BuscarMateriasAAsistir(1)); echo '</pre>';  
+ 
+ $horanumero='16:30';
+ $min='00:00';
+ $min2='00:00';
+ $horariofin=date('H:i',strtotime($horanumero.'+1 hour'));
+ $presentismoDesde= '17:32';
+ $presentismoHasta= '17:24';
+
+ if( mayorMentorigual($presentismoDesde,'>',$horanumero)){
+     $h=substr($horanumero, 0, 2);
+     $m=substr($horanumero, 3, 2);
+     $min=date("H:i",strtotime($presentismoDesde."-".$h."hour -".$m."min"));
+ }
+ if( mayorMentorigual($presentismoHasta,'<',$horariofin)){
+     $h=substr($presentismoHasta, 0, 2);
+     $m=substr($presentismoHasta, 3, 2);
+     $min2=date("H:i",strtotime($horariofin."-".$h."hour -".$m."min"));
+
+ }
+ $h=substr($min2, 0, 2);
+ $m=substr($min2, 3, 2);
+ $res=date("H:i", strtotime($min."+".$h."hour +".$m."min"));
+
+ //BUG ACA
+ 
+ echo " min: ";
+ 
+ echo $min;
+ echo " min2: ";
+ echo $min2;
+echo " res: ";
+ echo  $res;
+
+ function mayorMentorigual($horasql1,$signo,$horasql2){
+    $hora=  substr($horasql1, 0, 2);
+    $min=substr($horasql1, 3, 2);
+
+    $hora2= substr($horasql2, 0, 2);
+    $min2=substr($horasql2, 3, 2);    
+        switch ($signo) {
+            case '>':
+                if($hora>$hora2){
+                    return true;}
+                        elseif ($hora<$hora2) {
+                            return false;}
+                                elseif($min>$min2){return true;}
+                                    elseif ($min<$min2){return false;}
+                                        else return false;
+                
+                break;
+            case '<':
+                if($hora<$hora2){
+                    return true;}
+                        elseif ($hora>$hora2) {
+                            return false;}
+                                elseif($min<$min2){return true;}
+                                    elseif ($min>$min2){return false;}
+                                        else return false;
+                break;
+            case "==":
+                if($hora==$hora2){
+                    if ($min==$min2)
+                        {return true;}
+                }
+                else return false;
+                break;
+        }
+}
+
  $con= new conexion();
  $conn=$con->getconexion();
 

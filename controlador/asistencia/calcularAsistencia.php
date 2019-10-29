@@ -238,19 +238,29 @@ function calcularMinutosTarde($presentismo,$horanumero){
     $min='00:00';
     $min2='00:00';
     $horariofin=date('H:i',strtotime($horanumero.'+1 hour'));
-    if( mayorMentorigual($presentismo->gethoraDesde(),'>',$horanumero)){
-       $min=date("H:i",strtotime($presentismo->gethoraDesde())-strtotime($horanumero));
+    $presentismoDesde= $presentismo->gethoraDesde();
+    $presentismoHasta= $presentismo->gethoraHasta();
+
+    if( mayorMentorigual($presentismoDesde,'>',$horanumero)){
+        $h=substr($horanumero, 0, 2);
+        $m=substr($horanumero, 3, 2);
+        $min=date("H:i",strtotime($presentismoDesde."-".$h."hour -".$m."min"));
     }
-    if( mayorMentorigual($presentismo->gethoraHasta(),'<',$horariofin)){
-        $min2=date("H:i",strtotime($horafin)-strtotime($presentismo->gethoraHasta()));
+    if( mayorMentorigual($presentismoHasta,'<',$horariofin)){
+        $h=substr($presentismoHasta, 0, 2);
+        $m=substr($presentismoHasta, 3, 2);
+        $min2=date("H:i",strtotime($horariofin."-".$h."hour -".$m."min"));
+
     }
-    $res=date("H:i",strtotime($min)+strtotime($min2));
+    $h=substr($min2, 0, 2);
+    $m=substr($min2, 3, 2);
+    $res=date("H:i", strtotime($min."+".$h."hour +".$m."min"));
 
     //BUG ACA
-    echo '<pre>'; print_r($res); echo '</pre>'; 
-    echo "   espacio  "  ;
-    echo $min;
-    echo $min2;
+    // echo '<pre>'; print_r($res); echo '</pre>'; 
+    // echo "   espacio  "  ;
+    // echo $min;
+    // echo $min2;
 
     return $res;
     
