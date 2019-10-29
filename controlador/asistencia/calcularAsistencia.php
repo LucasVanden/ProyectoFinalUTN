@@ -47,6 +47,11 @@ foreach ($listaHoras as $hora) {
     }
     cambiarEstadoPresentismo($hora->getid_horadeconsulta());
 }
+echo "Calculando Insasistencias...";
+
+$direccion= $URL . $MenuIndex;
+header("refresh:2;".$direccion); 
+//header("Location: $direccion");
 
 function buscarHorasdeConsulta(){
     $listaHorasAcalcularAsistencia=array();
