@@ -39,7 +39,7 @@ if (count($listaHorasACerrar[0])>0){
 echo "Cerrando Horas de consulta...";
 echo '<pre>'; print_r($listaHorasACerrar); echo '</pre>';  
 $direccion= $URL . $MenuIndex;
-//header("refresh:2;".$direccion); 
+header("refresh:2;".$direccion); 
 // echo "ok";?>
     <!-- <form action=<?php echo $URL.$MenuIndex ?> method="POST">
  <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $URL.$MenuIndex ?> /></div>
