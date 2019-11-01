@@ -1,5 +1,7 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+header('Cache-Control: no cache'); //no cache
+session_cache_limiter('private_no_expire'); // works
 session_start();
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
@@ -8,6 +10,12 @@ if(!isset($_SESSION['rol'])){
         header('location: '. $URL.$login);
     }
 }
+
+if (!isset($_POST['Materias'])){
+    if(!isset($_POST['nombreMateriaSeleccionada'])){
+    $direccion= $URL . $alumnoPpal;
+    header("Location: $direccion");
+    }}
 
 require_once $DIR .$alumnoControlador;
 $a = new alumnoControlador();
@@ -55,7 +63,7 @@ $a = new alumnoControlador();
  document.getElementById("pikachu").value = localStorage.getItem("id_materia");
  </script> -->
 
-
+<?php if(count($mat->getHoraDeConsulta())>0): ?>
         <form action="alumnoConfirmarAsistencia.php" method="POST">        
             <div>
                 <table id="tablaMateriaPpal">
@@ -74,6 +82,7 @@ $a = new alumnoControlador();
                       <tr>
                             <td>
                                  <?php echo $horadeconsulta->getHorarioDeConsulta()->getDia()->getdia(); ?>
+                                 <?php echo date("d-m-Y", strtotime($horadeconsulta->getfechaHastaAnotados())); ?>
                             </td>
                             <td>
                                 <?php echo $horadeconsulta->getHorarioDeConsulta()->getHora(); ?>
@@ -118,6 +127,14 @@ $a = new alumnoControlador();
                 </table>                
             </div>
         </form>
+        <?php else:?>
+<table align='center' class="table-mostrar" id="tablanotificaciones" onclick="" >
+                    <td>
+                                    <?php echo "No hay Horario de consulta Cargados" ?>
+                        </td>
+                        </table> 
+            
+<?php endif?>
     </body>
     <footer>
        <?php require $DIR.$footer; ?>         

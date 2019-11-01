@@ -118,12 +118,13 @@ class Profesorcontrolador extends conexion
     function alumnosAnotados($idprofesor){
         $listaHora=array();
         $conn = $this->getconexion();
-        $stmt2 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia,cantidadAnotados FROM horadeconsulta where fk_profesor=$idprofesor and estadoVigencia='activo'"); 
+        $stmt2 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia,cantidadAnotados,fechaHastaAnotados FROM horadeconsulta where fk_profesor=$idprofesor and estadoVigencia='activo'"); 
         $stmt2->execute();
         while($row = $stmt2->fetch()) {
             $hora = new HoraDeConsulta();
             $hora->setid_horadeconsulta($row['id_horadeconsulta']);
             $hora->setcantidadAnotados($row['cantidadAnotados']);
+            $hora->setfechaHastaAnotados($row['fechaHastaAnotados']);
 
             $tempidhorario =$row['fk_horariodeconsulta'];
             $temporalMateriaid =$row['fk_materia'];

@@ -161,6 +161,7 @@ $_SESSION['mensaje']=null;
                                         </td>
                                         <td>
                                             <?php echo $hora->getHorariodeConsulta()->getdia()->getdia(); ?>
+                                            <?php echo date("d-m-Y", strtotime($hora->getfechaHastaAnotados())); ?>
                                         </td>
                                         <td>
                                             <?php echo $hora->getHorariodeConsulta()->gethora(); ?>

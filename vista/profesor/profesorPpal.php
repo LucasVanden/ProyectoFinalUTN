@@ -84,6 +84,7 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                             </td>
                             <td>
                             <?php echo $hora->getHorarioDeConsulta()->getdia()->getdia() ?>
+                            <?php echo date("d-m-Y", strtotime($hora->getfechaHastaAnotados())); ?>
                             </td>
                             <td>
                             <?php echo $hora->getHorarioDeConsulta()->gethora() ?>

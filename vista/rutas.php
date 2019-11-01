@@ -35,6 +35,7 @@ $alumnoagregarmateria='/vista/alumno/alumnoAgregarMateria.php';
 
 $alumnoControlador='/controlador/alumnoControlador.php';
 $departamentoMaterias='/controlador/departamentoMaterias.php';
+$buscarMateriasdeDepartamentodeAlumno='/controlador/buscarMateriasdeDepartamentodeAlumno.php';
 $eliminarAnotacion='/controlador/eliminarAnotacion.php';
 $AgregarMateriaAlumno='/controlador/AgregarMateriaAlumno.php';
 $EliminarMateriaAlumno='/controlador/EliminarMateriaAlumno.php';

@@ -55,7 +55,7 @@ function buscarAlumno($id){
                 $mat = new Materia();
                 $mat->setid_materia($row['id_materia']);
                 $mat->setnombreMateria($row['nombreMateria']);
-                // $mat->setfk_departamento($row['fk_departamento']);
+                $mat->setfk_departamento($row['fk_departamento']);
                 // $mat->setfk_dia($row['fk_dia']);
            array_push($ListaMaterias,$mat);
         }
@@ -150,12 +150,12 @@ return $mat;
             $ListHoraDeConsulta=array();
 
             $conn = $this->getconexion();
-            $stmt2 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta FROM horadeconsulta where fk_materia=$idmateria and estadoVigencia='activo'"); 
+            $stmt2 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fechaHastaAnotados FROM horadeconsulta where fk_materia=$idmateria and estadoVigencia='activo'"); 
             $stmt2->execute();
 
             while($row = $stmt2->fetch()) {
                 $hora = new HoraDeConsulta();
-              
+                $hora->setfechaHastaAnotados($row['fechaHastaAnotados']);
                 $hora->setid_horadeconsulta($row['id_horadeconsulta']);
                     
                 $tempidhorario =$row['fk_horariodeconsulta'];
@@ -268,13 +268,14 @@ return $mat;
             $prof->setemail($row['email']);
            array_push($profesorHorarios,$prof);
         }
-        $stmt2 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia FROM horadeconsulta where fk_profesor=$idprofesor and estadoVigencia='activo'"); 
+        $stmt2 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia,fechaHastaAnotados FROM horadeconsulta where fk_profesor=$idprofesor and estadoVigencia='activo'"); 
             $stmt2->execute();
           
 
             while($row = $stmt2->fetch()) {
                 $hora = new HoraDeConsulta();
                 $hora->setid_horadeconsulta($row['id_horadeconsulta']);
+                $hora->setfechaHastaAnotados($row['fechaHastaAnotados']);
                 $tempidhorario =$row['fk_horariodeconsulta'];
                 $temporalMateriaid =$row['fk_materia'];
 
@@ -426,12 +427,13 @@ function AnotadoRepetido($idhora,$idalumno){
             $id= $detalle->getfk_horadeconsulta();
             $idvaluedetalle=$detalle->getid_detalleanotados();
 
-            $stmt4 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia FROM horadeconsulta where id_horadeconsulta=$id "); 
+            $stmt4 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia,fechaHastaAnotados FROM horadeconsulta where id_horadeconsulta=$id "); 
             $stmt4->execute();
 
                             while($row = $stmt4->fetch()) {
                                 $hora = new HoraDeConsulta();
                                 $hora->settempiddetalle($idvaluedetalle);
+                                $hora->setfechaHastaAnotados($row['fechaHastaAnotados']);
                                 $hora->setid_horadeconsulta($row['id_horadeconsulta']);
                                 $listaAvisos=array();    
                                 $tempidhorario =$row['fk_horariodeconsulta'];

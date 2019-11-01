@@ -1,5 +1,7 @@
 <?php
 require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+header('Cache-Control: no cache'); //no cache
+session_cache_limiter('private_no_expire'); // works
 session_start();
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
@@ -38,6 +40,8 @@ require_once $DIR .$alumnoControlador;
                 <div class="form-group">
                     <h3 for="horarioProfesor" class="text-primary col-md-4 col-md-offset-5"> Horarios de Consulta: </h3>
                 </div>
+        <?php if(count($listaHorarios[1])>0): ?>       
+                <!-- y el Fomr action method POST ????? -->
                 <div class="container">
                     <div class="table-responsive col-md-6 col-md-offset-3">
                         <table class="table table-bordered table-hover" id="tablaBusquedaPorProfesor">
@@ -55,6 +59,7 @@ require_once $DIR .$alumnoControlador;
                                 </td>
                                 <td>
                                     <?php echo $horadeconsulta->getHorarioDeConsulta()->getdia()->getdia(); ?>
+                                    <?php echo date("d-m-Y", strtotime($horadeconsulta->getfechaHastaAnotados())); ?>
                                 </td>
                                 <td>
                                     <?php echo $horadeconsulta->getHorarioDeConsulta()->getHora(); ?>
@@ -94,6 +99,14 @@ require_once $DIR .$alumnoControlador;
                 </div>
             </form>
         </div>
+        <?php else:?>
+<table align='center' class="table-mostrar" id="tablanotificaciones" onclick="" >
+                    <td>
+                                    <?php echo "No hay Horario de consulta Cargados" ?>
+                        </td>
+                        </table> 
+            
+<?php endif?>
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
     </body>

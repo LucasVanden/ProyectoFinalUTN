@@ -633,7 +633,7 @@ if(!$repetido21){
         $_SESSION["falloComprobacion"]=true;
         }
     if(!$C4821){
-        array_push($mensajes,("No puede cambiar la hs de consulta  del 2d0 semestre en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
+        array_push($mensajes,("No puede cambiar la hs de consulta  del 2do semestre en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
         $ejecuta=false;
         $_SESSION["falloComprobacion"]=true;
         }

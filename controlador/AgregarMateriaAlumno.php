@@ -9,7 +9,7 @@ $conexttion=$con->getconexion();
     //$idalumno=$_SESSION['idalumno'];
     $idalumno= $_SESSION['idalumno'];
 
- 
+ $_SESSION['departamentos']=$_POST["departamentos"];
 
         $stmt = $conexttion->prepare("INSERT INTO `materias_alumno` (`fk_alumno`, `fk_materia`) 
         VALUES ('$idalumno', '$idmateria');"); 

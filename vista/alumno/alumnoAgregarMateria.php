@@ -15,9 +15,14 @@ require_once $DIR . $departamentoMaterias;
 
 $agregarmat=$URL.$AgregarMateriaAlumno;
 $eleminarmat=$URL.$EliminarMateriaAlumno;
-$depatartamentomaterias= $URL.$departamentoMaterias;
-?>
+$buscarMateriasdeDepartamentodeAlumno= $URL.$buscarMateriasdeDepartamentodeAlumno;
 
+$OpctionSeleccionadaDepartamento=2;
+if(isset( $_SESSION['departamentos'])){
+    $OpctionSeleccionadaDepartamento= $_SESSION['departamentos'];
+}
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -59,7 +64,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                                     <?php 
                                         $listadepartamento = $a->BuscarDepartamento();
                                         foreach ($listadepartamento as $departamento): ?> 
-                                        <option value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
+                                        <option  <?php if($departamento->getid_departamento() == $OpctionSeleccionadaDepartamento){echo("selected");}?> value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
                                     <?php endforeach; ?>
                                     </select>
                                 </td>
@@ -68,7 +73,7 @@ $depatartamentomaterias= $URL.$departamentoMaterias;
                                     </select> 
                                     <script>
                                         $("#first-choice").change(function() {
-                                            $("#second-choice").load("<?php echo $depatartamentomaterias.'?choice=';?>"+ $("#first-choice").val());
+                                            $("#second-choice").load("<?php echo $buscarMateriasdeDepartamentodeAlumno.'?choice=';?>"+ $("#first-choice").val());
                                         }).change();</script>
                                 </td>
                             </tr>                   
