@@ -27,13 +27,16 @@ $_SESSION['mensaje']=null;
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
+
+
+
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
         <title>Alumno Principal</title>
         <link rel="stylesheet" href="./../css/bootstrap.min.css">   
         <link href="css/sticky-footer-navbar.css" rel="stylesheet">
     </head>
     <body background = <?php echo $URL."/vista/fondoCuerpo.jpg>"?>
-        <?php require $DIR.$header ?>
+    <?php include  $DIR.$header ?>
             <?php if (!empty($message)): ?>
                 <p> <?= $message ?></p>
             <?php endif; ?>

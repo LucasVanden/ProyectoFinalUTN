@@ -33,6 +33,7 @@ require_once $DIR .$alumnoControlador;
     $listaHorarios= $a->buscarHorariosDeConsultaporProfesor($_POST["profesor"])?>
         <div class="container">
             <br>
+                   <?php if(count($listaHorarios[1])>0): ?>       
             <form action="alumnoConfirmarAsistencia.php" method="POST" class="form-horizontal">  
                 <div class="form-group">
                     <h2 for="profesor" class="text-primary col-md-4 col-md-offset-5"> <?php echo $listaHorarios[0]->getapellido();echo ', '; echo $listaHorarios[0]->getnombre()?> </h2>
@@ -40,7 +41,7 @@ require_once $DIR .$alumnoControlador;
                 <div class="form-group">
                     <h3 for="horarioProfesor" class="text-primary col-md-4 col-md-offset-5"> Horarios de Consulta: </h3>
                 </div>
-        <?php if(count($listaHorarios[1])>0): ?>       
+ 
                 <!-- y el Fomr action method POST ????? -->
                 <div class="container">
                     <div class="table-responsive col-md-6 col-md-offset-3">
