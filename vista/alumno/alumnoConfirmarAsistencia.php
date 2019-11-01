@@ -15,10 +15,11 @@ $crearanotacion= $URL .$crearAnotacion;
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
+        <meta charset="utf-8"  name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
+        <title>Confirmar Asistencia</title>
+        <link rel="stylesheet" href="./../css/bootstrap.min.css">   
+        <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+        <!--ver si el sigte script se usa sino borrarlo-->
         <script src="./../js/funciones.js" type="text/javascript"></script>
     </head>
     <body background = <?php echo $URL.$fondo?>>
@@ -26,23 +27,45 @@ $crearanotacion= $URL .$crearAnotacion;
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h1>Confirmar Asistencia</h1>
 <?php 
    
      $idhora = $_POST['Asistir'];
         ?>
-        <form action=<?php echo $crearanotacion ?> method="POST">
-        
-            <textarea placeholder="Ingrese su tema (opcional)" name="textarea" rows="10" cols="80"></textarea>
-            <input name="idhora" type="hidden" value=<?php echo $idhora ?> > </button>
+        <div class="container">
             <br>
-            <br>
-            <!-- agregar CSS -->
-            <input id=buttonConfirmar name="textoConfirmar" type="submit" value="Confirmar" onclick="">
-            <input type="submit" value="Cancelar" formaction="alumnoPpal.php" onclick="self.location.href=<?php echo $URL.$alumnoPpal?>"/>
-        </form>
+            <form action=<?php echo $crearanotacion ?> method="POST" class="form-horizontal">
+            <div class="form-group">
+                <h2 for="confirma" class="text-primary col-md-4 col-md-offset-5">Confirmar Asistencia</h2>
+            </div>
+            <div class="form-group"> 
+                <div class="col-md-4 col-md-offset-3">
+                    <textarea placeholder="Ingrese su tema (opcional)" name="textarea" rows="10" cols="80"></textarea>
+                        <input name="idhora" type="hidden" value=<?php echo $idhora ?>> 
+                </div>
+            </div>
+            <div class="container">
+                <br>
+                <div class="form-group"> 
+                    <div class="col-md-4 col-md-offset-3">
+                        <button class="btn btn-success" id=buttonConfirmar name="textoConfirmar" type="submit"> Confirmar 
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button> 
+                        <button class="btn btn-danger" id=buttonCancelar type="submit" formaction="alumnoPpal.php" onclick="self.location.href=<?php echo $URL.$alumnoPpal?>""> Cancelar 
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button> 
+                    </div> 
+                </div> 
+            </div> 
+            </form>
+        </div>
+        <script src="./../js/jquery.js"></script>
+        <script src="./../js/bootstrap.min.js"></script>
     </body>
-    <footer>
-       <?php require $DIR.$footer; ?>          
+    <footer class="footer">
+      <div class="container">
+            <div class="col-md-12">
+                <p class="text-muted text-center credit"> Copyright &copy; 2019 aHora</p> 
+            </div>
+      </div>
     </footer>  
 </html>

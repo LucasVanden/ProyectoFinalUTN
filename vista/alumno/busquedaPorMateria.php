@@ -9,12 +9,9 @@ if(!isset($_SESSION['rol'])){
     }
 }
 
-
 require_once $DIR .$alumnoControlador;
 $a = new alumnoControlador();
 ?>
-
-
 
 <!DOCTYPE html>
 <html>

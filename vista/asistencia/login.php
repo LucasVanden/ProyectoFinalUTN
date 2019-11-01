@@ -88,9 +88,6 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
             <div class="send-button">
                 <input type="submit" value="Ingresar">
             </div>        
-            <a href="recuperarContraseña.php">Olvidó su contraseña?</a>
-            <br>
-            <br> <a href="altaAlumno.php">Registrese</a>
         </form>
     </body>
     <footer>

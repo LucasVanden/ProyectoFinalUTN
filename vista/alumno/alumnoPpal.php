@@ -27,246 +27,245 @@ $_SESSION['mensaje']=null;
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
-        
-<!-- IMPORTAR BOOSTRAP -->
-<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
+        <title>Alumno Principal</title>
+        <link rel="stylesheet" href="./../css/bootstrap.min.css">   
+        <link href="css/sticky-footer-navbar.css" rel="stylesheet">
     </head>
-    <body background = <?php echo $URL.$fondo?>>
-    <!-- <body background=https://secure.img1-fg.wfcdn.com/im/78135171/resize-h505-w505%5Ecompr-r85/8470/84707680/Pokemon+Pikachu+Wall+Decal.jpg> -->
-    <?php require $DIR.$header ?>
-        <?php if (!empty($message)): ?>
-            <p> <?= $message ?></p>
-        <?php endif; ?>
-        
+    <body background = <?php echo $URL."/vista/fondoCuerpo.jpg>"?>
+        <?php require $DIR.$header ?>
+            <?php if (!empty($message)): ?>
+                <p> <?= $message ?></p>
+            <?php endif; ?>
+        <!-- se usa los dos script siguientes??-->
         <script src="jquery.js"></script>
         <script src="./../js/funciones.js" type="text/javascript"></script>
-
-
-        <h2>Estás cursando:</h2>
-        <form action="alumnoPpal.php" method="POST">        
-            <div>
-                <table align='center' class="table-mostrar" id="tablaMateria">
-                    <thead>
-                        <!--aca va cabecera de tabla-->
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th> Materias </th>
-                        </tr>
-                        <?php 
-     
-                        foreach ($alumno[0]->getMateria() as $materia): ?> 
-                      
-                            <tr>
-                           <td> <input name="nombreMateriaSeleccionada" id=<?php echo $materia->getid_materia()?> type="submit" value="<?php echo $materia->getnombreMateria()?>" formaction="busquedaPorMateria.php" 
-                            onclick=""></td>
-                             </tr>
-                        <?php endforeach; 
-                            ?>
-                    </tbody>
-                </table>
-            </div>
+        <div class="container">
             <br>
-                <input type="submit" value="Agregar Materia" formaction="alumnoAgregarMateria.php">
-                <br>
-           
-            <div>
-                <br>
-                <h2>Buscar Otra Consulta</h2>
-                <table align='center' class="table-buscar" id="tablaBuscar" style="border-color: #FFFFFF">  
-                    <tr>
-                        <th>Por Profesor</th>
-                        <th colspan="2">Por Materia</th>
-                    </tr>
-                        <tr>
-                            <td>
-                                <h5>Seleccione Profesor</h5>
-                            </td>
-                            <td colspan="2">
-                                <h5>Seleccione Departamento despúes Materia</h5>
-                            </td>
-                        <tr>
-                            <td>
-                                <select name="profesor">
-                               
-                                <?php 
-                               $listaprofesores = $a->BuscarProfesor();
-                               foreach ($listaprofesores as $profesor): ?> 
-                                <option value=<?php echo "{$profesor->getid_profesor()}" ?>> <?php echo "{$profesor->getApellido()}, {$profesor->getnombre()}" ?></option>   
-                                <?php endforeach; 
-                               ?>
-
-                                </select>                                
-                            </td>
-                            <td>                                
-                                <select id="first-choice" name="departamentos">
-
-                                       <?php 
-                               $listadepartamento = $a->BuscarDepartamento();
-                               foreach ($listadepartamento as $departamento): ?> 
-                                <option value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
-                                <?php endforeach; 
-                               ?>
-                                </select>
-                            </td>
-                            <td>                       
-                                <select id="second-choice" name="Materias">
-                                </select> 
-                                <script>
-                 $("#first-choice").change(function() {
-                 $("#second-choice").load("<?php echo $depatartamentomaterias.'?choice='?>"+ $("#first-choice").val());
-                }).change();</script>
-
-                            </td>
-                        </tr>                   
-                </table>
-            </div>
-            <div>
-                <br>
-                <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
-                <input id=buttonBuscar type="submit" value="Buscar Profesor" formaction="busquedaPorProfesor.php" onclick="">
-                <input type="submit" value="Buscar Materia" formaction="busquedaPorMateria.php">
-            </div>
-            <div>                     
-                <h2>Mis Anotaciones</h2>
-                <div>
-                <?php $misanotaciones = $a->MisAnotaciones($idalumno);?>
-                
-              
-                    <?php if (count($misanotaciones)>0){ ?>
-                    <table align='center' class="table-mostrar" id="tablaAnotaciones" onclick="" >
-                        <thead>                    
-                            <th>Materia</th>
-                            <th>Profesor</th>
-                            <th>Día</th>
-                            <th>Horario</th>
-                            <th>Aula</th>
-                            <th>Acciones</th>
-                        </thead>
-                        <tbody style="text-align: left">
-                        
-                        <?php     
-                        foreach ($misanotaciones as $hora): ?> 
-                      <tr>
-                           
+            <form action="alumnoPpal.php" method="POST" class="form-horizontal">
+                <div class="form-group">
+                    <h2 for="cursando" class="text-primary col-md-4 col-md-offset-5">Estás cursando:</h2>
+                </div>        
+                <div class="container">
+                    <div class="table-responsive col-md-4 col-md-offset-4">
+                        <table class="table table-bordered table-hover" id="tablaMateria">
+                            <tr class="info">
+                                <th> Materias </th>
+                            </tr>
+                            <?php foreach ($alumno[0]->getMateria() as $materia): ?>
+                            <tr>
                                 <td>
-                                    <?php echo $hora->getMateria()->getnombreMateria(); ?>
-                                </td>
-                                <td>
-                                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getapellido(); ?>
-                                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?>
-                                </td>
-                                <td>
-                                    <?php echo $hora->getHorariodeConsulta()->getdia()->getdia(); ?>
-                                </td>
-                                <td>
-                                    <?php echo $hora->getHorariodeConsulta()->gethora(); ?>
-                                </td>
-                                <td>
-                                <?php echo $hora->getHorarioDeConsulta()->getfk_aula()->getcuerpoAula();
-                                echo " nivel: ";
-                                echo $hora->getHorarioDeConsulta()->getfk_aula()->getnivelAula();
-                                echo " aula: ";
-                                echo $hora->getHorarioDeConsulta()->getfk_aula()->getnumeroAula(); ?>
-                            </td>
-                                <td>
-                                    <button type="submit" id="buttonBorrar" name="idDetalle" value=  <?php echo $hora->gettempiddetalle(); ?> formaction=<?php echo $eliminar?> onclick="return confirm('Esta seguro que desea eliminarse')"> Eliminar </button>
-                                </td>
-                                </tr>
-                        <?php endforeach; 
-                            ?>
-                        </tbody>
-                    </table>
-                <?php } else{ ?>
-                    <table align='center' class="table-mostrar" id="tablaAnotaciones" onclick="" >
-                    <td>
-                                    <?php echo "No esta anotado" ?>
-                        </td>
-                        </table> 
-                        <?php }; ?>
-                    <br>
-                </div>
-            </div>
-            <div>
-                <br>
-                <h2>Mis Notificaciones</h2>
-                <!-- <h5>Usted no tiene Mensajes Nuevos</h5> -->
-                <?php $notificaciones= $a->notificaciones($misanotaciones); ?>
-                <?php if (count($notificaciones)>0){ ?>
-                <table  align='center' class="table-mostrar" id="tablaAvisos" onclick="" >
-                <thead>                    
-                            <th>Materia</th>
-                            <th>Profesor</th>
-                            <th>Dia</th>
-                            <th>Fecha</th>
-                            <th>Mensaje</th>
-                          
-                        </thead>
-                <?php     
-                        foreach ($notificaciones as $hora): ?>   
-                           <br>
-                      <tr>     
-                                <td>
-                                    <?php echo $hora->getMateria()->getnombreMateria(); ?>
-                                </td>
-                                <td>
-                                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getapellido(); ?>
-                                    <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?> 
-                                </td>
-                                <td>
-                               <?php echo $hora->getHorariodeConsulta()->getdia()->getdia(); ?>
-                               <?php echo $hora->getHorariodeConsulta()->gethora(); ?>
-                                </td>
-                               <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> 
-                               <tr>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td>
-                                    <?php
-                                     echo $aviso->getfechaAvisoProfesor();
-                                     echo " ";
-                                     echo substr($aviso->gethoraAvisoProfesor(), 0, 5); ?>
-                                </td>
-                                <td>
-                                    <?php echo $aviso->getdetalleDescripcion() ?>
+                                    <input class="form-control" name="nombreMateriaSeleccionada" id=<?php echo $materia->getid_materia()?> type="submit" value="<?php echo $materia->getnombreMateria()?>" formaction="busquedaPorMateria.php">
                                 </td>
                             </tr>
-                                <?php endforeach; 
-                            ?>
-                               
+                            <?php endforeach;?>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group"> 
+                    <div class="col-md-6 col-md-offset-5">
+                        <button class="btn btn-primary" type="submit" formaction="alumnoAgregarMateria.php">Agregar Materia
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>                     
+                </div>           
+                <div class="container">
+                    <br>
+                    <div class="form-group">
+                        <h2 for="consulta" class="text-primary col-md-4 col-md-offset-4">Buscar Otra Consulta</h2>
+                    </div>
+                    <div class="container">
+                        <div class="table-responsive col-md-6 col-md-offset-3">
+                            <table class="table table-bordered table-hover" id="tablaBuscar">  
+                                <tr class="info">
+                                    <th>Por Profesor</th>
+                                    <th colspan="2">Por Materia</th>
                                 </tr>
-                        <?php endforeach; 
-                            ?>
-                </table>
-                <?php } else{ ?>
-                    <table align='center' class="table-mostrar" id="tablanotificaciones" onclick="" >
-                    <td>
-                                    <?php echo "No hay notificaciones" ?>
-                        </td>
-                        </table> 
-                        <?php }; ?>
+                                <tr>
+                                    <td>
+                                        <h5 for="profesor" class="text-primary">Seleccione Profesor</h5>
+                                    </td>
+                                    <td colspan="2">
+                                        <h5 for="departamento" class="text-danger">Seleccione Departamento despúes Materia</h5>
+                                    </td>
+                                    <tr>
+                                        <td> 
+                                            <div class="col-md-6 my-3">
+                                                <select class="browser-default custom-select" name="profesor" data-style="btn-primary" data-widthen="auto">                               
+                                                    <?php $listaprofesores = $a->BuscarProfesor();
+                                                        foreach ($listaprofesores as $profesor): ?> 
+                                                    <option data-divider="true" value=<?php echo "{$profesor->getid_profesor()}" ?>> <?php echo "{$profesor->getApellido()}, {$profesor->getnombre()}" ?></option>   
+                                                    <?php endforeach; ?>
+                                                </select> 
+                                            </div>                               
+                                        </td>
+                                        <td>                                
+                                            <select class="mdb-select md-form" id="first-choice" name="departamentos">
+                                            <?php $listadepartamento = $a->BuscarDepartamento();
+                                                    foreach ($listadepartamento as $departamento): ?> 
+                                                <option value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </td>
+                                        <td>                       
+                                            <select class="mdb-select md-form" id="second-choice" name="Materias">
+                                            </select> 
+                                            <script>
+                                                $("#first-choice").change(function() {
+                                                    $("#second-choice").load("<?php echo $depatartamentomaterias.'?choice='?>"+ $("#first-choice").val());
+                                                }).change();
+                                            </script>
+                                        </td>
+                                </tr>                   
+                        </table>
+                    </div>
+                </div>
+                <div class="container">
+                    <br>
+                    <div class="form-group"> 
+                        <div class="col-md-4 col-md-offset-4">
+                            <button class="btn btn-primary" id=buttonBuscar type="submit" formaction="busquedaPorProfesor.php"> Buscar Profesor 
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>                   
+                            <button class="btn btn-primary" type="submit" formaction="busquedaPorMateria.php"> Buscar Materia 
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>                     
+                    </div>
+                </div>                   
                 <br>
-
-            </div>
-            <!-- metodo vandenbosch para ver el fondo -->
-            <div>
-            <td>.</td><br>
-            <td>.</td>
-            </div>
-             <!-- metodo vandenbosch para ver el fondo -->
-        </form>
+                <div class="form-group">                  
+                    <h2 for="anotaciones" class="text-primary col-md-4 col-md-offset-4">Mis Anotaciones</h2>
+                </div>
+                    <?php $misanotaciones = $a->MisAnotaciones($idalumno);?>
+                    <?php if (count($misanotaciones)>0){ ?>
+                    <div class="container">
+                        <div class="table-responsive col-md-9 col-md-offset-1">
+                            <table class="table table-bordered table-hover" id="tablaAnotaciones">
+                                <tr class="info">                    
+                                    <th>Materia</th>
+                                    <th>Profesor</th>
+                                    <th>Día</th>
+                                    <th>Horario</th>
+                                    <th>Aula</th>
+                                    <th></th>
+                                </tr>
+                                <?php foreach ($misanotaciones as $hora): ?> 
+                                    <tr>
+                                        <td>
+                                            <?php echo $hora->getMateria()->getnombreMateria(); ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $hora->getHorariodeConsulta()->getProfesor()->getapellido(); ?>
+                                            <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $hora->getHorariodeConsulta()->getdia()->getdia(); ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $hora->getHorariodeConsulta()->gethora(); ?>
+                                        </td>
+                                        <td>
+                                        <?php echo $hora->getHorarioDeConsulta()->getfk_aula()->getcuerpoAula();
+                                        echo " nivel: ";
+                                        echo $hora->getHorarioDeConsulta()->getfk_aula()->getnivelAula();
+                                        echo " aula: ";
+                                        echo $hora->getHorarioDeConsulta()->getfk_aula()->getnumeroAula(); ?>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-warning btn-xs" title="Eliminar Anotación" type="submit" id="buttonBorrar" name="idDetalle" value=  <?php echo $hora->gettempiddetalle(); ?> formaction=<?php echo $eliminar?> onclick="return confirm('Está seguro que desea eliminarse')">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </table>
+                            <?php } else{ ?>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="table-responsive col-md-9 col-md-offset-1">
+                            <table class="table" id="tablaAnotaciones">
+                                <td>
+                                    <?php echo "No esta anotado" ?>
+                                </td>
+                            </table> 
+                            <?php }; ?>
+                        <br>
+                        </div>
+                    </div>
+                <div class="container">
+                    <br>
+                    <h2 for="notificaciones" class="text-primary col-md-4 col-md-offset-4">Mis Notificaciones</h2>
+                    <?php $notificaciones= $a->notificaciones($misanotaciones); ?>
+                    <?php if (count($notificaciones)>0){ ?>
+                    <div class="container">
+                        <div class="table-responsive col-md-9 col-md-offset-1">
+                            <table class="table table-bordered table-hover" id="tablaAvisos">
+                                <tr class="info">                    
+                                    <th>Materia</th>
+                                    <th>Profesor</th>
+                                    <th>Dia</th>
+                                    <th>Fecha</th>
+                                    <th>Mensaje</th>  
+                                </tr>
+                                <?php foreach ($notificaciones as $hora): ?>   
+                                <br>
+                                <tr>     
+                                    <td>
+                                        <?php echo $hora->getMateria()->getnombreMateria(); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $hora->getHorariodeConsulta()->getProfesor()->getapellido(); ?>
+                                        <?php echo $hora->getHorariodeConsulta()->getProfesor()->getnombre(); ?> 
+                                    </td>
+                                    <td>
+                                        <?php echo $hora->getHorariodeConsulta()->getdia()->getdia(); ?>
+                                        <?php echo $hora->getHorariodeConsulta()->gethora(); ?>
+                                    </td>
+                                    <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> 
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <?php echo $aviso->getfechaAvisoProfesor();
+                                                echo " ";
+                                                echo substr($aviso->gethoraAvisoProfesor(), 0, 5); ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $aviso->getdetalleDescripcion() ?>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>              
+                                </tr>
+                                    <?php endforeach; ?>
+                            </table>
+                                <?php } else{ ?>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="table-responsive col-md-9 col-md-offset-1">
+                            <table class="table" id="tablanotificaciones">
+                                <td>
+                                    <?php echo "No hay notificaciones" ?>
+                                </td>
+                            </table> 
+                            <?php }; ?>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script src="./../js/jquery.js"></script>
+        <script src="./../js/bootstrap.min.js"></script>
     </body>
-    <footer>
-       <?php require $DIR.$footer; ?>             
-    </footer>  
+    <footer class="footer">
+      <div class="container">
+            <div class="col-md-12">
+                <p class="text-muted text-center credit"> Copyright &copy; 2019 aHora</p> 
+            </div>
+      </div>
+    </footer> 
 </html>
