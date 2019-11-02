@@ -31,7 +31,7 @@ if(isset( $_SESSION['departamentos'])){
         <link rel="stylesheet" href="./../css/bootstrap.min.css">   
         <link href="css/sticky-footer-navbar.css" rel="stylesheet">
     </head>
-    <body background = <?php echo $URL.$fondo?>>
+    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
     <?php require $DIR.$header ?>
     <?php if (!empty($message)): ?>
     <p> <?= $message ?></p>

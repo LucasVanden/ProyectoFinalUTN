@@ -30,7 +30,7 @@ $a = new alumnoControlador();
         <link rel="stylesheet" href="./../css/bootstrap.min.css">
         <script src="./../js/funciones.js" type="text/javascript"></script>
     </head>
-    <body background = <?php echo $URL.$fondo?>>
+    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
         <?php require $DIR.$header ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
@@ -51,7 +51,7 @@ $a = new alumnoControlador();
  </script> -->
         <div class="container">
             <br>            
-            <form action="alumnoConfirmarAsistencia.php" method="POST" class="form-horizontal">        
+            <form action="alumnoConfirmarAsistencia.php" method="POST" class="form-horizontal" >        
                 <div class="form-group">
                     <h2><?php echo $mat->getnombreMateria(); ?></h2>
                 </div>

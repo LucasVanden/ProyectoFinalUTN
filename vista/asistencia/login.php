@@ -70,27 +70,52 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
         <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="assert/css/style.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="./../css/bootstrap.min.css">
     </head>
     <body background = <?php echo $URL."/vista/fondoCuerpo.jpg>"?>
-        <?php require 'partials/header.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-
-        <h1>Login</h1>
-        <form action="login.php" method="POST">
-            Nombre de Usuario <input name="usuario" type="text" placeholder="Ingrese Usuario" required="">
-            Contraseña <input name="contraseña" type="password" placeholder="Ingrese Contraseña" required="">
-            <div class="send-button">
-                <input type="submit" value="Ingresar">
-            </div>        
-        </form>
+        <div class="container">
+            <br> <br>
+            <form action="login.php" method="POST" class="form-horizontal">
+                <div class="row"> 
+                    <div class="col-md-4">
+                        <img src="partials\logo.png" title="aHora Sistemas de consultas educativas" style="background-color:transparent" class="img-thumbnail" >
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <h1 for="login" class="text-primary col-md-4 col-md-offset-4"> Login </h1>
+                        </div>   
+                        <div class="form-group">   
+                            <label for="nombre" class="control-label col-md-4"> Usuario </label>
+                            <div class="col-md-4">
+                                <input class="form-control" name="usuario" id="nombreusuario" type="text" placeholder="Ingrese Usuario" required>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label for="contraseña" class="control-label col-md-4"> Contraseña </label>
+                            <div class="col-md-4">
+                                <input class="form-control" name="contraseña" id="contraseña" type="password" placeholder="Ingrese Contraseña" required>
+                            </div>
+                        </div>
+                        <div class="form-group"> 
+                            <div class="col-md-4 col-md-offset-4">
+                                <button class="btn btn-primary"> Ingresar   
+                                    <span class="glyphicon glyphicon-log-in"></span>
+                                </button>
+                            </div>                     
+                        </div>
+                    </div>
+                </div> 
+            </form> 
+        </div>
+        <script src="./../js/jquery.js"></script>
+        <script src="./../js/bootstrap.min.js"></script>
     </body>
     <footer class="footer">
       <?php require $DIR.$footer; ?>     
- </footer>    
+    </footer>    
 </html>

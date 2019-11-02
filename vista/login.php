@@ -90,7 +90,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
     <head>
         <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
         <title>Login</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
     </head>
     <body background = <?php echo $URL."/vista/fondoCuerpo.jpg>"?>
         <?php if (!empty($message)): ?>

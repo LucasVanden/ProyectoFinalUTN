@@ -26,9 +26,8 @@ if(!isset($_SESSION['rol'])){
     <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
 
     <link rel="stylesheet" href="./../css/bootstrap.min.css">
-    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
   </head>
-  <body background = <?php echo $URL.$fondo?>>
+  <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
     <?php require $DIR.$header ?>
     <?php if (!empty($message)) : ?>
       <p> <?= $message ?></p>

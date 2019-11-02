@@ -17,12 +17,10 @@ $crearanotacion= $URL .$crearAnotacion;
     <head>
         <meta charset="utf-8"  name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
         <title>Confirmar Asistencia</title>
-        <link rel="stylesheet" href="./../css/bootstrap.min.css">   
-        <link href="css/sticky-footer-navbar.css" rel="stylesheet">
-        <!--ver si el sigte script se usa sino borrarlo-->
+        <link rel="stylesheet" href="./../css/bootstrap.min.css"> 
         <script src="./../js/funciones.js" type="text/javascript"></script>
     </head>
-    <body background = <?php echo $URL.$fondo?>>
+    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
         <?php require $DIR.$header ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>

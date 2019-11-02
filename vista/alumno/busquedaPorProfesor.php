@@ -21,7 +21,7 @@ require_once $DIR .$alumnoControlador;
         <title>Búsqueda Profesor</title>        
         <link rel="stylesheet" href="./../css/bootstrap.min.css">
     </head>
-    <body background = <?php echo $URL.$fondo?>>
+    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
     <?php require $DIR.$header ?>
     <?php if (!empty($message)): ?>
         <p> <?= $message ?></p>

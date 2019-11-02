@@ -39,8 +39,7 @@ if(isset($_POST['reporte2'])){
     <head>
         <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
         <title>Reportes</title>       
-        <link rel="stylesheet" href="./../css/bootstrap.min.css">   
-        <link href="css/sticky-footer-navbar.css" rel="stylesheet"> 
+        <link rel="stylesheet" href="./../css/bootstrap.min.css">  
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>

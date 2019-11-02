@@ -21,12 +21,11 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
+        <title>Profesor Principal</title>
+        <link rel="stylesheet" href="./../css/bootstrap.min.css">
     </head>
-    <body background = <?php echo $URL.$fondo?>>
+    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
     <?php require $DIR.$headerp ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
@@ -35,84 +34,93 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
         $notificar= $URL . $profesorNotificarAlumno; 
         $anotados= $URL . $profesorAlumnosAnotados; 
         ?>
-        <h2>Establecer Horario de Consulta:</h2>
-        <form action="profesorPpal.php" method="POST">        
-            <div>
-                <table align='center' class="table-mostrar" id="tablaMateria">
-                    <thead>
-                    <!--aca va cabecera de tabla-->
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th> Materias </th>
-                        </tr>   
-                        <?php 
-                        $a =new profesorControlador ;
-                        $listaDedicaciones = $a->buscarMateriasProfesor($idProfesor);
-                        foreach ($listaDedicaciones as $dedicacion): ?>   
-                        <tr>
-                            <td> 
-                                <input type="submit" name="nombreMateriaSeleccionada" id='<?php echo $dedicacion->getid_dedicacion()?>'  value="<?php echo $dedicacion->getMateria()->getnombreMateria()?>" formaction="profesorEstablecerHorario.php" 
-                            onclick=""></input>
-                            </td>
-                        </tr>
-                        <?php endforeach; 
+        <div class="container">
+            <br>
+            <form action="profesorPpal.php" method="POST" class="form-horizontal">
+                <div class="form-group">
+                    <h2 for="anotado" class="text-primary col-md-5 col-md-offset-4"> Establecer Horario de Consulta: </h2>
+                </div>                 
+                <div class="container">
+                    <div class="table-responsive col-md-4 col-md-offset-4">
+                        <table class="table table-bordered table-hover" id="tablaMateria">
+                            <tr class="info">
+                                <th> Materias </th>
+                            </tr>   
+                            <?php 
+                                $a =new profesorControlador;
+                                $listaDedicaciones = $a->buscarMateriasProfesor($idProfesor);
+                                foreach ($listaDedicaciones as $dedicacion): ?>   
+                            <tr>
+                                <td> 
+                                    <input class="form-control" name="nombreMateriaSeleccionada" id=<?php echo $dedicacion->getid_dedicacion()?> type="submit" value="<?php echo $dedicacion->getMateria()->getnombreMateria()?>" formaction="profesorEstablecerHorario.php">    
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h2 for="anotado" class="text-primary col-md-5 col-md-offset-4"> Alumnos Anotados </h2>
+                </div>
+                <div class="container"> 
+                    <div class="table-responsive col-md-9 col-md-offset-1"> 
+                        <table class="table table-bordered table-hover table-condensed" id="tablaAlumnosAnotados">
+                            <tr class="info">
+                                <th>Materia</th>
+                                <th>Día</th>
+                                <th>Hora</th>
+                                <th>Cantidad</th>
+                                <th colspan="2"></th>
+                            </tr>
+                            <?php 
+                                $alumnosanotados = $a->alumnosAnotados($idProfesor);//<--------------id session
                             ?>
-                    </tbody>
-                </table>
-            </div>
-            <div>                
-                <h2>Alumnos Anotados</h2>
-                <table align='center' id="tablaAlumnosAnotados" onclick="">
-                    <thead>
-                        <th>Materia</th>
-                        <th>Día</th>
-                        <th>Hora</th>
-                        <th>Cantidad</th>
-                        <th>Notificar</th>
-                        <th>Ver detalles</th>
-                    </thead>
-                   <?php 
-                   $alumnosanotados = $a->alumnosAnotados($idProfesor);//<---------------------------------id session
-                  ?>
-                    <tbody>
-                     <?php  foreach ($alumnosanotados as $hora): ?>   
-                       
-                     <tr>
-                            <td>
-                            <?php echo $hora->getMateria()->getnombreMateria() ?>
-                            </td>
-                            <td>
-                            <?php echo $hora->getHorarioDeConsulta()->getdia()->getdia() ?>
-                            <?php echo date("d-m-Y", strtotime($hora->getfechaHastaAnotados())); ?>
-                            </td>
-                            <td>
-                            <?php echo $hora->getHorarioDeConsulta()->gethora() ?>
-                            </td>
-                            <td>
-                            <?php echo $hora->getcantidadAnotados() ?>
-                            </td>
-                            <td>
-                                <button name="Notificaridhora" type='submit' value=<?php echo $hora->getid_horadeconsulta()?> formaction=<?php echo $notificar?> > Notificar </button>
-                            </td>
-                            <?php if ($hora->getcantidadAnotados()>0){ ?>
-                            <td>
-                            <input type='hidden' name='dia' value=<?php echo $hora->getHorarioDeConsulta()->getdia()->getdia() ?>>
-                            <input type='hidden' name='hora' value=<?php echo $hora->getHorarioDeConsulta()->gethora() ?>>
-                                <button name="Notificaridhora" type='submit' value=<?php echo $hora->getid_horadeconsulta()?> formaction=<?php echo $anotados?> > Ver </button>
-                            </td>
-                            <?php } else { 
-                                echo  '<td bgcolor="Lime">';
-                                echo "No anotados";
-                                echo  '</td>';
-                                 }; ?>
-
-                        </tr>
-                        <?php endforeach; 
-                            ?>                       
-                    </tbody>
-                </table>
-            </div>
+                            <?php foreach ($alumnosanotados as $hora): ?>   
+                            <tr>
+                                <td>
+                                    <?php echo $hora->getMateria()->getnombreMateria() ?>
+                                </td>
+                                <td>
+                                    <?php echo $hora->getHorarioDeConsulta()->getdia()->getdia() ?>
+                                    <?php echo date("d-m-Y", strtotime($hora->getfechaHastaAnotados())); ?>
+                                </td>
+                                <td>
+                                    <?php echo $hora->getHorarioDeConsulta()->gethora() ?>
+                                </td>
+                                <td>
+                                    <?php echo $hora->getcantidadAnotados() ?>
+                                </td>
+                                <td>
+                                    <div class="form-group"> 
+                                        <div class="col-md-4 col-md-offset-2">
+                                            <button class="btn btn-primary btn-xs" type="submit" id="Notificaridhora" title="Notificar Alumnos" name="Notificaridhora" value=<?php echo $hora->getid_horadeconsulta();?> formaction=<?php echo $notificar?>>
+                                                <span class="glyphicon glyphicon-send"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <?php if ($hora->getcantidadAnotados()>0){ ?>
+                                    <div class="form-group"> 
+                                        <div class="col-md-4 col-md-offset-2">
+                                            <input type='hidden' name='dia' value=<?php echo $hora->getHorarioDeConsulta()->getdia()->getdia() ?>>
+                                            <input type='hidden' name='hora' value=<?php echo $hora->getHorarioDeConsulta()->gethora() ?>>
+                                            <button class="btn btn-primary btn-xs" title="Ver Detalle" name="Notificaridhora" type='submit' value=<?php echo $hora->getid_horadeconsulta()?> formaction=<?php echo $anotados?> > 
+                                                <span class="glyphicon glyphicon-info-sign"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                    <?php } else { 
+                                                echo  '<td bgcolor="Lime">';
+                                                echo "No anotados";
+                                                echo  '</td>';
+                                                }; ?>
+                            </tr>
+                            <?php endforeach; ?>                       
+                        </table>
+                    </div>
+                </div>
             <div>
             <br>
             <h2>Mis Notificaciones</h2> <!-- desde aca acomodar con lo que viene-->
