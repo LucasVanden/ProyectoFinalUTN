@@ -23,10 +23,10 @@ $asistirprofesor=$URL.$AsistirProfesor;
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
+        <title>Asistencia Profesor</title>
+        <link rel="stylesheet" href="./../css/bootstrap.min.css">   
+        <link href="css/sticky-footer-navbar.css" rel="stylesheet">
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <?php require $DIR.$headerpasistencia?>
@@ -35,27 +35,30 @@ $asistirprofesor=$URL.$AsistirProfesor;
         <?php endif; ?>
         <?php
         ?>
-        <h2>Estás Dictando:</h2>
-          
-            <div>
-                <table align='center' class="table-mostrar" id="tablaMateria">
-                    <thead>
-                    <!--aca va cabecera de tabla-->
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th> Materias </th>
-                        </tr>   
-                        <?php 
-                        $a =new Asistenciacontrolador ;
-                        $listaDedicaciones = $a->buscarMateriasProfesor($idProfesor);
-                        foreach ($listaDedicaciones as $dedicacion): ?>   
-
-                      
-                        <?php $listaHorariosDecosnulta=$a->buscarHorasConsulta($idProfesor,$dedicacion->getMateria()->getid_materia()) ?>
-                        <input type="hidden" name="idmateria" value=<?php echo $dedicacion->getMateria()->getid_materia() ?>>
-                        <?php foreach ($listaHorariosDecosnulta as $hora): ?>  
-
+        <div class="container"> 
+            <br>
+            <form action=<?php echo $asistirprofesor?> method="POST" class="form-horizontal">
+                <div class="form-group">
+                    <h2 for="cursando" class="text-primary col-md-4 col-md-offset-4"> Estás Dictando: </h2>
+                </div> 
+                <div class="container">
+                    <div class="table-responsive col-md-9 col-md-offset-1">
+                        <table class="table table-bordered table-hover" id="tablaMateria">
+                            <tr class="info">
+                                <th> Materia </th>
+                                <th> Día </th>
+                                <th> Hora </th>
+                                <th colspan="2"> Profesor </th>
+                                <th>  </th>
+                            </tr>
+                            <?php 
+                                $a =new Asistenciacontrolador ;
+                                $listaDedicaciones = $a->buscarMateriasProfesor($idProfesor);
+                                foreach ($listaDedicaciones as $dedicacion): 
+                            ?>   
+                            <?php $listaHorariosDecosnulta=$a->buscarHorasConsulta($idProfesor,$dedicacion->getMateria()->getid_materia()) ?>
+                            <input type="hidden" name="idmateria" value=<?php echo $dedicacion->getMateria()->getid_materia() ?>>
+                            <?php foreach ($listaHorariosDecosnulta as $hora): ?>  
 <!-- SI no anda la asistencia profesor fue aca -->
 
                         <!--  < ?php if ($hora->getHorarioDeConsulta()->getdia()->getid_dia()==date("N")): ?> -->
@@ -66,38 +69,42 @@ $asistirprofesor=$URL.$AsistirProfesor;
                             $nombreBoton="Marcar Egreso";
                         }
                         ?>
-                        <tr>
-                            <td> 
-                                <?php echo $dedicacion->getMateria()->getnombreMateria()?>
-                                
-                            </td>
-                        
-                            
-                            <td><?php echo $hora->getHorarioDeConsulta()->getdia()->getdia() ?></td>
-                            <td><?php echo $hora->getHorarioDeConsulta()->gethora() ?></td>
-                            
-                            <?php ?>
-                            <td>
-                            <!-- nose xq no quiere recibir el id desde el boton, pero si desde el input hidden caundo en alumno ppal si anda -->
-                            <form action=<?php echo $asistirprofesor?> method="POST">     
-                            <input type="hidden" name="idmateria" value=<?php echo $dedicacion->getMateria()->getid_materia() ?>>
-                            <input type="hidden" name="asistir" value=<?php echo $hora->getid_horadeconsulta();?>>
-                            <button type="submit" name"asistir2" value=<?php echo $hora->getid_horadeconsulta();?> formaction=<?php echo $asistirprofesor?> onclick="return confirm('Marcar Horario de <?php echo $dedicacion->getMateria()->getnombreMateria()?>?')"> <?php echo $nombreBoton?></button>
-                            </form>
-                            </td>
+                            <tr>
+                                <td> 
+                                    <?php echo $dedicacion->getMateria()->getnombreMateria()?>                                
+                                </td>                       
+                                <td>
+                                    <?php echo $hora->getHorarioDeConsulta()->getdia()->getdia() ?>
+                                </td>
+                                <td>
+                                    <?php echo $hora->getHorarioDeConsulta()->gethora() ?>
+                                </td>
+                                <?php?>
+                                <td>
+                                <!-- nose xq no quiere recibir el id desde el boton, pero si desde el input hidden caundo en alumno ppal si anda -->
+                                    <div class="form-group"> 
+                                        <div class="col-md-4 col-md-offset-4">
+                                            <input type="hidden" name="idmateria" value=<?php echo $dedicacion->getMateria()->getid_materia() ?>>
+                                            <input type="hidden" name="asistir" value=<?php echo $hora->getid_horadeconsulta();?>>
+                                            <button class="btn btn-success btn-xs" title="Dar Presente" type="submit" name"asistir2" value=<?php echo $hora->getid_horadeconsulta();?> formaction=<?php echo $asistirprofesor?> onclick="return confirm('Marcar Horario de <?php echo $dedicacion->getMateria()->getnombreMateria()?>?')"> <?php echo $nombreBoton?>
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button> 
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
-                            <?php endif; ?>
-                      
-                        <?php endforeach; ?>
-                        <?php endforeach; ?>
-                          
-                    </tbody>
-                </table>
-            </div>
-            <br>
-     
+                            <?php endif; ?>                      
+                            <?php endforeach; ?>
+                            <?php endforeach; ?>                          
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script src="./../js/jquery.js"></script>
+        <script src="./../js/bootstrap.min.js"></script>
     </body>
-    <footer>
-       <?php require $DIR.$footer; ?>          
-    </footer>  
+    <footer class="footer">
+      <?php require $DIR.$footer; ?>     
+ </footer>
 </html>

@@ -212,11 +212,7 @@ var chart = new Chart(ctx, {
 <br>
 </div>
 </div>
-    <footer class="footer">
-      <div class="container">
-            <div class="col-md-12">
-                <p class="text-muted text-center credit"> Copyright &copy; 2019 aHora</p> 
-            </div>
-      </div>
-    </footer>   
+<footer class="footer">
+      <?php require $DIR.$footer; ?>     
+ </footer>    
 </html>

@@ -126,10 +126,6 @@ if(isset( $_SESSION['departamentos'])){
         <script src="./../js/bootstrap.min.js"></script>
     </body>
     <footer class="footer">
-      <div class="container">
-            <div class="col-md-12">
-                <p class="text-muted text-center credit"> Copyright &copy; 2019 aHora</p> 
-            </div>
-      </div>
-    </footer> 
+      <?php require $DIR.$footer; ?>     
+ </footer>
 </html>

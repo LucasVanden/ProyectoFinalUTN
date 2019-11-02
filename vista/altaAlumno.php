@@ -88,7 +88,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     <?php endif; ?>
     <?php endif; ?>
   </body>
-  <footer>
-    <?php require $DIR.$footer; ?>      
-  </footer>
+  <footer class="footer">
+      <?php require $DIR.$footer; ?>     
+ </footer>  
 </html>

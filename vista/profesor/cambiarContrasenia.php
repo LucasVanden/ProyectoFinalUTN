@@ -63,7 +63,7 @@ if(!isset($_SESSION['rol'])){
 <?php endif;?>
 
   </body>
-  <footer>
-  <?php require $DIR.$footer; ?>     
-    </footer>
+  <footer class="footer">
+      <?php require $DIR.$footer; ?>     
+ </footer> 
 </html>

@@ -5,8 +5,6 @@ require_once 'c:/xampp/htdocs/ProyectoFinalUTN/modelo/Materia.php';
 $con= new conexion();
 $conexttion=$con->getconexion();
 
-
-  
     $conn = $conexttion;
     $choice = $_GET['choice'];
     $stmt = $conn->prepare("SELECT id_materia,nombreMateria FROM materia where fk_departamento='$choice' ORDER BY nombreMateria "); 
@@ -17,6 +15,4 @@ $conexttion=$con->getconexion();
         $dep->setnombreMateria($row['nombreMateria']);
         echo "<option>" . $row{'nombreMateria'} . "</option>";
     }
-    
-
-    ?>
+?>

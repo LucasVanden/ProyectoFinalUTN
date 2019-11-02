@@ -44,7 +44,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
                 </div>
             </form>
     </body>
-    <footer>
-        <?php require 'partials/footer.php'; ?>      
-    </footer>
+    <footer class="footer">
+      <?php require $DIR.$footer; ?>     
+ </footer> 
 </html>

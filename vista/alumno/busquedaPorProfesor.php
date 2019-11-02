@@ -20,20 +20,18 @@ require_once $DIR .$alumnoControlador;
         <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
         <title>Búsqueda Profesor</title>        
         <link rel="stylesheet" href="./../css/bootstrap.min.css">
-        <link href="css/sticky-footer-navbar.css" rel="stylesheet">
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <?php require $DIR.$header ?>
     <?php if (!empty($message)): ?>
         <p> <?= $message ?></p>
     <?php endif; ?>
-
     <?php  
     $a=new AlumnoControlador();
     $listaHorarios= $a->buscarHorariosDeConsultaporProfesor($_POST["profesor"])?>
         <div class="container">
             <br>
-                   <?php if(count($listaHorarios[1])>0): ?>       
+            <?php if(count($listaHorarios[1])>0): ?>       
             <form action="alumnoConfirmarAsistencia.php" method="POST" class="form-horizontal">  
                 <div class="form-group">
                     <h2 for="profesor" class="text-primary col-md-4 col-md-offset-5"> <?php echo $listaHorarios[0]->getapellido();echo ', '; echo $listaHorarios[0]->getnombre()?> </h2>
@@ -44,7 +42,7 @@ require_once $DIR .$alumnoControlador;
  
                 <!-- y el Fomr action method POST ????? -->
                 <div class="container">
-                    <div class="table-responsive col-md-6 col-md-offset-3">
+                    <div class="table-responsive col-md-9 col-md-offset-1">
                         <table class="table table-bordered table-hover" id="tablaBusquedaPorProfesor">
                             <tr class="info">
                                 <th>Materia</th>
@@ -99,23 +97,22 @@ require_once $DIR .$alumnoControlador;
                     </div>
                 </div>
             </form>
-        </div>
         <?php else:?>
-<table align='center' class="table-mostrar" id="tablanotificaciones" onclick="" >
-                    <td>
-                                    <?php echo "No hay Horario de consulta Cargados" ?>
+            <div class="container">
+                <div class="table-responsive col-md-4 col-md-offset-4">
+                    <table class="table table-bordered table-hover" id="tablanotificaciones">
+                        <td>
+                            <?php echo "No hay Horario de consulta Cargados"?>
                         </td>
-                        </table> 
-            
-<?php endif?>
+                    </table> 
+                </div>
+            </div>    
+        </div>
+        <?php endif?>
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
     </body>
     <footer class="footer">
-      <div class="container">
-            <div class="col-md-12">
-                <p class="text-muted text-center credit"> Copyright &copy; 2019 aHora</p> 
-            </div>
-      </div>
-    </footer> 
+      <?php require $DIR.$footer; ?>     
+ </footer>
 </html>

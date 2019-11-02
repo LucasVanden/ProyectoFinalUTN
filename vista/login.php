@@ -91,7 +91,6 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
         <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
         <title>Login</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link href="css/sticky-footer-navbar.css" rel="stylesheet">
     </head>
     <body background = <?php echo $URL."/vista/fondoCuerpo.jpg>"?>
         <?php if (!empty($message)): ?>
@@ -140,10 +139,6 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
         <script src="js/bootstrap.min.js"></script>
     </body>
     <footer class="footer">
-      <div class="container">
-            <div class="col-md-12">
-                <p class="text-muted text-center credit"> Copyright &copy; 2019 aHora</p> 
-            </div>
-      </div>
-    </footer>
+      <?php require $DIR.$footer; ?>     
+ </footer> 
 </html>

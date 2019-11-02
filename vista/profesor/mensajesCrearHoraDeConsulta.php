@@ -405,7 +405,7 @@ foreach ($cargar as $horario) {
             </div>
             </form>
     </body>
-    <footer>
-    <?php require $DIR.$footer; ?>    
-    </footer>  
+    <footer class="footer">
+      <?php require $DIR.$footer; ?>     
+ </footer>   
 </html>

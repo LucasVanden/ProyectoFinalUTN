@@ -150,7 +150,7 @@ if(isset($_SESSION["faltasBuscadas"])) : ?>
 </table>  
 
 <?php endif?>
-    <footer>
-       <?php require $DIR.$footer; ?>         
-    </footer>  
+<footer class="footer">
+      <?php require $DIR.$footer; ?>     
+ </footer>   
 </html>

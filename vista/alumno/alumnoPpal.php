@@ -27,9 +27,6 @@ $_SESSION['mensaje']=null;
 <!DOCTYPE html>
 <html>
     <head>
-
-
-
         <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
         <title>Alumno Principal</title>
         <link rel="stylesheet" href="./../css/bootstrap.min.css">   
@@ -78,7 +75,7 @@ $_SESSION['mensaje']=null;
                         <h2 for="consulta" class="text-primary col-md-4 col-md-offset-4">Buscar Otra Consulta</h2>
                     </div>
                     <div class="container">
-                        <div class="table-responsive col-md-6 col-md-offset-3">
+                        <div class="table-responsive col-md-8 col-md-offset-2">
                             <table class="table table-bordered table-hover" id="tablaBuscar">  
                                 <tr class="info">
                                     <th>Por Profesor</th>
@@ -104,7 +101,7 @@ $_SESSION['mensaje']=null;
                                         </td>
                                         <td>                                
                                             <select class="mdb-select md-form" id="first-choice" name="departamentos">
-                                            <?php $listadepartamento = $a->BuscarDepartamento();
+                                            <?php   $listadepartamento = $a->BuscarDepartamento();
                                                     foreach ($listadepartamento as $departamento): ?> 
                                                 <option value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
                                                 <?php endforeach; ?>
@@ -144,7 +141,7 @@ $_SESSION['mensaje']=null;
                     <?php if (count($misanotaciones)>0){ ?>
                     <div class="container">
                         <div class="table-responsive col-md-9 col-md-offset-1">
-                            <table class="table table-bordered table-hover" id="tablaAnotaciones">
+                            <table class="table table-bordered table-hover table-condensed" id="tablaAnotaciones">
                                 <tr class="info">                    
                                     <th>Materia</th>
                                     <th>Profesor</th>
@@ -205,7 +202,7 @@ $_SESSION['mensaje']=null;
                     <?php if (count($notificaciones)>0){ ?>
                     <div class="container">
                         <div class="table-responsive col-md-9 col-md-offset-1">
-                            <table class="table table-bordered table-hover" id="tablaAvisos">
+                            <table class="table table-bordered table-hover table-condensed" id="tablaAvisos">
                                 <tr class="info">                    
                                     <th>Materia</th>
                                     <th>Profesor</th>
@@ -266,10 +263,6 @@ $_SESSION['mensaje']=null;
         <script src="./../js/bootstrap.min.js"></script>
     </body>
     <footer class="footer">
-      <div class="container">
-            <div class="col-md-12">
-                <p class="text-muted text-center credit"> Copyright &copy; 2019 aHora</p> 
-            </div>
-      </div>
-    </footer> 
+      <?php require $DIR.$footer; ?>     
+ </footer>
 </html>

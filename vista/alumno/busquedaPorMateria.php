@@ -15,7 +15,8 @@ if (!isset($_POST['Materias'])){
     if(!isset($_POST['nombreMateriaSeleccionada'])){
     $direccion= $URL . $alumnoPpal;
     header("Location: $direccion");
-    }}
+    }
+}
 
 require_once $DIR .$alumnoControlador;
 $a = new alumnoControlador();
@@ -24,119 +25,109 @@ $a = new alumnoControlador();
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
+        <title>Búsqueda Materias</title>
+        <link rel="stylesheet" href="./../css/bootstrap.min.css">
         <script src="./../js/funciones.js" type="text/javascript"></script>
     </head>
-    <body>
-    <?php require $DIR.$header ?>
+    <body background = <?php echo $URL.$fondo?>>
+        <?php require $DIR.$header ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-
-
- <?php 
- 
- if (isset($_POST['nombreMateriaSeleccionada'])){
-  $id = $a->buscarIDdeNombreMateria($_POST["nombreMateriaSeleccionada"]);}
-  else{
-      $id=$_POST['Materias'];
-  }
-//echo $a->buscarIDdeNombreMateria("ProyectoFinal");
- 
-   ?>
-        <?php
-
-         $mat = $a->buscarHorariosDeConsultaDeMateriaporhoraconsulta($id);
+        <?php 
+        if (isset($_POST['nombreMateriaSeleccionada'])){
+            $id = $a->buscarIDdeNombreMateria($_POST["nombreMateriaSeleccionada"]);
+        }else{
+            $id=$_POST['Materias'];
+        }
+        //echo $a->buscarIDdeNombreMateria("ProyectoFinal");
         ?>
-
-        <h2><?php echo $mat->getnombreMateria(); ?></h2>
-        <h3>Horarios de Consulta</h3>
-       
- 
-
+        <?php $mat = $a->buscarHorariosDeConsultaDeMateriaporhoraconsulta($id);?>
+        <?php if(count($mat->getHoraDeConsulta())>0): ?>
 <!-- <input id="pikachu" type="button" value="" name="test"> </input>
 <script> 
- 
  document.getElementById("pikachu").value = localStorage.getItem("id_materia");
  </script> -->
-
-<?php if(count($mat->getHoraDeConsulta())>0): ?>
-        <form action="alumnoConfirmarAsistencia.php" method="POST">        
-            <div>
-                <table id="tablaMateriaPpal">
-                    <thead>                    
-                        <th>Día</th>
-                        <th>Horario</th>
-                        <th>Profesor</th>
-                        <th>Aula</th>
-                        <th>Asistir</th>
-                    </thead>
-                    <body style="text-align: center" background = <?php echo $URL.$fondo?>>
-                        
-
-                        <?php 
-                        foreach ($mat->getHoraDeConsulta() as $horadeconsulta): ?> 
-                      <tr>
-                            <td>
-                                 <?php echo $horadeconsulta->getHorarioDeConsulta()->getDia()->getdia(); ?>
-                                 <?php echo date("d-m-Y", strtotime($horadeconsulta->getfechaHastaAnotados())); ?>
-                            </td>
-                            <td>
-                                <?php echo $horadeconsulta->getHorarioDeConsulta()->getHora(); ?>
-                            </td>
-                            <td>
-                                <?php echo $horadeconsulta->getHorarioDeConsulta()->getProfesor()->getnombre(); ?>
-                                <?php echo $horadeconsulta->getHorarioDeConsulta()->getProfesor()->getapellido(); ?>
-                            </td>
-                            <td>
-                                <?php echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getcuerpoAula();
-                                echo " nivel: ";
-                                echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getnivelAula();
-                                echo " aula: ";
-                                echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getnumeroAula(); ?>
-                            </td>
-                           
-                            <?php
-                            $idHora=$horadeconsulta->getid_horadeconsulta();
-                            $idusuario=$_SESSION['usuario'];
-                            $idalumno= $a->buscarAlumnoDeUsuario($idusuario);
-                            //aca ingresar del login
-                            if ($a->AnotadoRepetido($idHora,$idalumno)){
-                              echo  '<td bgcolor="Lime">';
-                             echo "Anotado";
-                              echo  '</td>';
-                            }else{
-                               echo  '<td>';
-                               echo  '<button id="buttonAsistir" name="Asistir" value='; 
-                               echo $horadeconsulta->getid_horadeconsulta();
-                                echo '> Asistir </button>';
-                               echo  '</td>';
-                            }
-                            ?>
-                                <!-- <button id="buttonAsistir" name="Asistir" value=<?php echo $horadeconsulta->getid_horadeconsulta();?> onclick=<?php echo $dialog?>> Asistir </button> -->
-                           
-                                </tr>
-                        <?php endforeach; 
-                            ?>
-                        
-                        
-                    </tbody>                    
-                </table>                
-            </div>
-        </form>
+        <div class="container">
+            <br>            
+            <form action="alumnoConfirmarAsistencia.php" method="POST" class="form-horizontal">        
+                <div class="form-group">
+                    <h2><?php echo $mat->getnombreMateria(); ?></h2>
+                </div>
+                <div class="form-group">
+                    <h3 for="consulta" class="text-primary col-md-4 col-md-offset-5">Horarios de Consulta</h3>
+                </div>
+                <div class="container">
+                    <div class="table-responsive col-md-9 col-md-offset-1">
+                        <table class="table table-bordered table-hover" id="tablaMateriaPpal">
+                            <tr class="info">                    
+                                <th>Día</th>
+                                <th>Horario</th>
+                                <th>Profesor</th>
+                                <th>Aula</th>
+                                <th></th>
+                            </tr>                        
+                            <?php foreach ($mat->getHoraDeConsulta() as $horadeconsulta): ?> 
+                            <tr>
+                                <td>
+                                    <?php echo $horadeconsulta->getHorarioDeConsulta()->getDia()->getdia(); ?>
+                                    <?php echo date("d-m-Y", strtotime($horadeconsulta->getfechaHastaAnotados())); ?>
+                                </td>
+                                <td>
+                                    <?php echo $horadeconsulta->getHorarioDeConsulta()->getHora(); ?>
+                                </td>
+                                <td>
+                                    <?php echo $horadeconsulta->getHorarioDeConsulta()->getProfesor()->getnombre(); ?>
+                                    <?php echo $horadeconsulta->getHorarioDeConsulta()->getProfesor()->getapellido(); ?>
+                                </td>
+                                <td>
+                                    <?php echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getcuerpoAula();
+                                    echo " nivel: ";
+                                    echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getnivelAula();
+                                    echo " aula: ";
+                                    echo $horadeconsulta->getHorarioDeConsulta()->getfk_aula()->getnumeroAula(); ?>
+                                </td>
+                                    <?php
+                                    $idHora=$horadeconsulta->getid_horadeconsulta();
+                                    $idusuario=$_SESSION['usuario'];
+                                    $idalumno= $a->buscarAlumnoDeUsuario($idusuario);
+                                    //aca ingresar del login
+                                    if ($a->AnotadoRepetido($idHora,$idalumno)){
+                                        echo  '<td bgcolor="Lime">';
+                                        echo "Anotado";
+                                        echo  '</td>';
+                                    }else{
+                                        echo  '<td>';
+                                        echo  '<button class="btn btn-primary btn-xs" title="Asistir a Consulta" id="buttonAsistir" name="Asistir" value='; 
+                                        echo $horadeconsulta->getid_horadeconsulta();
+                                        echo '> <span class="glyphicon glyphicon-plus"></span> </button>';
+                                        echo  '</td>';
+                                    }
+                                    ?>
+                                    <!-- <button id="buttonAsistir" name="Asistir" value=<?php echo $horadeconsulta->getid_horadeconsulta();?> onclick=<?php echo $dialog?>> Asistir </button> -->
+                            </tr>
+                            <?php endforeach; ?>  
+                        </table>                
+                    </div>
+                </div>
+            </form>
         <?php else:?>
-<table align='center' class="table-mostrar" id="tablanotificaciones" onclick="" >
-                    <td>
-                                    <?php echo "No hay Horario de consulta Cargados" ?>
+            <div class="container">
+                <div class="table-responsive col-md-4 col-md-offset-4">
+                    <table class="table table-bordered table-hover" id="tablanotificaciones">
+                        <td>
+                            <?php echo "No hay Horario de consulta Cargados"?>
                         </td>
-                        </table> 
-            
-<?php endif?>
+                    </table> 
+                </div>
+            </div>
+        </div>    
+        <?php endif?>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
-    <footer>
-       <?php require $DIR.$footer; ?>         
-    </footer>  
+    <footer class="footer">
+      <?php require $DIR.$footer; ?>     
+ </footer>
 </html>
