@@ -98,7 +98,7 @@ if(isset( $_SESSION['departamentos'])){
                         <div class="table-responsive col-md-4 col-md-offset-4">
                             <table class="table table-bordered table-hover" id="tablaMateria">
                                 <tr class="info">
-                                    <th> Materias </th>
+                                    <th colspan="2"> Materias </th>
                                 </tr>
                                 <?php 
                                     $a =new AlumnoControlador ;
@@ -117,6 +117,7 @@ if(isset( $_SESSION['departamentos'])){
                                 </tr>
                                 <?php endforeach; ?>                        
                             </table>
+                            <br> <br>
                         </div>
                     </div>
                 </div>

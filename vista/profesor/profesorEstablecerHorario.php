@@ -38,12 +38,11 @@ $M2S2=null;
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
+        <title>Establecer Horario</title>
+        <link rel="stylesheet" href="./../css/bootstrap.min.css">
     </head>
-    <body background = <?php echo $URL.$fondo?>>
+    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
     <?php require $DIR.$headerp ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
@@ -56,45 +55,50 @@ $M2S2=null;
         }else{
             $nommat=$_SESSION['nombreMateriaSeleccionadaEnPpal'];
         }
-          $a=new Profesorcontrolador();
-           $idmateria= $a->buscarIDdeNombreMateria($nommat);
-           $dedicacion=$a->buscarDedicaciondeMateria($idmateria,$idProfesor);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
-           
-           $dedicaciondoble=false;
-           if($dedicacion->getid_dedicacion()==$nombrededicacion){
+        $a=new Profesorcontrolador();
+        $idmateria= $a->buscarIDdeNombreMateria($nommat);
+        $dedicacion=$a->buscarDedicaciondeMateria($idmateria,$idProfesor);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
+        
+        $dedicaciondoble=false;
+        if($dedicacion->getid_dedicacion()==$nombrededicacion){
             $dedicaciondoble=true;
-           }
-          
-           $cargar=$a->buscarHorariosParallenarEnlosSelect($idmateria,$idProfesor);
-           if(isset($cargar)){
-           foreach ($cargar as $horario) {
-              if($horario->getsemestre()==1){
-                  if($horario->getn()==2){
-                    $D1S2=$horario->getdia()->getid_dia();
-                    $H1S2=date("H", strtotime( $horario->gethora()));
-                    $M1S2=date("i", strtotime( $horario->gethora()));
-                  }else{
-                    $D1S1=$horario->getdia()->getid_dia();
-                    $H1S1=date("H", strtotime( $horario->gethora()));
-                    $M1S1=date("i", strtotime( $horario->gethora()));
-                  }
-              }
-              elseif($horario->getsemestre()==2){
-                if($horario->getn()==2){
-                    $D2S2=$horario->getdia()->getid_dia();
-                    $H2S2=date("H", strtotime( $horario->gethora()));
-                    $M2S2=date("i", strtotime( $horario->gethora()));
-                  }else{
-                    $D2S1=$horario->getdia()->getid_dia();
-                    $H2S1=date("H", strtotime( $horario->gethora()));
-                    $M2S1=date("i", strtotime( $horario->gethora()));
-                  }
-           }
         }
-    }
-           ?>
-        <h2>Establecer Horario de Consulta:</h2>
-        <form action="alumnoPpal.php" method="POST">
+          
+        $cargar=$a->buscarHorariosParallenarEnlosSelect($idmateria,$idProfesor);
+        if(isset($cargar)){
+           foreach ($cargar as $horario) {
+                if($horario->getsemestre()==1){
+                    if($horario->getn()==2){
+                        $D1S2=$horario->getdia()->getid_dia();
+                        $H1S2=date("H", strtotime( $horario->gethora()));
+                        $M1S2=date("i", strtotime( $horario->gethora()));
+                    }else{
+                        $D1S1=$horario->getdia()->getid_dia();
+                        $H1S1=date("H", strtotime( $horario->gethora()));
+                        $M1S1=date("i", strtotime( $horario->gethora()));
+                    }
+                }
+                elseif($horario->getsemestre()==2){
+                    if($horario->getn()==2){
+                        $D2S2=$horario->getdia()->getid_dia();
+                        $H2S2=date("H", strtotime( $horario->gethora()));
+                        $M2S2=date("i", strtotime( $horario->gethora()));
+                    }else{
+                        $D2S1=$horario->getdia()->getid_dia();
+                        $H2S1=date("H", strtotime( $horario->gethora()));
+                        $M2S1=date("i", strtotime( $horario->gethora()));
+                    }
+                }
+            }
+        }
+        ?>
+        
+        <div class="container">
+            <br>
+            <form action="alumnoPpal.php" method="POST"> //
+                <div class="form-group">
+                    <h2 for="establecer" class="text-primary col-md-5 col-md-offset-4"> Establecer Horario de Consulta: </h2>
+                </div>
             <div>
                 <table align='center' id="tablaBuscar" style="border-color: #FFFFFF">  
                     <tr>

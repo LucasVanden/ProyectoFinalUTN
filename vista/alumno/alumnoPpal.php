@@ -66,10 +66,11 @@ $_SESSION['mensaje']=null;
                         <button class="btn btn-primary" type="submit" formaction="alumnoAgregarMateria.php">Agregar Materia
                             <span class="glyphicon glyphicon-plus"></span>
                         </button>
-                    </div>                     
-                </div>           
-                <div class="container">
-                    <br>
+                    </div>
+                </div>
+                <br>
+                <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">           
+                <div class="container"> 
                     <div class="form-group">
                         <h2 for="consulta" class="text-primary col-md-4 col-md-offset-4">Buscar Otra Consulta</h2>
                     </div>
@@ -133,6 +134,7 @@ $_SESSION['mensaje']=null;
                     </div>
                 </div>                   
                 <br>
+                <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
                 <div class="form-group">                  
                     <h2 for="anotaciones" class="text-primary col-md-4 col-md-offset-4">Mis Anotaciones</h2>
                 </div>
@@ -194,8 +196,8 @@ $_SESSION['mensaje']=null;
                         <br>
                         </div>
                     </div>
+                <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
                 <div class="container">
-                    <br>
                     <h2 for="notificaciones" class="text-primary col-md-4 col-md-offset-4">Mis Notificaciones</h2>
                     <?php $notificaciones= $a->notificaciones($misanotaciones); ?>
                     <?php if (count($notificaciones)>0){ ?>
@@ -239,9 +241,10 @@ $_SESSION['mensaje']=null;
                                     </tr>
                                     <?php endforeach; ?>              
                                 </tr>
-                                    <?php endforeach; ?>
+                                <?php endforeach; ?>
                             </table>
-                                <?php } else{ ?>
+                            <br>
+                    <?php } else{ ?>
                         </div>
                     </div>
                     <div class="container">
@@ -251,7 +254,7 @@ $_SESSION['mensaje']=null;
                                     <?php echo "No hay notificaciones" ?>
                                 </td>
                             </table> 
-                            <?php }; ?>
+                    <?php }; ?>
                             <br>
                         </div>
                     </div>

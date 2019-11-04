@@ -38,7 +38,7 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
             <br>
             <form action="profesorPpal.php" method="POST" class="form-horizontal">
                 <div class="form-group">
-                    <h2 for="anotado" class="text-primary col-md-5 col-md-offset-4"> Establecer Horario de Consulta: </h2>
+                    <h2 for="establecer" class="text-primary col-md-5 col-md-offset-4"> Establecer Horario de Consulta: </h2>
                 </div>                 
                 <div class="container">
                     <div class="table-responsive col-md-4 col-md-offset-4">
@@ -59,8 +59,10 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                         </table>
                     </div>
                 </div>
+                <br>
+                <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
                 <div class="form-group">
-                    <h2 for="anotado" class="text-primary col-md-5 col-md-offset-4"> Alumnos Anotados </h2>
+                    <h2 for="anotados" class="text-primary col-md-5 col-md-offset-4"> Alumnos Anotados </h2>
                 </div>
                 <div class="container"> 
                     <div class="table-responsive col-md-9 col-md-offset-1"> 
@@ -121,62 +123,71 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                         </table>
                     </div>
                 </div>
-            <div>
-            <br>
-            <h2>Mis Notificaciones</h2> <!-- desde aca acomodar con lo que viene-->
-            <?php if ($a->hayAvisosProfesor($alumnosanotados)){ ?>
-            <table  align='center' class="table-mostrar" id="tablaAvisos" onclick="" >
-                <thead>                    
-                    <th>Materia</th>
-                    <th>Dia</th>
-                    <th>Fecha</th>
-                    <th>Mensaje</th>          
-                </thead>
-                <?php     
-                    foreach ($alumnosanotados as $hora): ?>   
                 <br>
-                <tr>     
-                    <td>
-                        <?php echo $hora->getMateria()->getnombreMateria(); ?>
-                    </td>
-                    <td>    <?php echo $hora->getHorariodeConsulta()->getdia()->getdia(); ?>
-                               <?php echo $hora->getHorariodeConsulta()->gethora(); ?>
-                               </td>
-             
-                    <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> <!-- aca mensaje del alumno-->
-                <tr>    
-                <td></td>
-                <td>
-                    <?php echo ""?> <!-- aca fecha aviso del alumno-->
-                </td>
-                <td>
-                    <?php echo $aviso->getfechaAvisoProfesor();
-                    echo " ";
-                    echo substr($aviso->gethoraAvisoProfesor(), 0, 5);
-                     ?> <!-- aca fecha aviso del alumno-->
-                </td>
-                <td>
-                    <?php echo $aviso->getdetalleDescripcion() ?>
-                </td>
-                </tr>
-                    <?php endforeach;
-                    ?>
-                </tr>
-                    <?php endforeach; 
-                    ?>
-                </table>
+                <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
+                <div class="form-group">
+                    <h2 for="anotados" class="text-primary col-md-5 col-md-offset-4">Mis Notificaciones</h2>
+                </div>
+                <?php if ($a->hayAvisosProfesor($alumnosanotados)){ ?>
+                <div class="container"> 
+                    <div class="table-responsive col-md-9 col-md-offset-1"> 
+                        <table class="table table-bordered table-hover table-condensed" id="tablaAvisos">
+                            <tr class="info">
+                                <th>Materia</th>
+                                <th>Dia</th>
+                                <th>Fecha</th>
+                                <th>Mensaje</th>          
+                            </tr>
+                            <?php foreach ($alumnosanotados as $hora): ?>   
+                            <br>
+                            <tr>     
+                                <td>
+                                    <?php echo $hora->getMateria()->getnombreMateria(); ?>
+                                </td>
+                                <td>    <?php echo $hora->getHorariodeConsulta()->getdia()->getdia(); ?>
+                                        <?php echo $hora->getHorariodeConsulta()->gethora(); ?>
+                                        </td>
+                        
+                                <?php foreach ($hora->getAvisoProfesor() as $aviso): ?> <!-- aca mensaje del alumno-->
+                                <tr>    
+                                    <td></td>
+                                    <td>
+                                        <?php echo ""?> <!-- aca fecha aviso del alumno-->
+                                    </td>
+                                    <td>
+                                        <?php echo $aviso->getfechaAvisoProfesor();
+                                        echo " ";
+                                        echo substr($aviso->gethoraAvisoProfesor(), 0, 5);
+                                        ?> <!-- aca fecha aviso del alumno-->
+                                    </td>
+                                    <td>
+                                        <?php echo $aviso->getdetalleDescripcion() ?>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                            </tr>
+                            <?php endforeach;?>
+                        </table>
+                        <br>
                 <?php } else { ?>
-                    <table align='center' class="table-mostrar" id="tablanotificaciones" onclick="" >
-                    <td>
-                        <?php echo "No hay notificaciones." ?>
-                    </td>
-                </table> 
-                    <?php }; ?>
-                <br>
-                <br>
-                <br>
-            </div>
-        </form>
+                    </div>
+                </div>
+                <div class="container">
+                        <div class="table-responsive col-md-9 col-md-offset-1">
+                            <table class="table" id="tablanotificaciones">
+                                <td> 
+                                    <strong style="float:left;"><span class="glyphicon glyphicon-envelope"></span><?php echo "  - No hay notificaciones"?></strong>
+                                </td>
+                            </table> 
+                <?php }; ?>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <script src="./../js/jquery.js"></script>
+        <script src="./../js/bootstrap.min.js"></script>
     </body>
     <footer class="footer">
       <?php require $DIR.$footer; ?>     
