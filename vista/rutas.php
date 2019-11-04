@@ -90,6 +90,7 @@ $buscarMateriasDepartamentoincluidoTodas='/controlador/reportes/buscarMateriasDe
 $directorReportes='/vista/reportes/directorReportes.php';
 $vistafaltas='/vista/reportes/faltas.php';
 $buscarfaltas='/controlador/reportes/buscarFaltas.php';
+$llenarMaterias='/controlador/reportes/llenarMaterias.php';
 
 //ADMINISTRADOR
 $controladorAsuetosReceso='/controlador/administrador/controladorAsuetosReceso.php';

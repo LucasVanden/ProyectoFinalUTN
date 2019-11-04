@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
@@ -10,7 +11,7 @@ if(!isset($_SESSION['rol'])){
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
-$depatartamentomaterias= $URL.$departamentoMaterias;
+$depatartamentomaterias= $URL.$llenarMaterias;
 $grafico=false;
 $etiquetas=true;
 if(isset($_POST['departamentos'])){
@@ -30,8 +31,19 @@ if(isset($_POST['fechaHasta'])){
 if(isset($_POST['reporte2'])){
             $opcion=$_POST['reporte2'];}else{
                 $opcion=1;
-            }        
+            }      
+if(isset($_POST['fechaDesde'])){
+    if ($_POST['fechaDesde'] >$_POST['fechaHasta']){
+        $mensage="Fecha Hasta debe ser mayor a Fecha Desde";
+    }
+} 
+
+if(isset($_POST['Materias'])){
+    $_SESSION['materia']=$_POST['Materias'];}else{
+    }
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -139,6 +151,14 @@ if(isset($_POST['reporte2'])){
                 <br>
                 <?php 
                 if(isset($_POST["Obtener"])){
+
+                    if(isset($mensage)){
+                       
+                     echo '<div align="center" class="alert alert-danger" role="alert">';
+                     echo $mensage;
+                      echo "</div>";
+                    }else{
+
                     $fechaDesde=$_POST["fechaDesde"];
                     $fechaHasta=$_POST["fechaHasta"];
                     $c=new ReportesControlador();
@@ -165,12 +185,22 @@ if(isset($_POST['reporte2'])){
                         //echo '<pre>'; print_r($etiquetas); echo '</pre>';   
                         //echo '<pre>'; print_r($valores); echo '</pre>';   
                     $grafico=isset($_POST["Obtener"]);
+                }}
+              $noVacio=false;
+                    foreach ($valores as $valor) {
+                            if($valor!=0){
+                                $noVacio=true;
+                            }
+                    }
+                    if(!$noVacio){
+                  
+        echo '<div align="center" class="alert alert-warning" role="alert">';
+        echo "No hay datos";
+        echo '</div>';
                 }
-                if (empty($etiquetas)): ?>   
-                    No hay datos
-                <?php endif;?>
-                <?php if ($grafico): ?>
-                
+              ?>
+                <?php if ($grafico&&$noVacio): ?>
+
                 <div id="container" style="width:70%;">
                     <canvas id="myChart"></canvas>
                 </div>
