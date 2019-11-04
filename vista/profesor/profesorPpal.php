@@ -76,10 +76,10 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                 </div>                 
                 <div class="container">
                     <div class="table-responsive col-md-8 col-md-offset-2">
-                        <table class="table table-bordered table-hover" id="tablaMateria">
+                        <!-- <table class="table table-bordered table-hover" id="tablaMateria">
                             <tr class="info">
                                 <th> Materias </th>
-                            </tr>
+                            </tr> -->
                             <?php 
                                 $a =new profesorControlador;
                                 $listaDedicaciones = $a->buscarMateriasProfesor($idProfesor);
