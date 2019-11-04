@@ -107,11 +107,11 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
         </div>
         <br>
         <div class="form-group"> 
-          <div class="col-md-4 col-md-offset-4">  
-            <strong style="float:left;">
-              <span class="glyphicon glyphicon-user">Si ya te registraste como Alumno debes registrarte como Usuario: <a href="signup.php">Alta Usuario</a></span>
-            </strong>
+          <div align="center" class="col-md-9 col-md-offset-2">  
+              <h4 for="aclaracion" class="text-primary"> Si ya te registraste como Alumno debes registrarte como Usuario: <a href="signup.php"> Alta Usuario</a></h4>
             <br>
+          </div>
+        </div>
       </form>
     </div>
     <br>
