@@ -34,6 +34,40 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
         $notificar= $URL . $profesorNotificarAlumno; 
         $anotados= $URL . $profesorAlumnosAnotados; 
         ?>
+
+<style>
+.column {
+  float: left;
+  width: 30%;
+  padding: 50px;
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  margin: 5px;
+}
+
+.containerTab {
+  padding: 20px;
+  color: white;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Closable button inside the image */
+.closebtn {
+  float: right;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+}</style>
+<!-- The grid: three columns -->
+
         <div class="container">
             <br>
             <form action="profesorPpal.php" method="POST" class="form-horizontal">
@@ -41,22 +75,47 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                     <h2 for="establecer" class="text-primary col-md-5 col-md-offset-4"> Establecer Horario de Consulta: </h2>
                 </div>                 
                 <div class="container">
-                    <div class="table-responsive col-md-4 col-md-offset-4">
+                    <div class="table-responsive col-md-8 col-md-offset-2">
                         <table class="table table-bordered table-hover" id="tablaMateria">
                             <tr class="info">
                                 <th> Materias </th>
-                            </tr>   
+                            </tr>
                             <?php 
                                 $a =new profesorControlador;
                                 $listaDedicaciones = $a->buscarMateriasProfesor($idProfesor);
-                                foreach ($listaDedicaciones as $dedicacion): ?>   
+                             $listaDepartamentosConMaterias=$a->agruparMateriasPorDepartamento($listaDedicaciones); 
+// echo '<pre>'; print_r($a->agruparMateriasPorDepartamento($listaDedicaciones)); echo '</pre>';  
+?>
+<div class="row">
+        <?php  foreach ($listaDepartamentosConMaterias as $departamentoLista): ?>   
+        <div class="column" onclick="openTab('<?php echo $departamentoLista[0]?>');" style="background:#00b8eb;"> <?php echo $departamentoLista[0]?> </div>
+        <?php endforeach; ?>
+</div>
+
+<?php  foreach ($listaDepartamentosConMaterias as $departamentoLista): ?>   
+      
+ 
+        <div id="<?php echo $departamentoLista[0]?>" class="containerTab" style="display:none;background:#00b8eb">
+        <!-- If you want the ability to close the container, add a close button -->
+        <span onclick="this.parentElement.style.display='none'" class="closebtn">x</span>
+        
+        <?php foreach ($departamentoLista[1] as $materia): ?>   
+        <h2>  <input class="form-control" name="nombreMateriaSeleccionada" type="submit" value="<?php echo $materia->getnombreMateria()?>" formaction="profesorEstablecerHorario.php">    </h2>
+        <?php endforeach; ?>
+
+        </div>
+       
+<?php endforeach; ?>
+
+
+                            <!-- <?php foreach ($listaDedicaciones as $dedicacion): ?>   
                             <tr>
                                 <td> 
                                     <input class="form-control" name="nombreMateriaSeleccionada" id=<?php echo $dedicacion->getid_dedicacion()?> type="submit" value="<?php echo $dedicacion->getMateria()->getnombreMateria()?>" formaction="profesorEstablecerHorario.php">    
                                 </td>
                             </tr>
                             <?php endforeach; ?>
-                        </table>
+                        </table> -->
                     </div>
                 </div>
                 <br>
@@ -188,6 +247,16 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
         </div>
         <script src="./../js/jquery.js"></script>
         <script src="./../js/bootstrap.min.js"></script>
+<script>
+function openTab(tabName) {
+  var i, x;
+  x = document.getElementsByClassName("containerTab");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  document.getElementById(tabName).style.display = "block";
+} 
+</script>   
     </body>
     <footer class="footer">
       <?php require $DIR.$footer; ?>     

@@ -32,6 +32,16 @@ class Profesorcontrolador extends conexion
                 $mat = new Materia();
                 $mat->setid_materia($row['id_materia']);
                 $mat->setnombreMateria($row['nombreMateria']);
+                $tempdepartamento=$row['fk_departamento'];
+
+                $stmt0 = $conn->prepare("SELECT id_departamento,nombre FROM departamento WHERE id_departamento=$tempdepartamento "); 
+                $stmt0->execute();
+                while($row = $stmt0->fetch()) {
+                    $dep = new Departamento();
+                    $dep->setid_departamento($row['id_departamento']);
+                    $dep->setnombre($row['nombre']);
+                    $mat->setfk_departamento($dep);
+                }
             }
         $stmt3 = $conn->prepare("SELECT id_dedicacion,tipo,cantidadHora FROM dedicacion where id_dedicacion=$dedicacion"); 
         $stmt3->execute();
@@ -45,6 +55,31 @@ class Profesorcontrolador extends conexion
             }
         }
         return $listaDedicaciones;
+    }
+    function agruparMateriasPorDepartamento($listaDedicaciones){
+        $listaDepartamentosExistentes=array();
+        foreach ($listaDedicaciones as $dedicacion) {
+          $id= $dedicacion->getMateria()->getfk_departamento()->getnombre();
+            if (!(in_array( $id, $listaDepartamentosExistentes))){
+                array_push($listaDepartamentosExistentes,$id);
+            }
+        }
+        $resultadoFinal=array();
+        foreach ($listaDepartamentosExistentes as $dep) {
+            $materias=array();
+            $nombre=$dep;
+            foreach ($listaDedicaciones as $dedicacion) {
+                $id= $dedicacion->getMateria()->getfk_departamento()->getnombre();
+                if($id==$dep){
+                    $mat= $dedicacion->getMateria();
+                    array_push($materias,$mat);
+                }
+            }
+            $resultado=array();
+            array_push($resultado,$nombre,$materias);
+            array_push($resultadoFinal,$resultado);
+        }
+        return $resultadoFinal;
     }
 
     function buscarDiaDeMesaDeMateria($idMateria){

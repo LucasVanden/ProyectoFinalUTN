@@ -32,28 +32,28 @@ $crearanotacion= $URL .$crearAnotacion;
         <div class="container">
             <br>
             <form action=<?php echo $crearanotacion ?> method="POST" class="form-horizontal">
-            <div class="form-group">
-                <h2 for="confirma" class="text-primary col-md-4 col-md-offset-5">Confirmar Asistencia</h2>
-            </div>
-            <div class="form-group"> 
-                <div class="col-md-4 col-md-offset-3">
-                    <textarea placeholder="Ingrese su tema (opcional)" name="textarea" rows="10" cols="80"></textarea>
-                        <input name="idhora" type="hidden" value=<?php echo $idhora ?>> 
+                <div class="form-group">
+                    <h2 for="confirma" class="text-primary col-md-4 col-md-offset-5">Confirmar Asistencia</h2>
                 </div>
-            </div>
-            <div class="container">
-                <br>
                 <div class="form-group"> 
                     <div class="col-md-4 col-md-offset-3">
-                        <button class="btn btn-success" id=buttonConfirmar name="textoConfirmar" type="submit"> Confirmar 
-                            <span class="glyphicon glyphicon-ok"></span>
-                        </button> 
-                        <button class="btn btn-danger" id=buttonCancelar type="submit" formaction="alumnoPpal.php" onclick="self.location.href=<?php echo $URL.$alumnoPpal?>""> Cancelar 
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button> 
+                        <textarea placeholder="Ingrese su tema (opcional)" name="textarea" rows="10" cols="80"></textarea>
+                            <input name="idhora" type="hidden" value=<?php echo $idhora ?>> 
+                    </div>
+                </div>
+                <div class="container">
+                    <br>
+                    <div class="form-group"> 
+                        <div class="col-md-4 col-md-offset-3">
+                            <button class="btn btn-success" id=buttonConfirmar name="textoConfirmar" type="submit"> Confirmar 
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button> 
+                            <button class="btn btn-danger" id=buttonCancelar type="submit" formaction="alumnoPpal.php" onclick="self.location.href=<?php echo $URL.$alumnoPpal?>""> Cancelar 
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button> 
+                        </div> 
                     </div> 
                 </div> 
-            </div> 
             </form>
         </div>
         <script src="./../js/jquery.js"></script>
@@ -61,5 +61,5 @@ $crearanotacion= $URL .$crearAnotacion;
     </body>
     <footer class="footer">
       <?php require $DIR.$footer; ?>     
- </footer>
+    </footer>
 </html>
