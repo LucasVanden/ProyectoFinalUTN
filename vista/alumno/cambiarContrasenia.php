@@ -68,7 +68,7 @@ if(!isset($_SESSION['rol'])){
       <?php endif;?>
 
       <?php if($_SESSION['mensaje']=="ok"):?>
-        <div align="center"  class="alert alert-success" role="alert">
+        <div align="center" class="alert alert-success" role="alert">
           <h4 class="alert-heading"> Contraseña Creada Exitosamente </h4>
           <p> <?php echo $_SESSION['contenidomensaje']?></p>
           <hr>
