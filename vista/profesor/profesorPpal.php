@@ -233,7 +233,7 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                 </div>
                 <div class="container">
                         <div class="table-responsive col-md-9 col-md-offset-1">
-                            <table class="table" id="tablanotificaciones">
+                            <table class="table table-bordered table-hover table-condensed" id="tablanotificaciones">
                                 <td> 
                                     <strong style="float:left;"><span class="glyphicon glyphicon-envelope"></span><?php echo "  - No hay notificaciones"?></strong>
                                 </td>

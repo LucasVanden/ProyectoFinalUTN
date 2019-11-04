@@ -289,10 +289,10 @@ $M2S2=null;
                 <div>
                 <br>
                 <div class="form-group"> 
-                    <div class="col-md-4 col-md-offset-2">
+                    <div class="col-md-4 col-md-offset-4">
                         <input type='hidden' name='idmateria' value=<?php echo $idmateria?>>
                         <input type='hidden' name='dedicacion' value=<?php echo $dedicacion->getid_dedicacion()?>>
-                        <button class="btn btn-success" name="Establecer" type="submit" value=<?php echo $hora->getid_horadeconsulta()?> formaction=<?php echo $crearHorario?>> Establecer 
+                        <button class="btn btn-success" name="Establecer" type="submit" value="Establecer" formaction=<?php echo $crearHorario?>> Establecer 
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
                     </div>

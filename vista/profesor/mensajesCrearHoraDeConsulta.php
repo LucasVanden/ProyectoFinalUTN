@@ -398,15 +398,22 @@ foreach ($cargar as $horario) {
                 <?php endif; ?>
                 <?php endif; ?>
     <!-- asd -->
+                
+                <div class="form-group"> 
+                    <div class="col-md-4 col-md-offset-2">
+                        <input type='hidden' name='dedicacion' value=<?php echo $postdedicacion?>>
+                        <button class="btn btn-primary" name="mesa" type='submit' value=<?php echo $valueButton?> formaction=<?php echo $Aceptar?> > 
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </div>
                 </div>
-            <input type='hidden' name="dedicacion" value=<?php echo $postdedicacion?>></input>
-            <input type="submit" name="mesa" value=<?php echo $valueButton ?> formaction=<?php echo $Aceptar?> >
-            <?php if ($valueButton=="Continuar"): ?>
-                <div>  <input type="submit" value="Volver" name="Cancelar" formaction=<?php echo $MenuVolver ?> /></div>
+                <?php if ($valueButton=="Continuar"): ?>
+                <div>  
+                <input type="submit" value="Volver" name="Cancelar" formaction=<?php echo $MenuVolver ?> /></div>
                 <?php endif; ?>
                 </div>
-                </form>
-            </div>
+            </form>
+        </div>
         <script src="./../js/jquery.js"></script>
         <script src="./../js/bootstrap.min.js"></script>
     </body>

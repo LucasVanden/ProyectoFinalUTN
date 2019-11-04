@@ -44,7 +44,7 @@ $idhora=$_POST['Notificaridhora'];
                 </div>
                 <div class="container">
                     <div class="table-responsive col-md-6 col-md-offset-3">
-                        <table class="table table-bordered table-hover" id="tablaAlumnosAnotadosMateria">
+                        <table class="table table-bordered table-hover table-condensed" id="tablaAlumnosAnotadosMateria">
                             <tr class="info">                    
                                 <th></th>
                                 <th>Nombre</th>

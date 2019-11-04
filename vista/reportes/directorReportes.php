@@ -31,7 +31,6 @@ if(isset($_POST['reporte2'])){
             $opcion=$_POST['reporte2'];}else{
                 $opcion=1;
             }        
-
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +40,7 @@ if(isset($_POST['reporte2'])){
         <title>Reportes</title>       
         <link rel="stylesheet" href="./../css/bootstrap.min.css">  
     </head>
-    <body background = <?php echo $URL.$fondo?>>
+    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
     <script src="jquery.js"></script>
     <?php require $DIR.$headerp ?>
         <?php if (!empty($message)): ?>
@@ -49,34 +48,34 @@ if(isset($_POST['reporte2'])){
         <?php endif; ?>
         <div class="container">
             <br>
-        <form action="directorReportes.php" method="POST" class="form-horizontal">
-            <div class="form-group">
-                <h2 for="cursando" class="text-primary col-md-9 col-md-offset-2"> Obtener Reportes sobre Horarios de Consulta: </h2>
-            </div> 
-            <div class="container"> 
-                <div class="table-responsive col-md-8 col-md-offset-2">
-                    <table class="table table-bordered table-hover" id="tablaBuscar">  
-                        <tr>
-                            <th> Departamento </th>
-                            <td>                                
-                                <select id="first-choice" name="departamentos">
-                                    <?php $a=new ReportesControlador();
-                                        $listadepartamento = $a->BuscarDepartamento();
-                                        foreach ($listadepartamento as $departamento): ?> 
-                                    <option <?php if($dep == $departamento->getid_departamento()){echo("selected");}?> value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
-                                        <?php endforeach; ?>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
+            <form action="directorReportes.php" method="POST" class="form-horizontal">
+                <div class="form-group">
+                    <h2 for="cursando" class="text-primary col-md-9 col-md-offset-2"> Obtener Reportes sobre Horarios de Consulta: </h2>
+                </div> 
+                <div class="container"> 
+                    <div class="table-responsive col-md-8 col-md-offset-2">
+                        <table class="table table-bordered table-hover" id="tablaBuscar">  
+                            <tr class="info">
+                                <th> Departamento </th>
+                                <td colspan="2">                                
+                                    <select id="first-choice" name="departamentos">
+                                        <?php $a=new ReportesControlador();
+                                            $listadepartamento = $a->BuscarDepartamento();
+                                            foreach ($listadepartamento as $departamento): ?> 
+                                        <option <?php if($dep == $departamento->getid_departamento()){echo("selected");}?> value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
+                                            <?php endforeach; ?>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
                             <th>Fecha Desde</th>
-                            <td>
+                            <td colspan="2">
                                 <input type="date" id="f1" name="fechaDesde" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechadesde;?>>   
                             </td>
                         </tr>                   
                         <tr>
                             <th>Fecha Hasta</th>
-                            <td>                           
+                            <td colspan="2">                           
                                 <input type="date" id="f2" name="fechaHasta" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value=<?php echo $fechahasta;?>>                
                             </td>
                         </tr>                   
@@ -124,94 +123,85 @@ if(isset($_POST['reporte2'])){
                 </div>
             </div>
             <div class="form-group"> 
-                <div class="col-md-4 col-md-offset-4">
+                <div class="col-md-4 col-md-offset-2">
                     <button class="btn btn-primary" id="Obtener" type="submit" name="Obtener"> Obtener 
                         <span class="glyphicon glyphicon-play"></span>
                     </button> 
                 </div>                     
             </div>
+            <br>
+                <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
         </form>
     </div>
-    <script src="./../js/jquery.js"></script>
-    <script src="./../js/bootstrap.min.js"></script>
-    </body>
-
      
-            <div class="container">
-            <div class="col-md-12 col-md-offset-2">
-<br>
-                    <?php     
-
-if(isset($_POST["Obtener"])){
-$fechaDesde=$_POST["fechaDesde"];
-$fechaHasta=$_POST["fechaHasta"];
-$c=new ReportesControlador();
-switch ($_POST["reporte2"]) {
-    case '1':
-         $AlumnosPorMateria=$c->AlumnosPorMateria($_POST["departamentos"],$fechaDesde,$fechaHasta);
-        break;
-    case '2':
-        $AlumnosPorMateria=$c->AlumnosPorDepartamento($fechaDesde,$fechaHasta);
-        break;
-    case '3':
-        $AlumnosPorMateria=$c->AlumnosPorProfesorPorMateria($_POST["Materias"],$fechaDesde,$fechaHasta);
-        break;
-    default:
-       
-        break;
-}
-
-$etiquetas=$AlumnosPorMateria[0];
-$valores=$AlumnosPorMateria[1];
-
-$labels=$c->auxiliarLabels($etiquetas);
-$data=$c->auxiliarValores($valores);
-
-//$label="'".$_POST['reporte2']."'";
-$label="'"."Cantidad de Alumnos"."'";
-
-//echo $_POST['reporte2'];
-//echo '<pre>'; print_r($etiquetas); echo '</pre>';   
-//echo '<pre>'; print_r($valores); echo '</pre>';   
-
-$grafico=isset($_POST["Obtener"]);
-}
-if (empty($etiquetas)): ?>   
-No hay datos
-<?php endif; ?>
-
-  <?php if ($grafico): ?>
-
-<div id="container" style="width:70%;">
-<canvas id="myChart"></canvas>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'bar',
-
-    // The data for our dataset
-    data: {
-        labels: <?php echo $labels?>,
-        datasets: [{
-            label: <?php echo $label?>,
-            backgroundColor: 'rgb('+Math.trunc(Math.random()*255)+','+Math.trunc(Math.random()*255)+','+Math.trunc(Math.random()*255)+')',
-            borderColor: 'rgb(0, 0, 0)',
-            data: <?php echo $data?>,
-        }]
-    },
-
-    // Configuration options go here
-    options: {}
-});
-<?php endif; ?>
-</script>
-<br>
-</div>
-</div>
-<footer class="footer">
+        <div class="container">
+            <div class="col-md-10 col-md-offset-2">
+                <br>
+                <?php 
+                if(isset($_POST["Obtener"])){
+                    $fechaDesde=$_POST["fechaDesde"];
+                    $fechaHasta=$_POST["fechaHasta"];
+                    $c=new ReportesControlador();
+                    switch ($_POST["reporte2"]) {
+                        case '1':
+                            $AlumnosPorMateria=$c->AlumnosPorMateria($_POST["departamentos"],$fechaDesde,$fechaHasta);
+                            break;
+                        case '2':
+                            $AlumnosPorMateria=$c->AlumnosPorDepartamento($fechaDesde,$fechaHasta);
+                            break;
+                        case '3':
+                            $AlumnosPorMateria=$c->AlumnosPorProfesorPorMateria($_POST["Materias"],$fechaDesde,$fechaHasta);
+                            break;
+                        default:    
+                            break;
+                    }
+                    $etiquetas=$AlumnosPorMateria[0];
+                    $valores=$AlumnosPorMateria[1];
+                    $labels=$c->auxiliarLabels($etiquetas);
+                    $data=$c->auxiliarValores($valores);
+                        //$label="'".$_POST['reporte2']."'";
+                    $label="'"."Cantidad de Alumnos"."'";
+                        //echo $_POST['reporte2'];
+                        //echo '<pre>'; print_r($etiquetas); echo '</pre>';   
+                        //echo '<pre>'; print_r($valores); echo '</pre>';   
+                    $grafico=isset($_POST["Obtener"]);
+                }
+                if (empty($etiquetas)): ?>   
+                    No hay datos
+                <?php endif;?>
+                <?php if ($grafico): ?>
+                
+                <div id="container" style="width:70%;">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+                <script>
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'bar',
+                        // The data for our dataset
+                        data: {
+                            labels: <?php echo $labels?>,
+                            datasets: [{
+                                label: <?php echo $label?>,
+                                backgroundColor: 'rgb('+Math.trunc(Math.random()*255)+','+Math.trunc(Math.random()*255)+','+Math.trunc(Math.random()*255)+')',
+                                borderColor: 'rgb(0, 0, 0)',
+                                data: <?php echo $data?>,
+                            }]
+                        },
+                        // Configuration options go here
+                        options: {}
+                    });
+                    <?php endif; ?>
+                </script>
+                <br><br><br>
+            </div>
+        </div>
+        <script src="./../js/jquery.js"></script>
+        <script src="./../js/bootstrap.min.js"></script>
+    </body>
+    <footer class="footer">
       <?php require $DIR.$footer; ?>     
- </footer>    
+    </footer>    
 </html>
