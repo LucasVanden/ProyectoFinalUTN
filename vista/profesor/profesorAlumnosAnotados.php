@@ -56,27 +56,25 @@ $idhora=$_POST['Notificaridhora'];
                                 foreach ($detalles as $detalle): 
                                     $i++;?>   
                             <tr>
-                            <td>
-                            <?php echo $i?>
-                            </td>
-                            <td>
-                            <?php echo $detalle->getAlumno()->getnombre() ?>
-                            <?php echo $detalle->getAlumno()->getapellido() ?>
-                            </td>
-                            <td>
-                            <?php echo $detalle->getAlumno()->getlegajo() ?>
-                            </td>                            
-                            <td>
-                            <?php echo $detalle->gettema() ?>
-                            </td>                            
-                        </tr>
-                          <?php endforeach; 
-                              ?>    
-
-                      
-                    </tbody>                    
-                </table>                
-            </div>
+                                <td>
+                                    <?php echo $i?>
+                                </td>
+                                <td>
+                                    <?php echo $detalle->getAlumno()->getnombre() ?>
+                                    <?php echo $detalle->getAlumno()->getapellido() ?>
+                                </td>
+                                <td>
+                                    <?php echo $detalle->getAlumno()->getlegajo() ?>
+                                </td>                            
+                                <td>
+                                    <?php echo $detalle->gettema() ?>
+                                </td>                            
+                            </tr>
+                            <?php endforeach; ?>                          
+                            </tbody>                    
+                        </table>                
+                    </div>
+                </div>
 <!--            <div>
                 <h2>Enviar Notificaciones</h2>
                 <textarea name="cuerpoNotificacion" placeholder="Ingrese Contenido de la Notificación"rows="10" cols="80">Escribe aquí tu Notificación</textarea>

@@ -77,7 +77,7 @@ require_once $DIR .$alumnoControlador;
                                     $idalumno= $a->buscarAlumnoDeUsuario($idusuario);
                                     //aca ingresar del login
                                     if ($a->AnotadoRepetido($idHora,$idalumno)){
-                                        echo  '<td bgcolor="Lime">';
+                                        echo  '<td bgcolor="Chartreuse">';
                                         echo "Anotado";
                                         echo  '</td>';
                                     }else{

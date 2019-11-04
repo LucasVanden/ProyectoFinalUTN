@@ -53,7 +53,7 @@ $a = new alumnoControlador();
             <br>            
             <form action="alumnoConfirmarAsistencia.php" method="POST" class="form-horizontal" >        
                 <div class="form-group">
-                    <h2 class="text-primary col-md-7 col-md-offset-3"><?php echo $mat->getnombreMateria(); ?></h2>
+                    <h2 class="text-primary col-md-9 col-md-offset-4"><?php echo $mat->getnombreMateria(); ?></h2>
                 </div>
                 <div class="form-group">
                     <h3 for="consulta" class="text-primary col-md-4 col-md-offset-4">Horarios de Consulta</h3>
@@ -93,7 +93,7 @@ $a = new alumnoControlador();
                                     $idalumno= $a->buscarAlumnoDeUsuario($idusuario);
                                     //aca ingresar del login
                                     if ($a->AnotadoRepetido($idHora,$idalumno)){
-                                        echo  '<td bgcolor="(25, 0, 100, 0)">';
+                                        echo  '<td bgcolor="Chartreuse">';
                                         echo "Anotado";
                                         echo  '</td>';
                                     }else{

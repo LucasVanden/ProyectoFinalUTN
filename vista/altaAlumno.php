@@ -49,46 +49,89 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
 <!DOCTYPE html>
 <html>
   <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <meta charset="utf-8">
+  <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
   <title>Alta Alumno</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   </head>
-  <body background = <?php echo $URL.$fondo?>>
+  <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
     <?php require 'partials/header.php' ?>
-    <h1>Alta Alumno</h1>
-    <form action="altaAlumno.php" method="POST">
-      <p><br>
-        <label>Legajo:</label><input name="legajo" type="number" placeholder=" Legajo" min=1 value="" required><br>
-        <label>Nombre:</label><input name="nombre" type="text1" placeholder=" Nombre" required><br>
-        <label>Apellido:</label><input name="apellido" type="text1" placeholder=" Apellido" required><br>
-        <label>e - mail:</label><input name="email" type="mail" placeholder=" email@dominio.com"><br>
-        <label>Nacimiento:</label><input name="fecha" type="date" required><br>
-        <label>Teléfono:</label><input name="telefono" type="number" placeholder=" 555-555" min=1 max=999999><br>
-      </p>
-      <input type="submit" value="Enviar">
+    <div class="container">
       <br>
-      <span>Si ya te registraste como Alumno debes registrarte como Usuario: <a href="signup.php">Alta Usuario</a></span>
-    </form>
+      <form action="altaAlumno.php" method="POST" class="form-horizontal">
+        <div align="center" class="form-group">
+          <h2 for="contrasenia" class="text-primary"> Alta Alumno </h2>
+        </div>
+        <div class="form-group">   
+          <label for="contraseña" class="control-label col-md-4"> Legajo </label>
+          <div class="col-md-4">
+            <input class="form-control" name="legajo" type="number" min=1 placeholder="Legajo" required>
+          </div>
+        </div>
+        <div class="form-group">   
+          <label for="nuevacontraseña" class="control-label col-md-4"> Nombre </label>
+          <div class="col-md-4">
+            <input class="form-control" name="nombre" type="text" placeholder="Nombre" required>
+          </div>
+        </div>
+        <div class="form-group">   
+          <label for="confirma_contraseña" class="control-label col-md-4"> Apellido </label>
+          <div class="col-md-4">
+            <input class="form-control" name="apellido" type="text" placeholder="Apellido" required>
+          </div>
+        </div> 
+        <div class="form-group">   
+          <label for="contraseña" class="control-label col-md-4"> e - mail </label>
+          <div class="col-md-4">
+            <input class="form-control" name="email" type="mail" min=1 placeholder=" " required>
+          </div>
+        </div>
+        <div class="form-group">   
+          <label for="nuevacontraseña" class="control-label col-md-4"> Nacimiento </label>
+          <div class="col-md-4">
+            <input class="form-control" name="fecha" type="date" required>
+          </div>
+        </div>
+        <div class="form-group">   
+          <label for="confirma_contraseña" class="control-label col-md-4"> Teléfono </label>
+          <div class="col-md-4">
+            <input class="form-control" name="telefono" type="number" min=1 max=999999 placeholder="555-555" required>
+          </div>
+        </div> 
+        <br>
+        <div class="form-group"> 
+          <div class="col-md-4 col-md-offset-4">             
+            <button class="btn btn-primary" type="submit"> Enviar
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+          </div> 
+        </div>
+        <br>
+        <div class="form-group"> 
+          <div class="col-md-4 col-md-offset-4">  
+            <strong style="float:left;">
+              <span class="glyphicon glyphicon-user">Si ya te registraste como Alumno debes registrarte como Usuario: <a href="signup.php">Alta Usuario</a></span>
+            </strong>
+            <br>
+      </form>
+    </div>
     <br>
     <?php if (!empty($message)) : ?>
     <?php if ($exito) : ?>
-    <div class="alert alert-success" role="alert">
+    <div align="center" class="alert alert-success" role="alert">
       <h4 class="alert-heading">Alumno creado Exitosamente</h4>
       <p>Se creo alumno: <?php echo $_POST['nombre']?> </p>
     </div>
     <?php else: ?>
-    <div class="alert alert-danger" role="alert">
+    <div align="center" class="alert alert-danger" role="alert">
       <?php echo $message?>
     </div>
     <?php endif; ?>
     <?php endif; ?>
+   
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </body>
   <footer class="footer">
       <?php require $DIR.$footer; ?>     
- </footer>  
+  </footer> 
 </html>
