@@ -41,30 +41,63 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
     <title>Alta Usuario</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
   </head>
-  <body background = <?php echo $URL.$fondo?>>
+  <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
   <?php require $DIR.$header ?>
   <?php if (!empty($message)) : ?>
       <p> <?= $message ?></p>
   <?php endif; ?>
-
-    <h1>Alta Usuario</h1>
-    <form action="signup.php" method="POST">
-      <input name="usuario" type="text" placeholder="Ingrese su usuario">
-      <input name="contraseña" type="password" placeholder="Ingrese su contraseña">
-      <input name="confirma_contraseña" type="password" placeholder="confirme su contraseña">
-      <input name="alumno" type="text" placeholder="legajo">
-      <input type="submit" value="Enviar">
+    <div class="container">
       <br>
-      <span>Si ya se registro como usuario, ingrese al sistema: <a href="login.php">Login</a></span>
-    </form>
-
+      <form action="signup.php" method="POST" class="form-horizontal">
+        <div class="form-group">
+          <h2 align="center" for="contrasenia" class="text-primary col-md-4 col-md-offset-4"> Alta Usuario </h2>
+        </div>
+        <div class="form-group">   
+          <label for="usuario" class="control-label col-md-4"> Usuario </label>
+          <div class="col-md-4">
+            <input class="form-control" name="usuario" type="text" placeholder="Ingrese Usuario" required>
+          </div>
+        </div>
+        <div class="form-group">   
+          <label for="contraseña" class="control-label col-md-4"> Contraseña </label>
+          <div class="col-md-4">
+            <input class="form-control" name="contraseña" type="password" placeholder="Ingrese Contraseña" required>
+          </div>
+        </div>
+        <div class="form-group">   
+          <label for="confirma_contraseña" class="control-label col-md-4"> Repita Contraseña </label>
+          <div class="col-md-4">
+            <input class="form-control" name="confirma_contraseña" type="password" placeholder="Repita Contraseña" required>
+          </div>
+        </div>
+        <div class="form-group">   
+          <label for="alumno" class="control-label col-md-4"> Legajo </label>
+          <div class="col-md-4">
+            <input class="form-control" name="alumno" type="text" placeholder="Ingrese Legajo" required>
+          </div>
+        </div> 
+        <br>
+        <div class="form-group"> 
+          <div class="col-md-4 col-md-offset-4">             
+            <button class="btn btn-primary" type="submit"> Enviar
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>
+          </div> 
+        </div>
+        <br>
+        <div class="form-group">
+          <h4 align="center" for="aviso" class="text-primary col-md-10 col-md-offset-1"> Si ya se registro como usuario, ingrese al sistema: <a href="login.php">Login</a></h4>
+        </div>
+      </form>
+    </div>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
   </body>
   <footer class="footer">
       <?php require $DIR.$footer; ?>     
- </footer> 
+  </footer>
 </html>
