@@ -106,12 +106,6 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
           </div> 
         </div>
         <br>
-        <div class="form-group"> 
-          <div align="center" class="col-md-9 col-md-offset-2">  
-              <h4 for="aclaracion" class="text-primary"> Si ya te registraste como Alumno debes registrarte como Usuario: <a href="signup.php"> Alta Usuario</a></h4>
-            <br>
-          </div>
-        </div>
       </form>
     </div>
     <br>
