@@ -92,7 +92,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
         <title>Login</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css">
     </head>
-    <body background = <?php echo $URL."/vista/fondoCuerpo.jpg>"?>
+    <body background = <?php echo $URL."/vista/fondoCuerpoLogin.jpg>"?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>       
