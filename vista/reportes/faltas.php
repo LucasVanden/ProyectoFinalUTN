@@ -39,6 +39,12 @@ if(isset($_SESSION['reporte2'])){
 }else{
     $opcion=1;
 }  
+
+if(isset($_SESSION['fechaDesde'])){
+    if ($_SESSION['fechaDesde'] >$_SESSION['fechaHasta']){
+        $mensage="Fecha Hasta debe ser mayor a Fecha Desde";
+    }
+} 
 ?>
 
 <!DOCTYPE html>
@@ -58,10 +64,10 @@ if(isset($_SESSION['reporte2'])){
             <br>
             <form action="directorReportes.php" method="POST" class="form-horizontal">
                 <div class="form-group">
-                    <h2 for="inasistencias" class="text-primary col-md-9 col-md-offset-2"> Obtener Reportes Inasistencias: </h2>
+                    <h2 align="center" for="inasistencias" class="text-primary col-md-9 col-md-offset-2"> Obtener Reportes Inasistencias: </h2>
                 </div>
                 <div class="container"> 
-                    <div class="table-responsive col-md-8 col-md-offset-2">
+                    <div class="table-responsive col-md-6 col-md-offset-2">
                         <table class="table table-bordered table-hover" id="tablaBuscar">  
                             <tr class="info">
                                 <th>Departamento</th>
@@ -91,60 +97,89 @@ if(isset($_SESSION['reporte2'])){
                             <tr>
                                 <th>Materia</th>
                                 <td>
-                                    <select id="second-choice" name="Materias">                       
-                                        <!-- voy por aca-->
+                                    <select id="second-choice" name="Materias">
                                     </select>
-                                </td>
-
-                        
-                                            <script>
-
-                                  $("#first-choice").change(function() {
-                                    $("#second-choice").load("<?php echo $buscarMateriasDepartamentoincluidoTodas.'?choice='?>"+ $("#first-choice").val())}).change();
-                                    
-                                    </script>
+                                </td>                    
+                                <script>
+                                    $("#first-choice").change(function() {
+                                        $("#second-choice").load("<?php echo $buscarMateriasDepartamentoincluidoTodas.'?choice='?>"+ $("#first-choice").val())}).change();                                    
+                                </script>
                             </tr>   
-                 
                         </table>
                     </div> 
                 </div> 
-                <div>  <br><input type="submit" value="Obtener" name="Obtener" formaction=<?php echo $buscarfaltas?> /></div>
-                    </form>
-<?php     
- //echo '<pre>'; print_r($_SESSION["faltasBuscadas"]); echo '</pre>';   
-if(isset($_SESSION["faltasBuscadas"])) : ?>
-    <?php if(empty($_SESSION["faltasBuscadas"])) : ?>
-    No hay Faltas
-    <?php endif?>
-<table>
-<th>Legajo</th>
-<th>Profesor</th>
-<th>tipo</th>
-<th>cantidad</th>
-<th>fecha</th>
-<th>Materia</th>
-<?php foreach ($_SESSION["faltasBuscadas"] as $falta): ?>
-
-
-<tr>
-  
-        <div>
-        <td>    <?php echo $falta->getProfesor()->getlegajo() ?> </td>
-        <td>    <?php echo $falta->getProfesor()->getapellido() ?> 
-               <?php echo $falta->getProfesor()->getnombre() ?> </td>
-        <td>    <?php echo $falta->gettipo() ?> </td>
-        <td>     <?php echo $falta->getminutos() ?> </td>
-        <td>     <?php echo $falta->getfechaFalta() ?> </td>
-        <td>     <?php echo $falta->getMateria()->getnombreMateria() ?> </td>
- 
+                <div class="form-group"> 
+                    <div class="col-md-4 col-md-offset-4">             
+                        <button class="btn btn-primary" type="submit" formaction=<?php echo $buscarfaltas?>> Obtener
+                        <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </div> 
+                </div>
+                <br>
+                <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
+            </form>
+            <?php     
+            //echo '<pre>'; print_r($_SESSION["faltasBuscadas"]); echo '</pre>';   
+            if(isset($mensage)){
+                       
+                echo '<div align="center" class="alert alert-danger" role="alert">';
+                echo $mensage;
+                 echo "</div>";
+               }
+            if(isset($_SESSION["faltasBuscadas"]) &&(!isset($mensage))) : ?>
+            <?php if(empty($_SESSION["faltasBuscadas"])) : ?>
+               <?php echo '<div align="center" class="alert alert-warning" role="alert">';
+                echo "No hay datos";
+                echo '</div>';
+                ?>
+            <?php endif?>
+         <?php   if(!(empty($_SESSION["faltasBuscadas"]))) : ?>
+            <div class="container"> 
+                <div class="table-responsive col-md-6 col-md-offset-2">
+                    <table class="table table-bordered table-hover">
+                        <tr class="info">
+                            <th>Legajo</th>
+                            <th>Profesor</th>
+                            <th>Tipo</th>
+                            <th>Cantidad</th>
+                            <th>Fecha</th>
+                            <th>Materia</th>
+                        </tr>
+                        <?php foreach ($_SESSION["faltasBuscadas"] as $falta): ?>
+                        <tr>
+                            <div>
+                                <td>
+                                    <?php echo $falta->getProfesor()->getlegajo() ?>
+                                </td>
+                                <td>
+                                    <?php echo $falta->getProfesor()->getapellido() ?> 
+                                    <?php echo $falta->getProfesor()->getnombre() ?> 
+                                </td>
+                                <td>
+                                    <?php echo $falta->gettipo() ?> 
+                                </td>
+                                <td>
+                                    <?php echo $falta->getminutos() ?> 
+                                </td>
+                                <td>
+                                    <?php echo $falta->getfechaFalta() ?> 
+                                </td>
+                                <td>
+                                    <?php echo $falta->getMateria()->getnombreMateria() ?> 
+                                </td>                
+                            </div>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div>  
+            <?php endif?>
+            <?php endif?>
         </div>
-   
-</tr>
-<?php endforeach; ?>
-</table>  
-
-<?php endif?>
-<footer class="footer">
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body>
+    <footer class="footer">
       <?php require $DIR.$footer; ?>     
- </footer>   
+    </footer>  
 </html>

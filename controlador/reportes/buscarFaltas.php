@@ -40,12 +40,12 @@ echo $fechaDesde;
 echo $fechaHasta;
 echo $Materias;
 echo $departamentos;
-echo '<pre>'; print_r($_SESSION["faltasBuscadas"]); echo '</pre>'; 
+//echo '<pre>'; print_r($_SESSION["faltasBuscadas"]); echo '</pre>'; 
 
 
-$direccion= $URL . $vistafaltas;
-header("Location: $direccion");
-
+$direccion=$URL.$vistafaltas;
+header("Location:$direccion");
+echo $direccion;
 function buscarFaltas($fechaDesde,$fechaHasta,$Materias,$departamentos){
     $con= new conexion();
     $conn=$con->getconexion();
