@@ -134,13 +134,7 @@ foreach ($cargar as $horario) {
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>   
-            <div>       
-                    <?php $i=0;
-                     foreach ($mensj as $m):?>   
-                            <?php echo "-".$m?> <br><br>
-                          <?php endforeach; 
-                              ?>                                               
-            </div>
+
         <div class="container">
             <br>
             <form action="profesorEstablecerHorario.php" method="POST" class="form-horizontal">     
@@ -400,18 +394,47 @@ foreach ($cargar as $horario) {
     <!-- asd -->
                 
                 <div class="form-group"> 
-                    <div class="col-md-4 col-md-offset-2">
+                    <div class="col-md-12 col-md-offset-2">
+                    <div>       
+                    <?php $i=0;
+                     foreach ($mensj as $m):?>   
+
+                        <?php if($m=="Se Creo Correctamente"):?>
+                            <div class="alert alert-success" role="alert">
+                            <?php echo "-".$m?>
+                            </div>
+                        <?php endif;?>
+
+                       <?php if(substr( $m, 0, 3 ) === "La "||$m=="no realizo ningun cambio"):?>
+                            <div class="alert alert-warning" role="alert">
+                            <?php echo "-".$m?>
+                            </div>
+                        <?php endif;?>
+
+                        <?php if(!(($m=="Se Creo Correctamente")||(substr( $m, 0, 3 ) === "La "||$m=="no realizo ningun cambio"))) :?>
+                            <div class="alert alert-danger" role="alert">
+                            <?php echo "-".$m?>
+                            </div>
+                        <?php endif;?>
+                          <?php endforeach; 
+                              ?>                                               
+            </div>
                         <input type='hidden' name='dedicacion' value=<?php echo $postdedicacion?>>
-                        <button class="btn btn-primary" name="mesa" type='submit' value=<?php echo $valueButton?> formaction=<?php echo $Aceptar?> > 
+                        <tr>
+                        <td>
+                        <button class="btn btn-primary" name="mesa" type='submit' value=<?php echo $valueButton?> formaction=<?php echo $Aceptar?> > <?php echo $valueButton?>
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
+                        <?php if ($valueButton=="Continuar"): ?>
+                <button class="btn btn-primary" name="volver" type='submit' value=<?php echo $valueButton?> formaction=<?php echo $MenuVolver?> >Volver</button>
+              
+                <?php endif; ?>
+               
+                        </td>
+                        </tr>
                     </div>
                 </div>
-                <?php if ($valueButton=="Continuar"): ?>
-                <div>  
-                <input type="submit" value="Volver" name="Cancelar" formaction=<?php echo $MenuVolver ?> /></div>
-                <?php endif; ?>
-                </div>
+                
             </form>
         </div>
         <script src="./../js/jquery.js"></script>

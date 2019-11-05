@@ -748,10 +748,10 @@ if($ejecuta){
 
     if($dedicaciondoble&&$repetido11&&$repetido12&&$repetido21&&$repetido22){
             $mensajes=array();
-            array_push($mensajes,"No realizo ningun cambio 1");
+            array_push($mensajes,"no realizo ningun cambio");
     }elseif(!$dedicaciondoble&&$repetido11&&$repetido21){
             $mensajes=array();
-            array_push($mensajes,"No realizo ningun cambio 2");
+            array_push($mensajes,"no realizo ningun cambio");
     };     
 }
 
