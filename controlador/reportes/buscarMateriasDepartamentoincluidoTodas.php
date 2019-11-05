@@ -2,7 +2,7 @@
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR . $Materia);
-
+session_start();
 
 $con= new conexion();
 $conexttion=$con->getconexion();
@@ -19,7 +19,12 @@ $conexttion=$con->getconexion();
         $dep = new Materia();
         $dep->setid_materia($row['id_materia']);
         $dep->setnombreMateria($row['nombreMateria']);
-        echo "<option value=" . $row['id_materia'].">" . $row{'nombreMateria'} . "</option>";
+
+        if ($row['id_materia']==$_SESSION['Materias']){
+            echo "<option selected value=" . $row['id_materia'].">" . $row{'nombreMateria'} . "</option>";
+        }else{
+            echo "<option value=" . $row['id_materia'].">" . $row{'nombreMateria'} . "</option>";
+        }
     }
 }
 

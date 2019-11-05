@@ -11,6 +11,7 @@ $headerasistencia="/vista/partials/header.asistencia.php";
 $headera="/vista/partials/headera.php";
 $headerp="/vista/partials/headerp.php";
 $headerpasistencia="/vista/partials/headerp.asistencia.php";
+$headerPersonal="/vista/partials/headerPersonal.php";
 $footer="/vista/partials/footer.php";
 
 $style="/vista/assert/css/style.css";

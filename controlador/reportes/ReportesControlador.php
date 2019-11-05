@@ -200,6 +200,25 @@ class ReportesControlador extends conexion
         }
         return $listaDepartamento;
     }
+    function buscarPersonalDeUsuario($idusuario){
+        $conn = $this->getconexion();
+        $stmt = $conn->prepare("SELECT fk_persona FROM usuario where id_usuario=$idusuario"); 
+        $stmt->execute();
+        $idprofesor=null;
+        while($row = $stmt->fetch()) {
+           $idprofesor=$row['fk_persona'];
 
+           $stmt3 = $conn->prepare("SELECT apellido,nombre FROM persona where id_persona=$idprofesor"); 
+            $stmt3->execute();
+            while($row = $stmt3->fetch()) {
+                $apellido=$row['apellido'];
+                $nombre=$row['nombre'];
+            }
+            $Nombreprofesor=$apellido." ".$nombre;
+                
+            
+        }
+        return $Nombreprofesor;
+        }
 }
 ?>

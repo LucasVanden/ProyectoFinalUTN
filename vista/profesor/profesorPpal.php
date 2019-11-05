@@ -160,8 +160,9 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                                         </div>
                                     </div>
                                 </td>
-                                <td>
+                                
                                     <?php if ($hora->getcantidadAnotados()>0){ ?>
+                                        <td>
                                     <div class="form-group"> 
                                         <div class="col-md-4 col-md-offset-2">
                                             <input type='hidden' name='dia' value=<?php echo $hora->getHorarioDeConsulta()->getdia()->getdia() ?>>
