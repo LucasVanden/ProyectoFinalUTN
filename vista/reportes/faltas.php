@@ -45,6 +45,9 @@ if(isset($_SESSION['fechaDesde'])){
         $mensage="Fecha Hasta debe ser mayor a Fecha Desde";
     }
 } 
+$idusuario=$_SESSION['usuario'];
+$a=new ReportesControlador();
+$_SESSION['nombre']=$a->buscarPersonalDeUsuario($idusuario);
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +59,7 @@ if(isset($_SESSION['fechaDesde'])){
     </head>
     <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
     <script src="jquery.js"></script>
-    <?php require $DIR.$headera ?>
+    <?php require $DIR.$headerPersonal ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
@@ -135,7 +138,7 @@ if(isset($_SESSION['fechaDesde'])){
             <?php endif?>
          <?php   if(!(empty($_SESSION["faltasBuscadas"]))) : ?>
             <div class="container"> 
-                <div class="table-responsive col-md-6 col-md-offset-2">
+                <div class="table-responsive col-md-12 col-md-offset-0">
                     <table class="table table-bordered table-hover">
                         <tr class="info">
                             <th>Legajo</th>
