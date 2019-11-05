@@ -85,6 +85,12 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 }
 ?>
 
+<style>
+    h1 { 
+        font-family:"Georgia";
+        src: url(donde este guardad/tufuente.ttf) format("truetype");
+        font-size: 50px; }
+</style>
 <!DOCTYPE html>
 <html>
     <head>
@@ -92,17 +98,17 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
         <title>Login</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css">
     </head>
-    <body background = <?php echo $URL."/vista/fondoCuerpoLogin.jpg>"?>
+    <body background = <?php echo $URL."/vista/fondoCuerpoLogin.jpeg"?>>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>       
         <div class="container">
             <br> <br>
             <form action="login.php" method="POST" class="form-horizontal">
-                <div class="row"> 
+               <div class="row"> 
                     <div class="col-md-4">
-                        <img src="partials\logo.png" title="aHora Sistemas de consultas educativas" style="background-color:transparent" class="img-thumbnail" >
-                    </div>
+                        <!-- <img src="partials\logo.png" title="aHora Sistemas de consultas educativas" style="background-color:transparent" class="img-thumbnail" >
+                    --></div>
                     <div class="col-md-8">
                         <div class="form-group">
                             <h1 for="login" class="text-primary col-md-4 col-md-offset-4"> Login </h1>
