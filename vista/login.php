@@ -88,7 +88,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 <style>
     h1 { 
         font-family:"Georgia";
-        src: url(donde este guardad/tufuente.ttf) format("truetype");
+        <!--src: url(donde este guardad/tufuente.ttf) format("truetype");-->
         font-size: 50px; }
 </style>
 <!DOCTYPE html>
@@ -110,7 +110,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
                         <!-- <img src="partials\logo.png" title="aHora Sistemas de consultas educativas" style="background-color:transparent" class="img-thumbnail" >
                     --></div>
                     <div class="col-md-8">
-                        <div class="form-group">
+                        <div class="form-group" align="center">
                             <h1 for="login" class="text-primary col-md-4 col-md-offset-4"> Login </h1>
                         </div>   
                         <div class="form-group">   
@@ -132,7 +132,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
                                 </button>
                             </div>                     
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" align="center">
                             <div class="col-md-4 col-md-offset-4">
                                 <a href="recuperarContraseña.php" class="btn btn-link"> Olvidó su contraseña?</a>
                             </div>

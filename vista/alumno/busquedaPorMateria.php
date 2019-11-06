@@ -52,11 +52,11 @@ $a = new alumnoControlador();
         <div class="container">
             <br>            
             <form action="alumnoConfirmarAsistencia.php" method="POST" class="form-horizontal" >        
-                <div class="form-group">
-                    <h2 class="text-primary col-md-9 col-md-offset-4"><?php echo $mat->getnombreMateria(); ?></h2>
+                <div class="form-group" align="center">
+                    <h2 class="text-primary"><?php echo $mat->getnombreMateria(); ?></h2>
                 </div>
-                <div class="form-group">
-                    <h3 for="consulta" class="text-primary col-md-4 col-md-offset-4">Horarios de Consulta</h3>
+                <div class="form-group" align="center">
+                    <h3 for="consulta" class="text-primary">Horarios de Consulta</h3>
                 </div>
                 <div class="container">
                     <div class="table-responsive col-md-9 col-md-offset-1">

@@ -48,8 +48,8 @@ if(isset( $_SESSION['departamentos'])){
         <div class="container">
             <br>
             <form action=<?php echo $agregarmat?> method="POST" class="form-horizontal">  
-                <div class="form-group">
-                    <h2 for="agregar" class="text-primary col-md-4 col-md-offset-5"> Agregar Materias </h2>
+                <div class="form-group" align="center">
+                    <h2 for="agregar" class="text-primary"> Agregar Materias </h2>
                 </div> 
                 <div class="container">
                     <div class="table-responsive col-md-5 col-md-offset-4">

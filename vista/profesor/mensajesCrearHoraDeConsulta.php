@@ -138,8 +138,8 @@ foreach ($cargar as $horario) {
         <div class="container">
             <br>
             <form action="profesorEstablecerHorario.php" method="POST" class="form-horizontal">     
-                <div class="form-group">
-                    <h2 for="establecer" class="text-primary col-md-5 col-md-offset-4"> Creación Horario Consulta </h2>
+                <div class="form-group" align="center">
+                    <h2 for="establecer" class="text-primary"> Creación Horario Consulta </h2>
                 </div>
                 <div class="container">
     <!-- as -->

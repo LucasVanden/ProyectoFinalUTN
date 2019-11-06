@@ -61,8 +61,8 @@ if(isset($_POST['Materias'])){
         <div class="container">
             <br>
             <form action="directorReportes.php" method="POST" class="form-horizontal">
-                <div class="form-group">
-                    <h2 for="cursando" class="text-primary col-md-9 col-md-offset-2"> Obtener Reportes sobre Horarios de Consulta: </h2>
+                <div class="form-group" align="center">
+                    <h2 for="cursando" class="text-primary"> Obtener Reportes sobre Horarios de Consulta: </h2>
                 </div> 
                 <div class="container"> 
                     <div class="table-responsive col-md-8 col-md-offset-2">

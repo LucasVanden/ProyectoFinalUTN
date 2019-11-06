@@ -33,8 +33,8 @@ $idhora=$_POST['Notificaridhora'];
                 $a = new Profesorcontrolador();
                 $nombMateria=$a->buscarMateriaDeHoradeconsulta($idhora);
             ?>
-                <div class="form-group">
-                    <h2 for="notificar" class="text-primary col-md-10 col-md-offset-3">Enviar Notificación a Alumnos de <?php echo $nombMateria ?> </h2>
+                <div class="form-group" align="center">
+                    <h2 for="notificar" class="text-primary">Enviar Notificación a Alumnos de <?php echo $nombMateria ?> </h2>
                 </div>   
                 <div class="form-group"> 
                     <div class="col-md-4 col-md-offset-3">

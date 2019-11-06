@@ -33,11 +33,11 @@ require_once $DIR .$alumnoControlador;
             <br>
             <?php if(count($listaHorarios[1])>0): ?>       
             <form action="alumnoConfirmarAsistencia.php" method="POST" class="form-horizontal">  
-                <div class="form-group">
-                    <h2 for="profesor" class="text-primary col-md-4 col-md-offset-5"> <?php echo $listaHorarios[0]->getapellido();echo ', '; echo $listaHorarios[0]->getnombre()?> </h2>
+                <div class="form-group"align="center">
+                    <h2 for="profesor" class="text-primary"> <?php echo $listaHorarios[0]->getapellido();echo ', '; echo $listaHorarios[0]->getnombre()?> </h2>
                 </div>
-                <div class="form-group">
-                    <h3 for="horarioProfesor" class="text-primary col-md-4 col-md-offset-5"> Horarios de Consulta: </h3>
+                <div class="form-group" align="center">
+                    <h3 for="horarioProfesor" class="text-primary"> Horarios de Consulta: </h3>
                 </div>
  
                 <!-- y el Fomr action method POST ????? -->

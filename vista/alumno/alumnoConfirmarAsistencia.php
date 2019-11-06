@@ -32,8 +32,8 @@ $crearanotacion= $URL .$crearAnotacion;
         <div class="container">
             <br>
             <form action=<?php echo $crearanotacion ?> method="POST" class="form-horizontal">
-                <div class="form-group">
-                    <h2 for="confirma" class="text-primary col-md-4 col-md-offset-5">Confirmar Asistencia</h2>
+                <div class="form-group" align="center">
+                    <h2 for="confirma" class="text-primary">Confirmar Asistencia</h2>
                 </div>
                 <div class="form-group"> 
                     <div class="col-md-4 col-md-offset-3">

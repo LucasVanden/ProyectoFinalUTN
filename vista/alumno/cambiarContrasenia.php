@@ -28,8 +28,8 @@ if(!isset($_SESSION['rol'])){
     <div class="container">
       <br>
       <form action=cambiarContraseniaalumno.php method="POST" class="form-horizontal">
-        <div class="form-group">
-          <h2 for="contrasenia" class="text-primary col-md-4 col-md-offset-4"> Cambiar Contraseña </h2>
+        <div class="form-group" align="center">
+          <h2 for="contrasenia" class="text-primar col-md-4 col-md-offset-4"> Cambiar Contraseña </h2>
         </div>
         <div class="form-group">   
           <label for="contraseña" class="control-label col-md-4"> Contraseña Actual </label>

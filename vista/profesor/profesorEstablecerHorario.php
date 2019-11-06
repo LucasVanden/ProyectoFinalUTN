@@ -96,8 +96,8 @@ $M2S2=null;
         <div class="container">
             <br>
             <form action="alumnoPpal.php" method="POST" >
-                <div class="form-group">
-                    <h2 for="establecer" class="text-primary col-md-5 col-md-offset-4"> Establecer Horario de Consulta: </h2>
+                <div class="form-group" align="center">
+                    <h2 for="establecer" class="text-primary"> Establecer Horario de Consulta: </h2>
                 </div>
                 <div class="container">
                     <div class="table-responsive col-md-4 col-md-offset-4">

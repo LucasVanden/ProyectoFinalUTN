@@ -42,10 +42,10 @@ $_SESSION['mensaje']=null;
         <div class="container">
             <br>
             <form action="alumnoPpal.php" method="POST" class="form-horizontal">
-                <div class="form-group">
-                    <h2 for="cursando" class="text-primary col-md-4 col-md-offset-5">Estás cursando:</h2>
+                <div class="form-group" align="center">
+                    <h2 for="cursando" class="text-primary">Estás cursando:</h2>
                 </div>        
-                <div class="container">
+                <div class="container" align="center">
                     <div class="table-responsive col-md-4 col-md-offset-4">
                         <table class="table table-bordered table-hover" id="tablaMateria">
                             <tr class="info">
@@ -71,8 +71,8 @@ $_SESSION['mensaje']=null;
                 <br>
                 <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">           
                 <div class="container"> 
-                    <div class="form-group">
-                        <h2 for="consulta" class="text-primary col-md-4 col-md-offset-4">Buscar Otra Consulta</h2>
+                    <div class="form-group" align="center">
+                        <h2 for="consulta" class="text-primary">Buscar Otra Consulta</h2>
                     </div>
                     <div class="container">
                         <div class="table-responsive col-md-8 col-md-offset-2">

@@ -35,8 +35,8 @@ $asisitrAlumno=$URL.$AsistirAlumno;
         <div class="container">
             <br>
             <form action=<?php echo $asisitrAlumno?> method="POST" class="form-horizontal">        
-                <div class="form-group">
-                    <h2 for="anotado" class="text-primary col-md-4 col-md-offset-4"> Estás Anotado a: </h2>
+                <div class="form-group" align="center">
+                    <h2 for="anotado" class="text-primary"> Estás Anotado a: </h2>
                 </div> 
                 <div class="container">
                     <div class="table-responsive col-md-9 col-md-offset-1">

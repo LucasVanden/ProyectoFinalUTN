@@ -71,8 +71,8 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
         <div class="container">
             <br>
             <form action="profesorPpal.php" method="POST" class="form-horizontal">
-                <div class="form-group">
-                    <h2 for="establecer" class="text-primary col-md-5 col-md-offset-4"> Establecer Horario de Consulta: </h2>
+                <div class="form-group" align="center">
+                    <h2 for="establecer" class="text-primary"> Establecer Horario de Consulta: </h2>
                 </div>                 
                 <div class="container">
                     <div class="table-responsive col-md-8 col-md-offset-2">
@@ -120,8 +120,8 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                 </div>
                 <br>
                 <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
-                <div class="form-group">
-                    <h2 for="anotados" class="text-primary col-md-5 col-md-offset-4"> Alumnos Anotados </h2>
+                <div class="form-group" align="center">
+                    <h2 for="anotados" class="text-primary"> Alumnos Anotados </h2>
                 </div>
                 <div class="container"> 
                     <div class="table-responsive col-md-9 col-md-offset-1"> 
@@ -185,8 +185,8 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                 </div>
                 <br>
                 <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
-                <div class="form-group">
-                    <h2 for="anotados" class="text-primary col-md-5 col-md-offset-4">Mis Notificaciones</h2>
+                <div class="form-group" align="center">
+                    <h2 for="anotados" class="text-primary">Mis Notificaciones</h2>
                 </div>
                 <?php if ($a->hayAvisosProfesor($alumnosanotados)){ ?>
                 <div class="container"> 

@@ -31,11 +31,11 @@ $idhora=$_POST['Notificaridhora'];
                 $detalles=$a->detallealumnosAnotados($idhora);
                 $nombMateria=$a->buscarMateriaDeHoradeconsulta($idhora);
             ?>
-                <div class="form-group">
-                    <h2 for="detalleAnotados" class="text-primary col-md-10 col-md-offset-3">Detalle de Alumnos Anotados </h2>
+                <div class="form-group"align="center">
+                    <h2 for="detalleAnotados" class="text-primary">Detalle de Alumnos Anotados </h2>
                 </div>
-                <div class="form-group">
-                    <h3 class="text-primary col-md-10 col-md-offset-3"><?php echo $nombMateria;
+                <div class="form-group" align="center">
+                    <h3 class="text-primary"><?php echo $nombMateria;
                         echo ": ";
                         echo $_POST['dia'];
                         echo " ";
