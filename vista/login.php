@@ -86,11 +86,12 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
 ?>
 
 <style>
-    h1 { 
-        font-family:"Georgia";
-        <!--src: url(donde este guardad/tufuente.ttf) format("truetype");-->
-        font-size: 50px; }
+        @font-face {
+  font-family: myFirstFont;
+  src: url(Redemption.ttf);
+}
 </style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -111,7 +112,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
                     --></div>
                     <div class="col-md-6">
                         <div class="form-group" align="center">
-                            <h1 for="login" class="text-primary col-md-4 col-md-offset-4"> Login </h1>
+                            <h1 for="login" class=" col-md-4 col-md-offset-4" style = "font-family:myFirstFont,garamond,serif;font-size:84px;"> Login </h1>
                         </div>   
                         <div class="form-group">   
                             <label for="nombre" class="control-label col-md-4"> Usuario </label>

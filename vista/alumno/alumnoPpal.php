@@ -24,6 +24,13 @@ $_SESSION['nombre']=$a->idAlumnoaNombre($idalumno);
 $_SESSION['mensaje']=null;
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../Redemption.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +38,7 @@ $_SESSION['mensaje']=null;
         <title>Alumno Principal</title>
         <link rel="stylesheet" href="./../css/bootstrap.min.css">  
     </head>
-    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px;">
+    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px; bg-secondary">
     <?php include  $DIR.$header ?>
             <?php if (!empty($message)): ?>
                 <p> <?= $message ?></p>
@@ -43,7 +50,7 @@ $_SESSION['mensaje']=null;
             <br>
             <form action="alumnoPpal.php" method="POST" class="form-horizontal">
                 <div class="form-group" align="center">
-                    <h2 for="cursando" class="text-primary">Estás cursando:</h2>
+                    <h2 for="cursando" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;">Estás cursando:</h2>
                 </div>        
                 <div class="container" align="center">
                     <div class="table-responsive col-md-4 col-md-offset-4">
