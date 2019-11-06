@@ -187,6 +187,7 @@ if(isset($_POST['Materias'])){
                     $grafico=isset($_POST["Obtener"]);
                 }}
               $noVacio=false;
+              if(isset($valores)){
                     foreach ($valores as $valor) {
                             if($valor!=0){
                                 $noVacio=true;
@@ -198,6 +199,7 @@ if(isset($_POST['Materias'])){
         echo "No hay datos";
         echo '</div>';
                 }
+            }
               ?>
                 <?php if ($grafico&&$noVacio): ?>
 
