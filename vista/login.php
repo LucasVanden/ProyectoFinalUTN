@@ -106,10 +106,10 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
             <br> <br>
             <form action="login.php" method="POST" class="form-horizontal">
                <div class="row"> 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <!-- <img src="partials\logo.png" title="aHora Sistemas de consultas educativas" style="background-color:transparent" class="img-thumbnail" >
                     --></div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="form-group" align="center">
                             <h1 for="login" class="text-primary col-md-4 col-md-offset-4"> Login </h1>
                         </div>   
