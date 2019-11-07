@@ -50,6 +50,13 @@ $a=new ReportesControlador();
 $_SESSION['nombre']=$a->buscarPersonalDeUsuario($idusuario);
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -66,8 +73,8 @@ $_SESSION['nombre']=$a->buscarPersonalDeUsuario($idusuario);
         <div class="container">
             <br>
             <form action="directorReportes.php" method="POST" class="form-horizontal">
-                <div class="form-group">
-                    <h2 align="center" for="inasistencias" class="text-primary col-md-9 col-md-offset-2"> Obtener Reportes Inasistencias: </h2>
+                <div class="form-group" align="center" >
+                    <h2 for="inasistencias" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;"> Obtener Reportes Inasistencias: </h2>
                 </div>
                 <div class="container"> 
                     <div class="table-responsive col-md-6 col-md-offset-2">

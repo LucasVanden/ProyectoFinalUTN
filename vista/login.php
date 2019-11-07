@@ -112,7 +112,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
                     --></div>
                     <div class="col-md-6">
                         <div class="form-group" align="center">
-                            <h1 for="login" class=" col-md-4 col-md-offset-4" style = "font-family:myFirstFont,garamond,serif;font-size:84px;"> Login </h1>
+                            <h1 for="login" class="col-md-4 col-md-offset-4" style = "font-family:myFirstFont,garamond,serif;font-size:84px;"> Login </h1>
                         </div>   
                         <div class="form-group">   
                             <label for="nombre" class="control-label col-md-4"> Usuario </label>

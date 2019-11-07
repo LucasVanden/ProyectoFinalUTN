@@ -20,6 +20,13 @@ $asistirprofesor=$URL.$AsistirProfesor;
 
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,7 +45,7 @@ $asistirprofesor=$URL.$AsistirProfesor;
             <br>
             <form action=<?php echo $asistirprofesor?> method="POST" class="form-horizontal">
                 <div class="form-group" align="center">
-                    <h2 for="cursando" class="text-primary"> Estás Dictando: </h2>
+                    <h2 for="cursando" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Estás Dictando: </h2>
                 </div> 
                 <div class="container">
                     <div class="table-responsive col-md-9 col-md-offset-1">

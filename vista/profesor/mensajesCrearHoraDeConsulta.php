@@ -122,6 +122,14 @@ foreach ($cargar as $horario) {
 }
 
 ?>
+
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -139,7 +147,7 @@ foreach ($cargar as $horario) {
             <br>
             <form action="profesorEstablecerHorario.php" method="POST" class="form-horizontal">     
                 <div class="form-group" align="center">
-                    <h2 for="establecer" class="text-primary"> Creación Horario Consulta </h2>
+                    <h2 for="establecer" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;"> Creación Horario Consulta </h2>
                 </div>
                 <div class="container">
     <!-- as -->

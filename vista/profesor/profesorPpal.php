@@ -18,6 +18,13 @@ $_SESSION['idProfesor']=$idProfesor;
 $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -72,7 +79,7 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
             <br>
             <form action="profesorPpal.php" method="POST" class="form-horizontal">
                 <div class="form-group" align="center">
-                    <h2 for="establecer" class="text-primary"> Establecer Horario de Consulta: </h2>
+                    <h2 for="establecer" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Establecer Horario de Consulta: </h2>
                 </div>                 
                 <div class="container">
                     <div class="table-responsive col-md-8 col-md-offset-2">
@@ -121,10 +128,10 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                 <br>
                 <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
                 <div class="form-group" align="center">
-                    <h2 for="anotados" class="text-primary"> Alumnos Anotados </h2>
+                    <h2 for="anotados" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Alumnos Anotados </h2>
                 </div>
                 <div class="container"> 
-                    <div class="table-responsive col-md-9 col-md-offset-1"> 
+                    <div class="table-responsive col-md-12"> 
                         <table class="table table-bordered table-hover table-condensed" id="tablaAlumnosAnotados">
                             <tr class="info">
                                 <th>Materia</th>
@@ -186,11 +193,11 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                 <br>
                 <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
                 <div class="form-group" align="center">
-                    <h2 for="anotados" class="text-primary">Mis Notificaciones</h2>
+                    <h2 for="anotados" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;">Mis Notificaciones</h2>
                 </div>
                 <?php if ($a->hayAvisosProfesor($alumnosanotados)){ ?>
                 <div class="container"> 
-                    <div class="table-responsive col-md-9 col-md-offset-1"> 
+                    <div class="table-responsive col-md-12"> 
                         <table class="table table-bordered table-hover table-condensed" id="tablaAvisos">
                             <tr class="info">
                                 <th>Materia</th>

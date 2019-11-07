@@ -13,6 +13,13 @@ if(!isset($_SESSION['rol'])){
 }
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,7 +36,7 @@ if(!isset($_SESSION['rol'])){
       <br>
       <form action=cambiarContrasenia.php method="POST" class="form-horizontal">
         <div class="form-group"align="center">
-          <h2 for="contrasenia" class="text-primary"> Cambiar Contraseña </h2>
+          <h2 for="contrasenia" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;"> Cambiar Contraseña </h2>
         </div>
         <div class="form-group">   
           <label for="contraseña" class="control-label col-md-4"> Contraseña Actual </label>

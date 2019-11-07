@@ -14,6 +14,13 @@ if(!isset($_SESSION['rol'])){
 require_once $DIR .$alumnoControlador;
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,10 +41,10 @@ require_once $DIR .$alumnoControlador;
             <?php if(count($listaHorarios[1])>0): ?>       
             <form action="alumnoConfirmarAsistencia.php" method="POST" class="form-horizontal">  
                 <div class="form-group"align="center">
-                    <h2 for="profesor" class="text-primary"> <?php echo $listaHorarios[0]->getapellido();echo ', '; echo $listaHorarios[0]->getnombre()?> </h2>
+                    <h2 for="profesor" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> <?php echo $listaHorarios[0]->getapellido();echo ', '; echo $listaHorarios[0]->getnombre()?> </h2>
                 </div>
                 <div class="form-group" align="center">
-                    <h3 for="horarioProfesor" class="text-primary"> Horarios de Consulta: </h3>
+                    <h3 for="horarioProfesor" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:30px;"> Horarios de Consulta: </h3>
                 </div>
  
                 <!-- y el Fomr action method POST ????? -->

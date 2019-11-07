@@ -27,7 +27,7 @@ $_SESSION['mensaje']=null;
 <style>
         @font-face {
   font-family: myFirstFont;
-  src: url(./../Redemption.ttf);
+  src: url(./../SnowHut.ttf);
 }
 </style>
 
@@ -50,7 +50,7 @@ $_SESSION['mensaje']=null;
             <br>
             <form action="alumnoPpal.php" method="POST" class="form-horizontal">
                 <div class="form-group" align="center">
-                    <h2 for="cursando" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;">Estás cursando:</h2>
+                    <h2 for="cursando" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Estás cursando</h2>
                 </div>        
                 <div class="container" align="center">
                     <div class="table-responsive col-md-4 col-md-offset-4">
@@ -76,10 +76,10 @@ $_SESSION['mensaje']=null;
                     </div>
                 </div>
                 <br>
-                <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">           
+                <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
                 <div class="container"> 
                     <div class="form-group" align="center">
-                        <h2 for="consulta" class="text-primary">Buscar Otra Consulta</h2>
+                        <h2 for="consulta" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Buscar Otra Consulta</h2>
                     </div>
                     <div class="container">
                         <div class="table-responsive col-md-8 col-md-offset-2">
@@ -142,13 +142,13 @@ $_SESSION['mensaje']=null;
                 </div>                   
                 <br>
                 <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
-                <div class="form-group">                  
-                    <h2 for="anotaciones" class="text-primary col-md-4 col-md-offset-4">Mis Anotaciones</h2>
+                <div class="form-group" align="center">                  
+                    <h2 for="anotaciones" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Mis Anotaciones</h2>
                 </div>
                     <?php $misanotaciones = $a->MisAnotaciones($idalumno);?>
                     <?php if (count($misanotaciones)>0){ ?>
                     <div class="container">
-                        <div class="table-responsive col-md-9 col-md-offset-1">
+                        <div class="table-responsive col-md-12">
                             <table class="table table-bordered table-hover table-condensed" id="tablaAnotaciones">
                                 <tr class="info">                    
                                     <th>Materia</th>
@@ -204,12 +204,12 @@ $_SESSION['mensaje']=null;
                         </div>
                     </div>
                 <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
-                <div class="container">
-                    <h2 for="notificaciones" class="text-primary col-md-4 col-md-offset-4">Mis Notificaciones</h2>
+                <div class="form-group" align="center">
+                    <h2 for="notificaciones" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Mis Notificaciones</h2>
                     <?php $notificaciones= $a->notificaciones($misanotaciones); ?>
                     <?php if (count($notificaciones)>0){ ?>
                     <div class="container">
-                        <div class="table-responsive col-md-9 col-md-offset-1">
+                        <div class="table-responsive col-md-12">
                             <table class="table table-bordered table-hover table-condensed" id="tablaAvisos">
                                 <tr class="info">                    
                                     <th>Materia</th>
@@ -258,7 +258,7 @@ $_SESSION['mensaje']=null;
                         <div class="table-responsive col-md-9 col-md-offset-1">
                             <table class="table" id="tablanotificaciones">
                                 <td>
-                                    <?php echo "No hay notificaciones" ?>
+                                <strong style="float:left;"><span class="glyphicon glyphicon-envelope"></span><?php echo "No hay notificaciones" ?>
                                 </td>
                             </table> 
                     <?php }; ?>

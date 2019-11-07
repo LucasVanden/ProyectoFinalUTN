@@ -12,6 +12,13 @@ if(!isset($_SESSION['rol'])){
 $crearanotacion= $URL .$crearAnotacion;
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -33,7 +40,7 @@ $crearanotacion= $URL .$crearAnotacion;
             <br>
             <form action=<?php echo $crearanotacion ?> method="POST" class="form-horizontal">
                 <div class="form-group" align="center">
-                    <h2 for="confirma" class="text-primary">Confirmar Asistencia</h2>
+                    <h2 for="confirma" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Confirmar Asistencia</h2>
                 </div>
                 <div class="form-group"> 
                     <div class="col-md-4 col-md-offset-3">

@@ -23,6 +23,14 @@ if(isset( $_SESSION['departamentos'])){
 }
 
 ?>
+
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,7 +57,7 @@ if(isset( $_SESSION['departamentos'])){
             <br>
             <form action=<?php echo $agregarmat?> method="POST" class="form-horizontal">  
                 <div class="form-group" align="center">
-                    <h2 for="agregar" class="text-primary"> Agregar Materias </h2>
+                    <h2 for="agregar" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Agregar Materias </h2>
                 </div> 
                 <div class="container">
                     <div class="table-responsive col-md-5 col-md-offset-4">
@@ -88,10 +96,12 @@ if(isset( $_SESSION['departamentos'])){
                         </div>                     
                     </div>
                 </div>
+                <br>
+                <hr style= "height: 10px; border: 1; box-shadow: inset 0 9px 9px -3px rgba(11, 99, 184, 0.8); - webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;">
                 <div class="container">
                     <br>
-                    <div class="form-group">
-                        <h2 for="eliminarse" class="text-primary col-md-4 col-md-offset-4">Eliminarse de Materia</h2>
+                    <div class="form-group" align="center">
+                        <h2 for="eliminarse" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Eliminarse de Materia</h2>
                     </div>
                     <div class="container">
                         <div class="table-responsive col-md-4 col-md-offset-4">

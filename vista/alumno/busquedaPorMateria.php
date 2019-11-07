@@ -22,6 +22,13 @@ require_once $DIR .$alumnoControlador;
 $a = new alumnoControlador();
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,10 +60,10 @@ $a = new alumnoControlador();
             <br>            
             <form action="alumnoConfirmarAsistencia.php" method="POST" class="form-horizontal" >        
                 <div class="form-group" align="center">
-                    <h2 class="text-primary"><?php echo $mat->getnombreMateria(); ?></h2>
+                    <h2 class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"><?php echo $mat->getnombreMateria(); ?></h2>
                 </div>
                 <div class="form-group" align="center">
-                    <h3 for="consulta" class="text-primary">Horarios de Consulta</h3>
+                    <h3 for="consulta" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:30px;">Horarios de Consulta</h3>
                 </div>
                 <div class="container">
                     <div class="table-responsive col-md-9 col-md-offset-1">

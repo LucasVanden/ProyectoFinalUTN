@@ -19,6 +19,13 @@ $_SESSION['idAlumno']=$idAlumno;
 $asisitrAlumno=$URL.$AsistirAlumno;
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,7 +43,7 @@ $asisitrAlumno=$URL.$AsistirAlumno;
             <br>
             <form action=<?php echo $asisitrAlumno?> method="POST" class="form-horizontal">        
                 <div class="form-group" align="center">
-                    <h2 for="anotado" class="text-primary"> Estás Anotado a: </h2>
+                    <h2 for="anotado" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;"> Estás Anotado a: </h2>
                 </div> 
                 <div class="container">
                     <div class="table-responsive col-md-9 col-md-offset-1">

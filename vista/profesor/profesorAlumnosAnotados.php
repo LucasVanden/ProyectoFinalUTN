@@ -12,6 +12,13 @@ require_once $DIR . $profesorControlador;
 $idhora=$_POST['Notificaridhora'];
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,10 +39,10 @@ $idhora=$_POST['Notificaridhora'];
                 $nombMateria=$a->buscarMateriaDeHoradeconsulta($idhora);
             ?>
                 <div class="form-group"align="center">
-                    <h2 for="detalleAnotados" class="text-primary">Detalle de Alumnos Anotados </h2>
+                    <h2 for="detalleAnotados" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;">Detalle de Alumnos Anotados </h2>
                 </div>
                 <div class="form-group" align="center">
-                    <h3 class="text-primary"><?php echo $nombMateria;
+                    <h3 class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:30px;"><?php echo $nombMateria;
                         echo ": ";
                         echo $_POST['dia'];
                         echo " ";

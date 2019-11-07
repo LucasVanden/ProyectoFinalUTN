@@ -14,6 +14,13 @@ $profesorNotificar=$URL.$profesorCrearNotificacion;
 $idhora=$_POST['Notificaridhora'];
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,7 +41,7 @@ $idhora=$_POST['Notificaridhora'];
                 $nombMateria=$a->buscarMateriaDeHoradeconsulta($idhora);
             ?>
                 <div class="form-group" align="center">
-                    <h2 for="notificar" class="text-primary">Enviar Notificación a Alumnos de <?php echo $nombMateria ?> </h2>
+                    <h2 for="notificar" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;">Enviar Notificación a Alumnos de <?php echo $nombMateria ?> </h2>
                 </div>   
                 <div class="form-group"> 
                     <div class="col-md-4 col-md-offset-3">

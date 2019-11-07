@@ -35,6 +35,13 @@ $M2S2=null;
 
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -97,7 +104,7 @@ $M2S2=null;
             <br>
             <form action="alumnoPpal.php" method="POST" >
                 <div class="form-group" align="center">
-                    <h2 for="establecer" class="text-primary"> Establecer Horario de Consulta: </h2>
+                    <h2 for="establecer" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;"> Establecer Horario de Consulta: </h2>
                 </div>
                 <div class="container">
                     <div class="table-responsive col-md-4 col-md-offset-4">

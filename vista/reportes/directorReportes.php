@@ -43,7 +43,12 @@ if(isset($_POST['Materias'])){
     }
 ?>
 
-
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
 
 <!DOCTYPE html>
 <html>
@@ -62,7 +67,7 @@ if(isset($_POST['Materias'])){
             <br>
             <form action="directorReportes.php" method="POST" class="form-horizontal">
                 <div class="form-group" align="center">
-                    <h2 for="cursando" class="text-primary"> Obtener Reportes sobre Horarios de Consulta: </h2>
+                    <h2 for="cursando" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;"> Obtener Reportes sobre Horarios de Consulta: </h2>
                 </div> 
                 <div class="container"> 
                     <div class="table-responsive col-md-8 col-md-offset-2">
