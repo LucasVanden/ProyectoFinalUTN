@@ -91,7 +91,7 @@ require_once $DIR .$alumnoControlador;
                                         echo  '<td>';
                                         echo  '<button class="btn btn-primary btn-xs" title="Asistir a Consulta" id="buttonAsistir" name="Asistir" value='; 
                                         echo $horadeconsulta->getid_horadeconsulta();
-                                        echo '> <span class="glyphicon glyphicon-plus"></span> </button>';
+                                        echo '> Asistir <span class="glyphicon glyphicon-plus"></span></button>';
                                         echo  '</td>';
                                     }
                                     ?>
