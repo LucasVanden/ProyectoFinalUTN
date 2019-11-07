@@ -27,7 +27,7 @@ if(isset($idpresentismo)){
    $alumnosAusentes=buscarAlumnosAusentes($idhoradeconsulta);
     if (count($alumnosAusentes)>0){
         registrarAusentes($alumnosAusentes);
-        notificarPorMailaAusentes($alumnosAusentes,$idMateria);
+        notificarPorMailaAusentes($alumnosAusentes,$idMateria,$idProfesor);
     }
    cambiarEstadoVigencia($idhoradeconsulta);
 
@@ -117,7 +117,7 @@ function registrarAusentes($listaAlumnosAusentes){
     }
 }
 
-function notificarPorMailaAusentes($listaAlumnosAusentes,$idMateria){
+function notificarPorMailaAusentes($listaAlumnosAusentes,$idMateria,$idProfesor){
     $listaEmails=array();
     foreach ($listaAlumnosAusentes as $detalle) {
        $email=$detalle->getAlumno()->getemail();
@@ -132,7 +132,7 @@ function notificarPorMailaAusentes($listaAlumnosAusentes,$idMateria){
         $materia =$row['nombreMateria'];
     }
 
-    $stmt = $conn->prepare("SELECT nombre,apellido FROM profesor where id_profesor=$idprofesor"); 
+    $stmt = $conn->prepare("SELECT nombre,apellido FROM profesor where id_profesor=$idProfesor"); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
         $nombre=$row['nombre'];

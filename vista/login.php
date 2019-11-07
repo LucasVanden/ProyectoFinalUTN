@@ -99,7 +99,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
         <title>Login</title>
         <link rel="stylesheet" href="./css/bootstrap.min.css">
     </head>
-    <body background = <?php echo $URL."/vista/fondoCuerpoLogin.jpeg"?>>
+    <body background = <?php echo $URL."/vista/fondoCuerpoLogin.jpeg"?>
          
         <div class="container">
             <br> <br>
