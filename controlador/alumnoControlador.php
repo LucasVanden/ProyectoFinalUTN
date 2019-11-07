@@ -427,7 +427,7 @@ function AnotadoRepetido($idhora,$idalumno){
             $id= $detalle->getfk_horadeconsulta();
             $idvaluedetalle=$detalle->getid_detalleanotados();
 
-            $stmt4 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia,fechaHastaAnotados FROM horadeconsulta where id_horadeconsulta=$id "); 
+            $stmt4 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia,fechaHastaAnotados FROM horadeconsulta where id_horadeconsulta=$id and estadoVigencia='activo' "); 
             $stmt4->execute();
 
                             while($row = $stmt4->fetch()) {
