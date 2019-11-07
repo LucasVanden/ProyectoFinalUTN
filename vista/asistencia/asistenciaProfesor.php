@@ -92,7 +92,7 @@ $asistirprofesor=$URL.$AsistirProfesor;
                                         <div class="col-md-4 col-md-offset-4">
                                             <input type="hidden" name="idmateria" value=<?php echo $dedicacion->getMateria()->getid_materia() ?>>
                                             <input type="hidden" name="asistir" value=<?php echo $hora->getid_horadeconsulta();?>>
-                                            <button class="btn btn-success btn-xs" title="Dar Presente" type="submit" name"asistir2" value=<?php echo $hora->getid_horadeconsulta();?> formaction=<?php echo $asistirprofesor?> onclick="return confirm('Marcar Horario de <?php echo $dedicacion->getMateria()->getnombreMateria()?>?')"> <?php echo $nombreBoton?>
+                                            <button class="btn btn-success" title="Dar Presente" type="submit" name"asistir2" value=<?php echo $hora->getid_horadeconsulta();?> formaction=<?php echo $asistirprofesor?> onclick="return confirm('Marcar Horario de <?php echo $dedicacion->getMateria()->getnombreMateria()?>?')"> <?php echo $nombreBoton?>
                                                 <span class="glyphicon glyphicon-plus"></span>
                                             </button> 
                                         </div>

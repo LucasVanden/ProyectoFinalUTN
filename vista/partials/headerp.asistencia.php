@@ -12,6 +12,6 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
 <TD> <strong style="float:left;"><span class="glyphicon glyphicon-user"></span> - Profesor: <?php echo $_SESSION['nombre']?></strong>   &nbsp;&nbsp;  </TD>
 <?php endif; ?>
   <a href=<?php echo $URL.$asistenciaProfesor?>> <img src=<?php echo '"'.$URL.$logo.'"'?> width="75" height="75" /> </a>
-  <TD><a href=<?php echo $URL.$logoutasistencia?> style="float:right;"><span class="glyphicon glyphicon-log-out"></span>Salir -    &nbsp;&nbsp;  </a> </TD>
+  <TD><a href=<?php echo $URL.$logoutasistencia?> style="float:right;"><span class="glyphicon glyphicon-log-out"></span> Salir -    &nbsp;&nbsp;  </a> </TD>
   </div>
   </nav>
