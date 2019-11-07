@@ -152,7 +152,7 @@ if(isset($_POST['Materias'])){
     </div>
      
         <div class="container">
-            <div class="col-md-10 col-md-offset-2">
+            <div class="col-md-12 col-md-offset-0">
                 <br>
                 <?php 
                 if(isset($_POST["Obtener"])){
@@ -208,8 +208,8 @@ if(isset($_POST['Materias'])){
               ?>
                 <?php if ($grafico&&$noVacio): ?>
 
-                <div id="container" style="width:70%;">
-                    <canvas id="myChart"></canvas>
+                <div id="container" style="width:120%;">
+                    <canvas id="myChart" ></canvas>
                 </div>
                 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
                 <script>
@@ -228,7 +228,18 @@ if(isset($_POST['Materias'])){
                             }]
                         },
                         // Configuration options go here
-                        options: {}
+                        options: {
+                            scales: {
+                                xAxes: [{  barThickness: 48,  // number (pixels) or 'flex'
+                                maxBarThickness: 48 }],
+                                yAxes: [{
+                                 
+                                    ticks: {
+                                        precision: 0
+                                    }
+                                }]
+                            } 
+                        }
                     });
                     <?php endif; ?>
                 </script>
