@@ -100,9 +100,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
         <link rel="stylesheet" href="./css/bootstrap.min.css">
     </head>
     <body background = <?php echo $URL."/vista/fondoCuerpoLogin.jpeg"?>>
-        <?php if (!empty($message)): ?>
-            <p> <?= $message ?></p>
-        <?php endif; ?>       
+         
         <div class="container">
             <br> <br>
             <form action="login.php" method="POST" class="form-horizontal">
@@ -126,6 +124,11 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
                                 <input class="form-control" name="contraseña" id="contraseña" type="password" placeholder="Ingrese Contraseña" required>
                             </div>
                         </div>
+                        <?php if (!empty($message)): ?>
+            <div align="center" class="alert alert-danger" role="alert">
+                <?php echo $message?>
+            </div>
+        <?php endif; ?>  
                         <div class="form-group"> 
                             <div class="col-md-4 col-md-offset-4">
                                 <button class="btn btn-primary"> Ingresar   

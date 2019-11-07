@@ -17,6 +17,7 @@ $a=new Asistenciacontrolador();
 $idAlumno=$a->buscarAlumnoDeUsuario($idusuario);
 $_SESSION['idAlumno']=$idAlumno;
 $asisitrAlumno=$URL.$AsistirAlumno;
+$_SESSION['nombre']=$a->idAlumnoaNombre($idAlumno);
 ?>
 
 <style>
