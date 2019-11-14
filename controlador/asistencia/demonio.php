@@ -37,7 +37,7 @@ if (count($listaHorasACerrar[0])>0){
 }
 
 echo "Cerrando Horas de consulta...";
-echo '<pre>'; print_r($listaHorasACerrar); echo '</pre>';  
+//echo '<pre>'; print_r($listaHorasACerrar); echo '</pre>';  
 $direccion= $URL . $MenuIndex;
 header("refresh:2;".$direccion); 
 
