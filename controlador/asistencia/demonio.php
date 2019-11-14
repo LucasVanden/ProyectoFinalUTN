@@ -37,9 +37,12 @@ if (count($listaHorasACerrar[0])>0){
 }
 
 echo "Cerrando Horas de consulta...";
-//echo '<pre>'; print_r($listaHorasACerrar); echo '</pre>';  
+echo '<pre>'; print_r($listaHorasACerrar); echo '</pre>';  
 $direccion= $URL . $MenuIndex;
 header("refresh:2;".$direccion); 
+
+
+
 // echo "ok";?>
     <!-- <form action=<?php echo $URL.$MenuIndex ?> method="POST">
  <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $URL.$MenuIndex ?> /></div>
@@ -62,6 +65,7 @@ function buscarHorasACerrar(){
         $tempHorario=$row['fk_horariodeconsulta'];
         $idmateria=$row['fk_materia'];
         $idprofesor=$row['fk_profesor'];
+        $fecha=$row['fechaHastaAnotados'];
 
         $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora FROM horariodeconsulta where id_horariodeconsulta=$tempHorario");
         $stmt2->execute();
@@ -69,8 +73,19 @@ function buscarHorasACerrar(){
             $hora=$row['hora'];
             $h=date('H',strtotime(date('H:i:s').'-1 hour'));
             $m=date("i");
-             if(mayorMentorigual($hora,"<",$h,$m)){
-            //    if(true){
+            echo $hora;
+            echo $h;
+            echo $m;
+            $seleccionar=true;
+            if($fecha==$fechaActual){
+                if(mayorMentorigual($hora,"<",$h,$m)){
+                    $seleccionar=true;
+                }else{
+                    $seleccionar=false;
+                }
+            }
+           //  if(mayorMentorigual($hora,"<",$h,$m)){
+                if($seleccionar){
                 $stmt3 = $conn->prepare("SELECT horaDesde,horaHasta FROM presentismo where fk_horadeconsulta=$tempidhorario");
                 $stmt3->execute();
                 if($stmt3->rowCount() == 0) {
