@@ -31,13 +31,13 @@ if (count($listaHorasACerrar[0])>0){
 
     $hora= buscarHorarioDeConsultaActual($listaHorasACerrar[0][$i]);
     $siguientehorario=calcularSiguienteHorarioDeConsulta($hora,$listaHorasACerrar[1][$i],$listaHorasACerrar[2][$i]);
-    crearSiguienteHoraDeConsulta($listaHorasACerrar[1][$i],$listaHorasACerrar[0][$i],$siguientehorario);
+    crearSiguienteHoraDeConsulta($listaHorasACerrar[1][$i],$listaHorasACerrar[2][$i],$siguientehorario);
         
     }
 }
 
 echo "Cerrando Horas de consulta...";
-echo '<pre>'; print_r($listaHorasACerrar); echo '</pre>';  
+//echo '<pre>'; print_r($listaHorasACerrar); echo '</pre>';  
 $direccion= $URL . $MenuIndex;
 header("refresh:2;".$direccion); 
 // echo "ok";?>
@@ -270,7 +270,8 @@ function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
     $con= new conexion();
     $conn=$con->getconexion();
 
-    $dia=date('N');
+    $fechaHoraX=$hora->getfechaHastaAnotados();
+    $dia=date("N", strtotime($fechaHoraX));
  // $dia="5";
     $proximaConsulta=nextfechaDia($dia);
     $mesproximaConsulta=date("m", strtotime($proximaConsulta));
@@ -345,7 +346,7 @@ function crearSiguienteHoraDeConsulta($idMateria,$idProfesor,$siguientehorario){
  $idhorarioconsulta= $siguientehorario[0];
  $desde= $siguientehorario[1];
  $hasta= $siguientehorario[2];
-
+ echo '<pre>'; print_r($siguientehorario); echo '</pre>';  
  //test bug
  echo ("desde:".$desde. "<br>");
 
@@ -366,21 +367,25 @@ function nextfechaDia($diaID){
     switch ($diaID){
         case '1':
            $fecha= date("Y-m-d", strtotime("next Monday"));
+           return $fecha;
            break;
         case '2':
            $fecha= date("Y-m-d", strtotime("next Tuesday"));
+           return $fecha;
            break;
         case '3':
            $fecha= date("Y-m-d", strtotime("next Wednesday"));
+           return $fecha;
            break;
         case '4':
            $fecha= date("Y-m-d", strtotime("next Thursday"));
+           return $fecha;
            break;
         case '5':
            $fecha= date("Y-m-d", strtotime("next Friday"));
+           return $fecha;
            break;
     }
-    return $fecha;
 }
 function buscarFechaMesas(){
     $con= new conexion();
