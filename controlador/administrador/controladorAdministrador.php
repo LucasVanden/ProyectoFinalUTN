@@ -217,5 +217,21 @@ class controladorAdministrador extends conexion
         return $listaMateriasProfesor;
     }
 
+
+    function ConsultarAsueto($año,$mes){
+        $con= new conexion();
+        $conn=$con->getconexion();
+        $fecha=$año."-".$mes."%";
+            $listaAsuetos=array();
+            $stmt = $conn->prepare("SELECT fechaAsueto FROM asueto WHERE fechaAsueto LIKE '$fecha'");  
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $asueto=$row['fechaAsueto'];
+                $numero=date("j",strtotime($asueto));
+                array_push($listaAsuetos,$numero);
+            }
+            return $listaAsuetos;
+    
+    }
 }
 ?>

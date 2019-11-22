@@ -33,6 +33,7 @@ $asistenciaProfesor="/vista/asistencia/asistenciaProfesor.php";
 //ALUMNO
 $alumnoPpal="/vista/alumno/alumnoPpal.php";
 $alumnoagregarmateria='/vista/alumno/alumnoAgregarMateria.php';
+$temp1='/vista/alumno/temp.1.php';
 
 $alumnoControlador='/controlador/alumnoControlador.php';
 $departamentoMaterias='/controlador/departamentoMaterias.php';
@@ -107,6 +108,7 @@ $controladorAdministrador='/controlador/administrador/controladorAdministrador.p
 $setearAula='/controlador/administrador/setearAula.php';
 $abmcrearAula='/controlador/administrador/abmcrearAula.php';
 $borrarAula='/controlador/administrador/borrarAula.php';
+$marcarAsuetoReceso='/controlador/administrador/marcarAsuetoReceso.php';
 
 $asignarDirector='/controlador/administrador/cargoDirector/asignarDirector.php';
 $eliminarDirecotr='/controlador/administrador/cargoDirector/eliminarDirecotr.php';
