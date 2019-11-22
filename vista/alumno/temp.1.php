@@ -762,7 +762,8 @@ $marcarAsuetoReceso= $URL.$marcarAsuetoReceso;
 
             if(<?php echo ($_SESSION["agrego"]||$_SESSION["elimino"]) ?>){
             var x = document.getElementById("snackbar");
-
+            <?php $_SESSION["agrego"]=NULL;
+            $_SESSION["elimino"]=NULL; ?>
             // Add the "show" class to DIV
             x.className = "show";
 
