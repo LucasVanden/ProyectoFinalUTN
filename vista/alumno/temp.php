@@ -136,246 +136,55 @@ require_once ($DIR . $Dedicacion);
 // }else{
 //     echo "FLASE";
 // }
-
-
- //echo '<pre>'; print_r(BuscarMateriasAAsistir(1)); echo '</pre>';  
- 
- $horanumero='16:30';
- $min='00:00';
- $min2='00:00';
- $horariofin=date('H:i',strtotime($horanumero.'+1 hour'));
- $presentismoDesde= '17:32';
- $presentismoHasta= '17:24';
-
- if( mayorMentorigual($presentismoDesde,'>',$horanumero)){
-     $h=substr($horanumero, 0, 2);
-     $m=substr($horanumero, 3, 2);
-     $min=date("H:i",strtotime($presentismoDesde."-".$h."hour -".$m."min"));
- }
- if( mayorMentorigual($presentismoHasta,'<',$horariofin)){
-     $h=substr($presentismoHasta, 0, 2);
-     $m=substr($presentismoHasta, 3, 2);
-     $min2=date("H:i",strtotime($horariofin."-".$h."hour -".$m."min"));
-
- }
- $h=substr($min2, 0, 2);
- $m=substr($min2, 3, 2);
- $res=date("H:i", strtotime($min."+".$h."hour +".$m."min"));
-
- //BUG ACA
- 
- echo " min: ";
- 
- echo $min;
- echo " min2: ";
- echo $min2;
-echo " res: ";
- echo  $res;
-
- function mayorMentorigual($horasql1,$signo,$horasql2){
-    $hora=  substr($horasql1, 0, 2);
-    $min=substr($horasql1, 3, 2);
-
-    $hora2= substr($horasql2, 0, 2);
-    $min2=substr($horasql2, 3, 2);    
-        switch ($signo) {
-            case '>':
-                if($hora>$hora2){
-                    return true;}
-                        elseif ($hora<$hora2) {
-                            return false;}
-                                elseif($min>$min2){return true;}
-                                    elseif ($min<$min2){return false;}
-                                        else return false;
-                
-                break;
-            case '<':
-                if($hora<$hora2){
-                    return true;}
-                        elseif ($hora>$hora2) {
-                            return false;}
-                                elseif($min<$min2){return true;}
-                                    elseif ($min>$min2){return false;}
-                                        else return false;
-                break;
-            case "==":
-                if($hora==$hora2){
-                    if ($min==$min2)
-                        {return true;}
-                }
-                else return false;
-                break;
-        }
-}
-
- $con= new conexion();
- $conn=$con->getconexion();
-
- $stmt = $conn->prepare("SELECT id_detalleanotados,fk_horadeconsulta FROM detalleanotados where fk_alumno=1 "); 
- $stmt->execute();
- if($stmt->rowCount() == 0) {
-echo "vacio";
- }
- function BuscarMateriasAAsistir($idalumno){
-    $con= new conexion();
-    $conn=$con->getconexion();
-
-    $ListDetalles=array();
- 
-    $stmt = $conn->prepare("SELECT id_detalleanotados,fk_horadeconsulta FROM detalleanotados where fk_alumno=$idalumno "); 
-    $stmt->execute();
-   
-        while($row = $stmt->fetch()) {
-                $detalle = new Detalleanotados();
-                $detalle->setid_detalleanotados($row['id_detalleanotados']);
-                $detalle->setfk_horadeconsulta($row['fk_horadeconsulta']);
-
-                $iddetalle=$row['id_detalleanotados'];
-                $Estados=array();
-
-                $stmt2 = $conn->prepare("SELECT id_anotadoestado,fechaAnotadosEstado,horaAnotadosEstado,fk_estadoanotados FROM anotadosestado where fk_detalleanotados=$iddetalle "); 
-                $stmt2->execute();
-                while($row = $stmt2->fetch()) {
-                    $anotado = new AnotadosEstado();
-                    $anotado->setid_anotadosEstado($row['id_anotadoestado']);
-                    $anotado->setfechaAnotadosEstado($row['fechaAnotadosEstado']);
-                    $anotado->sethoraAnotadosEstado($row['horaAnotadosEstado']);
-                    $idnombreestado=$row['fk_estadoanotados'];
-
-                    $stmt3 = $conn->prepare("SELECT nombreEstado,id_estadoanotados FROM estadoanotados where id_estadoanotados=$idnombreestado "); 
-                    $stmt3->execute();
-                    while($row = $stmt3->fetch()) {
-                        $estado = new EstadoAnotados();
-                        $estado->setnombreEstado($row['nombreEstado']);
-                        $estado->setid_estadoanotados($row['id_estadoanotados']);
-                        $anotado->setEstadoAnotados($estado);       
-                    }
-                
-                        array_push($Estados,$anotado);
-                }
-                $detalle->setAnotadosEstado($Estados);
-                array_push($ListDetalles,$detalle);
-        } 
-        
-        $ListHoraDeConsulta=array();
-       
-       foreach ($ListDetalles as $detalle) {
-        
-        //    echo $detalle->getAnotadosEstado()[0]->getid_anotadosEstado();
-          $d= $detalle->getAnotadosEstado();
-     if  ( end($d)->getEstadoAnotados()->getnombreEstado()=="Anotado") {
-       
-        //llamar a buscar la hs cosulta
-      
-        $id= $detalle->getfk_horadeconsulta();
-        $idvaluedetalle=$detalle->getid_detalleanotados();
-
-        $stmt4 = $conn->prepare("SELECT id_horadeconsulta,fk_horariodeconsulta,fk_materia FROM horadeconsulta where id_horadeconsulta=$id "); 
-        $stmt4->execute();
-
-                        while($row = $stmt4->fetch()) {
-                            $hora = new HoraDeConsulta();
-                            $hora->settempiddetalle($idvaluedetalle);
-                            $hora->setid_horadeconsulta($row['id_horadeconsulta']);
-                            $hora->setDetalleAnotados($detalle);
-                            $listaAvisos=array();    
-                            $tempidhorario =$row['fk_horariodeconsulta'];
-                            $tempmaeria =$row['fk_materia'];
-                            $tempidhora=$row['id_horadeconsulta'];
-                            $hora->setPresentismo(false);
-                            $stmt9 = $conn->prepare("SELECT id_presentismo FROM presentismo where fk_horadeconsulta=$tempidhora and HoraHasta='00:00:00'"); 
-                            $stmt9->execute();
-                            while($row = $stmt9->fetch()) {
-                                $hora->setPresentismo(true);
-                            }
-
-                            $stmt5 = $conn->prepare("SELECT id_avisoprofesor,fechaAvisoProfesor,detalleDescripcion,horaAvisoProfesor FROM avisoprofesor where fk_horadeconsulta=$tempidhora"); 
-                            $stmt5->execute();
-                            
-
-                            while($row = $stmt5->fetch()) {
-                                $aviso = new AvisoProfesor();
-                                $aviso->setid_avisoprofesor($row['id_avisoprofesor']);
-                                $aviso->setfechaAvisoProfesor($row['fechaAvisoProfesor']);
-                                $aviso->setdetalleDescripcion($row['detalleDescripcion']);
-                                $aviso->sethoraAvisoProfesor($row['horaAvisoProfesor']);
-                                array_push($listaAvisos,$aviso);
-                              
-                                
-                            }
-                            $hora->setAvisoProfesor($listaAvisos);
-                            $stmt5 = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where id_materia=$tempmaeria"); 
-                            $stmt5->execute();
-
-                            while($row = $stmt5->fetch()) {
-                                $mat = new Materia();
-                                $mat->setid_materia($row['id_materia']);
-                                $mat->setnombreMateria($row['nombreMateria']);
-                                $hora->setMateria($mat);
-                            }
-
-                            $stmt6 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
-                            $stmt6->execute();
-
-                                while($row = $stmt6->fetch()) {
-                                    $ListaHorariosDeConsulta=array();
-                                    $hor = new HorarioDeConsulta();
-                                    $hor->setid_horariodeconsulta($row['id_horariodeconsulta']);
-                                    $hor->sethora($row['hora']);
-                                    $hor->setactivoDesde($row['activoDesde']);
-                                    $hor->setactivoHasta($row['activoHasta']);
-                                    $hor->setsemestre($row['semestre']);
-                                        
-                                        $tempDia =$row['fk_dia'];
-                                        $tempProfesor =$row['fk_profesor'];
-
-                                        $stmt7 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
-                                        $stmt7->execute();
-                                        while($row = $stmt7->fetch()) {
-                                            $dia = new Dia();
-                                            $dia->setid_dia($row['id_dia']);
-                                            $dia->setdia($row['dia']);
-                                            $hor->setdia($dia);
-                                        }
-                                        $stmt8 = $conn->prepare("SELECT id_profesor,apellido,nombre FROM profesor where id_profesor=$tempProfesor"); 
-                                        $stmt8->execute();
-                                        while($row = $stmt8->fetch()) {
-                                            $prof = new Profesor();
-                                            $prof->setid_profesor($row['id_profesor']);
-                                            $prof->setapellido($row['apellido']);
-                                            $prof->setnombre($row['nombre']);
-                                            $hor->setprofesor($prof);
-                                        }
-                                    $hora->setHorarioDeConsulta($hor);
-                                    }
-                                           
-                            array_push($ListHoraDeConsulta,$hora);
-                                            
-                            }
-                           
-        } 
-    }
-    // echo '<pre>'; print_r($ListHoraDeConsulta); echo '</pre>';
-    return $ListHoraDeConsulta;
-}
-
-
-function buscarAsuetos(){
-    $con= new conexion();
-    $conn=$con->getconexion();
-    $listaAsuetos=array();
-    $año=date("Y");
-    $fecha="{$año}-01-01";
-    $stmt = $conn->prepare("SELECT horaDesdeAsueto,horaHastaAsueto,fechaAsueto FROM asueto");
-    $stmt->execute(); 
-    while($row = $stmt->fetch()){
-        $asueto= new Asueto();
-        $asueto->setfechaAsueto($row['fechaAsueto']);
-        $asueto->sethoraDesdeAsueto($row['horaDesdeAsueto']);
-        $asueto->sethoraHastaAsueto($row['horaHastaAsueto']);
-        array_push($listaAsuetos,$asueto);
-    }
-    return $listaAsuetos;
-}
 ?>
+
+
+
+
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+</head>
+<body>
+<form action="temp.php" name="myForm"  method="post" >
+  <b>Number Input:</b>
+  <input type="time" step="any" min="0"  name="number" id="number" value="08:00" 
+  />
+         <b>Number Input2:</b>
+  <input type="time" step="any" min="0"  name="number2" id="number2" value="23:30"
+   /> 
+  <input type="submit" class="submit" value="Save" onclick="check()"/>
+</form>
+<script>
+ function check() {
+  var x = document.forms["myForm"]["number"].value;
+  var y = document.forms["myForm"]["number2"].value;
+   if ( x>y) {
+    
+     alert("Name must be filled out");
+    return false;
+
+   } else {
+      
+     input.setCustomValidity('');
+   }
+ }
+</script>
+<script>
+ function check2(input) {
+   if (($("#number2").val())  < ($("#number").val()) ) {
+     input.setCustomValidity('2 tiene que ser mayor.');
+     $("#number2").load()="";
+     $("#number").load()="";
+   } else {
+      
+     input.setCustomValidity('');
+   }
+ }
+</script>
+</script>
+
+
+</body>
+</html>
 

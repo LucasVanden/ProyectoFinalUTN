@@ -16,6 +16,8 @@ require_once ($DIR . $Presentismo);
 session_start();
 date_default_timezone_set('America/Argentina/Mendoza');
 
+$_SESSION["agrego"]=NULL;
+$_SESSION["elimino"]=NULL;
 
 $fecha=$_POST['fechadia'];
 
@@ -35,11 +37,13 @@ function ConsultarAsueto($fecha){
             $stmt2 = $conn->prepare("DELETE FROM asueto WHERE  fechaAsueto= '$fecha'");  
             $stmt2->execute();
             $crearFecha=false;
+            $_SESSION["elimino"]=true;
         }
         if($crearFecha){
             $stmt3 = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`) 
             VALUES (NULL, '$fecha', '08:00:00' , '23:30');");  
             $stmt3->execute();
+            $_SESSION["agrego"]=true;
         }
 
 
