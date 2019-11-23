@@ -23,7 +23,7 @@ $fecha=$_POST['fechadia'];
 
 $fechas=ConsultarAsueto($fecha);
 
-$direccion= $URL . $temp1;
+$direccion= $URL . $asutosReceso;
 header("Location: $direccion");
 
 function ConsultarAsueto($fecha){

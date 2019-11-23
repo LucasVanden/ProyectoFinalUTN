@@ -18,15 +18,17 @@ date_default_timezone_set('America/Argentina/Mendoza');
 
 $fechaDesdeVerano=$_POST['fechaDesdeVerano'];
 $fechaHastaVerano=$_POST['fechaHastaVerano'];
-$fechaDesdeInvierno=$_POST['fechaDesdeInvierno'];
-$fechaHastaInvierno=$_POST['fechaHastaInvierno'];
 
 
-if(($fechaDesdeVerano<$fechaHastaVerano)&&($fechaDesdeInvierno<$fechaHastaInvierno)){
 
+if(($fechaDesdeVerano<$fechaHastaVerano)){
+    if($_POST["Obtener"]=="Cargar"){
     crearAsuetosDesdeHasta($fechaDesdeVerano,$fechaHastaVerano);
-    crearAsuetosDesdeHasta($fechaDesdeInvierno,$fechaHastaInvierno);
-    $direccion= $URL . $AsuetoMenu;
+    }
+    if($_POST["Obtener"]=="Borrar"){
+        borrarAsuetosDesdeHasta($fechaDesdeVerano,$fechaHastaVerano);
+        }
+    $direccion= $URL . $asutosReceso;
     header("Location: $direccion");
 }else{
     $_SESSION['comprobacion']="fecha Desde debe ser menor a fecha Hasta";
@@ -58,8 +60,35 @@ function crearAsuetosDesdeHasta($fechadesde,$fechaHasta){
         $stmt = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`) 
         VALUES (NULL, '$fechaHasta', '08:00:00' , '23:30');");  
         $stmt->execute();
+        $_SESSION["agrego"]=true;
 
+}
+function borrarAsuetosDesdeHasta($fechadesde,$fechaHasta){
+    $con= new conexion();
+    $conn=$con->getconexion();
+    $fecha=$fechadesde;
 
+   
+        while ($fecha!=$fechaHasta) {
+
+            $stmt = $conn->prepare("SELECT id_asueto FROM asueto where fechaAsueto='$fecha' "); 
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+
+                $stmt2 = $conn->prepare("DELETE FROM asueto WHERE  fechaAsueto= '$fecha'");  
+                $stmt2->execute();
+            }
+
+            $fecha=date("Y-m-d",strtotime($fecha.'+ 1day'));
+        }
+
+        $stmt3 = $conn->prepare("SELECT id_asueto FROM asueto where fechaAsueto='$fechaHasta' "); 
+        $stmt3->execute();
+        while($row = $stmt->fetch()) {
+        $stmt4 = $conn->prepare("DELETE FROM asueto WHERE  fechaAsueto= '$fechaHasta'");  
+        $stmt4->execute();
+        }
+        $_SESSION["elimino"]=true;
 }
 
 ?>

@@ -143,12 +143,17 @@ $marcarAsuetoReceso= $URL.$marcarAsuetoReceso;
         <!-- Setear Año -->
         <?php 
             $year=date("Y");
+            if(isset($_SESSION["year"])){
+                $year=$_SESSION["year"];
+            }
 
             if (isset($_POST["anterior"])){
                 $year=$_POST["anterior"]-1;
+                $_SESSION["year"]=$year;
             }
             if (isset($_POST["siguiente"])){
                 $year=$_POST["siguiente"]+1;
+                $_SESSION["year"]=$year;
             }
         ?>
         <!-- Cabecera Año -->
