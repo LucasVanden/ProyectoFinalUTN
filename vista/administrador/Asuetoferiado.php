@@ -208,7 +208,7 @@ if(isset($_SESSION['idfechaferiado'])){
 <!-- Cabecera Año -->
 <div class="Row" >
     <div class="Column" align='right' > 
-        <form action="AsuetosReceso.php" method="POST" class="form-horizontal">
+        <form action="AsuetoFeriado.php" method="POST" class="form-horizontal">
             <button style="height:75;width:75" type="submit" name="anterior"  onclick="recargarCalendario()" value=<?php echo $year?>><</button>
         </form>
     </div>
@@ -218,7 +218,7 @@ if(isset($_SESSION['idfechaferiado'])){
     </div>
 
     <div class="Column" align='left'> 
-        <form action="AsuetosReceso.php" method="POST" class="form-horizontal">
+        <form action="AsuetoFeriado.php" method="POST" class="form-horizontal">
             <button style="height:75;width:75"  type="submit" name="siguiente"  onclick="recargarCalendario()" value=<?php echo $year?>>></button>
         </form>
     </div>
