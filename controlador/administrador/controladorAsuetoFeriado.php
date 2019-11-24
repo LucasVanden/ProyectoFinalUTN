@@ -17,9 +17,14 @@ session_start();
 date_default_timezone_set('America/Argentina/Mendoza');
 
 $fechaFeriado=$_POST['fechaFeriado'];
+$_SESSION['idfechaferiado']=$fechaFeriado;
 
-crearFeriado($fechaFeriado);
-
+if($_POST["Obtener"]=="Cargar"){
+    crearFeriado($fechaFeriado);
+    }
+    if($_POST["Obtener"]=="Borrar"){
+        borrarFeriado($fechaFeriado);
+        }
 
 $direccion= $URL . $asutosFeriado;
 header("Location: $direccion");
@@ -28,15 +33,29 @@ function crearFeriado($fecha){
     $con= new conexion();
     $conn=$con->getconexion();
 
-    $stmt = $conn->prepare("SELECT id_asueto FROM asueto where fechaAsueto='$fecha' "); 
+    $stmt = $conn->prepare("SELECT id_asueto FROM asueto where tipo='feriad' and  fechaAsueto='$fecha' "); 
     $stmt->execute();
     if($stmt->rowCount() == 0) {
 
-        $stmt = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`) 
-        VALUES (NULL, '$fecha', '08:00:00' , '23:30');");  
+        $stmt = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`,`tipo`) 
+        VALUES (NULL, '$fecha', '08:00:00' , '23:30','feriado');");  
         $stmt->execute();
     }
+    $_SESSION["agrego"]=true;
+}
 
+function borrarFeriado($fecha){
+    $con= new conexion();
+    $conn=$con->getconexion();
+
+
+        $stmt3 = $conn->prepare("SELECT id_asueto FROM asueto where  tipo='feriado' and fechaAsueto='$fecha' "); 
+        $stmt3->execute();
+        while($row = $stmt3->fetch()) {
+            $stmt4 = $conn->prepare("DELETE FROM asueto WHERE  tipo='feriado' and fechaAsueto= '$fecha'");  
+            $stmt4->execute();
+        }
+        $_SESSION["elimino"]=true;
 }
 
 ?>

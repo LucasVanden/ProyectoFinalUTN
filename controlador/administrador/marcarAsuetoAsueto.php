@@ -19,29 +19,34 @@ date_default_timezone_set('America/Argentina/Mendoza');
 $_SESSION["agrego"]=NULL;
 $_SESSION["elimino"]=NULL;
 
-$fecha=$_POST['fechadia'];
+$fecha=$_SESSION['cargarEnSessionLaFecha'];
+$desde=$_POST['horaDesde'];
+$hasta=$_POST['horaHasta'];
 
-$fechas=ConsultarAsueto($fecha);
 
-$direccion= $URL . $asutosReceso;
+
+
+$fechas=ConsultarAsueto($fecha,$desde,$hasta);
+
+$direccion= $URL . $AsuetoAsueto;
 header("Location: $direccion");
 
-function ConsultarAsueto($fecha){
+function ConsultarAsueto($fecha,$desde,$hasta){
     $con= new conexion();
     $conn=$con->getconexion();
     
-        $stmt = $conn->prepare("SELECT fechaAsueto FROM asueto WHERE tipo='receso' and fechaAsueto = '$fecha'");  
+        $stmt = $conn->prepare("SELECT fechaAsueto FROM asueto WHERE tipo='asueto' and fechaAsueto = '$fecha'");  
         $stmt->execute();
         $crearFecha=true;
         while($row = $stmt->fetch()) {
-            $stmt2 = $conn->prepare("DELETE FROM asueto WHERE tipo='receso' and fechaAsueto= '$fecha'");  
+            $stmt2 = $conn->prepare("DELETE FROM asueto WHERE tipo='asueto' and fechaAsueto= '$fecha'");  
             $stmt2->execute();
             $crearFecha=false;
             $_SESSION["elimino"]=true;
         }
         if($crearFecha){
             $stmt3 = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`,`tipo`) 
-            VALUES (NULL, '$fecha', '08:00:00' , '23:30','receso');");  
+            VALUES (NULL, '$fecha', '$desde' , '$hasta','asueto');");  
             $stmt3->execute();
             $_SESSION["agrego"]=true;
         }

@@ -45,20 +45,20 @@ function crearAsuetosDesdeHasta($fechadesde,$fechaHasta){
    
         while ($fecha!=$fechaHasta) {
 
-            $stmt = $conn->prepare("SELECT id_asueto FROM asueto where fechaAsueto='$fecha' "); 
+            $stmt = $conn->prepare("SELECT id_asueto FROM asueto where  tipo='receso' and fechaAsueto='$fecha' "); 
             $stmt->execute();
             if($stmt->rowCount() == 0) {
 
-            $stmt = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`) 
-            VALUES (NULL, '$fecha', '08:00:00' , '23:30');");  
+            $stmt = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`,`tipo`) 
+            VALUES (NULL, '$fecha', '08:00:00' , '23:30','receso');");  
             $stmt->execute();
             }
 
             $fecha=date("Y-m-d",strtotime($fecha.'+ 1day'));
         }
 
-        $stmt = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`) 
-        VALUES (NULL, '$fechaHasta', '08:00:00' , '23:30');");  
+        $stmt = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`,`tipo`) 
+        VALUES (NULL, '$fechaHasta', '08:00:00' , '23:30','receso');");  
         $stmt->execute();
         $_SESSION["agrego"]=true;
 
@@ -71,22 +71,22 @@ function borrarAsuetosDesdeHasta($fechadesde,$fechaHasta){
    
         while ($fecha!=$fechaHasta) {
 
-            $stmt = $conn->prepare("SELECT id_asueto FROM asueto where fechaAsueto='$fecha' "); 
+            $stmt = $conn->prepare("SELECT id_asueto FROM asueto where  tipo='receso' and fechaAsueto='$fecha' "); 
             $stmt->execute();
             while($row = $stmt->fetch()) {
 
-                $stmt2 = $conn->prepare("DELETE FROM asueto WHERE  fechaAsueto= '$fecha'");  
+                $stmt2 = $conn->prepare("DELETE FROM asueto WHERE  tipo='receso' and fechaAsueto= '$fecha'");  
                 $stmt2->execute();
             }
 
             $fecha=date("Y-m-d",strtotime($fecha.'+ 1day'));
         }
 
-        $stmt3 = $conn->prepare("SELECT id_asueto FROM asueto where fechaAsueto='$fechaHasta' "); 
+        $stmt3 = $conn->prepare("SELECT id_asueto FROM asueto where  tipo='receso' and fechaAsueto='$fechaHasta' "); 
         $stmt3->execute();
-        while($row = $stmt->fetch()) {
-        $stmt4 = $conn->prepare("DELETE FROM asueto WHERE  fechaAsueto= '$fechaHasta'");  
-        $stmt4->execute();
+        while($row = $stmt3->fetch()) {
+            $stmt4 = $conn->prepare("DELETE FROM asueto WHERE  tipo='receso' and fechaAsueto= '$fechaHasta'");  
+            $stmt4->execute();
         }
         $_SESSION["elimino"]=true;
 }

@@ -109,6 +109,9 @@ $setearAula='/controlador/administrador/setearAula.php';
 $abmcrearAula='/controlador/administrador/abmcrearAula.php';
 $borrarAula='/controlador/administrador/borrarAula.php';
 $marcarAsuetoReceso='/controlador/administrador/marcarAsuetoReceso.php';
+$marcarAsuetoFeriado='/controlador/administrador/marcarAsuetoFeriado.php';
+$marcarAsuetoAsueto='/controlador/administrador/marcarAsuetoAsueto.php';
+$cargarEnSessionLaFecha='/controlador/administrador/cargarEnSessionLaFecha.php';
 
 $asignarDirector='/controlador/administrador/cargoDirector/asignarDirector.php';
 $eliminarDirecotr='/controlador/administrador/cargoDirector/eliminarDirecotr.php';

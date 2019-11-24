@@ -19,10 +19,15 @@ date_default_timezone_set('America/Argentina/Mendoza');
 $fechaFeriado=$_POST['fechaFeriado'];
 $horaDesde=$_POST['horaDesde'];
 $horaHasta=$_POST['horaHasta'];
-
+$_SESSION['idfechaasueto']=$fechaFeriado;
 if($horaDesde<$horaHasta){
-crearAsueto($fechaFeriado,$horaDesde,$horaHasta);
-$direccion= $URL . $AsuetoMenu;
+    if($_POST['Obtener']=="Cargar"){
+        crearAsueto($fechaFeriado,$horaDesde,$horaHasta);
+    }
+    if($_POST['Obtener']=="Eliminar"){
+        eliminarAsueto($fechaFeriado,$horaDesde,$horaHasta);
+    }
+$direccion= $URL . $AsuetoAsueto;
 header("Location: $direccion");
 
 }else{
@@ -37,15 +42,27 @@ function crearAsueto($fechaFeriado,$horaDesde,$horaHasta){
     $con= new conexion();
     $conn=$con->getconexion();
 
-    $stmt = $conn->prepare("SELECT id_asueto FROM asueto where fechaAsueto='$fechaFeriado' and horaHastaAsueto='$horaHasta' and HoraDesdeAsueto='$horaDesde'"); 
+    $stmt = $conn->prepare("SELECT id_asueto FROM asueto where tipo='asueto' and fechaAsueto='$fechaFeriado' and horaHastaAsueto='$horaHasta' and HoraDesdeAsueto='$horaDesde'"); 
     $stmt->execute();
     if($stmt->rowCount() == 0) {
 
-    $stmt = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`) 
-    VALUES (NULL, '$fechaFeriado', '$horaDesde' , '$horaHasta');");  
+    $stmt = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`,`tipo`) 
+    VALUES (NULL, '$fechaFeriado', '$horaDesde' , '$horaHasta','asueto');");  
     $stmt->execute();
     }
-  
+  $_SESSION["agrego"]=true;
+}
+function eliminarAsueto($fechaFeriado,$horaDesde,$horaHasta){
+    $con= new conexion();
+    $conn=$con->getconexion();
+
+    $stmt = $conn->prepare("SELECT id_asueto FROM asueto where tipo='asueto' and fechaAsueto='$fechaFeriado' "); 
+    $stmt->execute();
+    while($row = $stmt->fetch()) {
+        $stmt2 = $conn->prepare("DELETE FROM asueto WHERE tipo='asueto' and fechaAsueto= '$fechaFeriado'");  
+        $stmt2->execute();
+    }
+    $_SESSION["elimino"]=true;
 }
 
 ?>

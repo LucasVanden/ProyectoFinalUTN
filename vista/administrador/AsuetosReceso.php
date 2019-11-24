@@ -91,7 +91,9 @@ if(isset($_SESSION['comprobacion'])):?>
    <div class="alert alert-danger" role="alert" align="center">
    <?php echo $_SESSION['comprobacion'];?>
  </div>
-<?php endif;?>
+<?php 
+$_SESSION["comprobacion"]=NULL;
+endif;?>
 
                     <div align="center"> <br><br> <input type="submit" value="Cargar" name="Obtener"  />
                     <input type="submit" value="Borrar" name="Obtener"  /></div>
@@ -99,7 +101,7 @@ if(isset($_SESSION['comprobacion'])):?>
                     </form>
 
 <!-- CALENDARIO -->
-
+<iframe width="0" height="0" border="0" name="dummyframe" id="dummyframe"></iframe>
    
 
 <!-- STYLE calendario -->
@@ -227,7 +229,7 @@ if(isset($_SESSION['comprobacion'])):?>
 <div class="Row" >
     <div class="Column" align='right' > 
         <form action="AsuetosReceso.php" method="POST" class="form-horizontal">
-            <button style="height:75;width:75" type="submit" name="anterior"  onclick="enviarAltura()" value=<?php echo $year?>><</button>
+            <button style="height:75;width:75" type="submit" name="anterior"  onclick="recargarCalendario()" value=<?php echo $year?>><</button>
         </form>
     </div>
 
@@ -237,29 +239,75 @@ if(isset($_SESSION['comprobacion'])):?>
 
     <div class="Column" align='left'> 
         <form action="AsuetosReceso.php" method="POST" class="form-horizontal">
-            <button style="height:75;width:75"  type="submit" name="siguiente"  onclick="enviarAltura()" value=<?php echo $year?>>></button>
+            <button style="height:75;width:75"  type="submit" name="siguiente"  onclick="recargarCalendario()" value=<?php echo $year?>>></button>
         </form>
     </div>
 </div>
 <!-- Calendario -->
-<form action=<?php echo $marcarAsuetoReceso?> method="POST" class="form-horizontal">
+<form action=<?php echo $marcarAsuetoReceso?> method="POST" class="form-horizontal" target="dummyframe">
         <?php $con= new controladorAdministrador;?>  
+    <div id="div">
+        <main >
+            <!-- 1 -->
+            <div >
+                <?php $month="01";
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month); ?>
+                <div class="month">      
+                    <ul>
+                        <li>
+                            <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                            <span style="font-size:18px"><?php echo $year?></span>
+                        </li>
+                    </ul>
+                </div>
 
-    <main >
-        <!-- 1 -->
-        <div >
-            <?php $month="01";
-            $listaAsuetos=$con->ConsultarAsueto($year,$month); ?>
-            <div class="month">      
-                <ul>
-                    <li>
-                        <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                        <span style="font-size:18px"><?php echo $year?></span>
-                    </li>
+                <ul class="weekdays" >
+                    <li>L</li>
+                    <li>M</li>
+                    <li>M</li>
+                    <li>J</li>
+                    <li>V</li>
+                    <li>S</li>
+                    <li>D</li>
+                </ul>
+
+                <ul class="days">
+                    <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                        <li></li>
+                    <?php endfor ;?>
+
+                    <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                    <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                        <?php if (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
+            <!-- //2 -->
+            <div>
+                <?php $month="02";
+                
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
+                    </li>
+                </ul>
+                </div>
 
-            <ul class="weekdays" >
+                <ul class="weekdays" >
                 <li>L</li>
                 <li>M</li>
                 <li>M</li>
@@ -267,9 +315,9 @@ if(isset($_SESSION['comprobacion'])):?>
                 <li>V</li>
                 <li>S</li>
                 <li>D</li>
-            </ul>
+                </ul>
 
-            <ul class="days">
+                <ul class="days">
                 <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
                     <li></li>
                 <?php endfor ;?>
@@ -277,497 +325,451 @@ if(isset($_SESSION['comprobacion'])):?>
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
                     <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>
-                        <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  onclick="enviarAltura()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
-                        <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                        <li>                  
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
                         </li>
                     <?php else:?>
-                        <li>
-                        <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                    <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>  
                         </li>
                     <?php endif;?>
                 <?php endfor;?>
-            </ul>
-        </div>
-        <!-- //2 -->
-        <div>
-            <?php $month="02";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);?>
-            <div class="month">      
-            <ul>
-                
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
+                </ul>
             </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                  
-                        <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+            <!-- 3 -->
+            <div>
+                <?php
+                $month="03";
+                
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);
+                ?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
                     </li>
-                <?php else:?>
-                <li>
-                        <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>  
+                </ul>
+                </div>
+
+                <ul class="weekdays" >
+                <li>L</li>
+                <li>M</li>
+                <li>M</li>
+                <li>J</li>
+                <li>V</li>
+                <li>S</li>
+                <li>D</li>
+                </ul>
+
+                <ul class="days">
+                <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                    <li></li>
+                <?php endfor ;?>
+
+                <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                    <?php if (in_array($i,$listaAsuetos)) :?>
+                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
+                    <?php else:?>
+                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
+                    <?php endif;?>
+                <?php endfor;?>
+                </ul>
+            </div>
+            <!-- 4 -->
+            <div>
+                <?php
+                $month="04";
+                
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);
+                ?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
                     </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-        <!-- 3 -->
-        <div>
-            <?php
-            $month="03";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);
-            ?>
-            <div class="month">      
-            <ul>
-                
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
+                </ul>
+                </div>
+
+                <ul class="weekdays" >
+                <li>L</li>
+                <li>M</li>
+                <li>M</li>
+                <li>J</li>
+                <li>V</li>
+                <li>S</li>
+                <li>D</li>
+                </ul>
+
+                <ul class="days">
+                <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                    <li></li>
+                <?php endfor ;?>
+
+                <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                    <?php if (in_array($i,$listaAsuetos)) :?>
+                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
+                    <?php else:?>
+                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
+                    <?php endif;?>
+                <?php endfor;?>
+                </ul>
             </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                <?php else:?>
-                <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-        <!-- 4 -->
-        <div>
-            <?php
-            $month="04";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);
-            ?>
-            <div class="month">      
-            <ul>
+            <!-- 5 -->
+            <div>
+                <?php
+                $month="05";
                 
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
-            </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                <?php else:?>
-                <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-        <!-- 5 -->
-        <div>
-            <?php
-            $month="05";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);
-            ?>
-            <div class="month">      
-            <ul>
-                
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
-            </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                <?php else:?>
-                <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-        <!-- 6 -->
-        <div>
-            <?php
-            $month="06";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);
-            ?>
-            <div class="month">      
-            <ul>
-                
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
-            </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                <?php else:?>
-                <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-        <!-- 7 -->
-        <div>
-            <?php
-            $month="07";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);
-            ?>
-            <div class="month">      
-            <ul>
-                
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
-            </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                <?php else:?>
-                <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-        <!-- 8 -->
-        <div>
-            <?php
-            $month="08";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);
-            ?>
-            <div class="month">      
-            <ul>
-                
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
-            </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                <?php else:?>
-                <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-        <!-- 9 -->
-        <div>
-            <?php
-            $month="09";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);
-            ?>
-            <div class="month">      
-            <ul>
-                
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
-            </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                <?php else:?>
-                <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-        <!-- 10 -->
-        <div>
-            <?php
-            $month="10";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);
-            ?>
-            <div class="month">      
-            <ul>
-                
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
-            </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                <?php else:?>
-                <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-        <!-- 11 -->
-        <div>
-            <?php
-            $month="11";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);
-            ?>
-            <div class="month">      
-            <ul>
-                
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
-            </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                <?php else:?>
-                <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-        <!-- 12 -->
-        <div>
-            <?php
-            $month="12";
-            
-            $listaAsuetos=$con->ConsultarAsueto($year,$month);
-            ?>
-            <div class="month">      
-            <ul>
-                
-                
-                <li>
-                <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
-                <span style="font-size:18px"><?php echo $year?></span>
-                </li>
-            </ul>
-            </div>
-
-            <ul class="weekdays" >
-            <li>L</li>
-            <li>M</li>
-            <li>M</li>
-            <li>J</li>
-            <li>V</li>
-            <li>S</li>
-            <li>D</li>
-            </ul>
-
-            <ul class="days">
-            <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
-                <li></li>
-            <?php endfor ;?>
-
-            <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
-            <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                <?php if (in_array($i,$listaAsuetos)) :?>
-                    <li>                 
-                    <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>   
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);
+                ?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
                     </li>
-                <?php else:?>
-                <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="enviarAltura()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                <?php endif;?>
-            <?php endfor;?>
-            </ul>
-        </div>
-    </main>
+                </ul>
+                </div>
 
+                <ul class="weekdays" >
+                <li>L</li>
+                <li>M</li>
+                <li>M</li>
+                <li>J</li>
+                <li>V</li>
+                <li>S</li>
+                <li>D</li>
+                </ul>
+
+                <ul class="days">
+                <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                    <li></li>
+                <?php endfor ;?>
+
+                <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                    <?php if (in_array($i,$listaAsuetos)) :?>
+                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
+                    <?php else:?>
+                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
+                    <?php endif;?>
+                <?php endfor;?>
+                </ul>
+            </div>
+            <!-- 6 -->
+            <div>
+                <?php
+                $month="06";
+                
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);
+                ?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
+                    </li>
+                </ul>
+                </div>
+
+                <ul class="weekdays" >
+                <li>L</li>
+                <li>M</li>
+                <li>M</li>
+                <li>J</li>
+                <li>V</li>
+                <li>S</li>
+                <li>D</li>
+                </ul>
+
+                <ul class="days">
+                <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                    <li></li>
+                <?php endfor ;?>
+
+                <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                    <?php if (in_array($i,$listaAsuetos)) :?>
+                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
+                    <?php else:?>
+                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
+                    <?php endif;?>
+                <?php endfor;?>
+                </ul>
+            </div>
+            <!-- 7 -->
+            <div>
+                <?php
+                $month="07";
+                
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);
+                ?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
+                    </li>
+                </ul>
+                </div>
+
+                <ul class="weekdays" >
+                <li>L</li>
+                <li>M</li>
+                <li>M</li>
+                <li>J</li>
+                <li>V</li>
+                <li>S</li>
+                <li>D</li>
+                </ul>
+
+                <ul class="days">
+                <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                    <li></li>
+                <?php endfor ;?>
+
+                <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                    <?php if (in_array($i,$listaAsuetos)) :?>
+                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
+                    <?php else:?>
+                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
+                    <?php endif;?>
+                <?php endfor;?>
+                </ul>
+            </div>
+            <!-- 8 -->
+            <div>
+                <?php
+                $month="08";
+                
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);
+                ?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
+                    </li>
+                </ul>
+                </div>
+
+                <ul class="weekdays" >
+                <li>L</li>
+                <li>M</li>
+                <li>M</li>
+                <li>J</li>
+                <li>V</li>
+                <li>S</li>
+                <li>D</li>
+                </ul>
+
+                <ul class="days">
+                <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                    <li></li>
+                <?php endfor ;?>
+
+                <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                    <?php if (in_array($i,$listaAsuetos)) :?>
+                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
+                    <?php else:?>
+                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
+                    <?php endif;?>
+                <?php endfor;?>
+                </ul>
+            </div>
+            <!-- 9 -->
+            <div>
+                <?php
+                $month="09";
+                
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);
+                ?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
+                    </li>
+                </ul>
+                </div>
+
+                <ul class="weekdays" >
+                <li>L</li>
+                <li>M</li>
+                <li>M</li>
+                <li>J</li>
+                <li>V</li>
+                <li>S</li>
+                <li>D</li>
+                </ul>
+
+                <ul class="days">
+                <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                    <li></li>
+                <?php endfor ;?>
+
+                <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                    <?php if (in_array($i,$listaAsuetos)) :?>
+                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
+                    <?php else:?>
+                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
+                    <?php endif;?>
+                <?php endfor;?>
+                </ul>
+            </div>
+            <!-- 10 -->
+            <div>
+                <?php
+                $month="10";
+                
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);
+                ?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
+                    </li>
+                </ul>
+                </div>
+
+                <ul class="weekdays" >
+                <li>L</li>
+                <li>M</li>
+                <li>M</li>
+                <li>J</li>
+                <li>V</li>
+                <li>S</li>
+                <li>D</li>
+                </ul>
+
+                <ul class="days">
+                <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                    <li></li>
+                <?php endfor ;?>
+
+                <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                    <?php if (in_array($i,$listaAsuetos)) :?>
+                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
+                    <?php else:?>
+                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
+                    <?php endif;?>
+                <?php endfor;?>
+                </ul>
+            </div>
+            <!-- 11 -->
+            <div>
+                <?php
+                $month="11";
+                
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);
+                ?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
+                    </li>
+                </ul>
+                </div>
+
+                <ul class="weekdays" >
+                <li>L</li>
+                <li>M</li>
+                <li>M</li>
+                <li>J</li>
+                <li>V</li>
+                <li>S</li>
+                <li>D</li>
+                </ul>
+
+                <ul class="days">
+                <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                    <li></li>
+                <?php endfor ;?>
+
+                <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                    <?php if (in_array($i,$listaAsuetos)) :?>
+                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
+                    <?php else:?>
+                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
+                    <?php endif;?>
+                <?php endfor;?>
+                </ul>
+            </div>
+            <!-- 12 -->
+            <div>
+                <?php
+                $month="12";
+                
+                $listaAsuetos=$con->ConsultarAsuetoReceso($year,$month);
+                ?>
+                <div class="month">      
+                <ul>
+                    
+                    
+                    <li>
+                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <span style="font-size:18px"><?php echo $year?></span>
+                    </li>
+                </ul>
+                </div>
+
+                <ul class="weekdays" >
+                <li>L</li>
+                <li>M</li>
+                <li>M</li>
+                <li>J</li>
+                <li>V</li>
+                <li>S</li>
+                <li>D</li>
+                </ul>
+
+                <ul class="days">
+                <?php for ($i = 1; $i < date("N",strtotime($year."-".$month."-01")) ;$i++) : ?>
+                    <li></li>
+                <?php endfor ;?>
+
+                <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
+                <?php for ($i = 1; $i <= $days ;$i++) : ?>
+                    <?php if (in_array($i,$listaAsuetos)) :?>
+                        <li>                 
+                        <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>   
+                        </li>
+                    <?php else:?>
+                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
+                    <?php endif;?>
+                <?php endfor;?>
+                </ul>
+            </div>
+        </main>
+    </div>
 </form>
 <!-- Cartel PopUp al clickear Fecha -->
 <div id="snackbar">
@@ -934,18 +936,13 @@ if(isset($_SESSION['comprobacion'])):?>
     document.getElementById("myForm").style.display = "none";
     }
 </script>
-<!-- funcion setear altura scrollbar -->
+
+<!-- funcion recargarCalendario -->
 <script>
-    setTimeout(function(){
-        var elmnt = document.getElementById("scroll");
-            elmnt.scrollTop=sessionStorage.getItem("Altura");
-    }, 1);
-    </script>
-<!-- funcion obtener altura scrollbar -->
-<script>
-    function enviarAltura(){
-        var elmnt = document.getElementById("scroll");
-        sessionStorage.Altura = elmnt.scrollTop;
+    function recargarCalendario(){
+        setTimeout(function(){
+            $("#div").load(" #div");
+        }, 250);
     }
 </script>
 
@@ -954,17 +951,14 @@ if(isset($_SESSION['comprobacion'])):?>
 <?php echo $_SESSION["agrego"]?>
 <?php echo "espacio"?>
 <?php echo $_SESSION["elimino"]?>
-<!-- Funcion test Scroll -->
-<script>
-    function scrollfunction() {
-    var elmnt = document.getElementById("scroll");
-    var x = elmnt.scrollLeft;
-    var y = elmnt.scrollTop;
-    document.getElementById ("demo").innerHTML = "Horizontally: " + x + "px<br>Vertically: " + y + "px" + "altura" + sessionStorage.getItem("Altura");
 
-    }
-</script>
-</body>
+<button id="MyButton" class="btn btn-warning">Refresh</button>
+<script>
+ $("#MyButton").click(function() {
+    alert('clicked')
+    $("#div").load(" #div");
+  }); </script>
+
     
 </body>
     <footer>

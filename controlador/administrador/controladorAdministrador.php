@@ -218,12 +218,42 @@ class controladorAdministrador extends conexion
     }
 
 
-    function ConsultarAsueto($año,$mes){
+    function ConsultarAsuetoReceso($año,$mes){
         $con= new conexion();
         $conn=$con->getconexion();
         $fecha=$año."-".$mes."%";
             $listaAsuetos=array();
-            $stmt = $conn->prepare("SELECT fechaAsueto FROM asueto WHERE fechaAsueto LIKE '$fecha'");  
+            $stmt = $conn->prepare("SELECT fechaAsueto FROM asueto WHERE tipo='receso' and fechaAsueto LIKE '$fecha'");  
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $asueto=$row['fechaAsueto'];
+                $numero=date("j",strtotime($asueto));
+                array_push($listaAsuetos,$numero);
+            }
+            return $listaAsuetos;
+    
+    }
+    function ConsultarAsuetoFeriado($año,$mes){
+        $con= new conexion();
+        $conn=$con->getconexion();
+        $fecha=$año."-".$mes."%";
+            $listaAsuetos=array();
+            $stmt = $conn->prepare("SELECT fechaAsueto FROM asueto WHERE tipo='feriado' and fechaAsueto LIKE '$fecha'");  
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $asueto=$row['fechaAsueto'];
+                $numero=date("j",strtotime($asueto));
+                array_push($listaAsuetos,$numero);
+            }
+            return $listaAsuetos;
+    
+    }
+    function ConsultarAsuetoAsueto($año,$mes){
+        $con= new conexion();
+        $conn=$con->getconexion();
+        $fecha=$año."-".$mes."%";
+            $listaAsuetos=array();
+            $stmt = $conn->prepare("SELECT fechaAsueto FROM asueto WHERE tipo='asueto' and fechaAsueto LIKE '$fecha'");  
             $stmt->execute();
             while($row = $stmt->fetch()) {
                 $asueto=$row['fechaAsueto'];

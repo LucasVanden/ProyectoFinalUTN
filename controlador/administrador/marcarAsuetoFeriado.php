@@ -30,18 +30,18 @@ function ConsultarAsueto($fecha){
     $con= new conexion();
     $conn=$con->getconexion();
     
-        $stmt = $conn->prepare("SELECT fechaAsueto FROM asueto WHERE tipo='receso' and fechaAsueto = '$fecha'");  
+        $stmt = $conn->prepare("SELECT fechaAsueto FROM asueto WHERE tipo='feriado' and fechaAsueto = '$fecha'");  
         $stmt->execute();
         $crearFecha=true;
         while($row = $stmt->fetch()) {
-            $stmt2 = $conn->prepare("DELETE FROM asueto WHERE tipo='receso' and fechaAsueto= '$fecha'");  
+            $stmt2 = $conn->prepare("DELETE FROM asueto WHERE tipo='feriado' and fechaAsueto= '$fecha'");  
             $stmt2->execute();
             $crearFecha=false;
             $_SESSION["elimino"]=true;
         }
         if($crearFecha){
             $stmt3 = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`,`tipo`) 
-            VALUES (NULL, '$fecha', '08:00:00' , '23:30','receso');");  
+            VALUES (NULL, '$fecha', '08:00:00' , '23:30','feriado');");  
             $stmt3->execute();
             $_SESSION["agrego"]=true;
         }
