@@ -263,5 +263,21 @@ class controladorAdministrador extends conexion
             return $listaAsuetos;
     
     }
+
+    function ConsultarMesa($año,$mes){
+        $con= new conexion();
+        $conn=$con->getconexion();
+        $fecha=$año."-".$mes."%";
+            $listaMesas=array();
+            $stmt = $conn->prepare("SELECT fechaMesa FROM fechamesa WHERE fechaMesa LIKE '$fecha'");  
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $mesa=$row['fechaMesa'];
+                $numero=date("j",strtotime($mesa));
+                array_push($listaMesas,$numero);
+            }
+            return $listaMesas;
+    
+    }
 }
 ?>

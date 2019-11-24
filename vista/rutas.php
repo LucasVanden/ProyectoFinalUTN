@@ -112,6 +112,7 @@ $marcarAsuetoReceso='/controlador/administrador/marcarAsuetoReceso.php';
 $marcarAsuetoFeriado='/controlador/administrador/marcarAsuetoFeriado.php';
 $marcarAsuetoAsueto='/controlador/administrador/marcarAsuetoAsueto.php';
 $cargarEnSessionLaFecha='/controlador/administrador/cargarEnSessionLaFecha.php';
+$marcarfechaMesa='/controlador/administrador/marcarfechaMesa.php';
 
 $asignarDirector='/controlador/administrador/cargoDirector/asignarDirector.php';
 $eliminarDirecotr='/controlador/administrador/cargoDirector/eliminarDirecotr.php';

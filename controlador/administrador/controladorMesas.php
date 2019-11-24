@@ -18,7 +18,15 @@ date_default_timezone_set('America/Argentina/Mendoza');
 
 $fechaMesa=$_POST['fechaMesa'];
 $_SESSION['FechaMesaIngresada']=$fechaMesa;
-crearfechaMesa($fechaMesa);
+
+
+if($_POST["Obtener"]=="Cargar"){
+    crearfechaMesa($fechaMesa);
+    }
+if($_POST["Obtener"]=="Borrar"){
+    borrarfechaMesa($fechaMesa);
+    }
+
 
 $año=$_POST['año'];
 $fechas=buscarMesa($año);
@@ -43,6 +51,20 @@ function crearfechaMesa($fecha){
     $stmt2->execute();
     
     }
+    $_SESSION["agrego"]=true;
+}
+function borrarfechaMesa($fecha){
+    $con= new conexion();
+    $conn=$con->getconexion();
+
+
+        $stmt3 = $conn->prepare("SELECT fechaMesa FROM fechamesa where fechaMesa='$fecha' "); 
+        $stmt3->execute();
+        while($row = $stmt3->fetch()) {
+            $stmt4 = $conn->prepare("DELETE FROM fechaMesa WHERE fechamesa= '$fecha'");  
+            $stmt4->execute();
+        }
+        $_SESSION["elimino"]=true;
 }
 function buscarMesa($año){
     $con= new conexion();
