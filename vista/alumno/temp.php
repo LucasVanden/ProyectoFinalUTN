@@ -14,7 +14,7 @@ require_once ($DIR . $DetalleAnotados);
 require_once ($DIR . $EstadoAnotados);
 require_once ($DIR . $AvisoProfesor);
 require_once ($DIR . $Dedicacion);
-$marcarAsuetoAsueto= $URL.$marcarAsuetoAsueto;
+
 
 
 
@@ -28,44 +28,29 @@ $marcarAsuetoAsueto= $URL.$marcarAsuetoAsueto;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 </head>
 <body>
+<div>
 <form action="temp.php" name="myForm"  method="post" >
   <b>Number Input:</b>
-  <input type="time" step="any" min="0"  name="number" id="number" value="08:00" 
+  <input type="time" step="any" min="0"  name="number1" id="number" value="08:00" oninput="check(this.value)"
   />
          <b>Number Input2:</b>
-  <input type="time" step="any" min="0"  name="number2" id="number2" value="23:30"
+  <input type="time" step="any" min="0"  name="number21" id="number2" value="23:30" oninput="check(this.value)"
    /> 
-  <input type="submit" class="submit" value="Save" onclick="check()"/>
-
-
-  <div class="form-popup" id="myForm">
-    <form action=<?php echo $marcarAsuetoAsueto?> class="form-container">
-        <h1>Asueto</h1>
-
-        <label for="time"><b>Hora Desde</b></label>
-        <input type="time" id="f1" name="horaDesde" value=<?php echo $horaDesde;?> required>
-
-        <label for="time"><b>Hora Hasta</b></label>
-        <input type="time" id="f2" name="horaHasta" value=<?php echo $horaDesde;?> required>
- 
-
-        <button type="submit" class="btn">Agregar</button>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-    </form>
-</div>
+  <input type="submit" class="submit" value="Save" />
 </form>
+
 <script>
- function check() {
-  var x = document.forms["myForm"]["number"].value;
-  var y = document.forms["myForm"]["number2"].value;
+ function check(input) {
+  var x = document.forms["myForm"]["number1"].value;
+  var y = document.forms["myForm"]["number21"].value;
    if ( x>y) {
-    
-     alert("Name must be filled out");
+    document.getElementById("number").setCustomValidity("This email is already registered!");
     return false;
 
    } else {
       
-     input.setCustomValidity('');
+    document.getElementById("number").setCustomValidity("");
+    document.getElementById("number2").setCustomValidity("");
    }
  }
 </script>
@@ -73,8 +58,7 @@ $marcarAsuetoAsueto= $URL.$marcarAsuetoAsueto;
  function check2(input) {
    if (($("#number2").val())  < ($("#number").val()) ) {
      input.setCustomValidity('2 tiene que ser mayor.');
-     $("#number2").load()="";
-     $("#number").load()="";
+
    } else {
       
      input.setCustomValidity('');

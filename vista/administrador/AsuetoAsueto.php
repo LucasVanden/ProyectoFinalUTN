@@ -934,17 +934,17 @@ if(isset($_SESSION['comprobacion'])){
 </div>
 
 <div class="form-popup" id="myFormVacio">
-    <form action=<?php echo $marcarAsuetoAsueto?> class="form-container"  method="POST">
+    <form action=<?php echo $marcarAsuetoAsueto?> name="formVacio" class="form-container"  method="POST" >
         <h1>Asueto</h1>
     <div id="pikachu1">
         <label for="time"><b>Hora Desde</b></label>
-        <input type="time" id="f1" name="horaDesde"  required>
+        <input type="time" id="t1" name="horaDesde" oninput="check()"  required>
 
         <label for="time"><b>Hora Hasta</b></label>
-        <input type="time" id="f2" name="horaHasta"  required>
+        <input type="time" id="t2" name="horaHasta" oninput="check()" required>
     </div>
 
-        <button type="submit" class="btn">Agregar</button>
+        <button type="submit" class="btn" onclick="check()">Agregar</button>
         <button type="button" class="btn cancel" onclick="closeFormVacio()">Close</button>
     </form>
 </div>
@@ -986,7 +986,21 @@ if(isset($_SESSION['comprobacion'])){
 </script>
 <!-- TESTEO -->
 
+<script>
+ function check(input) {
+  var x = document.forms["formVacio"]["horaDesde"].value;
+  var y = document.forms["formVacio"]["horaHasta"].value;
+   if ( x>y) {
+    document.getElementById("t1").setCustomValidity("Hora Desde debe ser menor a Hora Hasta");
+    return false;
 
+   } else {
+      
+    document.getElementById("t1").setCustomValidity("");
+    document.getElementById("t2").setCustomValidity("");
+   }
+ }
+</script>
 
 <p id="demo"></p>
 <?php echo $_SESSION["agrego"]?>
