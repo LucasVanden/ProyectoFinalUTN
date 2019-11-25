@@ -20,6 +20,8 @@ $marcarfechaMesa= $URL.$marcarfechaMesa;
 
 $MenuIndex= $URL.$MenuIndex;
 
+
+
 $fechaMesaIngresar="'".date("Y-m-d")."'";
 if(isset($_SESSION['FechaMesaIngresada'])){
  $fechaMesaIngresar=$_SESSION['FechaMesaIngresada'];
@@ -33,7 +35,6 @@ if(isset($_SESSION['fechasBuscadas'])){
     $buscar=true;
  }
 ?>
-
 
 <html>
     <head>
@@ -245,6 +246,18 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
         background-color:#1abc9c;
         color:white;
     }
+    .feriado{
+        height:30;
+        width:50;
+        background-color:red;
+        color:white;
+    }
+    .receso{
+        height:30;
+        width:50;
+        background-color:blue;
+        color:white;
+    }
 </style>
 
 <!-- Cabecera Año -->
@@ -273,7 +286,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
             <!-- 1 -->
             <div >
                 <?php $month="01";
-                $listaAsuetos=$con->ConsultarMesa($year,$month); ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                     <ul>
                         <li>
@@ -300,7 +315,16 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                     <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                     <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                        <?php if (in_array($i,$listaAsuetos)) :?>
+
+                        <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
                             <li>
                             <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
                             <!-- <button type="button" onclick="openForm()">Open Form</button> -->
@@ -317,7 +341,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
             <div>
                 <?php $month="02";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);?>
+                  $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -346,16 +372,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                  
-                            <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
-                        </li>
-                    <?php else:?>
-                    <li>
-                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>  
-                        </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
             <!-- 3 -->
@@ -363,8 +398,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
                 <?php
                 $month="03";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);
-                ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -393,12 +429,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                    <?php else:?>
-                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                    <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
             <!-- 4 -->
@@ -406,8 +455,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
                 <?php
                 $month="04";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);
-                ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -436,12 +486,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                    <?php else:?>
-                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
             <!-- 5 -->
@@ -449,8 +512,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
                 <?php
                 $month="05";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);
-                ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -479,12 +543,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                    <?php else:?>
-                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
             <!-- 6 -->
@@ -492,8 +569,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
                 <?php
                 $month="06";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);
-                ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -522,12 +600,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                    <?php else:?>
-                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
             <!-- 7 -->
@@ -535,8 +626,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
                 <?php
                 $month="07";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);
-                ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -565,12 +657,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                    <?php else:?>
-                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
             <!-- 8 -->
@@ -578,8 +683,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
                 <?php
                 $month="08";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);
-                ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -608,12 +714,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                    <?php else:?>
-                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
             <!-- 9 -->
@@ -621,8 +740,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
                 <?php
                 $month="09";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);
-                ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -651,12 +771,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                    <?php else:?>
-                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
             <!-- 10 -->
@@ -664,8 +797,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
                 <?php
                 $month="10";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);
-                ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -694,12 +828,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                    <?php else:?>
-                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
             <!-- 11 -->
@@ -707,8 +854,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
                 <?php
                 $month="11";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);
-                ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -737,12 +885,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                  <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                </li>
-                    <?php else:?>
-                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
             <!-- 12 -->
@@ -750,8 +911,9 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
                 <?php
                 $month="12";
                 
-                $listaAsuetos=$con->ConsultarMesa($year,$month);
-                ?>
+                $listaAsuetos=$con->ConsultarMesa($year,$month); 
+                $listaFeriados=$con->ConsultarAsuetoFeriado($year,$month); 
+                $listaRecesos=$con->ConsultarAsuetoReceso($year,$month); ?>
                 <div class="month">      
                 <ul>
                     
@@ -780,14 +942,25 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
 
                 <?php $days = cal_days_in_month(CAL_GREGORIAN, $month, $year);?>
                 <?php for ($i = 1; $i <= $days ;$i++) : ?>
-                    <?php if (in_array($i,$listaAsuetos)) :?>
-                        <li>                 
-                        <button class="cuadroDiaMacado" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>   
-                        </li>
-                    <?php else:?>
-                    <li>                 <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>                 </li>
-                    <?php endif;?>
-                <?php endfor;?>
+                <?php if (in_array($i,$listaFeriados)) :?>
+                            <li >
+                            <button class="feriado" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                            <?php elseif  (in_array($i,$listaRecesos)) :?>
+                            <li >
+                            <button class="receso" name="fechadia" type="button" disabled   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php elseif (in_array($i,$listaAsuetos)) :?>
+                            <li>
+                            <button class="cuadroDiaMacado" name="fechadia" type="submit"   onclick="recargarCalendario()" value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            <!-- <button type="button" onclick="openForm()">Open Form</button> -->
+                            </li>
+                        <?php else:?>
+                            <li>
+                            <button class="cuadroDia" name="fechadia" type="submit"  onclick="recargarCalendario()"  value=<?php echo $year."-"."$month"."-".$i?>> <?php echo $i?></button>
+                            </li>
+                        <?php endif;?>
+                    <?php endfor;?>
                 </ul>
             </div>
         </main>
@@ -801,6 +974,8 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
         echo "Se agrego la Fecha";}
     if( $_SESSION["elimino"]&&$_SESSION["agrego"]==NULL){
         echo "Se elimino la Fecha";}
+    if( $_SESSION["esferiado"]){
+        echo "No puede en Asueto";}
         ?>
 </div>
 <!-- Style popUP -->
@@ -856,10 +1031,12 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
     function myFunction() {
     // Get the snackbar DIV
 
-    if(<?php echo ($_SESSION["agrego"]||$_SESSION["elimino"]) ?>){
+    if(<?php echo ($_SESSION["agrego"]||$_SESSION["elimino"]||$_SESSION["esferiado"]); ?>){
     var x = document.getElementById("snackbar");
-    <?php $_SESSION["agrego"]=NULL;
-    $_SESSION["elimino"]=NULL; ?>
+    <?php 
+    $_SESSION["agrego"]=NULL;
+    $_SESSION["elimino"]=NULL; 
+    $_SESSION["esferiado"]=NULL; ?>
     // Add the "show" class to DIV
     x.className = "show";
 
@@ -967,6 +1144,10 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
         }, 250);
     }
 </script>
+<div align="center">
+<button style="width:75" class="feriado" disabled>Feriado</button>
+<button  style="width:75" class="receso" disabled>Receso</button>
+</div>
     <footer>
        <?php require $DIR.$footer; ?>         
     </footer>  

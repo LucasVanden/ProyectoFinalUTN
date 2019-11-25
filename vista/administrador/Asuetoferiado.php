@@ -14,7 +14,7 @@ require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
 require_once ($DIR.$controladorAdministrador);
 $controladorAsuetoFeriado= $URL.$controladorAsuetoFeriado;
-$marcarfechaMesa= $URL.$marcarfechaMesa;
+$marcarAsuetoFeriado= $URL.$marcarAsuetoFeriado;
 
 $Menu= $URL.$AsuetoMenu;
 

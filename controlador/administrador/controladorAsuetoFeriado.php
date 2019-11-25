@@ -33,13 +33,21 @@ function crearFeriado($fecha){
     $con= new conexion();
     $conn=$con->getconexion();
 
-    $stmt = $conn->prepare("SELECT id_asueto FROM asueto where tipo='feriad' and  fechaAsueto='$fecha' "); 
+    $stmt = $conn->prepare("SELECT id_asueto FROM asueto where tipo='feriado' and  fechaAsueto='$fecha' "); 
     $stmt->execute();
     if($stmt->rowCount() == 0) {
 
         $stmt = $conn->prepare("INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`,`tipo`) 
         VALUES (NULL, '$fecha', '08:00:00' , '23:30','feriado');");  
         $stmt->execute();
+
+        //eliminar mesa si habia en ese dia
+        $stmt4 = $conn->prepare("SELECT fechaMesa FROM fechamesa where fechaMesa='$fecha' "); 
+        $stmt4->execute();
+        while($row = $stmt4->fetch()) {
+            $stmt5 = $conn->prepare("DELETE FROM fechaMesa WHERE fechamesa= '$fecha'");  
+            $stmt5->execute();
+        }
     }
     $_SESSION["agrego"]=true;
 }

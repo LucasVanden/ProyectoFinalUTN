@@ -42,16 +42,22 @@ function crearfechaMesa($fecha){
     $con= new conexion();
     $conn=$con->getconexion();
 
-    $stmt = $conn->prepare("SELECT id_fechamesa FROM fechamesa where fechaMesa='$fecha'"); 
-    $stmt->execute();
-    if($stmt->rowCount() == 0) {
+    $stmt0 = $conn->prepare("SELECT fechaAsueto FROM asueto where fechaAsueto='$fecha'"); 
+    $stmt0->execute();
+    if($stmt0->rowCount() == 0) {
 
-    $stmt2 = $conn->prepare("INSERT INTO `fechamesa` (`id_fechamesa`,`fechaMesa`)
-    VALUES (null,'$fecha');");  
-    $stmt2->execute();
-    
-    }
+        $stmt = $conn->prepare("SELECT id_fechamesa FROM fechamesa where fechaMesa='$fecha'"); 
+        $stmt->execute();
+        if($stmt->rowCount() == 0) {
+
+            $stmt2 = $conn->prepare("INSERT INTO `fechamesa` (`id_fechamesa`,`fechaMesa`)
+            VALUES (null,'$fecha');");  
+            $stmt2->execute();
+        }
     $_SESSION["agrego"]=true;
+    }else{
+    $_SESSION["esferiado"]=true;
+    }
 }
 function borrarfechaMesa($fecha){
     $con= new conexion();

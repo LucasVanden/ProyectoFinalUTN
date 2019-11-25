@@ -44,6 +44,14 @@ function ConsultarAsueto($fecha){
             VALUES (NULL, '$fecha', '08:00:00' , '23:30','receso');");  
             $stmt3->execute();
             $_SESSION["agrego"]=true;
+
+            //eliminar mesa si habia en ese dia
+            $stmt4 = $conn->prepare("SELECT fechaMesa FROM fechamesa where fechaMesa='$fecha' "); 
+            $stmt4->execute();
+            while($row = $stmt4->fetch()) {
+                $stmt5 = $conn->prepare("DELETE FROM fechaMesa WHERE fechamesa= '$fecha'");  
+                $stmt5->execute();
+                        }
         }
 
 
