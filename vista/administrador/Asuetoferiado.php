@@ -44,7 +44,7 @@ if(isset($_SESSION['idfechaferiado'])){
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2 align="center">Cargar Feriado</h2>
+        <h2 align="center">Feriados</h2>
         <form action=<?php echo $controladorAsuetoFeriado ?> method="POST"> <!-- -->
             <div>
                 <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  

@@ -66,7 +66,7 @@ $fechahastaVerano="'".$year."-01-01"."'";
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2 align="center" >Cargar Recesos</h2>
+        <h2 align="center" >Recesos</h2>
         <form action=<?php echo $controladorAsuetosReceso ?> method="POST"> <!-- -->
             <div>
                 <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  

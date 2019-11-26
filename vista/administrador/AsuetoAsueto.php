@@ -16,9 +16,7 @@ $contAsuetoAsueto= $URL.$controladorAsuetoAsueto;
 $Menu= $URL.$AsuetoMenu;
 $marcarAsuetoAsueto= $URL.$marcarAsuetoAsueto;
 $cargarEnSessionLaFecha= $URL.$cargarEnSessionLaFecha;
-echo $_SESSION['cargarEnSessionLaFecha'];
-echo $_SESSION['desde'];
-echo $_SESSION['hasta'];
+
 
 $fechadesdeVerano="'".date("Y-m-d")."'";
 $horaDesde="'08:00'";
@@ -49,7 +47,7 @@ if(isset($_SESSION['idfechaasueto'])){
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2 align="center">Cargar Asueto</h2>
+        <h2 align="center">Asuetos</h2>
         <form action=<?php echo $contAsuetoAsueto ?> method="POST"> <!-- -->
             <div>
                 <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
