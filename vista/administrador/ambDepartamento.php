@@ -40,7 +40,7 @@ $departamentos=$a->BuscarDepartamento();
         <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
  
     </head>
-    <body background = <?php echo $URL.$fondo?>>
+    <body background = <?php echo $URL.$fondo?> onload="a()">
     <script src="jquery.js"></script>
     <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
@@ -78,7 +78,7 @@ $departamentos=$a->BuscarDepartamento();
                 </table>
             </div>
             <br>
-            <div><input type="submit" value="Cargar Departamento" name="Buscar" formaction=<?php echo $crearDepartamento ?> ></input></div> 
+            <div><input type="submit" value="Cargar Departamento" name="Buscar" formaction=<?php echo $crearDepartamento ?>></input></div> 
         </form>
             <div>  <input type="submit" value="Mostrar Departamentos" name="Buscar" formaction=<?php echo $abmDepartamento ?> onClick="myFunction();a()"></input></div>
 
@@ -94,7 +94,7 @@ $departamentos=$a->BuscarDepartamento();
     <?php foreach ($departamentos as $dep): ?>    
         <form action=<?php echo $editarDepartamento ?> method="POST"> 
        
-                    <select name="AulaAsignada" id="<?php echo "AulaidX".$dep->getid_departamento(); ?>" style="visibility:hidden">  
+                    <select name="AulaAsignada" id="<?php echo "AulaidX".$dep->getid_departamento(); ?>"style="visibility:hidden" >  
                         <?php
                         $aulas=$a->BuscarAulas();
                         foreach ($aulas as $aula): ?>
@@ -117,7 +117,7 @@ $departamentos=$a->BuscarDepartamento();
                     <!-- // -->
            
                             <td>                                
-                                <select name="departamentos"  id="<?php echo "first-choice".$dep->getid_departamento(); ?>">
+                                <select name="cuerpo"  id="<?php echo "first-choice".$dep->getid_departamento(); ?>">
                                             <?php 
                                     $listacuerpoAula = $a->BuscarCuerpoAulas();
                                     foreach ($listacuerpoAula as $cuerpoAula): ?> 
@@ -127,7 +127,7 @@ $departamentos=$a->BuscarDepartamento();
                                 </select>
                             </td>
                             <td>                       
-                                <select  name="Materias" id="<?php echo "second-choice".$dep->getid_departamento(); ?>">
+                                <select  name="nivel" id="<?php echo "second-choice".$dep->getid_departamento(); ?>">
                                 </select> 
                                     <script>
                                         $(<?php echo '"#first-choice'.$dep->getid_departamento().'"'; ?>).change(function() {
@@ -137,7 +137,7 @@ $departamentos=$a->BuscarDepartamento();
                                     </script>
                             </td>
                             <td>
-                                    <select name="profesor" id="<?php echo "profesor-choice".$dep->getid_departamento(); ?>">
+                                    <select name="numeroaula" id="<?php echo "profesor-choice".$dep->getid_departamento(); ?>">
                                     </select>                                
                                 
                                 <script>
@@ -206,6 +206,16 @@ function a(){
 </script>            
 
 </body>
+<script>
+
+
+$(document).ready(function() {
+    setTimeout(function(){a()},250)
+
+});
+
+  
+</script>
     <footer>
     <?php require $DIR.$footer; ?>     
     </footer>  

@@ -22,7 +22,7 @@ $AulaAsignada=$_POST['AulaAsignada'];
 $con= new conexion();
 $conn=$con->getconexion();
 
-$stmt = $conn->prepare("SELECT id_departamento FROM departamento WHERE nombre='$departamento'"); 
+$stmt = $conn->prepare("SELECT id_departamento FROM departamento WHERE nombre='$departamento' and eliminado is null"); 
 $stmt->execute();
 if($stmt->rowCount() == 0) {
 
