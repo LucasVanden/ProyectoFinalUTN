@@ -279,5 +279,36 @@ class controladorAdministrador extends conexion
             return $listaMesas;
     
     }
+
+    function BuscarCuerpoAulas(){
+        $con= new conexion();
+        $conn=$con->getconexion();
+        
+            $listaAula=array();
+            $stmt = $conn->prepare("SELECT DISTINCT cuerpoAula FROM aula ORDER BY cuerpoAula");  
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $aula=$row['cuerpoAula'];
+                array_push($listaAula,$aula);
+            }
+            return $listaAula;
+    
+    }
+    function BuscarAulaID($idAula){
+        $con= new conexion();
+        $conn=$con->getconexion();
+        $aula = new Aula();
+            $stmt = $conn->prepare("SELECT id_aula,cuerpoAula,nivelAula,numeroAula FROM aula where id_aula=$idAula ORDER BY cuerpoAula");  
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                
+                $aula->setid_aula($row['id_aula']);
+                $aula->setcuerpoAula($row['cuerpoAula']);
+                $aula->setnivelAula($row['nivelAula']);
+                $aula->setnumeroAula($row['numeroAula']);
+            }
+            return $aula;
+    
+    }
 }
 ?>

@@ -1,0 +1,30 @@
+<?php
+require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once ($DIR.$conexion);
+require_once ($DIR.$controladorAdministrador);
+session_start();
+$con= new conexion();
+$conexttion=$con->getconexion();
+
+$a=new controladorAdministrador();
+$salon=$_GET['aula'];
+$aula=$a->BuscarAulaID($salon);
+  
+    $conn = $conexttion;
+    echo "<option value=" . "-1".">" . "seleccione Nivel" . "</option>";
+    if (isset($_GET['choice'])){
+    $choice = $_GET['choice'];
+    $stmt = $conn->prepare("SELECT DISTINCT nivelAula FROM aula where cuerpoAula='$choice' and eliminado is null ORDER BY nivelAula "); 
+  
+    $stmt->execute();
+    while($row = $stmt->fetch()) {
+
+        if($aula->getnivelAula()==$row['nivelAula']){
+            echo "<option selected value=" . $row['nivelAula'].">" . $row{'nivelAula'} . "</option>";
+        }else{
+        echo "<option value=" . $row['nivelAula'].">" . $row{'nivelAula'} . "</option>";
+        }
+    }
+}
+
+    ?>

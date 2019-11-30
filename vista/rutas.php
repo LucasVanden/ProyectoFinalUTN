@@ -163,3 +163,5 @@ $subirCargoaDirector='/vista/administrador/subirCargoaDirector.php';
 
 
 $buscarDepartamentosconel1erovacio='/controlador/administrador/buscarDepartamentosconel1erovacio.php';
+$buscarNivelAula1ervacio='/controlador/administrador/buscarNivelAula1ervacio.php';
+$buscarNombreAula='/controlador/administrador/buscarNombreAula.php';
