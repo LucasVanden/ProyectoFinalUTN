@@ -87,19 +87,14 @@ $departamentos=$a->BuscarDepartamento();
 <div id="myDIV" >
 <table align="center">
     <th>Departamento</th>
-    <th>Aula de consultas</th>
+ 
     <th>Cuerpo</th>
     <th>Nivel</th>
     <th>Aula</th>
     <?php foreach ($departamentos as $dep): ?>    
-        <form action=<?php echo $editarDepartamento ?> method="POST">         
-            <tr>
-                <td>
-                    <?php   echo $dep->getnombre() ?>
-                    <!-- <?php   echo $dep->getid_departamento() ?> -->
-                </td>
-                <td>
-                    <select name="AulaAsignada" id="<?php echo "AulaidX".$dep->getid_departamento(); ?>">  
+        <form action=<?php echo $editarDepartamento ?> method="POST"> 
+       
+                    <select name="AulaAsignada" id="<?php echo "AulaidX".$dep->getid_departamento(); ?>" style="visibility:hidden">  
                         <?php
                         $aulas=$a->BuscarAulas();
                         foreach ($aulas as $aula): ?>
@@ -112,7 +107,13 @@ $departamentos=$a->BuscarDepartamento();
                     </select>
                     <?php $salon=$a->BuscarAulaID($dep->getfk_aula()); 
                     $_SESSION["salon"]=$salon;?>
-                    </td>
+                      
+            <tr>
+                <td>
+                    <?php   echo $dep->getnombre() ?>
+                    <!-- <?php   echo $dep->getid_departamento() ?> -->
+                </td>
+ 
                     <!-- // -->
            
                             <td>                                
@@ -194,7 +195,7 @@ function myFunction() {
   }
 } 
 </script>
-         <button onclick="a()">piaCHU</button>       
+         <!-- <button onclick="a()">piaCHU</button>        -->
 <script>
 function a(){
     <?php foreach ($departamentos as $dep): ?>  
