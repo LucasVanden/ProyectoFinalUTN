@@ -18,7 +18,11 @@ require_once ($DIR . $Profesor);
 
 session_start();
 $departamento=$_POST['departamento'];
-$AulaAsignada=$_POST['AulaAsignada'];
+
+$cuerpo=$_POST['cuerpo'];
+$nivel=$_POST['nivel'];
+$numeroaula=$_POST['numeroaula'];
+
 $con= new conexion();
 $conn=$con->getconexion();
 
@@ -26,9 +30,16 @@ $stmt = $conn->prepare("SELECT id_departamento FROM departamento WHERE nombre='$
 $stmt->execute();
 if($stmt->rowCount() == 0) {
 
+
+    $stmt3 = $conn->prepare("SELECT id_aula FROM aula WHERE cuerpoAula='$cuerpo' and nivelAula='$nivel' and numeroAula='$numeroaula' and eliminado is null "); 
+    $stmt3->execute();
+    while($row = $stmt3->fetch()) {
+        $AulaAsignada=$row['id_aula'];
+
     $stmt2 = $conn->prepare("INSERT INTO `departamento` (`id_departamento`,`nombre`,`fk_aula`)
     VALUES (null, '$departamento','$AulaAsignada');");  
     $stmt2->execute();
+    }
 }
 
 

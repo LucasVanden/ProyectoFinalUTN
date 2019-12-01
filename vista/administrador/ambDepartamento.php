@@ -59,9 +59,9 @@ $departamentos=$a->BuscarDepartamento();
                     </tr>   
 
                     <tr>
-                    <th>Aula de consulta predeterminada</th>
-                   <td>
-                            <select name="AulaAsignada"> 
+                    <th>Aula de consulta predeterminada:</th>
+                   <td style="visibility:hidden">
+                            <select name="AulaAsignada" style="visibility:hidden" > 
                             <?php
                             $aulas=$a->BuscarAulas();
                             foreach ($aulas as $aula): ?>
