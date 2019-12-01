@@ -160,7 +160,7 @@ $departamentos=$a->BuscarDepartamento();
                     <!-- // -->
            
                             <td>                                
-                                <select name="cuerpo"  id="<?php echo "first-choice".$dep->getid_departamento(); ?>">
+                                <select name="cuerpo"  id="<?php echo "first-choice".$dep->getid_departamento(); ?>" onclick="b()">
                                             <?php 
                                     $listacuerpoAula = $a->BuscarCuerpoAulas();
                                     foreach ($listacuerpoAula as $cuerpoAula): ?> 
@@ -246,6 +246,9 @@ function a(){
     <?php endforeach?>
 }
 
+function b(){
+    setTimeout(function(){a()},250)
+}
 </script>            
 
 </body>
