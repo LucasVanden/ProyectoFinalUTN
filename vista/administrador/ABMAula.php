@@ -34,7 +34,7 @@ $aulas=$a->BuscarAulas();
         <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
  
     </head>
-    <body background = <?php echo $URL.$fondo?> onload="myFunction()">
+    <body background = <?php echo $URL.$fondo?> onload="mostrarPopUp()">
     <script src="jquery.js"></script>
     <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
@@ -107,10 +107,11 @@ $aulas=$a->BuscarAulas();
                 <!-- //    -->
             </div>
         </form>
-        <script>
+
+        <!-- <script>
             var x = document.getElementById("myDIV");
             x.style.display = "none";
-        </script>
+        </script> -->
 
         <?php if(isset($_SESSION['mostrarAulas'])) :?>
         <script>
@@ -123,6 +124,18 @@ $aulas=$a->BuscarAulas();
         function myFunction() {
         var x = document.getElementById("myDIV");
         if (x.style.display === "none") {
+            x.style.display = "block";
+            <?php $_SESSION['estadoMostrar']="block" ;?>
+        } else {
+            x.style.display = "none";
+            <?php $_SESSION['estadoMostrar']="none" ;?>
+        }
+        } 
+</script>
+<script>
+        function mostrarOcultar() {
+        var x = document.getElementById("myDIV");
+        if (<?php echo ($_SESSION['estadoMostrar']=="block");?>) {
             x.style.display = "block";
         } else {
             x.style.display = "none";
@@ -247,12 +260,12 @@ function sortTable(n) {
 </style>
 <!-- funcion PopUp -->
 <script>
-    function myFunction() {
+    function mostrarPopUp() {
     // Get the snackbar DIV
 
-    if(<?php echo ($_SESSION["NoBorrar"]) ?>){
+    if(<?php echo ($_SESSION['NoBorrar']) ?>){
     var x = document.getElementById("snackbar");
-    <?php $_SESSION["NoBorrar"]=NULL;?>
+    <?php $_SESSION['NoBorrar']=NULL;?>
     // Add the "show" class to DIV
     x.className = "show";
     // After 3 seconds, remove the show class from DIV

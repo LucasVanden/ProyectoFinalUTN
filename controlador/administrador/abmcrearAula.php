@@ -34,6 +34,7 @@ VALUES (null, '$cuerpo', '$nivel' , '$Aula');");
 $stmt->execute();
 
 }
+$_SESSION['mostrarAulas']=true;
  $direccion= $URL . $ABMAula;
  header("Location: $direccion");
 
