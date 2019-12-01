@@ -46,7 +46,7 @@ $departamentos=$a->BuscarDepartamento();
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Cargar Departamento</h2>
+        <h2>Departamento</h2>
         <form action=<?php echo $crearDepartamento ?> method="POST">
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF" align="center">  
