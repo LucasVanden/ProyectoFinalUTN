@@ -28,10 +28,22 @@ header("Location: $direccion");
 
 $_SESSION['mostrarAulas']=true;
 function borrarAula($idAula){
+    $v1=true;
     $con= new conexion();
     $conn=$con->getconexion();
-
-        $stmt = $conn->prepare("UPDATE aula SET eliminado = '1' WHERE id_aula='$idAula'"); 
-        $stmt->execute();
+    $stmt = $conn->prepare("SELECT fk_aula FROM `horariodeconsulta` WHERE activoHasta='0000-00-00' and fk_aula=$idAula"); 
+    $stmt->execute();
+    if($stmt->rowCount() == 0) {
+        $stmt2 = $conn->prepare("SELECT fk_aula FROM `departamento` WHERE eliminado is null and fk_aula=$idAula"); 
+        $stmt2->execute();
+        if($stmt2->rowCount() == 0) {
+            $stmt3 = $conn->prepare("UPDATE aula SET eliminado = '1' WHERE id_aula='$idAula'"); 
+            $stmt3->execute();
+            $v1=false;
+        }
+    }
+    if($v1){
+        $_SESSION['NoBorrar']=true;
+    }
 }
 ?>
