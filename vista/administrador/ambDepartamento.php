@@ -73,7 +73,50 @@ $departamentos=$a->BuscarDepartamento();
                             <?php endforeach; ?>
                             </select>
                         </td>
-                        </tr>  
+                        </tr>
+                        <tr>
+                        <th>Cuerpo</th>
+                        <td>
+                        <select name="cuerpo"  id="first-choice">
+                                            <?php 
+                                    $listacuerpoAula = $a->BuscarCuerpoAulas();
+                                    foreach ($listacuerpoAula as $cuerpoAula): ?> 
+                                    <option value=<?php echo $cuerpoAula ?>> <?php echo $cuerpoAula  ?></option>   
+                                    <?php endforeach; 
+                                    ?>
+                                </select>
+                        <!-- // -->
+                        </td>
+                    
+                        </tr> 
+                         
+                        <tr>
+                        <th>Nivel</th>
+                        <td>                       
+                                <select  name="nivel" id="second-choice">
+                                </select> 
+                                    <script>
+                                        $("#first-choice").change(function() {
+                                        $("#second-choice").load("<?php echo $buscarNivelAula1ervacio.'?choice='?>"+ $("#first-choice").val());
+                                        }).change();
+                                        
+                                    </script>
+                            </td>
+                        </tr>
+
+                        <tr>
+                        <th>Aula</th>
+                        <td>
+                            <select  name="numeroaula" id="profesor-choice" oninvalid="this.setCustomValidity('Ingrese Aula y previamente Nivel')" onchange="this.setCustomValidity('')" required>
+                                </select> 
+                                    <script>
+                                        $("#second-choice").change(function() {
+                                            $("#profesor-choice").load("<?php echo $buscarNombreAula.'?choice='?>"+ $("#second-choice").val()+'&choice2='+ $("#first-choice").val());
+                                    }).change();
+                                        
+                                    </script>
+                        </td>
+                        </tr>
 
                 </table>
             </div>

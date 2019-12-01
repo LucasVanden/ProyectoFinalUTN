@@ -6,10 +6,16 @@ $con= new conexion();
 $conexttion=$con->getconexion();
 
 $a=new controladorAdministrador();
-$salon=$_GET['aula'];
-$aula=$a->BuscarAulaID($salon);
 
-  
+$select=false;
+if(isset($_GET['aula'])){
+    $salon=$_GET['aula'];
+    $aula=$a->BuscarAulaID($salon);
+    $select=true;
+}
+if(!$select){
+    echo "<option value=" . "".">" . "Ingrese Aula" . "</option>";
+}
     $conn = $conexttion;
     if (isset($_GET['choice'])){
     $choice = $_GET['choice'];
@@ -19,7 +25,7 @@ $aula=$a->BuscarAulaID($salon);
     $stmt->execute();
     while($row = $stmt->fetch()) {
 
-        if($aula->getnumeroAula()==$row['numeroAula']){
+        if($select && ($aula->getnumeroAula()==$row['numeroAula'])){
             echo "<option selected value=" . $row['numeroAula'].">" . $row{'numeroAula'} . "</option>";
         }else{
             echo "<option value=" . $row['numeroAula'].">" . $row{'numeroAula'} . "</option>";

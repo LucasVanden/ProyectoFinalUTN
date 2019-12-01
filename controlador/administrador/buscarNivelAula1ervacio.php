@@ -6,21 +6,29 @@ session_start();
 $con= new conexion();
 $conexttion=$con->getconexion();
 
+
+$select=false;
 $a=new controladorAdministrador();
-$salon=$_GET['aula'];
-$aula=$a->BuscarAulaID($salon);
+if(isset($_GET['aula'])){
+    $salon=$_GET['aula'];
+    $aula=$a->BuscarAulaID($salon);
+    $select=true;
+}
   
     $conn = $conexttion;
     if (isset($_GET['choice'])){
     $choice = $_GET['choice'];
+
+    if(!$select){
+        echo "<option selected value=''>" . "ingrese Nivel" . "</option>";
+    }
     $stmt = $conn->prepare("SELECT DISTINCT nivelAula FROM aula where cuerpoAula='$choice' and eliminado is null ORDER BY nivelAula "); 
   
     $stmt->execute();
     while($row = $stmt->fetch()) {
-
-        if($aula->getnivelAula()==$row['nivelAula']){
-            echo "<option selected value=" . $row['nivelAula'].">" . $row{'nivelAula'} . "</option>";
-        }else{
+            if( $select && ($aula->getnivelAula()==$row['nivelAula'])){
+                echo "<option selected value=" . $row['nivelAula'].">" . $row{'nivelAula'} . "</option>";
+            }else{
         echo "<option value=" . $row['nivelAula'].">" . $row{'nivelAula'} . "</option>";
         }
     }
