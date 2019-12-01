@@ -40,7 +40,7 @@ $aulas=$a->BuscarAulas();
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Cargar Aula</h2>
+        <h2>Aulas</h2>
         <form action=<?php echo $abmcrearAula ?> method="POST">
             <div>
                 <table id="tablaBuscar" style="border-color: #FFFFFF" align="center">                     
@@ -195,6 +195,7 @@ function sortTable(n) {
            
 <div id="snackbar">
     No puede eliminar un aula asignada
+    <button onclick="gg()">Ver</button>
 </div>
 <!-- Style popUP -->
 <style>
@@ -260,6 +261,12 @@ function sortTable(n) {
 
 
     } 
+</script>
+
+<script>
+function gg() {
+  var myWindow = window.open("aulasOcupadas.php", "","width=500,height=500");
+}
 </script>
 </body>
     <footer>

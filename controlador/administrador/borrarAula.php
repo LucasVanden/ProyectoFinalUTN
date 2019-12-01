@@ -19,9 +19,7 @@ date_default_timezone_set('America/Argentina/Mendoza');
 $idAula=$_POST['borrarAula'];
 
 borrarAula($idAula);
-
-
-
+$_SESSION['IDintentoBorrarAula']=$idAula;
 
 $direccion= $URL . $ABMAula;
 header("Location: $direccion");

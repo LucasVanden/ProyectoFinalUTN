@@ -310,5 +310,49 @@ class controladorAdministrador extends conexion
             return $aula;
     
     }
+
+    function aulasOcupadas($aula){
+       
+        $b=array();
+        $con=new conexion();
+        $conn=$con->getconexion();
+        $stmt=$conn->prepare("SELECT departamento.nombre,materia.nombreMateria,horariodeconsulta.semestre, profesor.apellido,profesor.nombre
+        FROM horariodeconsulta
+        INNER JOIN profesor 
+            ON horariodeconsulta.fk_profesor = profesor.id_profesor
+        INNER JOIN materia 
+            ON horariodeconsulta.fk_materia = materia.id_materia
+        INNER JOIN departamento 
+            ON departamento.id_departamento = materia.fk_departamento
+        WHERE horariodeconsulta.fk_aula=$aula");
+         $stmt->execute();
+         while($row = $stmt->fetch()) {
+             $departamento=$row[0];
+             $materia=$row[1];
+             $semestre=$row[2];
+             $apellido=$row[3];
+             $nombre=$row[4];
+             $a=array();
+             array_push($a,$departamento,$materia,$semestre,$apellido,$nombre);
+             array_push($b,$a);
+         }
+       
+         return $b;
+    }
+    function departamentosOcupados($aula){
+       
+        $a=array();
+        $con=new conexion();
+        $conn=$con->getconexion();
+        $stmt=$conn->prepare("SELECT nombre
+        FROM departamento
+        WHERE fk_aula=$aula");
+         $stmt->execute();
+         while($row = $stmt->fetch()) {
+             $departamento=$row[0];
+             array_push($a,$departamento);
+         }
+         return $a;
+    }
 }
 ?>
