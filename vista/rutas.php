@@ -167,7 +167,8 @@ $buscarNivelAula1ervacio='/controlador/administrador/buscarNivelAula1ervacio.php
 $buscarNombreAula='/controlador/administrador/buscarNombreAula.php';
 
 $restaurarContraseniaUsuario='/controlador/restaurarContraseniaUsuario.php';
-$recuperarContraseniaUsuario='/controlador/recuperarContraseniaUsuario.php';
-$restaurarContraseña='/vista/restaurarContraseñ241;a.php';
+$restaurarContraseña='/vista/restaurarContraseña.php';
 $restaurarContraseñaMail='/vista/restaurarContrase&#241;a.php';
+
+$recuperarContraseniaUsuario='/controlador/recuperarContraseniaUsuario.php';
 $recuperarContraseña='/vista/recuperarContraseña.php';

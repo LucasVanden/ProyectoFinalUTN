@@ -21,16 +21,16 @@ if($usuario!="-1"){
             $stmt = $conn->prepare("UPDATE usuario SET contraseña = '$password' WHERE usuario=$usuario"); 
             $stmt->execute();
             $mensaje="Se actualizo la contraseña";
-            $_SESSION['mensaje']="ok";
+            $_SESSION['mensaje1']="ok";
         }else{$mensaje="nuevas contraseñas no son iguales";
-            $_SESSION['mensaje']="fail";}
+            $_SESSION['mensaje1']="fail";}
 }else{
     $mensaje="link expiro";
-    $_SESSION['mensaje']="fail";
+    $_SESSION['mensaje1']="fail";
 }
 
 
-$_SESSION['contenidomensaje']=$mensaje;
+$_SESSION['contenidomensaje1']=$mensaje;
 
 
 $direccion= $URL . $restaurarContraseña."?keygen=".$keygen;

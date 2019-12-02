@@ -20,6 +20,7 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
   $dni = $_POST['dni'];
   $nombre = $_POST['nombre'];
   $apellido = $_POST['apellido'];
+  $email = $_POST['email'];
   $mensaje=null;
  
 
@@ -28,8 +29,8 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
   if($stmt2->rowCount() == 0) {
 
 
-        $stmt3 = $conexttion->prepare("INSERT INTO `persona` (`id_persona`, `dni`, `apellido`, `nombre`) 
-        VALUES (NULL, '$dni', '$apellido' , '$nombre');");
+        $stmt3 = $conexttion->prepare("INSERT INTO `persona` (`id_persona`, `dni`, `apellido`, `nombre`,`email`) 
+        VALUES (NULL, '$dni', '$apellido' , '$nombre','$email');");
         $stmt3->execute();
 
         $idpersona = $conexttion->lastInsertId("persona");
@@ -65,9 +66,10 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
     <h1>Alta Personal</h1>
     <form action="altaPersonal.php" method="POST">
       <p><br>
-        <label>DNI:</label><input name="dni" type="number" placeholder=" dni" min=1 value="" required><br>
+        <label>legajo:</label><input name="dni" type="number" placeholder=" dni" min=1 value="" required><br>
         <label>Nombre:</label><input name="nombre" type="text1" placeholder=" Nombre" required><br>
         <label>Apellido:</label><input name="apellido" type="text1" placeholder=" Apellido" required><br>
+        <label>email:</label><input name="email" type="text1" placeholder=" email" required><br>
       </p>
       <input type="submit" value="Enviar">
       <br>

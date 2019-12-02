@@ -35,10 +35,24 @@ if($stmt->rowCount() == 0) {
     }
     //
     // profesor
+    if($profesor!=NULL){
+        $stmt2 = $conexttion->prepare("SELECT email FROM profesor WHERE id_profesor= '$profesor'");
+        $stmt2->execute();
+        while($row = $stmt2->fetch()) {
+            $email=$row['email'];
+        }
+    }
     //
 
     //
     // persona
+    if($persona!=NULL){
+        $stmt2 = $conexttion->prepare("SELECT email FROM persona WHERE id_persona= '$persona'");
+        $stmt2->execute();
+        while($row = $stmt2->fetch()) {
+            $email=$row['email'];
+        }
+    }
     //
 
     $keygen=substr(md5(time()), 0, 25);
@@ -52,7 +66,7 @@ if($stmt->rowCount() == 0) {
     echo $body;
 
     enviaremail($mail,$body);
-    $mensaje="Se le envio un correo";
+    $mensaje="Se le envio un correo a $email con los pasos a seguir";
     $_SESSION['mensaje']="ok";
 }
 

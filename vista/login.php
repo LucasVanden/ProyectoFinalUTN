@@ -1,6 +1,8 @@
 <?php
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 session_start();
+$_SESSION['mensaje']=null;
+$_SESSION['mensaje1']=null;
 
 //con sesiones para los distintos tipos de roles de los usuarios
 if (isset($_SESSION['rol'])) {
