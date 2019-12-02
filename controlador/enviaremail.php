@@ -15,7 +15,7 @@ $mail = new PHPMailer(true);
 
 try {
     //Server settings
-    $mail->SMTPDebug = 2;                             
+    $mail->SMTPDebug = 3;                             
     $mail->isSMTP();    
     $mail->Host = 'smtp.gmail.com'; 
     $mail->SMTPAuth   = true;                              
@@ -33,7 +33,7 @@ try {
     $mail->isHTML(true);
     $mail->Subject = 'Anotaciones Consulta';
     $mail->Body    = $mensaje;
-
+    // $mail->CharSet = 'UTF-8';
     $mail->send();
 
     $mensaje= 'Message has been sent';

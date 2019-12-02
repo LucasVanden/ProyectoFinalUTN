@@ -165,3 +165,9 @@ $subirCargoaDirector='/vista/administrador/subirCargoaDirector.php';
 $buscarDepartamentosconel1erovacio='/controlador/administrador/buscarDepartamentosconel1erovacio.php';
 $buscarNivelAula1ervacio='/controlador/administrador/buscarNivelAula1ervacio.php';
 $buscarNombreAula='/controlador/administrador/buscarNombreAula.php';
+
+$restaurarContraseniaUsuario='/controlador/restaurarContraseniaUsuario.php';
+$recuperarContraseniaUsuario='/controlador/recuperarContraseniaUsuario.php';
+$restaurarContraseña='/vista/restaurarContraseñ241;a.php';
+$restaurarContraseñaMail='/vista/restaurarContrase&#241;a.php';
+$recuperarContraseña='/vista/recuperarContraseña.php';

@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-$recuperarContraseniaUsuario=$URL.$recuperarContraseniaUsuario;
+$restaurarContraseniaUsuario=$URL.$restaurarContraseniaUsuario;
 
 
 ?>
@@ -29,23 +29,29 @@ $recuperarContraseniaUsuario=$URL.$recuperarContraseniaUsuario;
       <br>
       <form action=cambiarContraseniaalumno.php method="POST" class="form-horizontal">
         <div class="form-group" align="center">
-          <h2 for="contrasenia" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Recuperar Contraseña </h2>
+          <h2 for="contrasenia" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Cambiar Contraseña </h2>
         </div>
         </div>
 
         <div class="form-group">   
-          <label for="nuevacontraseña" class="control-label col-md-4"> Legajo</label>
+          <label for="nuevacontraseña" class="control-label col-md-4"> Contraseña Nueva</label>
           <div class="col-md-4">
-            <input class="form-control" name="legajo" type="text" placeholder="Ingrese su Numero de Legajo" required>
+            <input class="form-control" name="nuevacontraseña" type="password" placeholder="Ingrese Nueva Contraseña" required>
           </div>
         </div>
 
+        <div class="form-group">   
+          <label for="confirma_contraseña" class="control-label col-md-4"> Contraseña Nueva </label>
+          <div class="col-md-4">
+            <input class="form-control" name="confirma_contraseña" type="password" placeholder="Repita Nueva Contraseña" required>
+          </div>
+        </div> 
         
         <br>
         <input name="tipo" type="hidden" value="alumno">
         <div class="form-group"> 
           <div class="col-md-4 col-md-offset-4">             
-            <button class="btn btn-primary" type="submit" name="keygen"  formaction=<?php echo $recuperarContraseniaUsuario?>> Enviar
+            <button class="btn btn-primary" type="submit" name="keygen" value=<?php echo $_GET['keygen']?> formaction=<?php echo $restaurarContraseniaUsuario?>> Enviar
               <span class="glyphicon glyphicon-ok"></span>
             </button>
           </div> 

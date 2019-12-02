@@ -14,15 +14,15 @@ require_once ($DIR . $DetalleAnotados);
 require_once ($DIR . $EstadoAnotados);
 require_once ($DIR . $AvisoProfesor);
 require_once ($DIR . $Dedicacion);
+require_once ($DIR. $email);
 
-
-
-
+$mail=array();
+array_push($mail,"vandenboschlucas@hotmail.com.com");
+enviaremail($mail,"pikachu");
+echo $_GET['key'];
+echo rand(999, 99999);
+echo substr(md5(time()), 0, 25);
 ?>
-
-
-
-
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -38,7 +38,14 @@ require_once ($DIR . $Dedicacion);
    /> 
   <input type="submit" class="submit" value="Save" />
 </form>
+<button onclick="test()">GET</button>
 
+<script>
+function test(){
+  <?php echo"hola";?>
+  <?php echo $_GET['key'];?>
+}
+</script>
 <script>
  function check(input) {
   var x = document.forms["myForm"]["number1"].value;
