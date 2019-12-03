@@ -40,6 +40,8 @@ if($stmt->rowCount() == 0) {
     VALUES (null, '$departamento','$AulaAsignada');");  
     $stmt2->execute();
     }
+}else{
+    $_SESSION["existenteDepartamento"]=true;
 }
 
 

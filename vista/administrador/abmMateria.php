@@ -324,15 +324,7 @@ function sortTable(n) {
 
     } 
 </script>
-<!-- Cartel PopUp al clickear Fecha -->
-<div id="snackbar">
-    <?php 
 
-    if( $_SESSION["agrego"]&&$_SESSION["elimino"]==NULL){
-        echo "Se agrego la Fecha";}
-    if( $_SESSION["elimino"]&&$_SESSION["agrego"]==NULL){
-        echo "Se elimino la Fecha";}
-        ?>
 </body>
     <footer>
     <?php require $DIR.$footer; ?>     
