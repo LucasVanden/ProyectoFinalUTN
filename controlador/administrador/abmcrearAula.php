@@ -25,7 +25,7 @@ $Aula=$_POST['Aula'];
 $con= new conexion();
 $conn=$con->getconexion();
 
-$stmt = $conn->prepare("SELECT id_aula FROM aula where cuerpoAula='$cuerpo' and nivelAula='$nivel' and numeroAula='$Aula' "); 
+$stmt = $conn->prepare("SELECT id_aula FROM aula where cuerpoAula='$cuerpo' and nivelAula='$nivel' and numeroAula='$Aula' and eliminado is null"); 
 $stmt->execute();
 if($stmt->rowCount() == 0) {
 
@@ -33,6 +33,8 @@ $stmt = $conn->prepare("INSERT INTO `aula` (`id_aula`,`cuerpoAula`,`nivelAula`,`
 VALUES (null, '$cuerpo', '$nivel' , '$Aula');");  
 $stmt->execute();
 
+}else{
+    $_SESSION["existenteAula"]=true;
 }
 $_SESSION['mostrarAulas']=true;
  $direccion= $URL . $ABMAula;

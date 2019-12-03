@@ -207,8 +207,12 @@ function sortTable(n) {
 
            
 <div id="snackbar">
+    <?php if ($_SESSION['existenteAula']) :?>
+        Aula Existente
+<?php else:?>
     No puede eliminar un aula asignada
     <button onclick="gg()">Ver</button>
+<?php endif;?>
 </div>
 <!-- Style popUP -->
 <style>
@@ -216,7 +220,7 @@ function sortTable(n) {
     visibility: hidden; /* Hidden by default. Visible on click */
     min-width: 250px; /* Set a default minimum width */
     margin-left: -125px; /* Divide value of min-width by 2 */
-    background-color: red; /* Black background color */
+    background-color: black; /* Black background color */
     color: #fff; /* White text color */
     text-align: center; /* Centered text */
     border-radius: 2px; /* Rounded borders */
@@ -263,9 +267,11 @@ function sortTable(n) {
     function mostrarPopUp() {
     // Get the snackbar DIV
 
-    if(<?php echo ($_SESSION['NoBorrar']) ?>){
+    if(<?php echo ($_SESSION['NoBorrar']||$_SESSION["existenteAula"]) ?>){
     var x = document.getElementById("snackbar");
-    <?php $_SESSION['NoBorrar']=NULL;?>
+    <?php $_SESSION['NoBorrar']=NULL;
+    $_SESSION["existenteAula"]=NULL;
+       ?>
     // Add the "show" class to DIV
     x.className = "show";
     // After 3 seconds, remove the show class from DIV
@@ -280,7 +286,12 @@ function sortTable(n) {
 function gg() {
   var myWindow = window.open("aulasOcupadas.php", "","width=500,height=500");
 }
+
 </script>
+
+
+
+
 </body>
     <footer>
     <?php require $DIR.$footer; ?>       
