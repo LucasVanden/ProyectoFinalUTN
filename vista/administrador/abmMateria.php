@@ -63,7 +63,7 @@ $materias=$a->BuscarMaterias($idDepartamento);
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Cargar Materia</h2>
+        <h2>Materia</h2>
         <form action=<?php echo $crearMateria ?> method="POST">
             <div>
                     <tr>
@@ -120,37 +120,53 @@ foreach ($listadepartamento as $departamento): ?>
 
 
 
-<div id="myDIV" >
-<table>
-    <?php foreach ($materias as $mat): ?>
-    <form action=<?php echo $abmMateria ?> method="POST">         
-        <tr>
-        <td>
-        <div>
-        <?php   echo $mat->getnombreMateria() ?>
+<div id="myDIV" align="center">
+<div class="container"> 
+                <div class="table-responsive col-md-12 col-md-offset-0">
+                    <table id="myTable2" class="table table-bordered table-hover">
+                        <tr class="info">
+                            <th onclick="sortTable(0)" style="cursor:pointer";>Materia</th>
+                            <th onclick="sortTable(1)" style="cursor:pointer";>Dia Mesa</th>
+                
+                        </tr>
 
-        <select name="diamesa" id="iddiamesa">
+                        <?php foreach ($materias as $mat): ?>
+                        <form action=<?php echo $abmMateria ?> method="POST">         
+                            <tr>
+                                <td>
+                                <div>
+                                <?php   echo $mat->getnombreMateria() ?>
+                                </td>
+                                <td>
+                                <select name="diamesa" id="iddiamesa">
 
-        <option <?php if($mat->getdia()->getid_dia()=='1'){echo ("selected");}?> value=1>Lunes</option>
-        <option <?php if($mat->getdia()->getid_dia()=='2'){echo ("selected");}?> value=2>Martes</option>
-        <option <?php if($mat->getdia()->getid_dia()=='3'){echo ("selected");}?> value=3>Miercoles</option>
-        <option <?php if($mat->getdia()->getid_dia()=='4'){echo ("selected");}?> value=4>Jueves</option>
-        <option <?php if($mat->getdia()->getid_dia()=='5'){echo ("selected");}?> value=5>Viernes</option>
-        </select>
-        <button type="submit" value=<?php echo $mat->getid_materia()?> name="BorraridMateria" formaction=<?php echo $editarmesaMateria ?> 
-        onclick="return confirm('Cambiar día de mesa de <?php echo $mat->getNombreMateria()?> ')">Asignar</button>
-      
-
-        <button type="submit" value=<?php echo $mat->getid_materia()?> name="BorraridMateria" formaction=<?php echo $BorrarMateria ?> 
-        onclick="return confirm('Esta seguro que desea eliminar materia <?php echo $mat->getNombreMateria()?> ')">Eliminar</button>
-        </form>
-        </div>
-        </td>
-        </tr>
-        <?php endforeach; ?>
-        </table>
+                                <option <?php if($mat->getdia()->getid_dia()=='1'){echo ("selected");}?> value=1>Lunes</option>
+                                <option <?php if($mat->getdia()->getid_dia()=='2'){echo ("selected");}?> value=2>Martes</option>
+                                <option <?php if($mat->getdia()->getid_dia()=='3'){echo ("selected");}?> value=3>Miercoles</option>
+                                <option <?php if($mat->getdia()->getid_dia()=='4'){echo ("selected");}?> value=4>Jueves</option>
+                                <option <?php if($mat->getdia()->getid_dia()=='5'){echo ("selected");}?> value=5>Viernes</option>
+                                </select>
+                                </td>
+                                <td>
+                                <button type="submit" value=<?php echo $mat->getid_materia()?> name="BorraridMateria" formaction=<?php echo $editarmesaMateria ?> 
+                                onclick="return confirm('Cambiar día de mesa de <?php echo $mat->getNombreMateria()?> ')">Asignar</button>
+                                </td>
+                                <td>
+                                <button type="submit" value=<?php echo $mat->getid_materia()?> name="BorraridMateria" formaction=<?php echo $BorrarMateria ?> 
+                                onclick="return confirm('Esta seguro que desea eliminar materia <?php echo $mat->getNombreMateria()?> ')">Eliminar</button>
+                                </form>
+                                </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </table>
     
+                    </div>
+    </div>
 </div>
+
+<!-- // -->
+
 
 <script>
  var x = document.getElementById("myDIV");
@@ -178,7 +194,62 @@ function myFunction() {
 </script>
                 
 
-
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable2");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc"; 
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++; 
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
 
 </body>
     <footer>
