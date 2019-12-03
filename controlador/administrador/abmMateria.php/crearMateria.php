@@ -33,6 +33,8 @@ if($stmt->rowCount() == 0) {
 $stmt = $conn->prepare("INSERT INTO `materia` (`id_materia`,`nombreMateria`,`fk_departamento`,`fk_dia`)
 VALUES (null, '$nombreMateria','$departamentos','$diaMesa');");  
 $stmt->execute();
+}else{
+    $_SESSION["existenteMateria"]=true;
 }
 
  $direccion= $URL . $abmMateria;
