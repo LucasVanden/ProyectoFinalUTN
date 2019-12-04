@@ -4,22 +4,27 @@ require_once ($DIR .$conexion);
 
 session_start();
 
+$id_dedicacion_materia_profesor=$_POST['id_dedicacion_materia_profesor'];
 
-$profesor=$_POST['profesor'];
-if(isset($_POST['Materias'])){
-    $Materias=$_POST['Materias'];
     date_default_timezone_set('America/Argentina/Mendoza');
 
     $con= new conexion();
     $conn=$con->getconexion();
 
+ 
+    $stmt0 = $conn->prepare("SELECT fk_materia,fk_profesor FROM dedicacion_materia_profesor WHERE eliminado is null and id_dedicacion_materia_profesor=$id_dedicacion_materia_profesor"); 
+    $stmt0->execute();
+    while($row = $stmt0->fetch()) {
+        $profesor=$row['fk_profesor'];
+        $Materias=$row['fk_materia'];
+    }
     $stmt = $conn->prepare("UPDATE dedicacion_materia_profesor SET eliminado = '1' WHERE fk_profesor=$profesor and fk_materia=$Materias"); 
     $stmt->execute();
 
     buscarHorasACerrar($Materias,$profesor);
-}
 
-$direccion= $URL . $bajaMateriaProfesor;
+
+$direccion= $URL . $asignarMateriaAProfesor;
 header("Location: $direccion");
 
 function buscarHorasACerrar($Materia,$profesor){

@@ -1,10 +1,15 @@
 
 
 <?php
+session_start();
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR.$conexion);
 require_once ($DIR . $Materia);
 
+$idmateria="-1";
+if(isset( $_SESSION['idMaterias'])){
+    $idmateria= $_SESSION['idMaterias'];
+}
 $con= new conexion();
 $conexttion=$con->getconexion();
  
@@ -23,7 +28,11 @@ if (isset($_GET['choice'])){
             $mat->setid_materia($row['id_materia']);
             $mat->setnombreMateria($row['nombreMateria']);
         }
+        if($idmateria==$mat->getid_materia()){
+            echo "<option selected value=" . $mat->getid_materia().">" . $mat->getnombreMateria() . "</option>";
+        }else{
         echo "<option value=" . $mat->getid_materia().">" . $mat->getnombreMateria() . "</option>";
+     }
     }
  }
 ?>

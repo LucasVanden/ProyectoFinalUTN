@@ -354,5 +354,35 @@ class controladorAdministrador extends conexion
          }
          return $a;
     }
+    function MostrarMateriasProfesor(){
+        $b=array();
+        $con=new conexion();
+        $conn=$con->getconexion();
+        $stmt=$conn->prepare("SELECT dedicacion_materia_profesor.id_dedicacion_materia_profesor,materia.nombreMateria, profesor.apellido,profesor.nombre,dedicacion.tipo,departamento.nombre
+        FROM dedicacion_materia_profesor
+        INNER JOIN profesor 
+            ON dedicacion_materia_profesor.fk_profesor = profesor.id_profesor
+        INNER JOIN materia 
+            ON dedicacion_materia_profesor.fk_materia = materia.id_materia
+        INNER JOIN dedicacion 
+            ON dedicacion_materia_profesor.fk_dedicacion = dedicacion.id_dedicacion
+        INNER JOIN departamento
+            ON materia.fk_departamento = departamento.id_departamento
+        WHERE dedicacion_materia_profesor.eliminado is null");
+         $stmt->execute();
+         while($row = $stmt->fetch()) {
+             $id=$row[0];
+             $materia=$row[1];
+             $apellido=$row[2];
+             $nombre=$row[3];
+             $dedicacion=$row[4];
+             $departamento=$row[5];
+             $a=array();
+             array_push($a,$id,$departamento,$materia,$apellido,$nombre,$dedicacion);
+             array_push($b,$a);
+         }
+
+         return $b;
+    }
 }
 ?>
