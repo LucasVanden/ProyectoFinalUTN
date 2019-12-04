@@ -3,7 +3,7 @@ require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR .$conexion);
 
 session_start();
-
+$_SESSION['Asignar']=true;
 $id_dedicacion_materia_profesor=$_POST['id_dedicacion_materia_profesor'];
 
     date_default_timezone_set('America/Argentina/Mendoza');

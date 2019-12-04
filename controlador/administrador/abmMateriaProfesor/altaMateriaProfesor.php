@@ -19,7 +19,7 @@ date_default_timezone_set('America/Argentina/Mendoza');
 $profesor=$_POST['profesor'];
 $Materias=$_POST['Materias'];
 $dedicacion=$_POST['dedicacion'];
-
+$_SESSION['Asignar']=true;
 crearMateriaProfesor($profesor,$Materias,$dedicacion);
 
 

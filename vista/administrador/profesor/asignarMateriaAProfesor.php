@@ -103,15 +103,15 @@ $darbajaMateriaProfesor= $URL.$darbajaMateriaProfesor;
             <div>
                 <br>
                 <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
-                <input id=buttonBuscar type="submit" value="Asignar" formaction=<?php echo $altaMateriaAProfesor?> onclick="">
+                <input id=buttonBuscar type="submit" value="Asignar" name="Asignar" formaction=<?php echo $altaMateriaAProfesor?> onclick="">
                 <input id=buttonBuscar type="submit" value="Ver" name="ver" formaction=<?php echo $asignarMateriaAProfesor?> onclick="">
                 <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
             </div>                   
         <tr>               
                     </form>
 
-<?php if(isset($_POST['ver'])):?>
-
+<?php if( isset($_POST['ver'] ) || isset($_SESSION['Asignar']) ) :?>
+<?php $_SESSION['Asignar']=null;?>
   <table align='center' class="table-mostrar">
      <div class="container"> 
         <div class="table-responsive col-md-12 col-md-offset-0">
