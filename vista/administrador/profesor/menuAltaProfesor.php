@@ -51,7 +51,7 @@ $_SESSION['fechasBuscadas']=null;
                         </td>
                         <td>   <div>  <input type="submit" value="Asignar Materia a Profesor" name="Obtener" formaction=<?php echo $asignarMateriaAProfesor ?> /></div></td>
                 
-                        <td>   <div>  <input type="submit" value="Baja Materia Profesor" name="Obtener" formaction=<?php echo $bajaMateriaProfesor ?> /></div></td>
+                        <td>   <div>  <input type="submit" value="Asignar Horarios de Cursado" name="Obtener" formaction=<?php echo $bajaMateriaProfesor ?> /></div></td>
                         <td>   <div>  <input type="submit" value="Baja Profesor" name="Obtener" formaction=<?php echo $bajaProfesor ?> /></div></td>
             
 
