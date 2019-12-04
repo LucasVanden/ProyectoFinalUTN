@@ -30,7 +30,7 @@ function crearMateriaProfesor($profesor,$Materias,$dedicacion){
     $con= new conexion();
     $conn=$con->getconexion();
 
-    $stmt = $conn->prepare("SELECT id_dedicacion_materia_profesor FROM dedicacion_materia_profesor where fk_profesor=$profesor and fk_materia=$Materias"); 
+    $stmt = $conn->prepare("SELECT id_dedicacion_materia_profesor FROM dedicacion_materia_profesor where fk_profesor=$profesor and fk_materia=$Materias and eliminado is null"); 
     $stmt->execute();
     if($stmt->rowCount() == 0) {
     

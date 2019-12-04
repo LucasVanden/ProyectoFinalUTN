@@ -27,12 +27,13 @@ if (isset($_GET['choice'])){
             $mat = new Materia();
             $mat->setid_materia($row['id_materia']);
             $mat->setnombreMateria($row['nombreMateria']);
-        }
+        
         if($idmateria==$mat->getid_materia()){
             echo "<option selected value=" . $mat->getid_materia().">" . $mat->getnombreMateria() . "</option>";
         }else{
         echo "<option value=" . $mat->getid_materia().">" . $mat->getnombreMateria() . "</option>";
      }
+    }
     }
  }
 ?>
