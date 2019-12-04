@@ -67,9 +67,9 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
     <form action="altaPersonal.php" method="POST">
       <p><br>
         <label>legajo:</label><input name="dni" type="number" placeholder=" dni" min=1 value="" required><br>
-        <label>Nombre:</label><input name="nombre" type="text1" placeholder=" Nombre" required><br>
-        <label>Apellido:</label><input name="apellido" type="text1" placeholder=" Apellido" required><br>
-        <label>email:</label><input name="email" type="text1" placeholder=" email" required><br>
+        <label>Nombre:</label><input name="nombre" type="text1" placeholder=" Nombre" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br>
+        <label>Apellido:</label><input name="apellido" type="text1" placeholder=" Apellido" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br>
+        <label>email:</label><input name="email" type="email" placeholder="email@dominio.com" pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[ña-z]{2,}$" title="email@dominio.com" required><br><br>
       </p>
       <input type="submit" value="Enviar">
       <br>
