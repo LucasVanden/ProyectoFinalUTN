@@ -82,11 +82,11 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     <form action="altaAlumno.php" method="POST">
       <p><br>
         <label>Legajo:</label><input name="legajo" type="number" placeholder=" Legajo" min=1 value="" required><br>
-        <label>Nombre:</label><input name="nombre" type="text1" placeholder=" Nombre" required><br>
-        <label>Apellido:</label><input name="apellido" type="text1" placeholder=" Apellido" required><br>
-        <label>e - mail:</label><input name="email" type="mail" placeholder=" email@dominio.com"><br>
+        <label>Nombre:</label><input name="nombre" type="text1" placeholder=" Nombre" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br><br>
+        <label>Apellido:</label><input name="apellido" type="text1" placeholder=" Apellido" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br><br>
+        <label>e - mail:</label><input name="email" type="mail" placeholder=" email@dominio.com" pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email@dominio.com" required><br><br>
         <label>Nacimiento:</label><input name="fecha" type="date" required><br>
-        <label>Teléfono:</label><input name="telefono" type="number" placeholder=" 555-555-5555" min=1 max=9999999999><br>
+        <label>Teléfono:</label><input name="telefono" type="text1" placeholder=" 0261-5555555" pattern="[0-9]{11}" title="11 numeros (0261-XXXXXXX)" required><br>
       </p>
       <input type="submit" value="Enviar">
       <br>
