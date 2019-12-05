@@ -37,7 +37,7 @@ class Profesor
 
 	function getemail()
 	{
-		return $this->e-mail;
+		return $this->email;
 	}
 
 	function setemail($newVal)

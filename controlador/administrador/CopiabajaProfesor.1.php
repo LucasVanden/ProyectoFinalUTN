@@ -21,9 +21,9 @@ $idprofesor=$_POST['profesor'];
 bajaProfesor($idprofesor);
 
 
-$_SESSION['eliminarProfesor']=true;
 
-$direccion= $URL . $altaProfesor;
+
+$direccion= $URL . $bajaProfesor;
 header("Location: $direccion");
 
 $_SESSION['mostrarAulas']=true;

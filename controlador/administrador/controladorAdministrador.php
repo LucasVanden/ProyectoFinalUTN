@@ -118,7 +118,7 @@ class controladorAdministrador extends conexion
     function BuscarProfesor(){
         $listaProfesor=array();
         $conn = $this->getconexion();
-        $stmt = $conn->prepare("SELECT id_profesor,nombre,apellido,email FROM profesor where eliminado is null ORDER BY apellido "); 
+        $stmt = $conn->prepare("SELECT id_profesor,nombre,apellido,email,legajo FROM profesor where eliminado is null ORDER BY apellido "); 
         $stmt->execute();
         while($row = $stmt->fetch()) {
             $prof = new Profesor();
@@ -126,6 +126,7 @@ class controladorAdministrador extends conexion
             $prof->setapellido($row['apellido']);
             $prof->setnombre($row['nombre']);
             $prof->setemail($row['email']);
+            $prof->setlegajo($row['legajo']);
            array_push($listaProfesor,$prof);
         }
         return $listaProfesor;
@@ -384,5 +385,19 @@ class controladorAdministrador extends conexion
 
          return $b;
     }
+    function BuscarProfesorID($id){
+        $conn = $this->getconexion();
+        $stmt = $conn->prepare("SELECT id_profesor,nombre,apellido,email,legajo FROM profesor where id_profesor=$id"); 
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+            $prof = new Profesor();
+            $prof->setid_profesor($row['id_profesor']);
+            $prof->setapellido($row['apellido']);
+            $prof->setnombre($row['nombre']);
+            $prof->setemail($row['email']);
+            $prof->setlegajo($row['legajo']);
+        }
+        return $prof;
+        }
 }
 ?>

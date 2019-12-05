@@ -102,9 +102,6 @@ $aulas=$a->BuscarAulas();
                     </table>
                 </div>
             </div> 
-            <!-- // -->
-
-                <!-- //    -->
             </div>
         </form>
 

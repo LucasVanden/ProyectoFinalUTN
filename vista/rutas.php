@@ -136,9 +136,11 @@ $mostrarMaterias='/controlador/administrador/abmMateria.php/mostrarMaterias.php'
 
 //Alta Profesor
 $altaProfesor='/vista/administrador/profesor/altaProfesor.php';
+$editarProfesor='/vista/administrador/profesor/editarProfesor.php';
 $menuAltaProfesor='/vista/administrador/profesor/menuAltaProfesor.php';
 $bajaProfesor='/vista/administrador/profesor/bajaProfesor.php';
 $controladorbajaProfesor='/controlador/administrador/bajaProfesor.php';
+$editProfesor='/controlador/administrador/editProfesor.php';
 
 //materiaProfesor
 $altaMateriaProfesor='/controlador/administrador/abmMateriaProfesor/altaMateriaProfesor.php';
