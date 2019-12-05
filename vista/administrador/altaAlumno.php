@@ -1,5 +1,6 @@
 <?php
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once ($DIR.$controladorAdministrador);
 session_start();
 if(!isset($_SESSION['rol'])){
   header('location: '. $URL.$login);
@@ -8,7 +9,9 @@ if(!isset($_SESSION['rol'])){
       header('location: '. $URL.$login);
   }
 }
-
+$editarAlumno= $URL.$editarAlumno;
+$controladorbajaAlumno= $URL.$controladorbajaAlumno;
+$a= new controladorAdministrador();
 require_once $DIR . $conexion;
 $message = null;
 $exito=0;
@@ -91,6 +94,9 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
       <input type="submit" value="Enviar">
       <br>
     </form>
+    <form action="altaAlumno.php" method="POST">
+        <div><input type="submit" value="consultar" name="consultar" onclick="myFunction()"></div>
+        </form>
     <br>
     <?php if (!empty($message)) : ?>
     <?php if ($exito) : ?>
@@ -105,6 +111,114 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     <?php endif; ?>
     <?php endif; ?>
   </body>
+
+ 
+ <?php if( isset($_POST['consultar'] ) || isset($_POST['enviar']) || isset($_SESSION['eliminarAlumno']) ) :?>
+<?php $_SESSION['eliminarAlumno']=null;?>
+  <form action="altaAlumno.php" method="POST">
+            <div id="myDIV" align="center">
+            <div class="container"> 
+                <div class="table-responsive col-md-12 col-md-offset-0">
+                    <table id="myTable2" class="table table-bordered table-hover">
+                        <tr class="info">
+                            <th onclick="sortTable(0)" style="cursor:pointer";>legajo</th>
+                            <th onclick="sortTable(1)" style="cursor:pointer";>Nombre</th>
+                            <th onclick="sortTable(2)" style="cursor:pointer";>Apellido</th>
+                            <th onclick="sortTable(3)" style="cursor:pointer";>Email</th>
+                            <th onclick="sortTable(4)" style="cursor:pointer";>Telefono</th>
+                        </tr>
+                        <?php $listaalumnos=$a->BuscarAlumnos(); ?>
+                        
+                        <?php foreach ($listaalumnos as $alumno): ?>
+                        <tr>
+                            <div>
+                                <td>
+                                    <?php echo $alumno->getlegajo() ?>
+                                </td>
+                                <td>
+                                    <?php echo $alumno->getnombre() ?>
+                                </td>
+                                <td>
+                                    <?php echo $alumno->getapellido() ?>
+                                </td>
+                                <td>
+                                    <?php echo $alumno->getemail() ?>
+                                </td>
+                                <td>
+                                    <?php echo $alumno->gettelefonoAlumno() ?>
+                                </td>
+                                <td>
+                                <button type="submit" value=<?php echo $alumno->getid_alumno()?> name="alumno" formaction=<?php echo $editarAlumno ?>> Editar</button>
+                                </td>
+                                <td>
+                                <button type="submit" value=<?php echo $alumno->getid_alumno()?> name="alumno" formaction=<?php echo $controladorbajaAlumno ?> onClick="return confirm('Esta seguro que desea eliminar')"> Eliminar</button>
+                                </td>             
+                            </div>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div> 
+            </div>
+    </form>
+<?php endif?>
+    <script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable2");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc"; 
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++; 
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+
   <footer>
     <?php require $DIR.$footer; ?>      
   </footer>

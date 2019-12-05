@@ -16,25 +16,25 @@ require_once ($DIR . $Presentismo);
 session_start();
 date_default_timezone_set('America/Argentina/Mendoza');
 
-$idprofesor=$_POST['profesor'];
+$idalumno=$_POST['alumno'];
 
-bajaProfesor($idprofesor);
+bajaAlumno($idalumno);
 
 
-$_SESSION['eliminarProfesor']=true;
+$_SESSION['eliminarAlumno']=true;
 
-$direccion= $URL . $altaProfesor;
+$direccion= $URL . $altaAlumno;
 header("Location: $direccion");
 
 $_SESSION['mostrarAulas']=true;
-function bajaProfesor($idprofesor){
+function bajaAlumno($idalumno){
     $con= new conexion();
     $conn=$con->getconexion();
 
-        $stmt = $conn->prepare("UPDATE profesor SET eliminado = '1' WHERE id_profesor='$idprofesor'"); 
+        $stmt = $conn->prepare("UPDATE alumno SET eliminado = '1' WHERE id_alumno='$idalumno'"); 
         $stmt->execute();
 
-        $stmt2 = $conn->prepare("DELETE FROM usuario WHERE fk_profesor='$idprofesor'"); 
+        $stmt2 = $conn->prepare("DELETE FROM usuario WHERE fk_alumno='$idalumno'"); 
         $stmt2->execute();
 }
 ?>

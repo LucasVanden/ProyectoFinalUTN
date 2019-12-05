@@ -399,5 +399,39 @@ class controladorAdministrador extends conexion
         }
         return $prof;
         }
+
+        function BuscarAlumnos(){
+            $listaAlumnos=array();
+            $conn = $this->getconexion();
+            $stmt4 = $conn->prepare("SELECT id_alumno,nombre,apellido,email,legajo,telefonoAlumno FROM alumno WHERE eliminado is null "); 
+                    $stmt4->execute();
+                    while($row = $stmt4->fetch()) {
+                        $alum=new alumno();
+                        $alum->setid_alumno($row['id_alumno']);
+                        $alum->setnombre($row['nombre']);
+                        $alum->setapellido($row['apellido']);
+                        $alum->setemail($row['email']);
+                        $alum->setlegajo($row['legajo']);
+                        $alum->settelefonoAlumno($row['telefonoAlumno']);
+                       array_push($listaAlumnos,$alum);
+                    }
+            return $listaAlumnos;
+        }
+        function buscarAlumnoID($idalumno){
+            $con= new conexion();
+            $conn = $con->getconexion();
+            $stmt3 = $conn->prepare("SELECT id_alumno,apellido,nombre,legajo,email,telefonoAlumno FROM alumno where id_alumno=$idalumno"); 
+            $stmt3->execute();
+            while($row = $stmt3->fetch()) {
+                $alum=new alumno();
+                $alum->setid_alumno($row['id_alumno']);
+                $alum->setnombre($row['nombre']);
+                $alum->setapellido($row['apellido']);
+                $alum->setemail($row['email']);
+                $alum->setlegajo($row['legajo']);
+                $alum->settelefonoAlumno($row['telefonoAlumno']);
+            }
+            return $alum;
+        }
 }
 ?>

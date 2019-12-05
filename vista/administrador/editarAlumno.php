@@ -4,8 +4,8 @@ require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $conexion;
 require_once ($DIR.$controladorAdministrador);
 $controladorbajaProfesor= $URL.$controladorbajaProfesor;
-$editProfesor= $URL.$editProfesor;
-$altaProfesor=$URL . $altaProfesor;
+$editAlumno= $URL.$editAlumno;
+$altaAlumno=$URL . $altaAlumno;
 $a= new controladorAdministrador();?>
 
 <!DOCTYPE html>
@@ -22,18 +22,18 @@ $a= new controladorAdministrador();?>
   </head>
   <body background = <?php echo $URL.$fondo?>>
   <?php require $DIR.$headera ?>
-  <?php $profe=$a->BuscarProfesorID($_POST['profesor'])?>
-
+  <?php $alumno=$a->buscarAlumnoID($_POST['alumno'])?>
  
 
-    <h2>Editar Profesor</h2>
-    <form action=<?php echo $editProfesor?> method="POST">
+    <h2>Editar Alumno</h2>
+    <form action=<?php echo $editAlumno?> method="POST">
         <p>
-          <label>Legajo: </label><input name="legajo" type="number" value= <?php echo $profe->getlegajo()?> min=1 required disabled ><br><br>
-          <label>Legajo: </label><input name="legajo" type="hidden" value= <?php echo $profe->getlegajo()?> min=1 required  >
-          <label>Nombre: </label><input name="nombre" type="text1" value="<?php echo $profe->getnombre()?>" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br><br>
-          <label>Apellido: </label><input name="apellido" type="text1" value="<?php echo $profe->getapellido()?>" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br><br>
-          <label>E - mail: </label><input name="email" type="mail" value=<?php echo $profe->getemail()?> pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email@dominio.com" required><br><br>
+          <label>Legajo: </label><input name="legajo" type="number" value= <?php echo $alumno->getlegajo()?> min=1 required disabled ><br><br>
+          <label>Legajo: </label><input name="legajo" type="hidden" value= <?php echo $alumno->getlegajo()?> min=1 required  >
+          <label>Nombre: </label><input name="nombre" type="text1" value="<?php echo $alumno->getnombre()?>" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br><br>
+          <label>Apellido: </label><input name="apellido" type="text1" value="<?php echo $alumno->getapellido()?>" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br><br>
+          <label>E - mail: </label><input name="email" type="mail" value=<?php echo $alumno->getemail()?> pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email@dominio.com" required><br><br>
+          <label>Teléfono:</label><input name="telefono" type="text1"  value=<?php echo $alumno->gettelefonoAlumno()?> pattern="[0-9]{11}" title="11 numeros (0261-XXXXXXX)" required><br>
         </p>
         <?php if (!empty($message)) : ?>
             <?php if ($ok):?>
@@ -50,8 +50,8 @@ $a= new controladorAdministrador();?>
 
         <div><br><br><input type="submit" value="Enviar"></div>
         </form>
-        <form action=<?php echo $menuAltaProfesor?> method="POST">
-        <div><input type="submit" value="Volver" name="Buscar" formaction=<?php echo $altaProfesor ?> /></div>
+        <form action=<?php echo $altaAlumno?> method="POST">
+        <div><input type="submit" value="Volver" name="enviar" formaction=<?php echo $altaAlumno ?> /></div>
         </form>
   </body>
   </html>

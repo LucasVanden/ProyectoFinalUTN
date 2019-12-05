@@ -34,6 +34,7 @@ $asistenciaProfesor="/vista/asistencia/asistenciaProfesor.php";
 $alumnoPpal="/vista/alumno/alumnoPpal.php";
 $alumnoagregarmateria='/vista/alumno/alumnoAgregarMateria.php';
 $temp1='/vista/alumno/temp.1.php';
+$controladorbajaAlumno='/controlador/administrador/bajaAlumno.php';
 
 $alumnoControlador='/controlador/alumnoControlador.php';
 $departamentoMaterias='/controlador/departamentoMaterias.php';
@@ -43,6 +44,7 @@ $AgregarMateriaAlumno='/controlador/AgregarMateriaAlumno.php';
 $EliminarMateriaAlumno='/controlador/EliminarMateriaAlumno.php';
 $departamentoMaterias='/controlador/departamentoMaterias.php';
 $crearAnotacion='/controlador/crearAnotacion.php';
+$editAlumno='/controlador/administrador/editAlumno.php';
 
 //MODELO
 $Alumno='/modelo/Alumno.php';
@@ -95,6 +97,7 @@ $buscarfaltas='/controlador/reportes/buscarFaltas.php';
 $llenarMaterias='/controlador/reportes/llenarMaterias.php';
 
 //ADMINISTRADOR
+$editarAlumno='/vista/administrador/editarAlumno.php';
 $controladorAsuetosReceso='/controlador/administrador/controladorAsuetosReceso.php';
 $controladorAsuetoFeriado='/controlador/administrador/controladorAsuetoFeriado.php';
 $controladorAsuetoAsueto='/controlador/administrador/controladorAsuetoAsueto.php';
@@ -140,6 +143,7 @@ $editarProfesor='/vista/administrador/profesor/editarProfesor.php';
 $menuAltaProfesor='/vista/administrador/profesor/menuAltaProfesor.php';
 $bajaProfesor='/vista/administrador/profesor/bajaProfesor.php';
 $controladorbajaProfesor='/controlador/administrador/bajaProfesor.php';
+
 $editProfesor='/controlador/administrador/editProfesor.php';
 
 //materiaProfesor
