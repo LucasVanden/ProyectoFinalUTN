@@ -8,8 +8,13 @@ if(!isset($_SESSION['rol'])){
       header('location: '. $URL.$login);
   }
 }
-
 require_once $DIR . $conexion;
+require_once ($DIR.$controladorAdministrador);
+$bajaPersonal= $URL.$bajaPersonal;
+$editPersonal= $URL.$editPersonal;
+$editarPersonal= $URL.$editarPersonal;
+$a= new controladorAdministrador();
+
 $message = null;
 $exito=0;
 if(isset($_POST['dni'])){
@@ -63,17 +68,20 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
   </head>
   <body background = <?php echo $URL.$fondo?>>
   <?php require $DIR.$headera ?>
-    <h1>Alta Personal</h1>
+    <h1>Personal</h1>
     <form action="altaPersonal.php" method="POST">
       <p><br>
-        <label>legajo:</label><input name="dni" type="number" placeholder=" dni" min=1 value="" required><br>
+        <label>legajo:</label><input name="dni" type="number" placeholder=" legajo" min=1 value="" required><br>
         <label>Nombre:</label><input name="nombre" type="text1" placeholder=" Nombre" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br>
         <label>Apellido:</label><input name="apellido" type="text1" placeholder=" Apellido" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br>
         <label>email:</label><input name="email" type="email" placeholder="email@dominio.com" pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[ña-z]{2,}$" title="email@dominio.com" required><br><br>
       </p>
-      <input type="submit" value="Enviar">
+      <input type="submit" value="Enviar" name="enviar">
       <br>
     </form>
+    <form action="altaPersonal.php" method="POST">
+        <div><input type="submit" value="consultar" name="consultar" ></div>
+        </form>
     <br>
     <?php if (!empty($message)) : ?>
     <?php if ($exito) : ?>
@@ -88,6 +96,109 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
     <?php endif; ?>
     <?php endif; ?>
   </body>
+
+<?php if( isset($_POST['consultar'] ) || isset($_POST['enviar']) || isset($_SESSION['eliminarPersonal']) ) :?>
+<?php $_SESSION['eliminarPersonal']=null;?>
+  <form action="altaPersonal.php" method="POST">
+            <div id="myDIV" align="center">
+            <div class="container"> 
+                <div class="table-responsive col-md-12 col-md-offset-0">
+                    <table id="myTable2" class="table table-bordered table-hover">
+                        <tr class="info">
+                            <th onclick="sortTable(0)" style="cursor:pointer";>legajo</th>
+                            <th onclick="sortTable(1)" style="cursor:pointer";>Nombre</th>
+                            <th onclick="sortTable(2)" style="cursor:pointer";>Apellido</th>
+                            <th onclick="sortTable(3)" style="cursor:pointer";>Email</th>
+                        </tr>
+                        <?php $listaprofesores=$a->BuscarPersonal(); ?>
+                        
+                        <?php foreach ($listaprofesores as $profe): ?>
+                        <tr>
+                            <div>
+                                <td>
+                                    <?php echo $profe->getlegajo() ?>
+                                </td>
+                                <td>
+                                    <?php echo $profe->getnombre() ?>
+                                </td>
+                                <td>
+                                    <?php echo $profe->getapellido() ?>
+                                </td>
+                                <td>
+                                    <?php echo $profe->getemail() ?>
+                                </td>
+                                <td>
+                                <button type="submit" value=<?php echo $profe->getid_profesor()?> name="persona" formaction=<?php echo $editarPersonal ?>> Editar</button>
+                                </td>
+                                <td>
+                                <button type="submit" value=<?php echo $profe->getid_profesor()?> name="persona" formaction=<?php echo $bajaPersonal ?> onClick="return confirm('Esta seguro que desea eliminar')"> Eliminar</button>
+                                </td>             
+                            </div>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                </div>
+            </div> 
+            </div>
+    </form>
+<?php endif?>
+    <script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("myTable2");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc"; 
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++; 
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+
   <footer>
     <?php require $DIR.$footer; ?>      
   </footer>

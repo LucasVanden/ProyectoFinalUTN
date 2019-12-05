@@ -433,5 +433,40 @@ class controladorAdministrador extends conexion
             }
             return $alum;
         }
+        function BuscarPersonal(){
+            $listaProfesor=array();
+            $conn = $this->getconexion();
+            $stmt = $conn->prepare("SELECT fk_persona FROM usuario where fk_perfil=5 "); 
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $id=$row['fk_persona'];
+                $stmt2 = $conn->prepare("SELECT id_persona,nombre,apellido,email,dni FROM persona where eliminado is null and id_persona=$id ORDER BY apellido "); 
+                $stmt2->execute();
+                while($row = $stmt2->fetch()) {
+                    $prof = new Profesor();
+                    $prof->setid_profesor($row['id_persona']);
+                    $prof->setapellido($row['apellido']);
+                    $prof->setnombre($row['nombre']);
+                    $prof->setemail($row['email']);
+                    $prof->setlegajo($row['dni']);
+                array_push($listaProfesor,$prof);
+                }
+            }
+            return $listaProfesor;
+        }
+        function BuscarPersonaID($id){
+            $conn = $this->getconexion();
+            $stmt = $conn->prepare("SELECT id_persona,nombre,apellido,email,dni FROM persona where id_persona=$id"); 
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $prof = new Profesor();
+                $prof->setid_profesor($row['id_persona']);
+                $prof->setapellido($row['apellido']);
+                $prof->setnombre($row['nombre']);
+                $prof->setemail($row['email']);
+                $prof->setlegajo($row['dni']);
+            }
+            return $prof;
+            }
 }
 ?>

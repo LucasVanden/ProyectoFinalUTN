@@ -4,8 +4,8 @@ require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . $conexion;
 require_once ($DIR.$controladorAdministrador);
 $controladorbajaProfesor= $URL.$controladorbajaProfesor;
-$editProfesor= $URL.$editProfesor;
-$altaProfesor=$URL . $altaProfesor;
+$editPersonal= $URL.$editPersonal;
+$altaPersonal=$URL . $altaPersonal;
 $a= new controladorAdministrador();?>
 
 <!DOCTYPE html>
@@ -16,18 +16,18 @@ $a= new controladorAdministrador();?>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <meta charset="utf-8">
-    <title>Alta Profesor</title>
+    <title>Personal</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
   <body background = <?php echo $URL.$fondo?>>
   <?php require $DIR.$headera ?>
-  <?php $profe=$a->BuscarProfesorID($_POST['profesor'])?>
+  <?php $profe=$a->BuscarPersonaID($_POST['persona'])?>
 
  
 
-    <h2>Alta Profesor</h2>
-    <form action=<?php echo $editProfesor?> method="POST">
+    <h2>Editar Personal</h2>
+    <form action=<?php echo $editPersonal?> method="POST">
         <p>
           <label>Legajo: </label><input name="legajo" type="number" value= <?php echo $profe->getlegajo()?> min=1 required disabled ><br><br>
           <label>Legajo: </label><input name="legajo" type="hidden" value= <?php echo $profe->getlegajo()?> min=1 required  >
@@ -47,11 +47,11 @@ $a= new controladorAdministrador();?>
          </div>
          <?php endif; ?>    
          <?php endif; ?>
-
+        <input name="Tipo" type="hidden" value="Personal">
         <div><br><br><input type="submit" value="Enviar"></div>
         </form>
-        <form action=<?php echo $menuAltaProfesor?> method="POST">
-        <div><input type="submit" value="Volver" name="consultar" formaction=<?php echo $altaProfesor ?> /></div>
+        <form action=<?php echo $altaPersonal?> method="POST">
+        <div><input type="submit" value="Volver" name="consultar" formaction=<?php echo $altaPersonal ?> /></div>
         </form>
   </body>
   </html>

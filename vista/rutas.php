@@ -122,6 +122,11 @@ $eliminarDirecotr='/controlador/administrador/cargoDirector/eliminarDirecotr.php
 
 $altaAlumno='/vista/administrador/altaAlumno.php';
 $altaPersonal='/vista/administrador/altaPersonal.php';
+
+$editarPersonal='/vista/administrador/editarPersonal.php';
+$editPersonal='/controlador/administrador/editPersonal.php';
+$bajaPersonal='/controlador/administrador/bajaPersonal.php';
+
 //ABM DEPARTAMENTO
 $abmDepartamento='/vista/administrador/ambDepartamento.php';
 
@@ -140,6 +145,7 @@ $mostrarMaterias='/controlador/administrador/abmMateria.php/mostrarMaterias.php'
 //Alta Profesor
 $altaProfesor='/vista/administrador/profesor/altaProfesor.php';
 $editarProfesor='/vista/administrador/profesor/editarProfesor.php';
+
 $menuAltaProfesor='/vista/administrador/profesor/menuAltaProfesor.php';
 $bajaProfesor='/vista/administrador/profesor/bajaProfesor.php';
 $controladorbajaProfesor='/controlador/administrador/bajaProfesor.php';
@@ -179,3 +185,5 @@ $restaurarContraseñaMail='/vista/restaurarContrase&#241;a.php';
 
 $recuperarContraseniaUsuario='/controlador/recuperarContraseniaUsuario.php';
 $recuperarContraseña='/vista/recuperarContraseña.php';
+
+
