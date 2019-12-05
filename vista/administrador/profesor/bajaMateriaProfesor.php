@@ -66,7 +66,7 @@ if(isset($_POST['Materias'])){
                                 <?php 
                                $listaprofesores = $a->BuscarProfesor();
                                foreach ($listaprofesores as $profesor): ?> 
-                                <option <?php if($profesor->getid_profesor()==$_SESSION['idprofesor']){echo "selected";}?> value=<?php echo "{$profesor->getid_profesor()}" ?>> <?php echo "{$profesor->getApellido()}, {$profesor->getnombre()}" ?></option>   
+                                <option <?php if(isset($_SESSION['idprofesor'])){if($profesor->getid_profesor()==$_SESSION['idprofesor']){echo "selected";}}?> value=<?php echo "{$profesor->getid_profesor()}" ?>> <?php echo "{$profesor->getApellido()}, {$profesor->getnombre()}" ?></option>   
                                 <?php endforeach; 
                                ?>
 
