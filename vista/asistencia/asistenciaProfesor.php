@@ -4,7 +4,7 @@ require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$loginasistencia);
 }else{
-    if($_SESSION['rol'] != 2){
+    if( !($_SESSION['rol'] == 2|| $_SESSION['rol'] == 3)) {
         header('location: '. $URL.$loginasistencia);
     }
 }

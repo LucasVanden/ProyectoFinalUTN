@@ -55,7 +55,11 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
            // $message = 'Entro al 2';
            header('location: '. $URL.$asistenciaProfesor);
             break;
-            default:
+            case 3:
+            // $message = 'Entro al 1';
+            header('location: '. $URL.$asistenciaProfesor);
+             break;
+            
            // $message = 'Entro al default'. $perfil ;
         }
     }
