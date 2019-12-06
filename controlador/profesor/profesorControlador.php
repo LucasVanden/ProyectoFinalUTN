@@ -19,7 +19,7 @@ class Profesorcontrolador extends conexion
     function buscarMateriasProfesor($id){
 
         $conn = $this->getconexion();
-        $stmt = $conn->prepare("SELECT fk_materia,fk_dedicacion FROM dedicacion_materia_profesor where fk_profesor=$id"); 
+        $stmt = $conn->prepare("SELECT fk_materia,fk_dedicacion FROM dedicacion_materia_profesor where fk_profesor=$id and eliminado is null"); 
         $stmt->execute();
         $listaDedicaciones=array();
         while($row = $stmt->fetch()) {

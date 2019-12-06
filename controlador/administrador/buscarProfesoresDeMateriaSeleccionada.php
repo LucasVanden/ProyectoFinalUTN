@@ -12,7 +12,7 @@ $conexttion=$con->getconexion();
     if (isset($_GET['choice'])){
     $choice = $_GET['choice'];
 
-    $stmt = $conn->prepare("SELECT fk_profesor FROM dedicacion_materia_profesor where fk_materia='$choice' "); 
+    $stmt = $conn->prepare("SELECT fk_profesor FROM dedicacion_materia_profesor where fk_materia='$choice' and eliminado is null"); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
         $pro=$row['fk_profesor'];
