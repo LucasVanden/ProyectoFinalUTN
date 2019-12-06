@@ -69,7 +69,7 @@ $darbajaMateriaProfesor= $URL.$darbajaMateriaProfesor;
                             </td>
                             <th>Materia</th>
                             <td>                       
-                                <select id="second-choice" name="Materias">
+                                <select id="second-choice" name="Materias" required>
                                 </select> 
                                 <script>
                  $("#first-choice").change(function() {
@@ -104,11 +104,14 @@ $darbajaMateriaProfesor= $URL.$darbajaMateriaProfesor;
                 <br>
                 <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
                 <input id=buttonBuscar type="submit" value="Asignar" name="Asignar" formaction=<?php echo $altaMateriaAProfesor?> onclick="">
+                </form>
+                <form action="asignarMateriaAProfesor.php" method="POST">
                 <input id=buttonBuscar type="submit" value="Ver" name="ver" formaction=<?php echo $asignarMateriaAProfesor?> onclick="">
                 <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
+                </form>
             </div>                   
         <tr>               
-                    </form>
+                 
 
 <?php if( isset($_POST['ver'] ) || isset($_SESSION['Asignar']) ) :?>
 <?php $_SESSION['Asignar']=null;?>
@@ -145,7 +148,7 @@ $darbajaMateriaProfesor= $URL.$darbajaMateriaProfesor;
                             </td>
                     
                         <td>
-                            <button value=<?php echo $item[0]?> name='id_dedicacion_materia_profesor' formaction=<?php echo $darbajaMateriaProfesor?> >Eliminar <?php echo $item[0]?></button>
+                            <button value=<?php echo $item[0]?> name='id_dedicacion_materia_profesor' formaction=<?php echo $darbajaMateriaProfesor?> onClick="return confirm('Esta seguro que desea eliminar')">Eliminar </button>
                         </td>
                     </tr>
                     <?php endforeach?>
