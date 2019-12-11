@@ -12,7 +12,6 @@ if(!isset($_SESSION['rol'])){
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
 
-
 $abmcrearAula= $URL.$abmcrearAula;
 $Menu= $URL.$AsuetoMenu;
 $ABMAula= $URL.$ABMAula;
@@ -20,19 +19,25 @@ $borrarAula=$URL.$borrarAula;
 
 $a=new controladorAdministrador();
 $aulas=$a->BuscarAulas();
-
 ?>
 
-
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
- 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+        <title>Aulas</title>        
+        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/> 
     </head>
     <body background = <?php echo $URL.$fondo?> onload="mostrarPopUp()">
     <script src="jquery.js"></script>
@@ -40,31 +45,37 @@ $aulas=$a->BuscarAulas();
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Aulas</h2>
+    <div class="container">
+        <br>
         <form action=<?php echo $abmcrearAula ?> method="POST">
-            <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF" align="center">                     
-                    <tr>
-                        <th>Cuerpo</th>
-                        <td>
-                            <input type="text" name="cuerpo" required><br>
-                        </td>
-                    </tr>
-                    <tr>                   
-                        <th>Nivel</th>
-                        <td>
-                            <input type="number" name="nivel" min="-2" max="10" step="1" required>
-                        </td>
-                        <br>
-                    </tr>
-                    <tr>   
-                        <th>Aula</th>
-                        <td>
-                            <input type="text" name="Aula" required><br>
-                        </td>
-                        <br>
-                    </tr>   
-                </table>
+            <div class="form-group" align="center">
+                <h2 for="abmaula" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Aulas </h2>
+            </div>
+            <div class="container" align="center">
+                <div class="table-responsive col-md-5 col-md-offset-4">
+                    <table class="table table-bordered table-hover" id="tablaBuscar">                     
+                        <tr class="info">
+                            <th>Cuerpo</th>
+                            <td>
+                                <input class="form-control" type="text" name="cuerpo" required>
+                            </td>
+                        </tr>
+                        <tr>                   
+                            <th>Nivel</th>
+                            <td>
+                                <input class="form-control" type="number" name="nivel" min="-2" max="10" step="1" required>
+                            </td>
+                            <br>
+                        </tr>
+                        <tr>   
+                            <th>Aula</th>
+                            <td>
+                                <input class="form-control" type="text" name="Aula" required>
+                            </td>
+                            <br>
+                        </tr>   
+                    </table>
+                </div>
             </div>
             <div><input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $abmcrearAula ?> /></div>     
         </form>
@@ -104,6 +115,7 @@ $aulas=$a->BuscarAulas();
             </div> 
             </div>
         </form>
+        </div>
 
         <!-- <script>
             var x = document.getElementById("myDIV");
@@ -195,13 +207,6 @@ function sortTable(n) {
   }
 }
 </script>
-            <!-- metodo vandenbosch para ver el fondo -->
-            <div>
-            <td>.</td><br>
-            <td>.</td>
-            </div>
-             <!-- metodo vandenbosch para ver el fondo -->
-
            
 <div id="snackbar">
     <?php if ($_SESSION['existenteAula']) :?>
@@ -285,10 +290,6 @@ function gg() {
 }
 
 </script>
-
-
-
-
 </body>
     <footer>
     <?php require $DIR.$footer; ?>       

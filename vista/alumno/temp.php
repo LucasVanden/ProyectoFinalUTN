@@ -17,7 +17,7 @@ require_once ($DIR . $Dedicacion);
 require_once ($DIR. $email);
 
 $mail=array();
-array_push($mail,"vandenboschlucas@hotmail.com.com");
+array_push($mail,"vandenboschlucas@gmail.com");
 enviaremail($mail,"pikachu");
 echo $_GET['key'];
 echo rand(999, 99999);

@@ -34,7 +34,7 @@ $_SESSION['mensaje']=null;
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
         <title>Alumno Principal</title>
         <link rel="stylesheet" href="./../css/bootstrap.min.css">  
     </head>

@@ -20,14 +20,10 @@ $marcarfechaMesa= $URL.$marcarfechaMesa;
 
 $MenuIndex= $URL.$MenuIndex;
 
-
-
 $fechaMesaIngresar="'".date("Y-m-d")."'";
 if(isset($_SESSION['FechaMesaIngresada'])){
  $fechaMesaIngresar=$_SESSION['FechaMesaIngresada'];
  }
-
-
 
 $año=date('Y'); 
 $buscar=false;
@@ -36,42 +32,58 @@ if(isset($_SESSION['fechasBuscadas'])){
  }
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
- 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
+        <title>Mesas</title>
+        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/> 
     </head>
     <body onload="myFunction()" background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
     <style>
         html, body{
             text-align: left;      
-  }
-  </style>
+        }
+    </style>
         <?php require './../partials/headera.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2 align="center">Cargar Fecha de Mesa</h2>
-        <form action=<?php echo $controladorMesas ?> method="POST" align="center"> <!-- -->
+        <form action=<?php echo $controladorMesas ?> method="POST" align="center"> 
+        <br>
+            <div class="form-group" align="center">
+                <h2 for="menuindex" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Cargar Fecha de Mesa</h2>
+            </div>
             <div>
-                <table align="center" id="tablaBuscar" style="border-color: #FFFFFF">  
-                   
+                <table align="center" id="tablaBuscar" style="border-color: #FFFFFF">                     
                     <tr>
                         <th>Fecha Mesa</th>
                         <td>
                         <input type="date" id="f1" name="fechaMesa" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechaMesaIngresar;?>>   
                         </td>
-
-                    </tr>                   
-
+                    </tr>                
                 </table>
-</div>
-                    <div>  <input type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorMesas ?> />
-                    <input type="submit" value="Borrar" name="Obtener" formaction=<?php echo $controladorMesas ?> /></div>
+            </div>
+            <br>
+            <div class="form-group" align="center"> 
+                <button class="btn btn-success" id="Cargar" name="textoConfirmar" type="submit" formaction=<?php echo $controladorMesas ?>> <b>  +  Cargar  </b>  
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button> 
+                <button class="btn btn-danger" id="Borrar" type="submit" formaction=<?php echo $controladorMesas ?>> <b>  -  Borrar  </b>  
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button> 
+            </div> 
 
         <!-- <tr>
                         <th>Buscar mesas del año:</th>
@@ -1144,10 +1156,13 @@ foreach ($_SESSION['fechasBuscadas'] as $fecha): ?>
         }, 250);
     }
 </script>
+<br>
 <div align="center">
 <button style="width:75" class="feriado" disabled>Feriado</button>
-<button  style="width:75" class="receso" disabled>Receso</button>
+<button style="width:75" class="receso" disabled>Receso</button>
+<br>
 </div>
+<br>
     <footer>
        <?php require $DIR.$footer; ?>         
     </footer>  
