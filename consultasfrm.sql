@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2019 a las 07:02:49
+-- Tiempo de generación: 11-12-2019 a las 20:42:36
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -649,7 +649,11 @@ INSERT INTO `privilegioperfil` (`fk_perfil`, `fk_privilegio`) VALUES
 (4, 15),
 (4, 16),
 (4, 17),
-(4, 18);
+(4, 18),
+(6, 1),
+(6, 2),
+(6, 3),
+(6, 7);
 
 -- --------------------------------------------------------
 
