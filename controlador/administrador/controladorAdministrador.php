@@ -454,6 +454,27 @@ class controladorAdministrador extends conexion
             }
             return $listaProfesor;
         }
+        function BuscarAdmin(){
+            $listaProfesor=array();
+            $conn = $this->getconexion();
+            $stmt = $conn->prepare("SELECT fk_persona FROM usuario where fk_perfil=6 "); 
+            $stmt->execute();
+            while($row = $stmt->fetch()) {
+                $id=$row['fk_persona'];
+                $stmt2 = $conn->prepare("SELECT id_persona,nombre,apellido,email,dni FROM persona where eliminado is null and id_persona=$id ORDER BY apellido "); 
+                $stmt2->execute();
+                while($row = $stmt2->fetch()) {
+                    $prof = new Profesor();
+                    $prof->setid_profesor($row['id_persona']);
+                    $prof->setapellido($row['apellido']);
+                    $prof->setnombre($row['nombre']);
+                    $prof->setemail($row['email']);
+                    $prof->setlegajo($row['dni']);
+                array_push($listaProfesor,$prof);
+                }
+            }
+            return $listaProfesor;
+        }
         function BuscarPersonaID($id){
             $conn = $this->getconexion();
             $stmt = $conn->prepare("SELECT id_persona,nombre,apellido,email,dni FROM persona where id_persona=$id"); 
@@ -467,6 +488,57 @@ class controladorAdministrador extends conexion
                 $prof->setlegajo($row['dni']);
             }
             return $prof;
+            }
+
+            function BuscarPermisos($idRol){
+                $permisos=array();
+                $conn = $this->getconexion();
+                $stmt = $conn->prepare("SELECT privilegio.nombrePrivilegio,privilegio.numeroPermiso
+                FROM privilegio
+                INNER JOIN privilegioperfil 
+                    ON privilegioperfil.fk_privilegio = privilegio.id_privilegio
+                INNER JOIN perfil 
+                    ON privilegioperfil.fk_perfil = perfil.id_perfil
+                WHERE perfil.id_perfil='$idRol'"); 
+                $stmt->execute();
+                while($row = $stmt->fetch()) {
+                    array_push($permisos,$row[1]);
+                }
+                return $permisos;
+
+            }
+            function BuscarPermisosNombre($idRol){
+                $permisos=array();
+                $conn = $this->getconexion();
+                $stmt = $conn->prepare("SELECT privilegio.nombrePrivilegio,privilegio.numeroPermiso
+                FROM privilegio
+                INNER JOIN privilegioperfil 
+                    ON privilegioperfil.fk_privilegio = privilegio.id_privilegio
+                INNER JOIN perfil 
+                    ON privilegioperfil.fk_perfil = perfil.id_perfil
+                WHERE perfil.id_perfil='$idRol'"); 
+                $stmt->execute();
+                while($row = $stmt->fetch()) {
+                    $permisos1=array();
+                    array_push($permisos1,$row[0],$row[1]);
+                    array_push($permisos,$permisos1);
+                }
+                return $permisos;
+
+            }
+            function buscarNombrePrivilegios(){
+                $permisos=array();
+                $conn = $this->getconexion();
+                $stmt = $conn->prepare("SELECT privilegio.nombrePrivilegio,privilegio.numeroPermiso
+                FROM privilegio");
+                $stmt->execute();
+                while($row = $stmt->fetch()) {
+                    $permisos1=array();
+                    array_push($permisos1,$row[0],$row[1]);
+                    array_push($permisos,$permisos1);
+                }
+                return $permisos;
+
             }
 }
 ?>

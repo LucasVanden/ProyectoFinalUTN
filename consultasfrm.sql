@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-10-2019 a las 04:31:56
+-- Tiempo de generación: 11-12-2019 a las 06:50:28
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -35,18 +35,16 @@ CREATE TABLE `alumno` (
   `nombre` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `fechaNacimientoAlumno` date NOT NULL,
-  `telefonoAlumno` varchar(50) NOT NULL
+  `telefonoAlumno` varchar(50) NOT NULL,
+  `eliminado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `alumno`
 --
 
-INSERT INTO `alumno` (`id_alumno`, `legajo`, `apellido`, `nombre`, `email`, `fechaNacimientoAlumno`, `telefonoAlumno`) VALUES
-(1, 35821, 'van den bosch', 'lucas', 'vandenboschlucas@hotmail.com', '1992-05-18', '2616394922'),
-(2, 32145, 'Porte', 'Gaston', 'email', '2019-09-09', '2618586488'),
-(4, 123, '123', '123', '', '0000-00-00', ''),
-(16, 1234, '1234', '1234', '1234', '2019-08-01', '');
+INSERT INTO `alumno` (`id_alumno`, `legajo`, `apellido`, `nombre`, `email`, `fechaNacimientoAlumno`, `telefonoAlumno`, `eliminado`) VALUES
+(26, 35821, 'Van den Bosch', 'Lucas', 'vandenboschlucas@gmail.com', '1992-05-18', '02616394922', NULL);
 
 -- --------------------------------------------------------
 
@@ -67,51 +65,8 @@ CREATE TABLE `anotadosestado` (
 --
 
 INSERT INTO `anotadosestado` (`id_anotadoestado`, `fechaAnotadosEstado`, `horaAnotadosEstado`, `fk_estadoanotados`, `fk_detalleanotados`) VALUES
-(83, '2019-09-21', '20:16:21', 2, 73),
-(84, '2019-09-21', '20:17:17', 1, 73),
-(85, '2019-09-21', '20:17:57', 2, 73),
-(86, '2019-09-21', '20:18:01', 1, 73),
-(87, '2019-09-21', '20:18:04', 2, 73),
-(88, '2019-09-21', '20:18:07', 1, 73),
-(90, '2019-09-21', '20:19:20', 1, 78),
-(94, '2019-09-22', '22:47:03', 2, 73),
-(95, '2019-09-22', '22:54:31', 1, 73),
-(104, '2019-09-23', '00:24:43', 2, 73),
-(105, '2019-09-23', '00:24:54', 1, 73),
-(106, '2019-09-23', '00:25:07', 2, 73),
-(107, '2019-09-23', '00:25:11', 1, 73),
-(108, '2019-09-23', '00:30:26', 2, 73),
-(109, '2019-09-23', '00:31:09', 1, 73),
-(110, '2019-09-23', '00:31:23', 2, 73),
-(111, '2019-09-23', '01:33:42', 1, 78),
-(112, '2019-09-23', '12:18:57', 1, 73),
-(113, '2019-09-23', '12:19:32', 2, 73),
-(114, '2019-09-23', '12:19:41', 1, 73),
-(115, '2019-09-23', '12:23:47', 2, 73),
-(116, '2019-09-23', '12:23:50', 1, 73),
-(117, '2019-09-23', '12:24:52', 2, 73),
-(118, '2019-09-23', '12:24:55', 1, 73),
-(119, '2019-09-23', '12:25:52', 2, 73),
-(120, '2019-09-23', '12:25:55', 1, 73),
-(121, '2019-09-23', '12:27:24', 2, 73),
-(122, '2019-09-23', '12:27:27', 1, 73),
-(123, '2019-09-23', '12:28:00', 2, 73),
-(124, '2019-09-23', '12:28:03', 1, 73),
-(125, '2019-09-23', '12:31:06', 2, 73),
-(126, '2019-09-23', '12:31:11', 1, 73),
-(127, '2019-09-23', '12:33:25', 2, 73),
-(128, '2019-09-23', '12:33:29', 1, 73),
-(131, '2019-09-28', '18:02:04', 2, 73),
-(132, '2019-09-28', '18:02:18', 1, 73),
-(139, '2019-10-12', '13:19:26', 2, 73),
-(141, '2019-10-12', '13:20:18', 1, 73),
-(147, '2019-10-12', '19:52:30', 4, 90),
-(148, '2019-10-12', '19:53:03', 1, 91),
-(149, '2019-10-14', '22:15:52', 2, 90),
-(150, '2019-10-14', '22:21:14', 4, 91),
-(151, '2019-10-20', '04:14:21', 1, 92),
-(152, '2019-10-20', '04:16:48', 2, 92),
-(153, '2019-10-20', '04:23:24', 1, 91);
+(259, '2019-12-06', '11:54:16', 1, 129),
+(260, '2019-12-10', '23:42:06', 5, 129);
 
 -- --------------------------------------------------------
 
@@ -123,79 +78,85 @@ CREATE TABLE `asueto` (
   `id_asueto` int(20) NOT NULL,
   `fechaAsueto` date NOT NULL,
   `horaDesdeAsueto` time NOT NULL,
-  `horaHastaAsueto` time NOT NULL
+  `horaHastaAsueto` time NOT NULL,
+  `tipo` varchar(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `asueto`
 --
 
-INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`) VALUES
-(971, '2019-12-30', '08:00:00', '23:30:00'),
-(972, '2019-12-31', '08:00:00', '23:30:00'),
-(973, '2020-01-01', '08:00:00', '23:30:00'),
-(974, '2020-01-02', '08:00:00', '23:30:00'),
-(975, '2020-01-03', '08:00:00', '23:30:00'),
-(976, '2020-01-04', '08:00:00', '23:30:00'),
-(977, '2020-01-05', '08:00:00', '23:30:00'),
-(978, '2020-01-06', '08:00:00', '23:30:00'),
-(979, '2020-01-07', '08:00:00', '23:30:00'),
-(980, '2020-01-08', '08:00:00', '23:30:00'),
-(981, '2020-01-09', '08:00:00', '23:30:00'),
-(982, '2020-01-10', '08:00:00', '23:30:00'),
-(983, '2020-01-11', '08:00:00', '23:30:00'),
-(984, '2020-01-12', '08:00:00', '23:30:00'),
-(985, '2020-01-13', '08:00:00', '23:30:00'),
-(986, '2020-01-14', '08:00:00', '23:30:00'),
-(987, '2020-01-15', '08:00:00', '23:30:00'),
-(988, '2020-01-16', '08:00:00', '23:30:00'),
-(989, '2020-01-17', '08:00:00', '23:30:00'),
-(990, '2020-01-18', '08:00:00', '23:30:00'),
-(991, '2020-01-19', '08:00:00', '23:30:00'),
-(992, '2020-01-20', '08:00:00', '23:30:00'),
-(993, '2020-01-21', '08:00:00', '23:30:00'),
-(994, '2020-01-22', '08:00:00', '23:30:00'),
-(995, '2020-01-23', '08:00:00', '23:30:00'),
-(996, '2020-01-24', '08:00:00', '23:30:00'),
-(997, '2020-01-25', '08:00:00', '23:30:00'),
-(998, '2020-01-26', '08:00:00', '23:30:00'),
-(999, '2020-01-27', '08:00:00', '23:30:00'),
-(1000, '2020-01-28', '08:00:00', '23:30:00'),
-(1001, '2020-01-29', '08:00:00', '23:30:00'),
-(1002, '2020-01-30', '08:00:00', '23:30:00'),
-(1003, '2020-01-31', '08:00:00', '23:30:00'),
-(1004, '2020-02-01', '08:00:00', '23:30:00'),
-(1005, '2020-02-02', '08:00:00', '23:30:00'),
-(1006, '2020-02-03', '08:00:00', '23:30:00'),
-(1007, '2020-02-04', '08:00:00', '23:30:00'),
-(1008, '2020-02-05', '08:00:00', '23:30:00'),
-(1009, '2020-02-06', '08:00:00', '23:30:00'),
-(1010, '2020-02-07', '08:00:00', '23:30:00'),
-(1011, '2020-02-08', '08:00:00', '23:30:00'),
-(1012, '2020-02-09', '08:00:00', '23:30:00'),
-(1013, '2020-02-10', '08:00:00', '23:30:00'),
-(1014, '2020-02-11', '08:00:00', '23:30:00'),
-(1015, '2020-02-12', '08:00:00', '23:30:00'),
-(1016, '2020-02-13', '08:00:00', '23:30:00'),
-(1017, '2020-02-14', '08:00:00', '23:30:00'),
-(1018, '2020-02-15', '08:00:00', '23:30:00'),
-(1019, '2020-02-16', '08:00:00', '23:30:00'),
-(1020, '2020-02-17', '08:00:00', '23:30:00'),
-(1021, '2020-02-18', '08:00:00', '23:30:00'),
-(1022, '2020-02-19', '08:00:00', '23:30:00'),
-(1023, '2020-02-20', '08:00:00', '23:30:00'),
-(1024, '2020-02-21', '08:00:00', '23:30:00'),
-(1025, '2020-02-22', '08:00:00', '23:30:00'),
-(1026, '2020-02-23', '08:00:00', '23:30:00'),
-(1027, '2020-02-24', '08:00:00', '23:30:00'),
-(1028, '2020-02-25', '08:00:00', '23:30:00'),
-(1029, '2020-02-26', '08:00:00', '23:30:00'),
-(1030, '2020-02-27', '08:00:00', '23:30:00'),
-(1031, '2020-02-28', '08:00:00', '23:30:00'),
-(1032, '2020-02-29', '08:00:00', '23:30:00'),
-(1033, '2020-03-01', '08:00:00', '23:30:00'),
-(1065, '2020-03-01', '08:00:00', '23:30:00'),
-(1070, '2020-03-01', '08:00:00', '23:30:00');
+INSERT INTO `asueto` (`id_asueto`, `fechaAsueto`, `horaDesdeAsueto`, `horaHastaAsueto`, `tipo`) VALUES
+(1224, '2019-01-01', '08:00:00', '23:30:00', 'receso'),
+(1225, '2019-01-02', '08:00:00', '23:30:00', 'receso'),
+(1226, '2019-01-03', '08:00:00', '23:30:00', 'receso'),
+(1227, '2019-01-04', '08:00:00', '23:30:00', 'receso'),
+(1228, '2019-01-05', '08:00:00', '23:30:00', 'receso'),
+(1229, '2019-01-06', '08:00:00', '23:30:00', 'receso'),
+(1230, '2019-01-07', '08:00:00', '23:30:00', 'receso'),
+(1231, '2019-01-08', '08:00:00', '23:30:00', 'receso'),
+(1232, '2019-01-09', '08:00:00', '23:30:00', 'receso'),
+(1233, '2019-01-10', '08:00:00', '23:30:00', 'receso'),
+(1234, '2019-01-11', '08:00:00', '23:30:00', 'receso'),
+(1235, '2019-01-12', '08:00:00', '23:30:00', 'receso'),
+(1236, '2019-01-13', '08:00:00', '23:30:00', 'receso'),
+(1237, '2019-01-14', '08:00:00', '23:30:00', 'receso'),
+(1238, '2019-01-15', '08:00:00', '23:30:00', 'receso'),
+(1239, '2019-01-16', '08:00:00', '23:30:00', 'receso'),
+(1240, '2019-01-17', '08:00:00', '23:30:00', 'receso'),
+(1241, '2019-01-18', '08:00:00', '23:30:00', 'receso'),
+(1242, '2019-01-19', '08:00:00', '23:30:00', 'receso'),
+(1243, '2019-01-20', '08:00:00', '23:30:00', 'receso'),
+(1244, '2019-01-21', '08:00:00', '23:30:00', 'receso'),
+(1245, '2019-01-22', '08:00:00', '23:30:00', 'receso'),
+(1246, '2019-01-23', '08:00:00', '23:30:00', 'receso'),
+(1247, '2019-01-24', '08:00:00', '23:30:00', 'receso'),
+(1248, '2019-01-25', '08:00:00', '23:30:00', 'receso'),
+(1249, '2019-01-26', '08:00:00', '23:30:00', 'receso'),
+(1250, '2019-01-27', '08:00:00', '23:30:00', 'receso'),
+(1251, '2019-01-28', '08:00:00', '23:30:00', 'receso'),
+(1252, '2019-01-29', '08:00:00', '23:30:00', 'receso'),
+(1253, '2019-01-30', '08:00:00', '23:30:00', 'receso'),
+(1254, '2019-01-31', '08:00:00', '23:30:00', 'receso'),
+(1256, '2019-12-01', '08:00:00', '23:30:00', 'receso'),
+(1257, '2019-12-02', '08:00:00', '23:30:00', 'receso'),
+(1258, '2019-12-03', '08:00:00', '23:30:00', 'receso'),
+(1259, '2019-12-04', '08:00:00', '23:30:00', 'receso'),
+(1260, '2019-12-05', '08:00:00', '23:30:00', 'receso'),
+(1261, '2019-12-06', '08:00:00', '23:30:00', 'receso'),
+(1262, '2019-12-07', '08:00:00', '23:30:00', 'receso'),
+(1263, '2019-12-08', '08:00:00', '23:30:00', 'receso'),
+(1264, '2019-12-09', '08:00:00', '23:30:00', 'receso'),
+(1265, '2019-12-10', '08:00:00', '23:30:00', 'receso'),
+(1266, '2019-12-11', '08:00:00', '23:30:00', 'receso'),
+(1267, '2019-12-12', '08:00:00', '23:30:00', 'receso'),
+(1268, '2019-12-13', '08:00:00', '23:30:00', 'receso'),
+(1269, '2019-12-14', '08:00:00', '23:30:00', 'receso'),
+(1270, '2019-12-15', '08:00:00', '23:30:00', 'receso'),
+(1271, '2019-12-16', '08:00:00', '23:30:00', 'receso'),
+(1272, '2019-12-17', '08:00:00', '23:30:00', 'receso'),
+(1273, '2019-12-18', '08:00:00', '23:30:00', 'receso'),
+(1274, '2019-12-19', '08:00:00', '23:30:00', 'receso'),
+(1275, '2019-12-20', '08:00:00', '23:30:00', 'receso'),
+(1276, '2019-12-21', '08:00:00', '23:30:00', 'receso'),
+(1277, '2019-12-22', '08:00:00', '23:30:00', 'receso'),
+(1278, '2019-12-23', '08:00:00', '23:30:00', 'receso'),
+(1279, '2019-12-24', '08:00:00', '23:30:00', 'receso'),
+(1280, '2019-12-25', '08:00:00', '23:30:00', 'receso'),
+(1281, '2019-12-26', '08:00:00', '23:30:00', 'receso'),
+(1282, '2019-12-27', '08:00:00', '23:30:00', 'receso'),
+(1283, '2019-12-28', '08:00:00', '23:30:00', 'receso'),
+(1284, '2019-12-29', '08:00:00', '23:30:00', 'receso'),
+(1285, '2019-12-30', '08:00:00', '23:30:00', 'receso'),
+(1286, '2019-12-31', '08:00:00', '23:30:00', 'receso'),
+(1287, '2019-04-12', '08:00:00', '23:30:00', 'feriado'),
+(1288, '2019-05-01', '08:00:00', '23:30:00', 'feriado'),
+(1289, '2019-05-25', '08:00:00', '23:30:00', 'feriado'),
+(1290, '2019-12-25', '08:00:00', '23:30:00', 'feriado'),
+(1291, '2019-10-10', '08:00:00', '23:30:00', 'feriado'),
+(1294, '2019-02-01', '08:00:00', '23:30:00', 'feriado'),
+(1295, '2019-02-09', '08:00:00', '23:30:00', 'feriado'),
+(1296, '2019-02-06', '08:00:00', '23:30:00', 'feriado');
 
 -- --------------------------------------------------------
 
@@ -207,16 +168,18 @@ CREATE TABLE `aula` (
   `cuerpoAula` varchar(20) NOT NULL,
   `nivelAula` int(11) NOT NULL,
   `numeroAula` varchar(20) NOT NULL,
-  `id_aula` int(20) NOT NULL
+  `id_aula` int(20) NOT NULL,
+  `eliminado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `aula`
 --
 
-INSERT INTO `aula` (`cuerpoAula`, `nivelAula`, `numeroAula`, `id_aula`) VALUES
-('qwe', 1, '123', 106),
-('', 0, '', 107);
+INSERT INTO `aula` (`cuerpoAula`, `nivelAula`, `numeroAula`, `id_aula`, `eliminado`) VALUES
+('central', 1, 'consultas', 143, NULL),
+('1', 1, '01', 144, NULL),
+('1', 1, '02', 145, NULL);
 
 -- --------------------------------------------------------
 
@@ -231,27 +194,6 @@ CREATE TABLE `avisoprofesor` (
   `fk_horadeconsulta` int(20) NOT NULL,
   `horaAvisoProfesor` time(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `avisoprofesor`
---
-
-INSERT INTO `avisoprofesor` (`id_avisoprofesor`, `fechaAvisoProfesor`, `detalleDescripcion`, `fk_horadeconsulta`, `horaAvisoProfesor`) VALUES
-(9, '2019-10-12', 'pikachu', 28, '15:59:58.00000'),
-(10, '2019-10-12', 'pikachu', 28, '16:03:25.00000'),
-(11, '2019-10-12', 'pikachu', 28, '16:07:05.00000'),
-(12, '2019-10-12', 'pikachu', 28, '16:10:43.00000'),
-(13, '2019-10-12', '1', 31, '18:29:03.00000'),
-(14, '2019-10-12', '2', 32, '18:29:06.00000'),
-(15, '2019-10-12', 'pikachu', 31, '18:53:47.00000'),
-(16, '2019-10-12', 'pikachu', 31, '18:56:09.00000'),
-(17, '2019-10-12', 'pikachu', 31, '18:57:00.00000'),
-(18, '2019-10-12', 'test mails 2', 31, '19:43:25.00000'),
-(19, '2019-10-12', 'NO TIFICACION', 31, '19:44:22.00000'),
-(20, '2019-10-12', 'test mail v1.0', 31, '19:53:30.00000'),
-(21, '2019-10-12', 'v2.0', 31, '19:54:56.00000'),
-(22, '2019-10-12', 'v.3', 31, '19:55:25.00000'),
-(23, '2019-10-12', 'v.4', 31, '19:58:30.00000');
 
 -- --------------------------------------------------------
 
@@ -292,16 +234,15 @@ CREATE TABLE `dedicacion_materia_profesor` (
 --
 
 INSERT INTO `dedicacion_materia_profesor` (`id_dedicacion_materia_profesor`, `fk_dedicacion`, `fk_materia`, `fk_profesor`, `eliminado`) VALUES
-(1, 1, 1, 2, NULL),
-(2, 2, 4, 2, NULL),
-(3, 2, 2, 3, NULL),
-(4, 2, 2, 3, NULL),
-(5, 1, 3, 5, 1),
-(6, 1, 7, 6, NULL),
-(7, 1, 7, 6, NULL),
-(8, 1, 7, 6, NULL),
-(9, 1, 7, 6, NULL),
-(18, 1, 7, 10, NULL);
+(83, 1, 24, 33, 1),
+(84, 2, 26, 33, 1),
+(85, 1, 24, 33, 1),
+(86, 1, 25, 33, 1),
+(87, 1, 26, 33, 1),
+(88, 1, 24, 33, 1),
+(89, 1, 25, 33, NULL),
+(90, 1, 26, 33, 1),
+(91, 1, 24, 33, NULL);
 
 -- --------------------------------------------------------
 
@@ -311,20 +252,18 @@ INSERT INTO `dedicacion_materia_profesor` (`id_dedicacion_materia_profesor`, `fk
 
 CREATE TABLE `departamento` (
   `id_departamento` int(20) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `nombre` varchar(50) NOT NULL,
+  `fk_aula` int(20) NOT NULL,
+  `eliminado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `departamento`
 --
 
-INSERT INTO `departamento` (`id_departamento`, `nombre`) VALUES
-(1, 'Sistemas'),
-(2, 'Básicas'),
-(3, 'Civil'),
-(4, 'Electrónica'),
-(5, 'Electromecénica'),
-(6, 'Química');
+INSERT INTO `departamento` (`id_departamento`, `nombre`, `fk_aula`, `eliminado`) VALUES
+(21, 'Sistemas', 143, NULL),
+(22, 'Basicas', 144, NULL);
 
 -- --------------------------------------------------------
 
@@ -346,9 +285,7 @@ CREATE TABLE `detalleanotados` (
 --
 
 INSERT INTO `detalleanotados` (`id_detalleanotados`, `fechaDesdeAnotados`, `horaDetalleAnotados`, `tema`, `fk_alumno`, `fk_horadeconsulta`) VALUES
-(90, '2019-10-12', '19:52:30.000000', '1', 2, 31),
-(91, '2019-10-12', '19:53:03.000000', '', 1, 31),
-(92, '2019-10-20', '04:14:21.000000', '', 1, 54);
+(129, '2019-12-06', '11:54:16.000000', 'lala', 26, 125);
 
 -- --------------------------------------------------------
 
@@ -406,12 +343,20 @@ CREATE TABLE `falta` (
   `id_falta` int(20) NOT NULL,
   `fechaFalta` date NOT NULL,
   `tipo` varchar(20) CHARACTER SET utf8 NOT NULL,
-  `min` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
+  `minutos` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `fk_horadeconsulta` int(20) NOT NULL,
   `fk_materia` int(20) NOT NULL,
   `fk_profesor` int(20) NOT NULL,
   `fk_departamento` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `falta`
+--
+
+INSERT INTO `falta` (`id_falta`, `fechaFalta`, `tipo`, `minutos`, `fk_horadeconsulta`, `fk_materia`, `fk_profesor`, `fk_departamento`) VALUES
+(1, '2019-12-09', 'Falta', NULL, 125, 24, 33, 21),
+(2, '2019-12-09', 'Falta', NULL, 126, 24, 33, 21);
 
 -- --------------------------------------------------------
 
@@ -429,13 +374,20 @@ CREATE TABLE `fechamesa` (
 --
 
 INSERT INTO `fechamesa` (`id_fechaMesa`, `fechaMesa`) VALUES
-(46, '2020-02-22'),
-(56, '2020-01-14'),
-(57, '2020-01-15'),
-(58, '2019-10-30'),
-(59, '2019-10-31'),
-(60, '2021-10-11'),
-(62, '2019-10-20');
+(75, '2019-02-04'),
+(76, '2019-02-05'),
+(78, '2019-02-07'),
+(79, '2019-02-08'),
+(81, '2019-08-12'),
+(82, '2019-08-13'),
+(83, '2019-08-14'),
+(84, '2019-08-15'),
+(85, '2019-08-16'),
+(86, '2019-11-04'),
+(87, '2019-11-12'),
+(88, '2019-11-28'),
+(89, '2019-11-20'),
+(90, '2019-10-25');
 
 -- --------------------------------------------------------
 
@@ -460,9 +412,10 @@ CREATE TABLE `horadeconsulta` (
 --
 
 INSERT INTO `horadeconsulta` (`id_horadeconsulta`, `fechaDesdeAnotados`, `fechaHastaAnotados`, `cantidadAnotados`, `estadoPresentismo`, `estadoVigencia`, `fk_materia`, `fk_horariodeconsulta`, `fk_profesor`) VALUES
-(31, '2019-10-12', '2019-10-22', 4, 'activo', 'activo', 1, 65, 2),
-(40, '2019-10-08', '2019-10-15', 0, 'activo', 'completo', 1, 64, 2),
-(54, '2019-10-15', '2019-10-29', 0, 'activo', 'activo', 1, 64, 2);
+(125, '2019-12-06', '2019-12-09', 1, 'calculado', 'completo', 24, 132, 33),
+(126, '2019-12-06', '2019-12-09', 0, 'calculado', 'completo', 24, 133, 33),
+(127, '2019-12-09', '2020-01-06', 0, 'pendiente', 'activo', 24, 132, 33),
+(128, '2019-12-09', '2020-01-06', 0, 'pendiente', 'activo', 24, 133, 33);
 
 -- --------------------------------------------------------
 
@@ -487,7 +440,8 @@ CREATE TABLE `horariocursado` (
 --
 
 INSERT INTO `horariocursado` (`id_horariocursado`, `HoraDesde`, `HoraHasta`, `fk_profesor`, `fk_materia`, `semestreAnual`, `fk_dia`, `fk_turno`, `comision`) VALUES
-(1, '08:00:00', '08:00:00', 5, 3, '1', 1, NULL, NULL);
+(43, '14:00:00', '19:00:00', 33, 24, 'anual', 1, NULL, NULL),
+(44, '19:00:00', '23:30:00', 33, 24, 'anual', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -513,12 +467,14 @@ CREATE TABLE `horariodeconsulta` (
 --
 
 INSERT INTO `horariodeconsulta` (`id_horariodeconsulta`, `hora`, `activoDesde`, `activoHasta`, `fk_dia`, `fk_materia`, `fk_profesor`, `semestre`, `n`, `fk_aula`) VALUES
-(62, '08:00', '2019-10-12', '0000-00-00', 1, 1, 2, 1, 1, 1),
-(63, '08:00', '2019-10-12', '0000-00-00', 4, 1, 2, 1, 2, 2),
-(64, '08:00', '2019-10-12', '0000-00-00', 2, 1, 4, 2, 1, 1),
-(65, '08:00', '2019-10-12', '0000-00-00', 4, 1, 2, 2, 2, 2),
-(66, '08:00', '2019-10-12', '0000-00-00', 2, 1, 2, 31, 1, 2),
-(67, '08:00', '2019-10-12', '0000-00-00', 2, 1, 2, 32, 1, 1);
+(130, '08:00', '2019-12-06', '0000-00-00', 1, 24, 33, 1, 1, 143),
+(131, '09:00', '2019-12-06', '0000-00-00', 1, 24, 33, 1, 2, 143),
+(132, '08:00', '2019-12-06', '0000-00-00', 1, 24, 33, 2, 1, 143),
+(133, '09:00', '2019-12-06', '0000-00-00', 1, 24, 33, 2, 2, 143),
+(134, '08:00', '2019-12-06', '0000-00-00', 4, 24, 33, 31, 1, 143),
+(135, '08:00', '2019-12-06', '0000-00-00', 4, 24, 33, 32, 1, 143),
+(136, '09:00', '2019-12-06', '0000-00-00', 4, 24, 33, 31, 2, 143),
+(137, '09:00', '2019-12-06', '0000-00-00', 4, 24, 33, 32, 2, 143);
 
 -- --------------------------------------------------------
 
@@ -530,21 +486,18 @@ CREATE TABLE `materia` (
   `id_materia` int(20) NOT NULL,
   `nombreMateria` varchar(50) NOT NULL,
   `fk_departamento` int(20) NOT NULL,
-  `fk_dia` int(20) NOT NULL
+  `fk_dia` int(20) NOT NULL,
+  `eliminado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `materia`
 --
 
-INSERT INTO `materia` (`id_materia`, `nombreMateria`, `fk_departamento`, `fk_dia`) VALUES
-(1, 'Proyecto Final', 1, 1),
-(2, 'Computacion en la Nube', 1, 5),
-(3, 'Análisis matemático', 2, 3),
-(4, 'Administración Gerencial', 1, 2),
-(5, 'pikachu 3', 1, 3),
-(6, 'pikachu 4', 1, 5),
-(7, 'quimica 1', 6, 3);
+INSERT INTO `materia` (`id_materia`, `nombreMateria`, `fk_departamento`, `fk_dia`, `eliminado`) VALUES
+(24, 'Proyecto FInal', 21, 1, NULL),
+(25, 'Analisis de sistema', 21, 3, NULL),
+(26, 'Diseño de Sistemas', 21, 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -562,11 +515,8 @@ CREATE TABLE `materias_alumno` (
 --
 
 INSERT INTO `materias_alumno` (`fk_alumno`, `fk_materia`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(2, 1),
-(4, 4);
+(26, 24),
+(26, 26);
 
 -- --------------------------------------------------------
 
@@ -585,7 +535,35 @@ CREATE TABLE `perfil` (
 
 INSERT INTO `perfil` (`nombrePerfil`, `id_perfil`) VALUES
 ('alumno', 1),
-('profesor', 2);
+('profesor', 2),
+('director', 3),
+('root', 4),
+('personal', 5),
+('administrador', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `persona`
+--
+
+CREATE TABLE `persona` (
+  `id_persona` int(20) NOT NULL,
+  `nombre` varchar(11) NOT NULL,
+  `apellido` varchar(11) NOT NULL,
+  `dni` int(11) NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `eliminado` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`id_persona`, `nombre`, `apellido`, `dni`, `email`, `eliminado`) VALUES
+(8, 'aa', 'aa', 1, 'algo@gmail.com.ar', NULL),
+(9, 'Admin', 'Admina', 3574, 'admin@gmail.com', NULL),
+(10, 'test', 'test', 15478, 'algo@gmail.com.ar', NULL);
 
 -- --------------------------------------------------------
 
@@ -602,13 +580,6 @@ CREATE TABLE `presentismo` (
   `fk_horadeconsulta` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `presentismo`
---
-
-INSERT INTO `presentismo` (`id_presentismo`, `fecha`, `horaDesde`, `horaHasta`, `fk_profesor`, `fk_horadeconsulta`) VALUES
-(21, '2019-10-15', '00:50:52', '00:50:56', 2, 40);
-
 -- --------------------------------------------------------
 
 --
@@ -616,10 +587,33 @@ INSERT INTO `presentismo` (`id_presentismo`, `fecha`, `horaDesde`, `horaHasta`, 
 --
 
 CREATE TABLE `privilegio` (
-  `nombrePrivilegio` varchar(20) NOT NULL,
-  `numeroPerfil` int(11) NOT NULL,
-  `id_privilegio` int(20) NOT NULL
+  `nombrePrivilegio` varchar(35) NOT NULL,
+  `id_privilegio` int(35) NOT NULL,
+  `numeroPermiso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `privilegio`
+--
+
+INSERT INTO `privilegio` (`nombrePrivilegio`, `id_privilegio`, `numeroPermiso`) VALUES
+('Recesos', 1, 1),
+('Feriados', 2, 2),
+('Asuetos', 3, 3),
+('Mesas', 4, 4),
+('Aulas', 5, 5),
+('Departamentos', 6, 6),
+('Materias', 7, 7),
+('Profesor', 8, 8),
+('Asignar Materia a Profesor', 9, 9),
+('Asignar Horario de Cursado', 10, 10),
+('Cambiar Aula de consulta', 11, 11),
+('Alumno', 12, 12),
+('Cargo Director', 13, 13),
+('Personal', 14, 14),
+('Cerrar horas de Ausentes', 15, 15),
+('Calcular Asistencia', 16, 16),
+('Backup', 17, 17);
 
 -- --------------------------------------------------------
 
@@ -631,6 +625,29 @@ CREATE TABLE `privilegioperfil` (
   `fk_perfil` int(20) NOT NULL,
   `fk_privilegio` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `privilegioperfil`
+--
+
+INSERT INTO `privilegioperfil` (`fk_perfil`, `fk_privilegio`) VALUES
+(4, 1),
+(4, 2),
+(4, 3),
+(4, 4),
+(4, 5),
+(4, 6),
+(4, 7),
+(4, 8),
+(4, 9),
+(4, 10),
+(4, 11),
+(4, 12),
+(4, 13),
+(4, 14),
+(4, 15),
+(4, 16),
+(4, 17);
 
 -- --------------------------------------------------------
 
@@ -644,20 +661,17 @@ CREATE TABLE `profesor` (
   `apellido` varchar(50) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `fk_dedicacion_materia_profesor` int(20) DEFAULT NULL
+  `fk_dedicacion_materia_profesor` int(20) DEFAULT NULL,
+  `eliminado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `profesor`
 --
 
-INSERT INTO `profesor` (`id_profesor`, `legajo`, `apellido`, `nombre`, `email`, `fk_dedicacion_materia_profesor`) VALUES
-(2, '1234', 'Vazquez', 'Alejandro ', 'vandenboschlucas@gmail.com', NULL),
-(3, '789', 'Ryan', 'Mauricio', 'mauriciorayan@gmail.com', NULL),
-(4, '1234', 'Moralejo', 'Raúl ', 'moralejoraul@gmail.com', NULL),
-(5, '4321', 'Manino', 'Gustavo', 'marinogustavo@gmail.com', NULL),
-(6, '1452', 'Villa', 'Diego', 'villadiego@gmail.com', NULL),
-(10, '4625', 'Profesor', 'Señor', 'señorProfesor@hotmail.com', NULL);
+INSERT INTO `profesor` (`id_profesor`, `legajo`, `apellido`, `nombre`, `email`, `fk_dedicacion_materia_profesor`, `eliminado`) VALUES
+(33, '1234', 'Vazques', 'Alejando', 'mail@gmail.com', NULL, NULL),
+(34, '45688', 'ahora ', 'profe', 'algo@gmail.com.ar', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -691,19 +705,23 @@ CREATE TABLE `usuario` (
   `contraseña` varchar(70) NOT NULL,
   `fk_alumno` int(20) DEFAULT NULL,
   `fk_profesor` int(20) DEFAULT NULL,
-  `fk_perfil` int(20) NOT NULL
+  `fk_perfil` int(20) NOT NULL,
+  `fk_persona` int(20) DEFAULT NULL,
+  `keygen` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `usuario`, `contraseña`, `fk_alumno`, `fk_profesor`, `fk_perfil`) VALUES
-(6, '35821', '$2y$10$LTAsfQoxzhQXQOu88XBAoerUDbW7O68wNPrHz3x8gIc0Ddnyt61s6', 1, NULL, 1),
-(7, 'porte', '$2y$10$LHdyKE6JxmTVqA6T.mdYPOblig4zCJw.BeUbalTk21wSG/h89uaJW', 2, NULL, 1),
-(8, 'test', '$2y$10$jEshAdowgM5ekVRLD/b9YenbPegwO3aFY0vkwHU6KQ51rgBYg33ZK', 4, NULL, 1),
-(10, 'root', '$2y$10$PNwqEM24Ie1UMpkA999Z8eTrPa3.WRJ6UrU7U6sWDjCYEoP.qQs8K', NULL, 2, 2),
-(11, '4625', '$2y$10$BrXc50ww8zVVbEtCOezPzO.NCdcf7qVu08.WDz2byPVIOouhfOiAC', NULL, 10, 2);
+INSERT INTO `usuario` (`id_usuario`, `usuario`, `contraseña`, `fk_alumno`, `fk_profesor`, `fk_perfil`, `fk_persona`, `keygen`) VALUES
+(10, 'root', '$2y$10$PNwqEM24Ie1UMpkA999Z8eTrPa3.WRJ6UrU7U6sWDjCYEoP.qQs8K', NULL, 2, 4, NULL, NULL),
+(51, '1234', '$2y$10$zd1l7Ro5xkehn7yqDkvfdez00UYcJioTgWLymtxU.Y3eTfrciUzcm', NULL, 33, 3, NULL, NULL),
+(52, '45688', '$2y$10$hQyvZ3Akft/TdYHYSQVkMui2sLMZhaTMSCGj4my7kp7DXnvQAU1HK', NULL, 34, 3, NULL, NULL),
+(53, '35821', '$2y$10$0jX4ixRHNyQGsajrrij5meH5sT5e7Gkr2FoRma2h6kHyMub0QX23G', 26, NULL, 1, NULL, NULL),
+(54, '1', '$2y$10$v4MankqoPPCAoZfVnBjlWe9Ys5KUz22t09.tuWl6B2ELDQo9affVi', NULL, NULL, 5, 8, NULL),
+(55, '3574', '$2y$10$nOIU/fRbbv.ngnImn/bu2.O2yaVfC4k9kCbn1wrTVeiLaH.VSdlGm', NULL, NULL, 6, 9, NULL),
+(56, '15478', '$2y$10$EHHC22SdYxgt0YlYjGfxD.1sn5zo4ysvn2W9XPrc5dj/0dSGiVIIm', NULL, NULL, 6, 10, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -855,6 +873,12 @@ ALTER TABLE `perfil`
   ADD PRIMARY KEY (`id_perfil`);
 
 --
+-- Indices de la tabla `persona`
+--
+ALTER TABLE `persona`
+  ADD PRIMARY KEY (`id_persona`);
+
+--
 -- Indices de la tabla `presentismo`
 --
 ALTER TABLE `presentismo`
@@ -905,27 +929,27 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `id_alumno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_alumno` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT de la tabla `anotadosestado`
 --
 ALTER TABLE `anotadosestado`
-  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
+  MODIFY `id_anotadoestado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=261;
 --
 -- AUTO_INCREMENT de la tabla `asueto`
 --
 ALTER TABLE `asueto`
-  MODIFY `id_asueto` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1071;
+  MODIFY `id_asueto` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1297;
 --
 -- AUTO_INCREMENT de la tabla `aula`
 --
 ALTER TABLE `aula`
-  MODIFY `id_aula` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id_aula` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 --
 -- AUTO_INCREMENT de la tabla `avisoprofesor`
 --
 ALTER TABLE `avisoprofesor`
-  MODIFY `id_avisoprofesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_avisoprofesor` int(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `dedicacion`
 --
@@ -935,17 +959,17 @@ ALTER TABLE `dedicacion`
 -- AUTO_INCREMENT de la tabla `dedicacion_materia_profesor`
 --
 ALTER TABLE `dedicacion_materia_profesor`
-  MODIFY `id_dedicacion_materia_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_dedicacion_materia_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 --
 -- AUTO_INCREMENT de la tabla `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `id_departamento` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_departamento` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `detalleanotados`
 --
 ALTER TABLE `detalleanotados`
-  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id_detalleanotados` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
 --
 -- AUTO_INCREMENT de la tabla `dia`
 --
@@ -960,52 +984,57 @@ ALTER TABLE `estadoanotados`
 -- AUTO_INCREMENT de la tabla `falta`
 --
 ALTER TABLE `falta`
-  MODIFY `id_falta` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_falta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `fechamesa`
 --
 ALTER TABLE `fechamesa`
-  MODIFY `id_fechaMesa` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id_fechaMesa` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT de la tabla `horadeconsulta`
 --
 ALTER TABLE `horadeconsulta`
-  MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_horadeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 --
 -- AUTO_INCREMENT de la tabla `horariocursado`
 --
 ALTER TABLE `horariocursado`
-  MODIFY `id_horariocursado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_horariocursado` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT de la tabla `horariodeconsulta`
 --
 ALTER TABLE `horariodeconsulta`
-  MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id_horariodeconsulta` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 --
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_materia` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `id_perfil` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_perfil` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `persona`
+--
+ALTER TABLE `persona`
+  MODIFY `id_persona` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `presentismo`
 --
 ALTER TABLE `presentismo`
-  MODIFY `id_presentismo` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_presentismo` int(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `privilegio`
 --
 ALTER TABLE `privilegio`
-  MODIFY `id_privilegio` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_privilegio` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT de la tabla `profesor`
 --
 ALTER TABLE `profesor`
-  MODIFY `id_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_profesor` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT de la tabla `turno`
 --
@@ -1015,115 +1044,7 @@ ALTER TABLE `turno`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `anotadosestado`
---
-ALTER TABLE `anotadosestado`
-  ADD CONSTRAINT `anotadosestado_ibfk_1` FOREIGN KEY (`fk_detalleanotados`) REFERENCES `detalleanotados` (`id_detalleanotados`),
-  ADD CONSTRAINT `anotadosestado_ibfk_2` FOREIGN KEY (`fk_estadoanotados`) REFERENCES `estadoanotados` (`id_estadoanotados`);
-
---
--- Filtros para la tabla `avisoprofesor`
---
-ALTER TABLE `avisoprofesor`
-  ADD CONSTRAINT `avisoprofesor_ibfk_1` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`);
-
---
--- Filtros para la tabla `dedicacion_materia_profesor`
---
-ALTER TABLE `dedicacion_materia_profesor`
-  ADD CONSTRAINT `dedicacion_materia_profesor_ibfk_1` FOREIGN KEY (`fk_dedicacion`) REFERENCES `dedicacion` (`id_dedicacion`),
-  ADD CONSTRAINT `dedicacion_materia_profesor_ibfk_2` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`),
-  ADD CONSTRAINT `dedicacion_materia_profesor_ibfk_3` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`);
-
---
--- Filtros para la tabla `detalleanotados`
---
-ALTER TABLE `detalleanotados`
-  ADD CONSTRAINT `detalleanotados_ibfk_1` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`),
-  ADD CONSTRAINT `detalleanotados_ibfk_2` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`);
-
---
--- Filtros para la tabla `falta`
---
-ALTER TABLE `falta`
-  ADD CONSTRAINT `falta_ibfk_1` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`),
-  ADD CONSTRAINT `falta_ibfk_2` FOREIGN KEY (`fk_departamento`) REFERENCES `departamento` (`id_departamento`),
-  ADD CONSTRAINT `falta_ibfk_3` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`),
-  ADD CONSTRAINT `falta_ibfk_4` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`);
-
---
--- Filtros para la tabla `horadeconsulta`
---
-ALTER TABLE `horadeconsulta`
-  ADD CONSTRAINT `horadeconsulta_ibfk_1` FOREIGN KEY (`fk_horariodeconsulta`) REFERENCES `horariodeconsulta` (`id_horariodeconsulta`),
-  ADD CONSTRAINT `horadeconsulta_ibfk_2` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`),
-  ADD CONSTRAINT `horadeconsulta_ibfk_4` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`);
-
---
--- Filtros para la tabla `horariocursado`
---
-ALTER TABLE `horariocursado`
-  ADD CONSTRAINT `horariocursado_ibfk_1` FOREIGN KEY (`fk_dia`) REFERENCES `dia` (`id_dia`),
-  ADD CONSTRAINT `horariocursado_ibfk_2` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`),
-  ADD CONSTRAINT `horariocursado_ibfk_3` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`),
-  ADD CONSTRAINT `horariocursado_ibfk_4` FOREIGN KEY (`fk_turno`) REFERENCES `turno` (`id_turno`);
-
---
--- Filtros para la tabla `horariodeconsulta`
---
-ALTER TABLE `horariodeconsulta`
-  ADD CONSTRAINT `horariodeconsulta_ibfk_1` FOREIGN KEY (`fk_dia`) REFERENCES `dia` (`id_dia`),
-  ADD CONSTRAINT `horariodeconsulta_ibfk_2` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`),
-  ADD CONSTRAINT `horariodeconsulta_ibfk_3` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`);
-
---
--- Filtros para la tabla `materia`
---
-ALTER TABLE `materia`
-  ADD CONSTRAINT `materia_ibfk_1` FOREIGN KEY (`fk_dia`) REFERENCES `dia` (`id_dia`),
-  ADD CONSTRAINT `materia_ibfk_2` FOREIGN KEY (`fk_departamento`) REFERENCES `departamento` (`id_departamento`);
-
---
--- Filtros para la tabla `materias_alumno`
---
-ALTER TABLE `materias_alumno`
-  ADD CONSTRAINT `materias_alumno_ibfk_2` FOREIGN KEY (`fk_materia`) REFERENCES `materia` (`id_materia`),
-  ADD CONSTRAINT `materias_alumno_ibfk_3` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`);
-
---
--- Filtros para la tabla `presentismo`
---
-ALTER TABLE `presentismo`
-  ADD CONSTRAINT `presentismo_ibfk_1` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`),
-  ADD CONSTRAINT `presentismo_ibfk_2` FOREIGN KEY (`fk_horadeconsulta`) REFERENCES `horadeconsulta` (`id_horadeconsulta`);
-
---
--- Filtros para la tabla `privilegioperfil`
---
-ALTER TABLE `privilegioperfil`
-  ADD CONSTRAINT `privilegioperfil_ibfk_1` FOREIGN KEY (`fk_perfil`) REFERENCES `perfil` (`id_perfil`),
-  ADD CONSTRAINT `privilegioperfil_ibfk_2` FOREIGN KEY (`fk_privilegio`) REFERENCES `privilegio` (`id_privilegio`);
-
---
--- Filtros para la tabla `profesor`
---
-ALTER TABLE `profesor`
-  ADD CONSTRAINT `profesor_ibfk_1` FOREIGN KEY (`fk_dedicacion_materia_profesor`) REFERENCES `dedicacion_materia_profesor` (`id_dedicacion_materia_profesor`);
-
---
--- Filtros para la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`fk_profesor`) REFERENCES `profesor` (`id_profesor`),
-  ADD CONSTRAINT `usuario_ibfk_3` FOREIGN KEY (`fk_perfil`) REFERENCES `perfil` (`id_perfil`),
-  ADD CONSTRAINT `usuario_ibfk_4` FOREIGN KEY (`fk_alumno`) REFERENCES `alumno` (`id_alumno`);
-COMMIT;
+  MODIFY `id_usuario` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

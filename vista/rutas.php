@@ -173,7 +173,7 @@ $SeleccionEditarAulaAsignada='/vista/administrador/SeleccionEditarAulaAsignada.p
 $ABMAula='/vista/administrador/ABMAula.php';
 $backup='/vista/administrador/backup.php';
 $subirCargoaDirector='/vista/administrador/subirCargoaDirector.php';
-
+$Permisos='/vista/administrador/Permisos.php';
 
 $buscarDepartamentosconel1erovacio='/controlador/administrador/buscarDepartamentosconel1erovacio.php';
 $buscarNivelAula1ervacio='/controlador/administrador/buscarNivelAula1ervacio.php';
@@ -187,3 +187,4 @@ $recuperarContraseniaUsuario='/controlador/recuperarContraseniaUsuario.php';
 $recuperarContraseña='/vista/recuperarContraseña.php';
 
 
+$editarPermisos='/controlador/administrador/editarPermisos.php';
