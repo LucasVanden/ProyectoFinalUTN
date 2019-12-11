@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2019 a las 06:50:28
+-- Tiempo de generación: 11-12-2019 a las 07:02:49
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -613,7 +613,8 @@ INSERT INTO `privilegio` (`nombrePrivilegio`, `id_privilegio`, `numeroPermiso`) 
 ('Personal', 14, 14),
 ('Cerrar horas de Ausentes', 15, 15),
 ('Calcular Asistencia', 16, 16),
-('Backup', 17, 17);
+('Backup', 17, 17),
+('Administrador', 30, 18);
 
 -- --------------------------------------------------------
 
@@ -647,7 +648,8 @@ INSERT INTO `privilegioperfil` (`fk_perfil`, `fk_privilegio`) VALUES
 (4, 14),
 (4, 15),
 (4, 16),
-(4, 17);
+(4, 17),
+(4, 18);
 
 -- --------------------------------------------------------
 
@@ -1029,7 +1031,7 @@ ALTER TABLE `presentismo`
 -- AUTO_INCREMENT de la tabla `privilegio`
 --
 ALTER TABLE `privilegio`
-  MODIFY `id_privilegio` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_privilegio` int(35) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT de la tabla `profesor`
 --

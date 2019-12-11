@@ -122,6 +122,7 @@ $eliminarDirecotr='/controlador/administrador/cargoDirector/eliminarDirecotr.php
 
 $altaAlumno='/vista/administrador/altaAlumno.php';
 $altaPersonal='/vista/administrador/altaPersonal.php';
+$altaAdministrador='/vista/administrador/altaAdministrador.php';
 
 $editarPersonal='/vista/administrador/editarPersonal.php';
 $editPersonal='/controlador/administrador/editPersonal.php';

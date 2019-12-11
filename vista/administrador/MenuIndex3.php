@@ -29,12 +29,14 @@ $menuAltaProfesor=$URL.$menuAltaProfesor;
 $backup=$URL.$backup;
 $altaAlumno=$URL.$altaAlumno;
 $altaPersonal=$URL.$altaPersonal;
+$altaAdministrador=$URL.$altaAdministrador;
 $subirCargoaDirector=$URL.$subirCargoaDirector;
 $CerrarhoraAusente=$URL.$CerrarhoraAusente;
 $calcularAsistencia=$URL.$calcularAsistencia;
 $AsuetosReceso= $URL.$asutosReceso;
 $AsuetosFeriado= $URL.$asutosFeriado;
 $AsuetoAsueto=$URL.$AsuetoAsueto;
+$Permisos=$URL.$Permisos;
 
 $altaProfesor=$URL.$altaProfesor;
 $asignarMateriaAProfesor= $URL.$asignarMateriaAProfesor;
@@ -75,6 +77,8 @@ $Asuetos=in_array("3", $lsitaPermisos);
 $Feriados=in_array("2", $lsitaPermisos);
 $Recesos=in_array("1", $lsitaPermisos);
 $MenuAsuetos=($Asuetos||$Feriados||$Recesos);
+$Administrador=in_array("18", $lsitaPermisos);
+if ($_SESSION['rol']==4){$Permiso=true;}else{$Permiso=false;}
 ?>
 
 <style>
@@ -200,8 +204,16 @@ $MenuAsuetos=($Asuetos||$Feriados||$Recesos);
                 <li><a href="<?php echo $calcularAsistencia?>">Calcular Asistencia</a></li>
                 <?php endif?>
 
-                <?php if($Backup) :?>
+                <?php if($Administrador) :?>
+                <li><a href="<?php echo $altaAdministrador?>">Administrador</a></li>
+                <?php endif?>
+
+                  <?php if($Backup) :?>
                 <li><a href="<?php echo $backup?>">Backup</a></li>
+                <?php endif?>
+
+                        <?php if($Permiso) :?>
+                <li><a href="<?php echo $Permisos?>">Permisos</a></li>
                 <?php endif?>
             </ul>
         </div>              

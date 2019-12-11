@@ -15,6 +15,7 @@ require_once ($DIR.$controladorAdministrador);
 
 $a=new controladorAdministrador();
 $editarPermisos=$URL.$editarPermisos;
+$permisoRol=6;
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +41,7 @@ $editarPermisos=$URL.$editarPermisos;
                     <tr>
                     <th>Profesor</th>       
                         <?php 
-                        $permisosActuales = $a->BuscarPermisos($_SESSION['rol']);
+                        $permisosActuales = $a->BuscarPermisos($permisoRol);
                         $listaPermisos = $a->buscarNombrePrivilegios();
                         //  echo '<pre>'; print_r($permisosActuales); echo '</pre>';
                         foreach ($listaPermisos as $permiso): ?> 
