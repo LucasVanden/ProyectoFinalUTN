@@ -70,7 +70,7 @@ if(isset($_SESSION['fechasBuscadas'])){
                     <tr>
                         <th>Fecha Mesa</th>
                         <td>
-                        <input type="date" id="f1" name="fechaMesa" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechaMesaIngresar;?>>   
+                        <input class="form-control" type="date" id="f1" name="fechaMesa" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechaMesaIngresar;?>>   
                         </td>
                     </tr>                
                 </table>

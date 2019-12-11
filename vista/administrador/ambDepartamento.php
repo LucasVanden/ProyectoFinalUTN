@@ -13,8 +13,6 @@ if(!isset($_SESSION['rol'])){
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
 
-
-
 $Menu= $URL.$AsuetoMenu;
 $ABMAula= $URL.$ABMAula;
 
@@ -25,20 +23,26 @@ $editarDepartamento=$URL.$editarDepartamento;
 $buscarNivelAula1ervacio=$URL.$buscarNivelAula1ervacio;
 $buscarNombreAula=$URL.$buscarNombreAula;
 
-
 $a=new controladorAdministrador();
 $departamentos=$a->BuscarDepartamento();
-
 ?>
 
-<!DOCTYPE html>
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
- 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+        <title>Departamento</title>
+        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/> 
     </head>
     <body background = <?php echo $URL.$fondo?> onload="a();PopUp()">
     <script src="jquery.js"></script>
@@ -46,11 +50,13 @@ $departamentos=$a->BuscarDepartamento();
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Departamento</h2>
+        <br>
         <form action=<?php echo $crearDepartamento ?> method="POST">
+            <div class="form-group" align="center">
+                <h2 for="abmdepartamento" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Departamentos </h2>
+            </div>
             <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF" align="center">  
-                   
+                <table id="tablaBuscar" align="center">                     
                     <tr>
                         <th>Departamento</th>
                         <td>
@@ -120,12 +126,20 @@ $departamentos=$a->BuscarDepartamento();
 
                 </table>
             </div>
-            <br>
-            <div><input type="submit" value="Cargar Departamento" name="Buscar" formaction=<?php echo $crearDepartamento ?>></input></div> 
+
+            <br> <br>
+            <div class="form-group" align="center"> 
+                <button class="btn btn-success" id="CargarDepartamento" name="textoConfirmar" type="submit" formaction=<?php echo $crearDepartamento ?>> <b>  +  Cargar Departamento </b>  
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>  
+            </div>
         </form>
-            <div>  <input type="submit" value="Mostrar Departamentos" name="Buscar" formaction=<?php echo $abmDepartamento ?> onClick="myFunction();a()"></input></div>
-
-
+        <br>
+            <div class="form-group" align="center"> 
+                <button class="btn btn-primary" id="MostrarDepartamentos" name="textoConfirmar" type="submit" formaction=<?php echo $abmDepartamento ?> onClick="myFunction();a()"> <b>  +  Mostrar Departamentos </b>  
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>  
+            </div>      
 
 <div id="myDIV" >
 <table align="center">

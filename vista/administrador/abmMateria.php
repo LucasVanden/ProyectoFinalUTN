@@ -13,8 +13,6 @@ if(!isset($_SESSION['rol'])){
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
 
-
-
 $Menu= $URL.$AsuetoMenu;
 $ABMAula= $URL.$ABMAula;
 
@@ -29,9 +27,6 @@ $mostrarMaterias=$URL.$mostrarMaterias;
 $a=new controladorAdministrador();
 $departamentos=$a->BuscarDepartamento();
 
-
-
-
 if(isset($_SESSION['departamentos'])){
     $dep=$_SESSION['departamentos'];
 }else{
@@ -45,17 +40,25 @@ if(isset($_SESSION['idDepartamentoSeleccionado'])){
 }
 
 $materias=$a->BuscarMaterias($idDepartamento);
-
 ?>
+
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
- 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
+        <title>Materias</title>
+        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/> 
     </head>
     <body background = <?php echo $URL.$fondo?> onload="PopUp()"> 
     <script src="jquery.js"></script>
@@ -63,15 +66,18 @@ $materias=$a->BuscarMaterias($idDepartamento);
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Materia</h2>
+        <br>
         <form action=<?php echo $crearMateria ?> method="POST">
-            <div>
-                    <tr>
-                        <th>Nombre Materia</th>
-                        <td>
-                        <input type="text" name="nombreMateria" required><br>
-                        </td>
-                    </tr>    
+          <div class="form-group" align="center">
+            <h2 for="abmmateria" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Materias </h2>
+          </div>
+          <div>
+            <tr>
+              <th>Nombre Materia</th>
+                <td>
+                  <input class="form-control" type="text" name="nombreMateria" required><br>
+                </td>
+            </tr>    
                     
 <tr>
 <th>Departamento</th>
@@ -98,11 +104,20 @@ foreach ($listadepartamento as $departamento): ?>
 </select>
 </tr> 
                   </div>
-                        <div><br><input type="submit" value="Cargar Materia" name="Buscar" formaction=<?php echo $crearMateria ?> /><br><br></div>
 
-</form>         
-<form action=<?php echo $abmMateria ?> method="POST">              
-                        <h2>Ver Materias</h2>
+                  <br>
+            <div class="form-group" align="center"> 
+                <button class="btn btn-success" id="CargarMateria" name="textoConfirmar" type="submit" formaction=<?php echo $crearMateria ?>> <b>  +  Cargar Materia </b>  
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>  
+            </div>
+</form>  
+<br> <br>       
+<form action=<?php echo $abmMateria ?> method="POST"> 
+
+          <div class="form-group" align="center">
+            <h2 for="abmmateria" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Ver Materias </h2>
+          </div>
                          <select id="first-choice" name="depBuscar">
 <?php 
 $listadepartamento = $a->BuscarDepartamento();
@@ -113,10 +128,13 @@ foreach ($listadepartamento as $departamento): ?>
 ?>
 </select>
 
-                         <div>  <br><input type="submit" value="Mostrar Materias" name="Buscar" formaction=<?php echo $mostrarMaterias ?> onClick="myFunction()"/></div>
-                       
-
-                       </form>
+<br> <br>
+            <div class="form-group" align="center"> 
+                <button class="btn btn-primary" id="MostrarMateria" name="textoConfirmar" type="submit" formaction=<?php echo $mostrarMaterias ?> onClick="myFunction()"> <b>  +  Mostrar Materias </b>  
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>  
+            </div>
+</form>
 
 
 

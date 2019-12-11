@@ -77,10 +77,20 @@ $aulas=$a->BuscarAulas();
                     </table>
                 </div>
             </div>
-            <div><input type="submit" value="Cargar Aula" name="Buscar" formaction=<?php echo $abmcrearAula ?> /></div>     
+
+            <br>
+            <div class="form-group" align="center"> 
+                <button class="btn btn-success" id="CargarAula" name="textoConfirmar" type="submit" formaction=<?php echo $abmcrearAula ?>> <b>  +  Cargar Aula </b>  
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>  
+            </div>    
         </form>
-            <div><input type="submit" value="Mostrar Aulas" name="Buscar" formaction=<?php echo $ABMAula ?> onClick="myFunction()"/></div>
-        
+            <br>
+            <div class="form-group" align="center"> 
+                <button class="btn btn-primary" id="MostrarAulas" name="textoConfirmar" type="submit" formaction=<?php echo $ABMAula ?> onClick="myFunction()"> <b>  +  Mostrar Aulas </b>  
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>  
+            </div>        
         <form action=<?php echo $borrarAula ?> method="POST">
             <div id="myDIV" align="center">
             <div class="container"> 
