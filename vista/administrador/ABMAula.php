@@ -1,10 +1,13 @@
 <?php
 session_start();
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+
+
+
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
   }else{
-    if($_SESSION['rol'] != 4){
+    if(!in_array(5,$_SESSION['permisos'])){
         header('location: '. $URL.$login);
     }
   }

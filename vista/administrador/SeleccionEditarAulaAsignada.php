@@ -4,7 +4,7 @@ session_start();
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
   }else{
-    if($_SESSION['rol'] != 4){
+    if(!in_array(11,$_SESSION['permisos'])){
         header('location: '. $URL.$login);
     }
   }

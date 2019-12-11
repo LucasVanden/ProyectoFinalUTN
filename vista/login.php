@@ -3,6 +3,8 @@ require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 session_start();
 $_SESSION['mensaje']=null;
 $_SESSION['mensaje1']=null;
+require_once ($DIR.$controladorAdministrador);
+$a= new controladorAdministrador();
 
 //con sesiones para los distintos tipos de roles de los usuarios
 if (isset($_SESSION['rol'])) {
@@ -25,6 +27,10 @@ if (isset($_SESSION['rol'])) {
          // $message = 'Entro al 2';
               header('Location: '. $URL.'/vista/reportes/faltas.php');
           break;
+          case 6:
+          // $message = 'Entro al 2';
+               header('Location: '. $URL.'/vista/administrador/MenuIndex.php');
+           break;
         default:
     }
 }
@@ -54,6 +60,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
     if (password_verify($_POST['contraseña'],$pass)){   
         $_SESSION['rol'] = $perfil;
         $_SESSION['usuario']=$usuario;
+        $_SESSION['permisos']=$a->BuscarPermisos($perfil);
         switch($perfil){
             case 1:
            // $message = 'Entro al 1';
@@ -75,6 +82,10 @@ if (!empty($_POST['usuario']) && !empty($_POST['contraseña'])) {
               // $message = 'Entro al 2';
                    header('Location: '. $URL.'/vista/reportes/faltas.php');
                break;
+               case 6:
+               // $message = 'Entro al 2';
+                    header('Location: '. $URL.'/vista/administrador/MenuIndex.php');
+                break;
             default:
            // $message = 'Entro al default'. $perfil ;
         }

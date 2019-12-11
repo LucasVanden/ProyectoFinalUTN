@@ -5,13 +5,16 @@ require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
   }else{
-    if($_SESSION['rol'] != 4){
+    if(!($_SESSION['rol'] == 4 || $_SESSION['rol'] == 6)){
         header('location: '. $URL.$login);
     }
   }
   
 require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
+require_once ($DIR.$controladorAdministrador);
+//antes de romper
+$a=new controladorAdministrador();
 
 $MenuIndex= $URL.$MenuIndex;
 
@@ -26,9 +29,18 @@ $menuAltaProfesor=$URL.$menuAltaProfesor;
 $backup=$URL.$backup;
 $altaAlumno=$URL.$altaAlumno;
 $altaPersonal=$URL.$altaPersonal;
+$altaAdministrador=$URL.$altaAdministrador;
 $subirCargoaDirector=$URL.$subirCargoaDirector;
 $CerrarhoraAusente=$URL.$CerrarhoraAusente;
 $calcularAsistencia=$URL.$calcularAsistencia;
+$AsuetosReceso= $URL.$asutosReceso;
+$AsuetosFeriado= $URL.$asutosFeriado;
+$AsuetoAsueto=$URL.$AsuetoAsueto;
+$Permisos=$URL.$Permisos;
+
+$altaProfesor=$URL.$altaProfesor;
+$asignarMateriaAProfesor= $URL.$asignarMateriaAProfesor;
+$bajaMateriaProfesor= $URL.$bajaMateriaProfesor;
 
 $_SESSION['comprobacion']=null;
 $_SESSION['fechasBuscadas']=null;
@@ -37,136 +49,178 @@ $_SESSION['mostrarAulas']=null;
 $_SESSION['departamentos']=null;
 $_SESSION['idDepartamentoSeleccionado']=null;
 
+
+
+$lsitaPermisos=$a->BuscarPermisos($_SESSION['rol']);
+
+$Backup=in_array("17", $lsitaPermisos);
+$CalcularAsistencia=in_array("16", $lsitaPermisos);
+$CerrarhorasdeAusentes=in_array("15", $lsitaPermisos);
+$AltaPersonal=in_array("14", $lsitaPermisos);
+$CargoDirector=in_array("13", $lsitaPermisos);
+$AltaAlumno=in_array("12", $lsitaPermisos);
+$CambiarAuladeconsulta=in_array("11", $lsitaPermisos);
+
+$Profesor=in_array("8", $lsitaPermisos);
+$AsignarMateriaaProfesor=in_array("9", $lsitaPermisos);
+$AsignarHorariodeCursado=in_array("10", $lsitaPermisos);
+$MenuProfesores=($Profesor||$AsignarMateriaaProfesor||$AsignarHorariodeCursado);
+
+
+$Materias=in_array("7", $lsitaPermisos);
+$Departamentos=in_array("6", $lsitaPermisos);
+$Aulas=in_array("5", $lsitaPermisos);
+$Mesas=in_array("4", $lsitaPermisos);
+
+
+$Asuetos=in_array("3", $lsitaPermisos);
+$Feriados=in_array("2", $lsitaPermisos);
+$Recesos=in_array("1", $lsitaPermisos);
+$MenuAsuetos=($Asuetos||$Feriados||$Recesos);
+$Administrador=in_array("18", $lsitaPermisos);
+if ($_SESSION['rol']==4){$Permiso=true;}else{$Permiso=false;}
 ?>
+
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/>
-        
-        <style type="text/css">
-            body{
-                padding:0px;
-                margin:0px;
-            }
-            .nav ul{
-                list-style: none;
-                margin:0;
-                padding:0;
-            }
-            .nav ul li {
-                padding:15px;
-                position:relative;
-                width: 150px;
-                vertical-align: middle;
-                background-color: #0098cb;
-                cursor:pointer;
-                border-top: 1px solid white;
-                -webkit-transition: all 0.3s;
-                -o-transition: all 0.3s;
-                transition: all 0.3s;
-            }
-            .nav ul li:{
-                background-color: #0098cb;
-            }
-            .nav > ul > li{
-                border-right: 1px solid yellow;
-            }
-            .nav ul ul{
-                transition: all 0.3s;
-                position: absolute;
-                opacity:0;
-                visibility: hidden;
-                left:100%;
-                top:-2%;
-                border-left: 1px solid yellow; 
-            }
-            .nav ul li:hover > ul{
-                opacity:1;
-                visibility: visible;
-            }
-            .nav ul li a {
-                color: white;
-                text-decoration: none;
-            }
-        </style>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
+        <title>Menú Administrador</title>
+        <link rel="stylesheet" href="./../css/bootstrap.min.css">
     </head>
-    <body background = <?php echo $URL.$fondo?>>
+    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px; bg-secondary">
     <script src="jquery.js"></script>
         <?php require './../partials/headera.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Menú Administrador</h2>
-            <div class="nav">
-                <ul align='left'>
-                    <li><a href="<?php echo $AsuetosMenu ?>">Asuetos</a></li>
-                        <ul>
-                            <li><a href="http://localhost/ProyectoFinalUTN/vista/administrador/AsuetosReceso.php">Recesos</a></li>
-                            <li><a href="#">Feriados</a></li>
-                            <li><a href="#">Asuetos</a></li>
-                            <li><a href="#">Borrar Fecha</a></li>
-                        </ul>
-                    <li><a href="<?php echo $Mesas ?>">Mesas</a></li>
-                    <li><a href="<?php echo $ABMAula ?>">Aulas</a></li>
-                        <ul>
-                            <li><a href="#">Cargar Aulas</a></li>
-                            <li><a href="#">Mostrar Aulas</a></li>
-                        </ul>
-                    <li><a href="<?php echo $abmDepartamento ?>">Departamentos</a></li>
-                    <li><a href="<?php echo $abmMateria ?> ">Materias</a></li>
-                    <li><a href="<?php echo $menuAltaProfesor ?>">Profesores</a></li>
-                        <ul>
-                            <li><a href="#">Alta Profesor</a></li>
-                            <li><a href="#">Asignar Materia A Profesor</a></li>
-                            <li><a href="#">Baja Materia Profesor</a></li>
-                        </ul>
-                    <li><a href="<?php echo $EditarAultaAsignada ?>">Cambiar Aula de consulta</a></li> 
-                    <li><a href="<?php echo $altaAlumno ?>">Alta alumno</a></li> 
-                    <li><a href="<?php echo $subirCargoaDirector ?>">Cargo Director</a></li> 
-                    <li><a href="<?php echo $altaPersonal ?>">Alta Personal</a></li> 
-                    <li><a href="<?php echo $CerrarhoraAusente ?>">Cerrar horas de Ausentes</a></li> 
-                    <li><a href="<?php echo $calcularAsistencia ?>">calcular Asistencia</a></li> 
-                    <li><a href="<?php echo $backup ?>">Backup</a></li> 
-                </ul>
+        <div class="container">
+            <br>
+            <div class="form-group" align="center">
+                <h2 for="menuindex" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Menú Administrador</h2>
             </div>
+        </div> 
+        <div class="navbar navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">  
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar1">
+            <ul class="nav navbar-nav">
+
+            <?php if($MenuAsuetos) :?>
+                <li class="menu-item dropdown">
+                    <a href="<?php echo $AsuetosMenu?>" class="dropdown-toggle" data-toggle="dropdown"> Asuetos <b class="caret"> </b> </a>
+
+                    <ul class="dropdown-menu">
+
+                    <?php if($Recesos) :?>
+                    <li><a href="<?php echo $AsuetosReceso?>">Recesos</a></li>
+                    <?php endif?>
+
+                    <?php if($Feriados) :?>
+                    <li><a href="<?php echo $AsuetosFeriado?>">Feriados</a></li>
+                    <?php endif?>
+
+                    <?php if($Asuetos) :?>
+                    <li><a href="<?php echo $AsuetoAsueto?>">Asuetos</a></li>
+                    <?php endif?>
+                    </ul>
+                </li>
+                <?php endif?>
 
 
+                <?php if($Mesas) :?>
+                <li><a href="<?php echo $Mesas?>">Mesas</a></li>
+                <?php endif?>
 
-<!--
-            <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF">  
-             
-                    
-                        <tr>
-                        <td>
-                        <div>  <input type="submit" value="Asuetos" name="Obtener" formaction=<?php echo $AsuetosMenu ?>  /></div>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td>   <div>  <input type="submit" value="Cargar Fecha de Mesa" name="Obtener" formaction=<?php echo $Mesas ?> /></div></td>
-                        </tr>
-                        <tr>
-                        <td>   <div>  <input type="submit" value="Cargar Aula" name="Obtener" formaction=<?php echo $ABMAula ?> /></div></td>
-                        <td>   <div>  <input type="submit" value="Editar Aula Asignada" name="Obtener" formaction=<?php echo $EditarAultaAsignada ?> /></div></td>
-                        </tr>
-                        <tr>
-                        <td>   <div>  <input type="submit" value="Cargar Departamento" name="Obtener" formaction=<?php echo $abmDepartamento ?> /></div></td>
-                        <td>   <div>  <input type="submit" value="Materia" name="Obtener" formaction=<?php echo $abmMateria ?> /></div></td>
-                        <td>   <div>  <input type="submit" value="Profesor" name="Obtener" formaction=<?php echo $menuAltaProfesor ?> /></div></td>       
-                        </tr>        
+                <?php if($Aulas) :?>
+                <li > <a href="<?php echo $ABMAula?>"> Aulas</b></a></li>
+                <?php endif?>
 
-                             <tr>
-                        <td>
-                        <div>  <input type="submit" value="Backup" name="Obtener" formaction=<?php echo $backup ?>  /></div>
-                        </td>
-                        </tr> -->
+                <?php if($Departamentos) :?>
+                <li><a href="<?php echo $abmDepartamento?>">Departamentos</a></li>
+                <?php endif?>
 
+                <?php if($Materias) :?>
+                <li><a href="<?php echo $abmMateria?>">Materias</a></li>
+                <?php endif?>
 
-    <footer>
-       <?php require $DIR.$footer; ?>         
-    </footer>  
+                <?php if($MenuProfesores) :?>
+                <li class="menu-item dropdown">
+                    <a href="<?php echo $menuAltaProfesor?>" class="dropdown-toggle" data-toggle="dropdown"> Profesores <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+
+                        <?php if($Profesor) :?>
+                        <li><a href="<?php echo $altaProfesor?>">Profesor</a></li>
+                        <?php endif?>
+
+                        <?php if($AsignarMateriaaProfesor) :?>
+                        <li><a href="<?php echo $asignarMateriaAProfesor?>">Asignar Materia a Profesor</a></li>
+                        <?php endif?>
+
+                        <?php if($AsignarHorariodeCursado) :?>
+                        <li><a href="<?php echo $bajaMateriaProfesor?>">Asignar Horario de Cursado</a></li>
+                        <?php endif?>
+
+                    </ul>
+                </li>
+                <?php endif?>
+                
+                <?php if($CambiarAuladeconsulta) :?>
+                <li><a href="<?php echo $EditarAultaAsignada?>">Cambiar Aula de consulta</a></li>
+                <?php endif?>
+
+                <?php if($AltaAlumno) :?>
+                <li><a href="<?php echo $altaAlumno?>">Alumno</a></li>
+                <?php endif?>
+
+                <?php if($CargoDirector) :?>
+                <li><a href="<?php echo $subirCargoaDirector?>">Cargo Director</a></li>
+                <?php endif?>
+
+                <?php if($AltaPersonal) :?>
+                <li><a href="<?php echo $altaPersonal?>">Personal</a></li>
+                <?php endif?>
+
+                <?php if($CerrarhorasdeAusentes) :?>
+                <li><a href="<?php echo $CerrarhoraAusente?>">Cerrar horas de Ausentes</a></li>
+                <?php endif?>
+
+                <?php if($CalcularAsistencia) :?>
+                <li><a href="<?php echo $calcularAsistencia?>">Calcular Asistencia</a></li>
+                <?php endif?>
+
+                <?php if($Administrador) :?>
+                <li><a href="<?php echo $altaAdministrador?>">Administrador</a></li>
+                <?php endif?>
+
+                  <?php if($Backup) :?>
+                <li><a href="<?php echo $backup?>">Backup</a></li>
+                <?php endif?>
+
+                        <?php if($Permiso) :?>
+                <li><a href="<?php echo $Permisos?>">Permisos</a></li>
+                <?php endif?>
+            </ul>
+        </div>              
+        <script src="./../js/jquery.js"></script>
+        <script src="./../js/bootstrap.min.js"></script>
+    </body>
+    <footer class="footer">
+        <?php require $DIR.$footer; ?>     
+    </footer> 
 </html>

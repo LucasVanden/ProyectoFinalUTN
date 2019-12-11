@@ -1,3 +1,5 @@
+
+<!-- NO SE USA MAS -->
 <?php
 session_start();
 

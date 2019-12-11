@@ -10,7 +10,7 @@ $a= new controladorAdministrador();
 if(!isset($_SESSION['rol'])){
   header('location: '. $URL.$login);
 }else{
-  if($_SESSION['rol'] != 4){
+  if(!in_array(8,$_SESSION['permisos'])){
       header('location: '. $URL.$login);
   }
 }
