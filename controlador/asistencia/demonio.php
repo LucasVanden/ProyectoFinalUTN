@@ -39,7 +39,7 @@ if (count($listaHorasACerrar[0])>0){
 echo "Cerrando Horas de consulta...";
 //echo '<pre>'; print_r($listaHorasACerrar); echo '</pre>';  
 $direccion= $URL . $MenuIndex;
-header("refresh:2;".$direccion); 
+//header("refresh:2;".$direccion); 
 
 
 
@@ -287,15 +287,42 @@ function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
 
     $fechaHoraX=$hora->getfechaHastaAnotados();
     $dia=date("N", strtotime($fechaHoraX));
- // $dia="5";
+//comprobar si era horario de mesa
+if($hora->getHorarioDeConsulta()->getsemestre()==31){
+    $nMesa=$hora->getHorarioDeConsulta()->getn();
+    $stmt = $conn->prepare("SELECT fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=1 and n=$nMesa");
+    $stmt->execute();
+    while($row = $stmt->fetch()) {
+    $dia=$row['fk_dia'];
+    }
+}
+if($hora->getHorarioDeConsulta()->getsemestre()==32){
+    $nMesa=$hora->getHorarioDeConsulta()->getn();
+    $stmt = $conn->prepare("SELECT fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=2 and n=$nMesa");
+    $stmt->execute();
+    while($row = $stmt->fetch()) {
+    $dia=$row['fk_dia'];
+    }
+}
+//
+    
     $proximaConsulta=nextfechaDia($dia);
+    //si es de mesa omitir la siguiente consulta que ya la dio
+    if( ($hora->getHorarioDeConsulta()->getsemestre()==31) || ($hora->getHorarioDeConsulta()->getsemestre()==32)){
+        $proximaConsulta=nextfechaDiaOmitiendo1($dia);
+    }
+
+ // $dia="5";
+
     $mesproximaConsulta=date("m", strtotime($proximaConsulta));
     
     $semestreactual;
     if($mesproximaConsulta<=6){
         $semestreactual=1;
+        $tempsemestreactual=1;
     }else{
         $semestreactual=2;
+        $tempsemestreactual=2;
     }
      $n=$hora->getHorarioDeConsulta()->getn();
  //comprobar si es feriado
@@ -310,6 +337,7 @@ function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
                 //
                 if($proximaConsulta==$feriado->getfechaAsueto()){
                 $proximaConsulta= date('Y-m-d',strtotime($proximaConsulta.'+7 day'));
+                $tempProximaConsulta=$proximaConsulta;
                 echo "sumo 7";
                 echo $proximaConsulta;
                 echo $feriado->getfechaAsueto();
@@ -339,15 +367,29 @@ function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
              $fk_dia=$row['fk_dia'];
          }
         $desde= $hora->getfechaHastaAnotados();
-        
-        //si es una consulta especial de mesa
         $hasta=$proximaConsulta;
-        if(($semestreactual=="31")||($semestreactual=="32"));{
-            $hasta=$proximaConsulta;
-            fechaDiaAnteriorAfecha($proximaConsulta,$fk_dia);
+        //si es una consulta especial de mesa
+  
+        if(($semestreactual=="31")||($semestreactual=="32")){
+            $hasta=fechaDiaAnteriorAfecha($proximaConsulta,$fk_dia);
+            //si la consulta especial de mesa es feriado rollback
+            foreach ($asuetos as $feriado) {
+            if($hasta==$feriado){
+                $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$tempsemestreactual and n=$n"); 
+                $stmt2->execute();
+                while($row = $stmt2->fetch()) {
+                    $idhorarioconsulta=$row['id_horariodeconsulta'];
+                    $fk_dia=$row['fk_dia'];
+                }
+               $desde= $hora->getfechaHastaAnotados();
+               $hasta=$proximaConsulta;
+            }
         }
- 
+    }
 
+echo "siguiente: "; 
+echo $proximaConsulta;
+echo $hasta;
         $siguenteconsulta=array();
         array_push($siguenteconsulta,$idhorarioconsulta);
         array_push($siguenteconsulta,$desde);
@@ -398,6 +440,30 @@ function nextfechaDia($diaID){
            break;
         case '5':
            $fecha= date("Y-m-d", strtotime("next Friday"));
+           return $fecha;
+           break;
+    }
+}
+function nextfechaDiaOmitiendo1($diaID){
+    switch ($diaID){
+        case '1':
+           $fecha= date("Y-m-d", strtotime("second Monday"));
+           return $fecha;
+           break;
+        case '2':
+           $fecha= date("Y-m-d", strtotime("second Tuesday"));
+           return $fecha;
+           break;
+        case '3':
+           $fecha= date("Y-m-d", strtotime("second Wednesday"));
+           return $fecha;
+           break;
+        case '4':
+           $fecha= date("Y-m-d", strtotime("second Thursday"));
+           return $fecha;
+           break;
+        case '5':
+           $fecha= date("Y-m-d", strtotime("second Friday"));
            return $fecha;
            break;
     }

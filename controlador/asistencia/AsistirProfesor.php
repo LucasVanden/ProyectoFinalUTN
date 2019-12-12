@@ -225,65 +225,117 @@ function calcularSiguienteHorarioDeConsulta($hora,$idMateria,$idProfesor){
     $con= new conexion();
     $conn=$con->getconexion();
 
-    $dia=date('N');
-    $proximaConsulta=nextfechaDia($dia);
-    $mesproximaConsulta=date("m", strtotime($proximaConsulta));
-    
-    $semestreactual;
-    if($mesproximaConsulta<=6){
-        $semestreactual=1;
-    }else{
-        $semestreactual=2;
+    $fechaHoraX=$hora->getfechaHastaAnotados();
+    $dia=date("N", strtotime($fechaHoraX));
+    //comprobar si era horario de mesa
+    if($hora->getHorarioDeConsulta()->getsemestre()==31){
+        $nMesa=$hora->getHorarioDeConsulta()->getn();
+        $stmt = $conn->prepare("SELECT fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=1 and n=$nMesa");
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+        $dia=$row['fk_dia'];
+        }
     }
-     $n=$hora->getHorarioDeConsulta()->getn();
- //comprobar si es feriado
-    $asuetos=buscarAsuetos();
-    if(count($asuetos)>1){
-        $repetir=true;
-        while ($repetir) {
-            $repetir=false;
-            foreach ($asuetos as $feriado) {
-                if($proximaConsulta==$feriado->getfechaAsueto()){
-                $proximaConsulta= date('Y-m-d',strtotime($proximaConsulta.'+7 day'));
-                $repetir=true;
+    if($hora->getHorarioDeConsulta()->getsemestre()==32){
+        $nMesa=$hora->getHorarioDeConsulta()->getn();
+        $stmt = $conn->prepare("SELECT fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=2 and n=$nMesa");
+        $stmt->execute();
+        while($row = $stmt->fetch()) {
+        $dia=$row['fk_dia'];
+        }
+    }
+    //
+        
+        $proximaConsulta=nextfechaDia($dia);
+        //si es de mesa omitir la siguiente consulta que ya la dio
+        if( ($hora->getHorarioDeConsulta()->getsemestre()==31) || ($hora->getHorarioDeConsulta()->getsemestre()==32)){
+            $proximaConsulta=nextfechaDiaOmitiendo1($dia);
+        }
+
+    // $dia="5";
+
+        $mesproximaConsulta=date("m", strtotime($proximaConsulta));
+        
+        $semestreactual;
+        if($mesproximaConsulta<=6){
+            $semestreactual=1;
+            $tempsemestreactual=1;
+        }else{
+            $semestreactual=2;
+            $tempsemestreactual=2;
+        }
+        $n=$hora->getHorarioDeConsulta()->getn();
+    //comprobar si es feriado
+        $asuetos=buscarAsuetos();
+        if(count($asuetos)>1){
+            $repetir=true;
+            while ($repetir) {
+                $repetir=false;
+                foreach ($asuetos as $feriado) {
+                    //test bug
+                    //echo "entro al bucle";
+                    //
+                    if($proximaConsulta==$feriado->getfechaAsueto()){
+                    $proximaConsulta= date('Y-m-d',strtotime($proximaConsulta.'+7 day'));
+                    $tempProximaConsulta=$proximaConsulta;
+                    echo "sumo 7";
+                    echo $proximaConsulta;
+                    echo $feriado->getfechaAsueto();
+                    $repetir=true;
+                    }
                 }
             }
         }
-    }
-   //comprobar si la siguiente consulta hay mesa
-     $diaMesa=buscardiaMesaDeMateria($idMateria);
-     $diaproximaConsulta=date("N", strtotime($proximaConsulta));
+    //comprobar si la siguiente consulta hay mesa
+    
+        $diaMesa=buscardiaMesaDeMateria($idMateria);
+        $diaproximaConsulta=date("N", strtotime($proximaConsulta));
 
-     if($diaMesa->getid_dia()==$diaproximaConsulta){
-        $mesas=buscarFechaMesas();
-        foreach ($mesas as $fechaMesa) {
-            if($proximaConsulta==$fechaMesa->getfechaMesa()){
-                $semestreactual="3".$semestreactual;
+        if($diaMesa->getid_dia()==$diaproximaConsulta){
+            $mesas=buscarFechaMesas();
+            foreach ($mesas as $fechaMesa) {
+                if($proximaConsulta==$fechaMesa->getfechaMesa()){
+                    $semestreactual="3".$semestreactual;
+                }
             }
         }
-    }
-  //Buscar siguiente Horario a asignar
-    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$semestreactual and n=$n"); 
-    $stmt2->execute();
-    while($row = $stmt2->fetch()) {
-        $idhorarioconsulta=$row['id_horariodeconsulta'];
-        $fk_dia=$row['fk_dia'];
-    }
-    $desde= $hora->getfechaHastaAnotados();
+    //BUscar siguiente Horario a asignar
+            $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$semestreactual and n=$n"); 
+            $stmt2->execute();
+            while($row = $stmt2->fetch()) {
+                $idhorarioconsulta=$row['id_horariodeconsulta'];
+                $fk_dia=$row['fk_dia'];
+            }
+            $desde= $hora->getfechaHastaAnotados();
+            $hasta=$proximaConsulta;
+            //si es una consulta especial de mesa
     
-    //si es una consulta especial de mesa
-    $hasta=$proximaConsulta;
-    if(($semestreactual=="31")||($semestreactual=="32"));{
-        $hasta=$proximaConsulta;
-        fechaDiaAnteriorAfecha($proximaConsulta,$fk_dia);
-    }
- 
-    $siguenteconsulta=array();
-    array_push($siguenteconsulta,$idhorarioconsulta);
-    array_push($siguenteconsulta,$desde);
-    array_push($siguenteconsulta,$hasta);
-    return $siguenteconsulta;
-}
+            if(($semestreactual=="31")||($semestreactual=="32")){
+                $hasta=fechaDiaAnteriorAfecha($proximaConsulta,$fk_dia);
+                //si la consulta especial de mesa es feriado rollback
+                foreach ($asuetos as $feriado) {
+                if($hasta==$feriado){
+                    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$tempsemestreactual and n=$n"); 
+                    $stmt2->execute();
+                    while($row = $stmt2->fetch()) {
+                        $idhorarioconsulta=$row['id_horariodeconsulta'];
+                        $fk_dia=$row['fk_dia'];
+                    }
+                $desde= $hora->getfechaHastaAnotados();
+                $hasta=$proximaConsulta;
+                }
+            }
+        }
+
+    echo "siguiente: "; 
+    echo $proximaConsulta;
+    echo $hasta;
+            $siguenteconsulta=array();
+            array_push($siguenteconsulta,$idhorarioconsulta);
+            array_push($siguenteconsulta,$desde);
+            array_push($siguenteconsulta,$hasta);
+            return $siguenteconsulta;
+} 
 
 function crearSiguienteHoraDeConsulta($idMateria,$idProfesor,$siguientehorario){
  $con= new conexion();
