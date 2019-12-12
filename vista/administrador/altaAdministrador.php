@@ -26,13 +26,11 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
   $nombre = $_POST['nombre'];
   $apellido = $_POST['apellido'];
   $email = $_POST['email'];
-  $mensaje=null;
- 
+  $mensaje=null; 
 
   $stmt2 = $conexttion->prepare("SELECT dni FROM persona where dni='$dni'");
   $stmt2->execute();
   if($stmt2->rowCount() == 0) {
-
 
         $stmt3 = $conexttion->prepare("INSERT INTO `persona` (`id_persona`, `dni`, `apellido`, `nombre`,`email`) 
         VALUES (NULL, '$dni', '$apellido' , '$nombre','$email');");
@@ -54,34 +52,59 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
 }
 }
 ?>
+
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
   <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <meta charset="utf-8">
-  <title>Alta Personal</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
+    <title>Alta Personal</title>
+    <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
-  <body background = <?php echo $URL.$fondo?>>
+  <body background = <?php echo $URL.$fondo?> style="padding-top: 70px; bg-secondary">
   <?php require $DIR.$headera ?>
-    <h1>Administrador</h1>
-    <form action="altaAdministrador.php" method="POST">
-      <p><br>
-        <label>legajo:</label><input name="dni" type="number" placeholder=" legajo" min=1 value="" required><br>
-        <label>Nombre:</label><input name="nombre" type="text1" placeholder=" Nombre" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br>
-        <label>Apellido:</label><input name="apellido" type="text1" placeholder=" Apellido" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br>
-        <label>email:</label><input name="email" type="email" placeholder="email@dominio.com" pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[ña-z]{2,}$" title="email@dominio.com" required><br><br>
+    <div class="container">
+    <form action="altaAdministrador.php" method="POST" class="form-horizontal">
+    <p><br>
+      <div class="form-group">
+        <h2 for="altaadministrador" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Alta Administrador </h2>
+      </div>   
+      <div class="form-group">   
+        <label><b> Legajo: </b></label><input name="dni" type="number" placeholder=" Legajo" min=1 value="" required><br>
+      </div>
+      <div class="form-group">
+        <label><b>Nombre:</b></label><input name="nombre" type="text1" placeholder=" Nombre" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br>
+      </div>
+      <div class="form-group">
+        <label><b>Apellido:</b></label><input name="apellido" type="text1" placeholder=" Apellido" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br>
+      </div>
+      <div class="form-group">
+        <label><b>e - mail:</b></label><input name="email" type="mail" placeholder=" email@dominio.com" pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email@dominio.com" required><br>
+      </div>
       </p>
-      <input type="submit" value="Enviar" name="enviar">
-      <br>
+      <div class="form-group" align="center"> 
+        <button class="btn btn-success" type="submit" value="Enviar" name="enviar"><b> +  Enviar  </b>  
+          <span class="glyphicon glyphicon-log-in"></span>
+        </button>                   
+      </div>
     </form>
-    <form action="altaAdministrador.php" method="POST">
-        <div><input type="submit" value="consultar" name="consultar" ></div>
-        </form>
+    <form action="altaAdministrador.php" method="POST" class="form-horizontal">
+      <div class="form-group" align="center"> 
+        <button class="btn btn-primary" type="submit" value="consultar" name="consultar" onclick="myFunction()"><b> +  Consultar  </b>  
+          <span class="glyphicon glyphicon-log-in"></span>
+        </button>                    
+      </div>
+    </form>
     <br>
     <?php if (!empty($message)) : ?>
     <?php if ($exito) : ?>
@@ -95,6 +118,7 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
     </div>
     <?php endif; ?>
     <?php endif; ?>
+    </div>
   </body>
 
 <?php if( isset($_POST['consultar'] ) || isset($_POST['enviar']) || isset($_SESSION['eliminarPersonal']) ) :?>

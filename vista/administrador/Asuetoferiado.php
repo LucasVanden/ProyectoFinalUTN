@@ -52,7 +52,8 @@ if(isset($_SESSION['idfechaferiado'])){
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <form action=<?php echo $controladorAsuetoFeriado ?> method="POST">
+        <div class="container" align="center">
+        <form action=<?php echo $controladorAsuetoFeriado ?> method="POST" class="form-horizontal">
             <div class="form-group" align="center">     
                 <h2 for="Asuetoferiado" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Feriados </h2>
             </div> 
@@ -72,10 +73,10 @@ if(isset($_SESSION['idfechaferiado'])){
 
                     <br>
                     <div class="form-group" align="center"> 
-                        <button class="btn btn-success" id="Cargar"  type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorAsuetoFeriado ?>> Cargar 
+                        <button class="btn btn-success" id="Cargar"  type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorAsuetoFeriado ?>><b> +  Cargar  </b>   
                             <span class="glyphicon glyphicon-ok"></span>
                         </button> 
-                        <button class="btn btn-danger" id="Borrar" type="submit" value="Borrar" name="Obtener" > Borrar 
+                        <button class="btn btn-danger" id="Borrar" type="submit" value="Borrar" name="Obtener"> <b> +  Borrar  </b>  
                             <span class="glyphicon glyphicon-remove"></span>
                         </button> 
                     </div> 
@@ -956,7 +957,7 @@ if(isset($_SESSION['idfechaferiado'])){
     $("#div").load(" #div");
   }); </script>
 
-
+</div> 
 </body>
     <footer>
     <?php require $DIR.$footer; ?>        

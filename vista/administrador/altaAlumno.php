@@ -26,8 +26,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
   $email = $_POST['email'];
   $fecha = $_POST['fecha'];
   $telefono = $_POST['telefono'];
-  $mensaje=null;
- 
+  $mensaje=null; 
 
   $stmt0 = $conexttion->prepare("SELECT id_alumno FROM alumno where legajo='$legajo'");
   $stmt0->execute();
@@ -35,7 +34,6 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     $alumno = ($row['id_alumno']);
   }
   if (isset($alumno)){$message="legajo existente";}else{
-
 
     $stmt = $conexttion->prepare("INSERT INTO `alumno` (`id_alumno`, `legajo`, `apellido`, `nombre`, `email`, `fechaNacimientoAlumno`,`telefonoAlumno`) 
     VALUES (NULL, '$legajo', '$apellido' , '$nombre', '$email','$fecha','$telefono');");
@@ -58,7 +56,6 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     }else{
         $message="Hubo un problema al crear al alumno";
     }
-
   }
 }
  
@@ -67,6 +64,14 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
 }
 }
 ?>
+
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -74,30 +79,50 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <meta charset="utf-8">
+  <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
   <title>Alta Alumno</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
-  <body background = <?php echo $URL.$fondo?>>
+  <body background = <?php echo $URL.$fondo?> style="padding-top: 70px; bg-secondary">
   <?php require $DIR.$headera ?>
-    <h1>Alta Alumno</h1>
-    <form action="altaAlumno.php" method="POST">
+  <div class="container" align="center">
+    <form action="altaAlumno.php" method="POST" class="form-horizontal">
       <p><br>
-        <label>Legajo:</label><input name="legajo" type="number" placeholder=" Legajo" min=1 value="" required><br>
-        <label>Nombre:</label><input name="nombre" type="text1" placeholder=" Nombre" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br><br>
-        <label>Apellido:</label><input name="apellido" type="text1" placeholder=" Apellido" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br><br>
-        <label>e - mail:</label><input name="email" type="mail" placeholder=" email@dominio.com" pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email@dominio.com" required><br><br>
-        <label>Nacimiento:</label><input name="fecha" type="date" required><br>
-        <label>Teléfono:</label><input name="telefono" type="text1" placeholder=" 0261-5555555" pattern="[0-9]{11}" title="11 numeros (0261-XXXXXXX)" required><br>
-      </p>
-      <input type="submit" value="Enviar">
-      <br>
+      <div class="form-group">
+        <h2 for="altaalumno" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Alta Alumno </h2>
+      </div>   
+      <div class="form-group">   
+        <label><b> Legajo: </b></label><input name="legajo" type="number" placeholder=" Legajo" min=1 value="" required><br>
+      </div>
+      <div class="form-group">
+        <label><b>Nombre:</b></label><input name="nombre" type="text1" placeholder=" Nombre" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br>
+      </div>
+      <div class="form-group">
+        <label><b>Apellido:</b></label><input name="apellido" type="text1" placeholder=" Apellido" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br>
+      </div>
+      <div class="form-group">
+        <label><b>e - mail:</b></label><input name="email" type="mail" placeholder=" email@dominio.com" pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email@dominio.com" required><br>
+      </div>
+      <div class="form-group">
+        <label><b>Nacimiento:</b></label><input name="fecha" type="date" required><br>
+      </div>
+      <div class="form-group">
+        <label><b>Teléfono:</b></label><input name="telefono" type="text1" placeholder=" 0261-5555555" pattern="[0-9]{11}" title="11 numeros (0261-XXXXXXX)" required><br>
+      </div>
+      </p><br>
+      <div class="form-group" align="center"> 
+        <button class="btn btn-success" type="submit" value="Enviar" name="enviar"><b> +  Enviar  </b>  
+          <span class="glyphicon glyphicon-log-in"></span>
+        </button>
+      </div>
     </form>
-    <form action="altaAlumno.php" method="POST">
-        <div><input type="submit" value="consultar" name="consultar" onclick="myFunction()"></div>
-        </form>
-    <br>
+    <form action="altaAlumno.php" method="POST" class="form-horizontal">
+      <div class="form-group" align="center"> 
+        <button class="btn btn-primary" type="submit" value="consultar" name="consultar" onclick="myFunction()"><b> +  Consultar  </b>  
+          <span class="glyphicon glyphicon-log-in"></span>
+        </button>                    
+      </div>
+    </form>
     <?php if (!empty($message)) : ?>
     <?php if ($exito) : ?>
     <div class="alert alert-success" role="alert">
@@ -110,8 +135,8 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     </div>
     <?php endif; ?>
     <?php endif; ?>
+    </div>
   </body>
-
  
  <?php if( isset($_POST['consultar'] ) || isset($_POST['enviar']) || isset($_SESSION['eliminarAlumno']) ) :?>
 <?php $_SESSION['eliminarAlumno']=null;?>
