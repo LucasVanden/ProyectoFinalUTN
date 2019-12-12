@@ -70,7 +70,7 @@ $MenuProfesores=($Profesor||$AsignarMateriaaProfesor||$AsignarHorariodeCursado);
 $Materias=in_array("7", $lsitaPermisos);
 $Departamentos=in_array("6", $lsitaPermisos);
 $Aulas=in_array("5", $lsitaPermisos);
-$Mesas=in_array("4", $lsitaPermisos);
+$MesasP=in_array("4", $lsitaPermisos);
 
 
 $Asuetos=in_array("3", $lsitaPermisos);
@@ -143,7 +143,7 @@ if ($_SESSION['rol']==4){$Permiso=true;}else{$Permiso=false;}
                 <?php endif?>
 
 
-                <?php if($Mesas) :?>
+                <?php if($MesasP) :?>
                 <li><a href="<?php echo $Mesas?>">Mesas</a></li>
                 <?php endif?>
 
