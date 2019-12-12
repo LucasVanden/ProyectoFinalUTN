@@ -367,8 +367,8 @@ foreach ($cargar as $horario) {
                                 <td>
                                 <?php if($activo22): ?>  
                                     <select name="MesaHorarioshora2dosemestre2">                       
-                                        <option <?php if($HM2S2 == '08'){echo("selected");}?> value='08'>8</option>
-                                        <option <?php if($HM2S2 == '09'){echo("selected");}?> value='09'>9</option>
+                                        <option <?php if($HM2S2 == '08'){echo("selected");}?> value='08'>08</option>
+                                        <option <?php if($HM2S2 == '09'){echo("selected");}?> value='09'>09</option>
                                         <option <?php if($HM2S2 == '10'){echo("selected");}?> value='10'>10</option>
                                         <option <?php if($HM2S2 == '11'){echo("selected");}?> value='11'>11</option>
                                         <option <?php if($HM2S2 == '12'){echo("selected");}?> value='12'>12</option>
