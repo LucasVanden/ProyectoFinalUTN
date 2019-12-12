@@ -104,10 +104,10 @@ endif;?>
 
                     <br>
                     <div class="form-group" align="center"> 
-                        <button class="btn btn-success" id="Cargar" name="textoConfirmar" type="submit"> <b> +  Cargar  </b>  
+                        <button class="btn btn-success" id="Cargar" name="Obtener" value="Cargar" type="submit"> <b> +  Cargar  </b>  
                             <span class="glyphicon glyphicon-ok"></span>
                         </button> 
-                        <button class="btn btn-danger" id="Borrar" type="submit"> <b> -  Borrar </b> 
+                        <button class="btn btn-danger" id="Borrar" type="submit" value="Borrar" name="Obtener"> <b> -  Borrar </b> 
                             <span class="glyphicon glyphicon-remove"></span>
                         </button> 
                     </div> 

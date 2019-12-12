@@ -89,10 +89,10 @@ if(isset($_SESSION['comprobacion'])){
                     
                     <br>
                     <div class="form-group" align="center"> 
-                        <button class="btn btn-success" id="Cargar" name="textoConfirmar" type="submit" formaction=<?php echo $contAsuetoAsueto ?>> <b> +  Cargar  </b>  
+                        <button class="btn btn-success" id="Cargar"  value="Cargar" name="Obtener" type="submit" formaction=<?php echo $contAsuetoAsueto ?>> <b> +  Cargar  </b>  
                             <span class="glyphicon glyphicon-ok"></span>
                         </button> 
-                        <button class="btn btn-danger" id="Eliminar" type="submit" formaction=<?php echo $contAsuetoAsueto ?>> <b> -  Eliminar </b> 
+                        <button class="btn btn-danger" id="Eliminar" type="submit"  value="Eliminar" name="Obtener" formaction=<?php echo $contAsuetoAsueto ?>> <b> -  Eliminar </b> 
                             <span class="glyphicon glyphicon-remove"></span>
                         </button> 
                     </div>                     

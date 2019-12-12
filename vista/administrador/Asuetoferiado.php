@@ -72,10 +72,10 @@ if(isset($_SESSION['idfechaferiado'])){
 
                     <br>
                     <div class="form-group" align="center"> 
-                        <button class="btn btn-success" id="Cargar" name="textoConfirmar" type="submit" formaction=<?php echo $controladorAsuetoFeriado ?>> Cargar 
+                        <button class="btn btn-success" id="Cargar"  type="submit" value="Cargar" name="Obtener" formaction=<?php echo $controladorAsuetoFeriado ?>> Cargar 
                             <span class="glyphicon glyphicon-ok"></span>
                         </button> 
-                        <button class="btn btn-danger" id="Borrar" type="submit"> Borrar 
+                        <button class="btn btn-danger" id="Borrar" type="submit" value="Borrar" name="Obtener" > Borrar 
                             <span class="glyphicon glyphicon-remove"></span>
                         </button> 
                     </div> 
