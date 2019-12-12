@@ -43,7 +43,7 @@ $recuperarContraseniaUsuario=$URL.$recuperarContraseniaUsuario;
         <div class="form-group">   
           <label for="nuevacontraseña" class="control-label col-md-4"> Legajo</label>
           <div class="col-md-4">
-            <input class="form-control" name="legajo" type="text" placeholder="Ingrese su Numero de Legajo" required>
+            <input class="form-control" name="legajo" type="text" placeholder="Ingrese su Número de Legajo" required>
           </div>
         </div>
 
@@ -68,7 +68,7 @@ $recuperarContraseniaUsuario=$URL.$recuperarContraseniaUsuario;
 
       <?php if($_SESSION['mensaje']=="ok"):?>
         <div align="center" class="alert alert-success" role="alert">
-          <h4 class="alert-heading">Email de recuperacion </h4>
+          <h4 class="alert-heading">Email de recuperación </h4>
           <p> <?php echo $_SESSION['contenidomensaje']?></p>
           <hr>
         </div>

@@ -66,7 +66,7 @@ if($stmt->rowCount() == 0) {
     echo $body;
 
     enviaremail($mail,$body);
-    $mensaje="Se le envio un correo a $email con los pasos a seguir";
+    $mensaje="Se le envió un correo a $email con los pasos a seguir";
     $_SESSION['mensaje']="ok";
 }
 
