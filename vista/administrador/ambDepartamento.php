@@ -80,7 +80,7 @@ $departamentos=$a->BuscarDepartamento();
                             <tr>
                                 <th>Cuerpo</th>
                                 <td>
-                                    <select class="browser-default custom-select"  data-style="btn-primary" data-widthen="auto" name="cuerpo"  id="first-choice">
+                                    <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" name="cuerpo"  id="first-choice">
                                         <?php 
                                             $listacuerpoAula = $a->BuscarCuerpoAulas();
                                             foreach ($listacuerpoAula as $cuerpoAula): ?> 

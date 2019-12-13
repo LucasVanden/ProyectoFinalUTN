@@ -2,7 +2,6 @@
 <!-- Batman -->
 <?php
 session_start();
-
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
@@ -10,8 +9,7 @@ if(!isset($_SESSION['rol'])){
     if(!in_array(10,$_SESSION['permisos'])){
         header('location: '. $URL.$login);
     }
-  }
-  
+  }  
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
 
@@ -48,14 +46,23 @@ if(isset($_POST['ver'])){
     $_SESSION['mostrarAulas']=true;}
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
- 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+        <title>Asignar Horario de Cursado</title>
+        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/> 
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
@@ -63,143 +70,154 @@ if(isset($_POST['ver'])){
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <h2>Horarios de Cursado</h2>
-        <form action=<?php echo $bajaMateriaProfesor ?> method="POST" name="horamayor"> <!-- -->
-            <div>
-                <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
-                <tr>
-                <th>Profesor</th>
-                            <td>
-                                <select id="idprofesor"name="profesor">
-                               
-                                <?php 
-                               $listaprofesores = $a->BuscarProfesor();
-                               foreach ($listaprofesores as $profesor): ?> 
-                                <option <?php if(isset($_SESSION['idprofesor'])){if($profesor->getid_profesor()==$_SESSION['idprofesor']){echo "selected";}}?> value=<?php echo "{$profesor->getid_profesor()}" ?>> <?php echo "{$profesor->getApellido()}, {$profesor->getnombre()}" ?></option>   
-                                <?php endforeach; 
-                               ?>
-
-                                </select>                                
-                            </td>
-                            <th>Materia</th>
-                            <td>                       
-                                <select id="second-choice" name="Materias">
-                                </select> 
-                                <script>
-                                    $("#idprofesor").change(function() {
-                                    $("#second-choice").load("<?php echo $buscarmateriasProfesor.'?choice='?>"+ $("#idprofesor").val());
-                                    }).change();</script>
-
-                            </td>
-                        </tr>    
-                </table>
-            </div>
-            <div>
+        <div class="container" align="center">
+        <br>
+            <form action=<?php echo $bajaMateriaProfesor ?> method="POST" name="horamayor">
+                <div class="form-group" align="center">
+                    <h2 for="editarPersonal" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Horario de Cursado</h2>
+                </div>
+                <div class="container" align="center">
+                    <div class="table-responsive col-md-8 col-md-offset-4">
+                        <table class="table table-bordered table-hover" id="tablaBuscar">  
+                            <tr class="info">
+                                <th>Profesor</th>
+                                <td>
+                                    <select class="browser-default custom-select"  data-style="btn-primary" data-widthen="auto" id="idprofesor"name="profesor">
+                                    <?php 
+                                        $listaprofesores = $a->BuscarProfesor();
+                                        foreach ($listaprofesores as $profesor): ?> 
+                                        <option <?php if(isset($_SESSION['idprofesor'])){if($profesor->getid_profesor()==$_SESSION['idprofesor']){echo "selected";}}?> value=<?php echo "{$profesor->getid_profesor()}" ?>> <?php echo "{$profesor->getApellido()}, {$profesor->getnombre()}" ?></option>   
+                                    <?php endforeach;?>
+                                    </select>                                
+                                </td>
+                                <th>Materia</th>
+                                <td>                       
+                                    <select class="browser-default custom-select"  data-style="btn-primary" data-widthen="auto" id="second-choice" name="Materias">
+                                    </select> 
+                                    <script>
+                                        $("#idprofesor").change(function() {
+                                            $("#second-choice").load("<?php echo $buscarmateriasProfesor.'?choice='?>"+ $("#idprofesor").val());
+                                        }).change();
+                                    </script>
+                                </td>
+                            </tr>   
+                        </table>
+                    </div>
+                </div>
                 <br>
-                <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
-                <input id=buttonBuscar name="agregar" type="submit" value="Agregar" formaction=<?php echo $bajaMateriaProfesor?> >
-                <input id=buttonBuscar name="ver" type="submit" value="Ver Horario Cursado" formaction=<?php echo $bajaMateriaProfesor?> >
-                <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
-            </div>                  
-        <tr>               
-                 
-<?php
-if(isset($_POST['ver'])||isset($_SESSION['mostrarAulas'])):?>
-<?php if(isset( $_SESSION['idprofesor'])):?>
- <?php if(isset( $_SESSION['idMaterias'])):?>
-  <table align='center' class="table-mostrar">
+                <div class="form-group" align="center"> 
+                    <button class="btn btn-success" id="buttonBuscar" name="agregar" value="Agregar" type="submit" formaction=<?php echo $bajaMateriaProfesor?>> <b>  +  Agregar </b>  
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>  
+                    <button class="btn btn-primary" id="buttonBuscar" name="ver" value="Ver Horario Cursado" type="submit" formaction=<?php echo $bajaMateriaProfesor?>> <b>  +  Ver Horario Cursado </b>  
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                </div>                  
+                <tr>                           
+                <?php if(isset($_POST['ver'])||isset($_SESSION['mostrarAulas'])):?>
+                    <?php if(isset( $_SESSION['idprofesor'])):?>
+                        <?php if(isset( $_SESSION['idMaterias'])):?>
+                    <div class="container" align="center"> 
+                        <div class="table-responsive col-md-12 col-md-offset-0">
+                            <table id="myTable2" class="table table-bordered table-hover">
+                                <tr class="info">
+                                    <th onclick="sortTable(0)" style="cursor:pointer";>Materia</th>
+                                    <th onclick="sortTable(1)" style="cursor:pointer";>Profesor</th>
+                                    <th onclick="sortTable(2)" style="cursor:pointer";>Dia</th>
+                                    <th onclick="sortTable(3)" style="cursor:pointer";>Hora Desde</th>
+                                    <th onclick="sortTable(4)" style="cursor:pointer";>Hora Hasta</th>
+                                    <th onclick="sortTable(5)" style="cursor:pointer";>Semestre</th>
+                                </tr>
+                                    <?php  foreach ($listaMaterias as $horacursado) : ?>        
+                                <tr>
+                                    <td>
+                                        <?php echo $horacursado->getfk_materia()->getnombreMateria()?>
+                                    </td>
+                                    <td>
+                                        <?php echo $horacursado->getProfesor()->getApellido()." ".$horacursado->getProfesor()->getNombre()?>
+                                    </td>
+                                    <td>
+                                        <?php echo $horacursado->getdia()->getdia()?>
+                                    </td>
+                                    <td>
+                                        <?php echo $horacursado->gethoraDesde()?>
+                                    </td>
+                                    <td>
+                                        <?php echo $horacursado->gethoraHasta()?>
+                                    </td>
+                                    <td>
+                                        <?php echo $horacursado->getsemestreAnual()?>
+                                    </td>
+                                    <td>
+                                        <button type="submit" value=<?php echo $horacursado->getid_HorarioCursado()?> name="idhoraCursado" formaction=<?php echo $eliminarHorariodeCursado ?> onclick="return confirm('Esta seguro que desea eliminar')"> Eliminar</button>
+                                    </td>
+                                </tr>
+                                    <?php endforeach; ?>
+                            </table>
+                        </div>
+                    </div>
+                        <?php else: echo "No hay materias"; ?>
+                        <?php endif?>
+                    <?php endif?>  
+                <?php endif?>
+                <?php if(isset($_POST['agregar'])):?>
+                    <?php if(isset($_POST['profesor'])):?>
+                        <?php if(isset($_POST['Materias'])):?>
+                    <div class="container" align="center">
+                        <div class="table-responsive col-md-12 col-md-offset-0">
+                            <table class="table table-bordered table-hover">
+                                <tr class="info">
+                                    <th>Tipo</th>
+                                    <th>Día</th>
+                                    <th>Hora Desde</th>
+                                    <th>Hora Hasta</th>
+                                </tr>           
+                                <tr>
+                                    <td> 
+                                        <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" id="second-choice" name="semestreAnual">
+                                            <option value="1">1 semestre</option>   
+                                            <option value="2">2 semestre</option>   
+                                            <option value="anual">Anual</option>   
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" id="second-choice" name="dia">
+                                            <option value="1">Lunes</option>   
+                                            <option value="2">Martes</option>   
+                                            <option value="3">Miercoles</option>   
+                                            <option value="4">Jueves</option>   
+                                            <option value="5">Viernes</option>   
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="time" id="f1" name="horaDesde" value=08:00 oninput="check()">           
+                                    </td>
+                                    <td>
+                                        <input type="time" id="f1" name="horaHasta" value=08:00 oninput="check()">    
+                                    </td>
+                                    <td>
+                                        <button type="submit" formaction=<?php echo $agregarHorarioCursado ?> onclick="return confirm('Esta seguro que desea agregar')"> Agregar</button>
+                                    </td>
+                                </tr>    
+                            </table>
+                        </div>
+                    </div>
+                        <?php else: echo "No hay materias"; ?>
+                        <?php endif?>     
+                    <?php endif?>
+                <?php endif?>
+            </form>  
+        </div>
+    </body>
 
-     <div class="container"> 
-                <div class="table-responsive col-md-12 col-md-offset-0">
-                    <table id="myTable2" class="table table-bordered table-hover"  align="center">
-                        <tr class="info">
-                            <th onclick="sortTable(0)" style="cursor:pointer";>Materia</th>
-                            <th onclick="sortTable(1)" style="cursor:pointer";>Profesor</th>
-                            <th onclick="sortTable(2)" style="cursor:pointer";>Dia</th>
-                            <th onclick="sortTable(3)" style="cursor:pointer";>Hora Desde</th>
-                            <th onclick="sortTable(4)" style="cursor:pointer";>Hora Hasta</th>
-                            <th onclick="sortTable(5)" style="cursor:pointer";>Semestre</th>
-                        </tr>
-        <?php  foreach ($listaMaterias as $horacursado) : ?>
-        
-        <tr>
-        <td><?php echo $horacursado->getfk_materia()->getnombreMateria()?></td>
-        <td><?php echo $horacursado->getProfesor()->getApellido()." ".$horacursado->getProfesor()->getNombre()?></td>
-        <td><?php echo $horacursado->getdia()->getdia()?></td>
-        <td><?php echo $horacursado->gethoraDesde()?></td>
-        <td><?php echo $horacursado->gethoraHasta()?></td>
-        <td><?php echo $horacursado->getsemestreAnual()?></td>
-        <td>
-        <button type="submit" value=<?php echo $horacursado->getid_HorarioCursado()?> name="idhoraCursado" formaction=<?php echo $eliminarHorariodeCursado ?> onclick="return confirm('Esta seguro que desea eliminar')"> Eliminar</button>
-        </td>
-        </tr>
-                    <?php endforeach; ?>
-</table>
-</div>
-</div>
-            <?php  else: echo "No hay materias"; ?>
-            <?php endif?>
-     
-      <?php   endif?>  
-      <?php   endif?>
-
-
-
-<?php  if(isset($_POST['agregar'])):?>
-<?php  if(isset($_POST['profesor'])):?>
-    <?php if(isset($_POST['Materias'])):?>
-        <table align='center' class="table-mostrar">
-        <th>Tipo</th>
-            <th>Dia</th>
-            <th>Hora Desde</th>
-            <th>Hora Hasta</th>
-         
-  
-            <tr>
-                <td> 
-                    <select id="second-choice" name="semestreAnual">
-                    <option value="1">1 semestre</option>   
-                    <option value="2">2 semestre</option>   
-                    <option value="anual">Anual</option>   
-                    </select>
-                </td>
-                <td>
-                    <select id="second-choice" name="dia">
-                        <option value="1">Lunes</option>   
-                        <option value="2">Martes</option>   
-                        <option value="3">Miercoles</option>   
-                        <option value="4">Jueves</option>   
-                        <option value="5">Viernes</option>   
-                    </select>
-                </td>
-                <td>
-                    <input type="time" id="f1" name="horaDesde" value=08:00 oninput="check()">           
-                </td>
-                <td>
-                    <input type="time" id="f1" name="horaHasta" value=08:00 oninput="check()">    
-                </td>
-                <td>
-                <button type="submit"  formaction=<?php echo $agregarHorarioCursado ?> onclick="return confirm('Esta seguro que desea agregar')"> Agregar</button>
-                </td>
-            </tr>    
-    </table>
-   
-    <?php  else: echo "No hay materias"; ?>
-            <?php endif?>
-     
-      <?php   endif?>
-      <?php   endif?>
-      </form>  
-      <script>
+ <script>
  function check(input) {
   var x = document.forms["horamayor"]["horaDesde"].value;
   var y = document.forms["horamayor"]["horaHasta"].value;
    if ( x>y) {
     document.getElementById("f1").setCustomValidity("Hora Desde debe ser menor a Hora Hasta");
     return false;
-
-   } else {
-      
+   } else {      
     document.getElementById("f1").setCustomValidity("");
     document.getElementById("f2").setCustomValidity("");
    }
@@ -262,6 +280,7 @@ function sortTable(n) {
   }
 }
 </script>
+
     <footer>
         <?php require $DIR.$footer; ?>     
     </footer>  
