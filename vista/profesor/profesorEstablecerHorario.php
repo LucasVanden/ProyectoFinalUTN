@@ -179,7 +179,7 @@ $M2S2=null;
                                 </td>
                                 <?php if($dedicaciondoble): ?>  
                                 <td>
-                                    <select name="Horarioshora1ersemestre2" id="Horarioshora1ersemestre2" onchange="check11(this.value)">>                       
+                                    <select name="Horarioshora1ersemestre2" id="Horarioshora1ersemestre2" onchange="check11(this.value)">                       
                                         <option <?php if($H1S2 == '08'){echo("selected");}?> value='08'>08</option>
                                         <option <?php if($H1S2 == '09'){echo("selected");}?> value='09'>09</option>
                                         <option <?php if($H1S2 == '10'){echo("selected");}?> value='10'>10</option>

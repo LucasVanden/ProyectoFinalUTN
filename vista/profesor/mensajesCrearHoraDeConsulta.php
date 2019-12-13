@@ -145,7 +145,7 @@ foreach ($cargar as $horario) {
 
         <div class="container">
             <br>
-            <form action="profesorEstablecerHorario.php" method="POST" class="form-horizontal">     
+            <form action="profesorEstablecerHorario.php" method="POST" class="form-horizontal" name="myForm">     
                 <div class="form-group" align="center">
                     <h2 for="establecer" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;"> Creación Horario Consulta </h2>
                 </div>
@@ -218,7 +218,7 @@ foreach ($cargar as $horario) {
                                 <th>Horario</th>                        
                                 <td>
                                 <?php if($activo11): ?>  
-                                    <select name="MesaHorarioshora1ersemestre1">                       
+                                    <select name="MesaHorarioshora1ersemestre1" id="h11" onchange="check11(this.value)">                    
                                         <option <?php if($HM1S1 == '08'){echo("selected");}?> value='08'>08</option>
                                         <option <?php if($HM1S1 == '09'){echo("selected");}?> value='09'>09</option>
                                         <option <?php if($HM1S1 == '10'){echo("selected");}?> value='10'>10</option>
@@ -235,7 +235,7 @@ foreach ($cargar as $horario) {
                                         <option <?php if($HM1S1 == '21'){echo("selected");}?> value='21'>21</option>
                                         <option <?php if($HM1S1 == '22'){echo("selected");}?> value='22'>22</option>
                                 
-                                    </select>:<select name="MesaHorariomin1ersemestre1">                       
+                                    </select>:<select name="MesaHorariomin1ersemestre1" id="m11" onchange="check11(this.value)">                       
                                 
                                         <option <?php if($MM1S1 == '00'){echo("selected");}?> value='00'>00</option>
                                         <option <?php if($MM1S1 == '15'){echo("selected");}?> value='15'>15</option>
@@ -247,7 +247,7 @@ foreach ($cargar as $horario) {
                                 </td>
                                 <td>
                                 <?php if($activo12): ?>  
-                                    <select name="MesaHorarioshora1ersemestre2">                       
+                                    <select name="MesaHorarioshora1ersemestre2" id="h12" onchange="check12(this.value)">                 
                                         <option <?php if($HM1S2 == '08'){echo("selected");}?> value='08'>08</option>
                                         <option <?php if($HM1S2 == '09'){echo("selected");}?> value='09'>09</option>
                                         <option <?php if($HM1S2 == '10'){echo("selected");}?> value='10'>10</option>
@@ -264,7 +264,7 @@ foreach ($cargar as $horario) {
                                         <option <?php if($HM1S2 == '21'){echo("selected");}?> value='21'>21</option>
                                         <option <?php if($HM1S2 == '22'){echo("selected");}?> value='22'>22</option>
                                 
-                                    </select>:<select name="MesaHorariomin1ersemestre2">                       
+                                    </select>:<select name="MesaHorariomin1ersemestre2" id="m12" onchange="check11(this.value)">                          
                                 
                                         <option <?php if($MM1S2 == '00'){echo("selected");}?> value='00'>00</option>
                                         <option <?php if($MM1S2 == '15'){echo("selected");}?> value='15'>15</option>
@@ -337,7 +337,7 @@ foreach ($cargar as $horario) {
                                 <th>Horario</th>                        
                                 <td>
                                 <?php if($activo21): ?>  
-                                    <select name="MesaHorarioshora2dosemestre1">                       
+                                    <select name="MesaHorarioshora2dosemestre1" id="h21" onchange="check21(this.value)">                         
                                         <option <?php if($HM2S1 == '08'){echo("selected");}?> value='08'>08</option>
                                         <option <?php if($HM2S1 == '09'){echo("selected");}?> value='09'>09</option>
                                         <option <?php if($HM2S1 == '10'){echo("selected");}?> value='10'>10</option>
@@ -354,7 +354,7 @@ foreach ($cargar as $horario) {
                                         <option <?php if($HM2S1 == '21'){echo("selected");}?> value='21'>21</option>
                                         <option <?php if($HM2S1 == '22'){echo("selected");}?> value='22'>22</option>
                                 
-                                    </select>:<select name="MesaHorariomin2dosemestre1">                       
+                                    </select>:<select name="MesaHorariomin2dosemestre1" id="m21" onchange="check21(this.value)">  >                       
                                     
                                         <option <?php if($MM2S1 == '00'){echo("selected");}?> value='00'>00</option>
                                         <option <?php if($MM2S1 == '15'){echo("selected");}?> value='15'>15</option>
@@ -366,7 +366,7 @@ foreach ($cargar as $horario) {
                                 </td>
                                 <td>
                                 <?php if($activo22): ?>  
-                                    <select name="MesaHorarioshora2dosemestre2">                       
+                                    <select name="MesaHorarioshora2dosemestre2" id="h22" onchange="check22(this.value)">  >                       
                                         <option <?php if($HM2S2 == '08'){echo("selected");}?> value='08'>08</option>
                                         <option <?php if($HM2S2 == '09'){echo("selected");}?> value='09'>09</option>
                                         <option <?php if($HM2S2 == '10'){echo("selected");}?> value='10'>10</option>
@@ -383,7 +383,7 @@ foreach ($cargar as $horario) {
                                         <option <?php if($HM2S2 == '21'){echo("selected");}?> value='21'>21</option>
                                         <option <?php if($HM2S2 == '22'){echo("selected");}?> value='22'>22</option>
                                 
-                                    </select>:<select name="MesaHorariomin2dosemestre2">                       
+                                    </select>:<select name="MesaHorariomin2dosemestre2" id="m22" onchange="check22(this.value)">  >                       
                                     
                                         <option <?php if($MM2S2 == '00'){echo("selected");}?> value='00'>00</option>
                                         <option <?php if($MM2S2 == '15'){echo("selected");}?> value='15'>15</option>
@@ -448,6 +448,64 @@ foreach ($cargar as $horario) {
         <script src="./../js/jquery.js"></script>
         <script src="./../js/bootstrap.min.js"></script>
     </body>
+
+    <script>
+
+function check11(input) {
+ var x = document.forms["myForm"]["MesaHorarioshora1ersemestre1"].value;
+ var y = document.forms["myForm"]["MesaHorariomin1ersemestre1"].value;
+  if ( x==22&&y==45) {
+   document.getElementById("m11").setCustomValidity("Maximo 22:30");
+   return false;
+
+  } else {
+     
+   document.getElementById("m11").setCustomValidity("");
+  }
+}
+</script>
+<script>
+function check12(input) {
+ var x = document.forms["myForm"]["MesaHorarioshora1ersemestre2"].value;
+ var y = document.forms["myForm"]["MesaHorariomin1ersemestre2"].value;
+  if ( x==22&&y==45) {
+   document.getElementById("m12").setCustomValidity("Maximo 22:30");
+   return false;
+
+  } else {
+     
+   document.getElementById("m12").setCustomValidity("");
+  }
+}
+</script>
+<script>
+function check21(input) {
+ var x = document.forms["myForm"]["MesaHorarioshora2dosemestre1"].value;
+ var y = document.forms["myForm"]["MesaHorariomin2dosemestre1"].value;
+  if ( x==22&&y==45) {
+   document.getElementById("m21").setCustomValidity("Maximo 22:30");
+   return false;
+
+  } else {
+     
+   document.getElementById("m21").setCustomValidity("");
+  }
+}
+</script>
+<script>
+function check22(input) {
+ var x = document.forms["myForm"]["MesaHorarioshora2dosemestre2"].value;
+ var y = document.forms["myForm"]["MesaHorariomin2dosemestre2"].value;
+  if ( x==22&&y==45) {
+   document.getElementById("m22").setCustomValidity("Maximo 22:30");
+   return false;
+
+  } else {
+     
+   document.getElementById("m22").setCustomValidity("");
+  }
+}
+</script>
     <footer class="footer">
       <?php require $DIR.$footer; ?>     
     </footer>  
