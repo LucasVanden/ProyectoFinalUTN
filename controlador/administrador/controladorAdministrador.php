@@ -540,5 +540,24 @@ class controladorAdministrador extends conexion
                 return $permisos;
 
             }
+            function BuscarProfesornoDirector(){
+                $listaProfesor=array();
+                $conn = $this->getconexion();
+                $stmt = $conn->prepare("SELECT id_profesor,nombre,apellido,email,legajo FROM profesor 
+                INNER JOIN usuario
+                ON usuario.usuario=profesor.legajo
+                where eliminado is null and fk_perfil=2 ORDER BY apellido"); 
+                $stmt->execute();
+                while($row = $stmt->fetch()) {
+                    $prof = new Profesor();
+                    $prof->setid_profesor($row['id_profesor']);
+                    $prof->setapellido($row['apellido']);
+                    $prof->setnombre($row['nombre']);
+                    $prof->setemail($row['email']);
+                    $prof->setlegajo($row['legajo']);
+                   array_push($listaProfesor,$prof);
+                }
+                return $listaProfesor;
+            }
 }
 ?>

@@ -55,7 +55,7 @@ $eliminarDirecotr= $URL.$eliminarDirecotr;
                                 <td>
                                     <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" name="profesor">
                                         <?php 
-                                            $listaprofesores = $a->BuscarProfesor();
+                                            $listaprofesores = $a->BuscarProfesornoDirector();
                                             foreach ($listaprofesores as $profesor): ?> 
                                         <option value=<?php echo "{$profesor->getid_profesor()}" ?>> <?php echo "{$profesor->getApellido()}, {$profesor->getnombre()}" ?></option>   
                                             <?php endforeach; 
