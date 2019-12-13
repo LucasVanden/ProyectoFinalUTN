@@ -1,9 +1,6 @@
 <?php
 session_start();
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-
-
-
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
   }else{
@@ -42,13 +39,13 @@ $aulas=$a->BuscarAulas();
         <title>Aulas</title>        
         <link href="./../assert/css/style.css" rel="stylesheet" type="text/css"/> 
     </head>
-    <body background = <?php echo $URL.$fondo?> onload="mostrarPopUp()">
+    <body background = <?php echo $URL.$fondo?> onload="mostrarPopUp()" style="padding-top: 70px; bg-secondary">
     <script src="jquery.js"></script>
     <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-    <div class="container">
+    <div class="container" align="center">
         <br>
         <form action=<?php echo $abmcrearAula ?> method="POST">
             <div class="form-group" align="center">

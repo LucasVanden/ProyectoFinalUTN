@@ -46,7 +46,7 @@ $_SESSION['mensaje']=null;
         <!-- se usa los dos script siguientes??-->
         <script src="jquery.js"></script>
         <script src="./../js/funciones.js" type="text/javascript"></script>
-        <div class="container">
+        <div class="container" align="center">
             <br>
             <form action="alumnoPpal.php" method="POST" class="form-horizontal">
                 <div class="form-group" align="center">

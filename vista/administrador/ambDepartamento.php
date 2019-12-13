@@ -1,8 +1,6 @@
 <?php
 session_start();
-
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
-
 if(!isset($_SESSION['rol'])){
   header('location: '. $URL.$login);
 }else{
@@ -16,7 +14,6 @@ require_once ($DIR.$controladorAdministrador);
 
 $Menu= $URL.$AsuetoMenu;
 $ABMAula= $URL.$ABMAula;
-
 $borrarDepartamento=$URL.$borrarDepartamento;
 $abmDepartamento=$URL.$abmDepartamento;
 $crearDepartamento=$URL.$crearDepartamento;
@@ -45,97 +42,91 @@ $departamentos=$a->BuscarDepartamento();
         <title>Departamento</title>
         <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/> 
     </head>
-    <body background = <?php echo $URL.$fondo?> onload="a();PopUp()">
+    <body background = <?php echo $URL.$fondo?> onload="a();PopUp()" style="padding-top: 70px; bg-secondary">
     <script src="jquery.js"></script>
     <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
+        <div class="container" align="center">
         <br>
-        <form action=<?php echo $crearDepartamento ?> method="POST">
-            <div class="form-group" align="center">
-                <h2 for="abmdepartamento" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Departamentos </h2>
-            </div>
-            <div>
-                <table id="tablaBuscar" align="center">                     
-                    <tr>
-                        <th>Departamento</th>
-                        <td>
-                        <input type="text" name="departamento" required><br>
-                        </td>
-                    </tr>   
-
-                    <tr>
-                    <th>Aula de consulta predeterminada:</th>
-                   <td style="visibility:hidden">
-                            <select name="AulaAsignada" style="visibility:hidden" > 
-                            <?php
-                            $aulas=$a->BuscarAulas();
-                            foreach ($aulas as $aula): ?>
-                            <option value=<?php echo $aula->getid_aula()?>> 
-                            <?php 
-                            echo "Cuerpo: ".$aula->getcuerpoAula()." nivel: ".$aula->getnivelAula()." aula: ".$aula->getnumeroAula();
-                            ?>
-                            </option>
-                            <?php endforeach; ?>
-                            </select>
-                        </td>
-                        </tr>
-                        <tr>
-                        <th>Cuerpo</th>
-                        <td>
-                        <select name="cuerpo"  id="first-choice">
-                                            <?php 
-                                    $listacuerpoAula = $a->BuscarCuerpoAulas();
-                                    foreach ($listacuerpoAula as $cuerpoAula): ?> 
-                                    <option value=<?php echo $cuerpoAula ?>> <?php echo $cuerpoAula  ?></option>   
-                                    <?php endforeach; 
-                                    ?>
-                                </select>
-                        <!-- // -->
-                        </td>
-                    
-                        </tr> 
-                         
-                        <tr>
-                        <th>Nivel</th>
-                        <td>                       
-                                <select  name="nivel" id="second-choice">
-                                </select> 
+            <form action=<?php echo $crearDepartamento ?> method="POST">
+                <div class="form-group" align="center">
+                    <h2 for="abmdepartamento" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Departamentos </h2>
+                </div>
+                <div class="container" align="center">
+                    <div class="table-responsive col-md-7 col-md-offset-1">
+                        <table class="table table-bordered table-hover" id="tablaBuscar" align="center">                     
+                            <tr class="info">
+                                <th>Departamento</th>
+                                <td>
+                                    <input class="form-control" type="text" name="departamento" required><br>
+                                </td>
+                            </tr>  
+                            <tr>
+                                <th colspan="2">Aula de consulta predeterminada:</th>
+                                <td style="visibility:hidden">
+                                    <select class="browser-default custom-select" name="AulaAsignada" style="visibility:hidden" > 
+                                        <?php
+                                            $aulas=$a->BuscarAulas();
+                                            foreach ($aulas as $aula): ?>
+                                        <option value=<?php echo $aula->getid_aula()?>> 
+                                        <?php 
+                                            echo "Cuerpo: ".$aula->getcuerpoAula()." nivel: ".$aula->getnivelAula()." aula: ".$aula->getnumeroAula();
+                                        ?>
+                                        </option>
+                                            <?php endforeach; ?>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Cuerpo</th>
+                                <td>
+                                    <select class="browser-default custom-select"  data-style="btn-primary" data-widthen="auto" name="cuerpo"  id="first-choice">
+                                        <?php 
+                                            $listacuerpoAula = $a->BuscarCuerpoAulas();
+                                            foreach ($listacuerpoAula as $cuerpoAula): ?> 
+                                            <option value=<?php echo $cuerpoAula ?>> <?php echo $cuerpoAula  ?></option>   
+                                            <?php endforeach; 
+                                            ?>
+                                        </select>
+                                </td>                            
+                            </tr>                             
+                            <tr>
+                                <th>Nivel</th>
+                                <td>                       
+                                    <select class="browser-default custom-select"  data-style="btn-primary" data-widthen="auto" name="nivel" id="second-choice">
+                                    </select> 
                                     <script>
                                         $("#first-choice").change(function() {
-                                        $("#second-choice").load("<?php echo $buscarNivelAula1ervacio.'?choice='?>"+ $("#first-choice").val());
-                                        }).change();
-                                        
+                                            $("#second-choice").load("<?php echo $buscarNivelAula1ervacio.'?choice='?>"+ $("#first-choice").val());
+                                        }).change();                                                
                                     </script>
-                            </td>
-                        </tr>
-
-                        <tr>
-                        <th>Aula</th>
-                        <td>
-                            <select  name="numeroaula" id="profesor-choice" oninvalid="this.setCustomValidity('Ingrese Aula y previamente Nivel')" onchange="this.setCustomValidity('')" required>
-                                </select> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Aula</th>
+                                <td>
+                                    <select class="browser-default custom-select"  data-style="btn-primary" data-widthen="auto" name="numeroaula" id="profesor-choice" oninvalid="this.setCustomValidity('Ingrese Aula y previamente Nivel')" onchange="this.setCustomValidity('')" required>
+                                    </select> 
                                     <script>
                                         $("#second-choice").change(function() {
                                             $("#profesor-choice").load("<?php echo $buscarNombreAula.'?choice='?>"+ $("#second-choice").val()+'&choice2='+ $("#first-choice").val());
-                                    }).change();
-                                        
+                                        }).change();                                                
                                     </script>
-                        </td>
-                        </tr>
-
-                </table>
-            </div>
-
-            <br> <br>
-            <div class="form-group" align="center"> 
-                <button class="btn btn-success" id="CargarDepartamento" name="textoConfirmar" type="submit" formaction=<?php echo $crearDepartamento ?>> <b>  +  Cargar Departamento </b>  
-                    <span class="glyphicon glyphicon-ok"></span>
-                </button>  
-            </div>
-        </form>
-        <br>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group" align="center"> 
+                    <button class="btn btn-success" id="CargarDepartamento" name="textoConfirmar" type="submit" formaction=<?php echo $crearDepartamento ?>> <b>  +  Cargar Departamento </b>  
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>  
+                </div>
+            </form>
+            <br>
             <div class="form-group" align="center"> 
                 <button class="btn btn-primary" id="MostrarDepartamentos" name="textoConfirmar" type="submit" formaction=<?php echo $abmDepartamento ?> onClick="myFunction();a()"> <b>  +  Mostrar Departamentos </b>  
                     <span class="glyphicon glyphicon-ok"></span>
@@ -144,8 +135,7 @@ $departamentos=$a->BuscarDepartamento();
 
 <div id="myDIV" >
 <table align="center">
-    <th>Departamento</th>
- 
+    <th>Departamento</th> 
     <th>Cuerpo</th>
     <th>Nivel</th>
     <th>Aula</th>
@@ -185,7 +175,7 @@ $departamentos=$a->BuscarDepartamento();
                                 </select>
                             </td>
                             <td>                       
-                                <select  name="nivel" id="<?php echo "second-choice".$dep->getid_departamento(); ?>">
+                                <select name="nivel" id="<?php echo "second-choice".$dep->getid_departamento(); ?>">
                                 </select> 
                                     <script>
                                         $(<?php echo '"#first-choice'.$dep->getid_departamento().'"'; ?>).change(function() {
@@ -241,8 +231,6 @@ $departamentos=$a->BuscarDepartamento();
 </script>
 <?php endif; ?>
 
-
-
 <script>
 function myFunction() {
   var x = document.getElementById("myDIV");
@@ -265,21 +253,15 @@ function b(){
     setTimeout(function(){a()},250)
 }
 </script>            
-
+</div>
 </body>
 <script>
-
-
 $(document).ready(function() {
     setTimeout(function(){a()},250)
-
 });
-
-
 </script>
-  <div id="snackbar">
-  
 
+<div id="snackbar"> 
   Departamento Existente
        
 </div>
