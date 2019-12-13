@@ -7,9 +7,11 @@ if(!isset($_SESSION['rol'])){
   if(!in_array(6,$_SESSION['permisos'])){
       header('location: '. $URL.$login);
   }
-}  
+}
+  
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
+
 $Menu= $URL.$AsuetoMenu;
 $ABMAula= $URL.$ABMAula;
 $borrarDepartamento=$URL.$borrarDepartamento;
@@ -37,7 +39,7 @@ $departamentos=$a->BuscarDepartamento();
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
-        <title>Departamentos</title>
+        <title>Departamento</title>
         <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/> 
     </head>
     <body background = <?php echo $URL.$fondo?> onload="a();PopUp()">
@@ -80,7 +82,7 @@ $departamentos=$a->BuscarDepartamento();
                             <tr>
                                 <th>Cuerpo</th>
                                 <td>
-                                    <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" name="cuerpo"  id="first-choice">
+                                    <select class="browser-default custom-select"  data-style="btn-primary" data-widthen="auto" name="cuerpo"  id="first-choice">
                                         <?php 
                                             $listacuerpoAula = $a->BuscarCuerpoAulas();
                                             foreach ($listacuerpoAula as $cuerpoAula): ?> 
@@ -129,85 +131,93 @@ $departamentos=$a->BuscarDepartamento();
                 <button class="btn btn-primary" id="MostrarDepartamentos" name="textoConfirmar" type="submit" formaction=<?php echo $abmDepartamento ?> onClick="myFunction();a()"> <b>  +  Mostrar Departamentos </b>  
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>  
-            </div>
-            <div class="container" align="center" id="myDIV">
-                <div class="table-responsive col-md-12 col-md-offset-0">
-                    <table class="table table-bordered table-hover">
-                        <tr class="info">
-                            <th>Departamento</th> 
-                            <th>Cuerpo</th>
-                            <th>Nivel</th>
-                            <th>Aula</th>
-                            <?php foreach ($departamentos as $dep): ?>                          
-                                <form action=<?php echo $editarDepartamento ?> method="POST"> 
-                                    <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" name="AulaAsignada" id="<?php echo "AulaidX".$dep->getid_departamento();?> "style="visibility:hidden">  
-                                <?php
-                                    $aulas=$a->BuscarAulas();
-                                    foreach ($aulas as $aula): ?>
-                                        <option <?php if($aula->getid_aula() == $dep->getfk_aula()){echo("selected");}?> value=<?php echo $aula->getid_aula()?>> 
-                                            <?php 
-                                                echo "Cuerpo: ".$aula->getcuerpoAula()." nivel: ".$aula->getnivelAula()." aula: ".$aula->getnumeroAula();
-                                            ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                    </select>
-                                    <?php $salon=$a->BuscarAulaID($dep->getfk_aula()); 
-                                        $_SESSION["salon"]=$salon;?>
-                        </tr>         
-                        <tr>
-                            <td>
-                                <?php echo $dep->getnombre() ?>
-                            <!--<?php   echo $dep->getid_departamento() ?> -->
-                            </td>
+            </div>      
+
+<div id="myDIV" >
+<table align="center">
+    <th>Departamento</th> 
+    <th>Cuerpo</th>
+    <th>Nivel</th>
+    <th>Aula</th>
+    <?php foreach ($departamentos as $dep): ?>    
+        <form action=<?php echo $editarDepartamento ?> method="POST"> 
+       
+                    <select name="AulaAsignada" id="<?php echo "AulaidX".$dep->getid_departamento(); ?>"style="visibility:hidden" >  
+                        <?php
+                        $aulas=$a->BuscarAulas();
+                        foreach ($aulas as $aula): ?>
+                        <option  <?php if($aula->getid_aula() == $dep->getfk_aula()){echo("selected");}?> value=<?php echo $aula->getid_aula()?>> 
+                            <?php 
+                            echo "Cuerpo: ".$aula->getcuerpoAula()." nivel: ".$aula->getnivelAula()." aula: ".$aula->getnumeroAula();
+                            ?>
+                        </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <?php $salon=$a->BuscarAulaID($dep->getfk_aula()); 
+                    $_SESSION["salon"]=$salon;?>
+                      
+            <tr>
+                <td>
+                    <?php   echo $dep->getnombre() ?>
+                    <!-- <?php   echo $dep->getid_departamento() ?> -->
+                </td>
+ 
                     <!-- // -->
+           
                             <td>                                
-                                <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" name="cuerpo"  id="<?php echo "first-choice".$dep->getid_departamento(); ?>" onclick="b()">
-                                    <?php 
+                                <select name="cuerpo"  id="<?php echo "first-choice".$dep->getid_departamento(); ?>" onclick="b()">
+                                            <?php 
                                     $listacuerpoAula = $a->BuscarCuerpoAulas();
                                     foreach ($listacuerpoAula as $cuerpoAula): ?> 
                                     <option <?php if($salon->getcuerpoAula()==$cuerpoAula){echo ("selected");}?> value=<?php echo $cuerpoAula ?>> <?php echo $cuerpoAula  ?></option>   
-                                    <?php endforeach;?>
+                                    <?php endforeach; 
+                                    ?>
                                 </select>
                             </td>
                             <td>                       
-                                <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" name="nivel" id="<?php echo "second-choice".$dep->getid_departamento(); ?>">
+                                <select name="nivel" id="<?php echo "second-choice".$dep->getid_departamento(); ?>">
                                 </select> 
-                                <script>
-                                    $(<?php echo '"#first-choice'.$dep->getid_departamento().'"'; ?>).change(function() {
+                                    <script>
+                                        $(<?php echo '"#first-choice'.$dep->getid_departamento().'"'; ?>).change(function() {
                                         $(<?php echo '"#second-choice'.$dep->getid_departamento().'"';?>).load("<?php echo $buscarNivelAula1ervacio.'?choice='?>"+ $(<?php echo '"#first-choice'.$dep->getid_departamento().'"';?>).val()+'&aula='+ $(<?php echo '"#AulaidX'.$dep->getid_departamento().'"'; ?>).val());
-                                    }).change();                                        
-                                </script>
+                                        }).change();
+                                        
+                                    </script>
                             </td>
                             <td>
-                                <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" name="numeroaula" id="<?php echo "profesor-choice".$dep->getid_departamento(); ?>">
-                                </select>                                
+                                    <select name="numeroaula" id="<?php echo "profesor-choice".$dep->getid_departamento(); ?>">
+                                    </select>                                
+                                
                                 <script>
                                     $(<?php echo '"#second-choice'.$dep->getid_departamento().'"';?>).change(function() {
-                                        $(<?php echo '"#profesor-choice'.$dep->getid_departamento().'"'; ?>).load("<?php echo $buscarNombreAula.'?choice='?>"+ $(<?php echo '"#second-choice'.$dep->getid_departamento().'"';?>).val()+'&choice2='+ $(<?php echo '"#first-choice'.$dep->getid_departamento().'"'; ?>).val()+'&aula='+ $(<?php echo '"#AulaidX'.$dep->getid_departamento().'"'; ?>).val());
+                                    $(<?php echo '"#profesor-choice'.$dep->getid_departamento().'"'; ?>).load("<?php echo $buscarNombreAula.'?choice='?>"+ $(<?php echo '"#second-choice'.$dep->getid_departamento().'"';?>).val()+'&choice2='+ $(<?php echo '"#first-choice'.$dep->getid_departamento().'"'; ?>).val()+'&aula='+ $(<?php echo '"#AulaidX'.$dep->getid_departamento().'"'; ?>).val());
                                     }).change();
                                 </script>
                                 <script>
                                     $(<?php echo '"#first-choice'.$dep->getid_departamento().'"';?>).change(function() {
-                                        $(<?php echo '"#profesor-choice'.$dep->getid_departamento().'"'; ?>).load("<?php echo $buscarNombreAula.'?choice='?>"+ $(<?php echo '"#second-choice'.$dep->getid_departamento().'"';?>).val()+'&choice2='+ $(<?php echo '"#first-choice'.$dep->getid_departamento().'"'; ?>).val()+'&aula='+ $(<?php echo '"#AulaidX'.$dep->getid_departamento().'"'; ?>).val());
+                                    $(<?php echo '"#profesor-choice'.$dep->getid_departamento().'"'; ?>).load("<?php echo $buscarNombreAula.'?choice='?>"+ $(<?php echo '"#second-choice'.$dep->getid_departamento().'"';?>).val()+'&choice2='+ $(<?php echo '"#first-choice'.$dep->getid_departamento().'"'; ?>).val()+'&aula='+ $(<?php echo '"#AulaidX'.$dep->getid_departamento().'"'; ?>).val());
                                     }).change();
                                 </script>
                             </td>
-                                  <!-- // -->           
-                            <td>
-                                <button type="submit" id="buttonAsistir" name="asignar" value=<?php echo $dep->getid_departamento()?> formaction=<?php echo $editarDepartamento?>> asignar </button>
-                                </form>
-                            </td>  
-                        <form action=<?php echo $borrarDepartamento ?> method="POST">
-                            <td>
-                                <button type="submit" value=<?php echo $dep->getid_departamento()?> name="borrarDepartamento" formaction=<?php echo $borrarDepartamento ?> onclick="return confirm('Esta seguro que desea eliminar departamento <?php echo $dep->getnombre()?> ')">Eliminar</button>    
-                            </td>
-                        </form>
-                        </tr>
-                        <?php endforeach; ?>
-                    </table>
+                                        
+                                  <!-- // -->
+           
+                <td>
+                    <button type="submit" id="buttonAsistir" name="asignar" value=<?php echo $dep->getid_departamento()?> formaction=<?php echo $editarDepartamento?>> asignar </button>
+        </form>
+            </td> 
+         
+        <form action=<?php echo $borrarDepartamento ?> method="POST">
+            <td>
+                <button type="submit" value=<?php echo $dep->getid_departamento()?> name="borrarDepartamento" formaction=<?php echo $borrarDepartamento ?> onclick="return confirm('Esta seguro que desea eliminar departamento <?php echo $dep->getnombre()?> ')">Eliminar</button>    
+            </td>
+        </form>
+            </tr>
+        <?php endforeach; ?>
+</table>
     <!-- // -->
-                </div>
-            </div>
+    
+</div>
 
 <script>
  var x = document.getElementById("myDIV");
@@ -245,7 +255,6 @@ function b(){
 </script>            
 </div>
 </body>
-
 <script>
 $(document).ready(function() {
     setTimeout(function(){a()},250)
@@ -323,7 +332,6 @@ $(document).ready(function() {
 
    } 
 </script>
-
     <footer>
     <?php require $DIR.$footer; ?>     
     </footer>  
