@@ -27,10 +27,11 @@ if(isset($_SESSION['idfechaasueto'])){
     $fechadesdeVerano=$_SESSION['idfechaasueto'];
 }
 ?>
+
 <style>
         @font-face {
   font-family: myFirstFont;
-  src: url(Redemption.ttf);
+  src: url(./../SnowHut.ttf);
 }
 </style>
 

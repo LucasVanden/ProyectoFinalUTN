@@ -27,7 +27,7 @@ if(isset($_SESSION['idfechaferiado'])){
 <style>
         @font-face {
   font-family: myFirstFont;
-  src: url(Redemption.ttf);
+  src: url(./../SnowHut.ttf);
 }
 </style>
 
@@ -52,7 +52,8 @@ if(isset($_SESSION['idfechaferiado'])){
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <div class="container" align="center">
+        <div class="container" align="center"> 
+        <br>
         <form action=<?php echo $controladorAsuetoFeriado ?> method="POST">
             <div class="form-group" align="center">     
                 <h2 for="Asuetoferiado" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Feriados </h2>
