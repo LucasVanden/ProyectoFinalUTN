@@ -72,6 +72,9 @@ if(isset($_POST['ver'])){
         <?php endif; ?>
         <div class="container" align="center">
             <br>
+      
+           
+
             <form action=<?php echo $bajaMateriaProfesor ?> method="POST" name="horamayor">
                 <div class="form-group" align="center">
                     <h2 for="editarPersonal" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Horario de Cursado</h2>
@@ -103,6 +106,13 @@ if(isset($_POST['ver'])){
                             </tr>   
                         </table>
                     </div>
+
+      <?php if(isset($_SESSION['mostraMensaje'])):?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $_SESSION['mostraMensaje']?>
+            </div>
+    <?php $_SESSION['mostraMensaje']=null;
+     endif;?>
                 </div>
                 <br>
                 <div class="form-group" align="center"> 
