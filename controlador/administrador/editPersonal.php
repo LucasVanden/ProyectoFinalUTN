@@ -15,10 +15,11 @@ $email=$_POST['email'];
 
 editarProfesor($legajo,$nombre,$apellido,$email);
 
-if($_POST['Tipo']=="Personal"){
-$direccion= $URL . $altaPersonal;
-}else{
-    //Persona Bedel
+if($_SESSION['PersonalAdmin']=="Personal"){
+    $direccion= $URL . $altaPersonal;
+}
+if($_SESSION['PersonalAdmin']=="Admin"){
+    $direccion=$URL.$altaAdministrador;
 }
 
 header("Location: $direccion");

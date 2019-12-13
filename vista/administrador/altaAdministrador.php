@@ -1,10 +1,11 @@
 <?php
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 session_start();
+
 if(!isset($_SESSION['rol'])){
   header('location: '. $URL.$login);
 }else{
-  if(!in_array(18,$_SESSION['permisos'])){
+  if(!(in_array(18,$_SESSION['permisos']))){
       header('location: '. $URL.$login);
   }
 }
@@ -13,6 +14,7 @@ require_once ($DIR.$controladorAdministrador);
 $bajaPersonal= $URL.$bajaPersonal;
 $editPersonal= $URL.$editPersonal;
 $editarPersonal= $URL.$editarPersonal;
+$_SESSION['PersonalAdmin']="Admin";
 $a= new controladorAdministrador();
 
 $message = null;
@@ -92,6 +94,7 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
         <label><b>e - mail:</b></label><input name="email" type="mail" placeholder=" email@dominio.com" pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email@dominio.com" required><br>
       </div>
       </p>
+   
       <div class="form-group" align="center"> 
         <button class="btn btn-success" type="submit" value="Enviar" name="enviar"><b> +  Enviar  </b>  
           <span class="glyphicon glyphicon-log-in"></span>

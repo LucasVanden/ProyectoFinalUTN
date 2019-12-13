@@ -52,7 +52,7 @@ $_SESSION['idDepartamentoSeleccionado']=null;
 
 
 $lsitaPermisos=$a->BuscarPermisos($_SESSION['rol']);
-
+// '<pre>'; print_r($lsitaPermisos); echo '</pre>';
 $Backup=in_array("17", $lsitaPermisos);
 $CalcularAsistencia=in_array("16", $lsitaPermisos);
 $CerrarhorasdeAusentes=in_array("15", $lsitaPermisos);
