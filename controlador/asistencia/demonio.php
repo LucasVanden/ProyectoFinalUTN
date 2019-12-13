@@ -39,7 +39,7 @@ if (count($listaHorasACerrar[0])>0){
 echo "Cerrando Horas de consulta...";
 //echo '<pre>'; print_r($listaHorasACerrar); echo '</pre>';  
 $direccion= $URL . $MenuIndex;
-//header("refresh:2;".$direccion); 
+header("refresh:2;".$direccion); 
 
 
 
@@ -73,9 +73,9 @@ function buscarHorasACerrar(){
             $hora=$row['hora'];
             $h=date('H',strtotime(date('H:i:s').'-1 hour'));
             $m=date("i");
-            echo $hora;
-            echo $h;
-            echo $m;
+            // echo $hora;
+            // echo $h;
+            // echo $m;
             $seleccionar=true;
             if($fecha==$fechaActual){
                 if(mayorMentorigual($hora,"<",$h,$m)){
@@ -338,9 +338,9 @@ if($hora->getHorarioDeConsulta()->getsemestre()==32){
                 if($proximaConsulta==$feriado->getfechaAsueto()){
                 $proximaConsulta= date('Y-m-d',strtotime($proximaConsulta.'+7 day'));
                 $tempProximaConsulta=$proximaConsulta;
-                echo "sumo 7";
-                echo $proximaConsulta;
-                echo $feriado->getfechaAsueto();
+                // echo "sumo 7";
+                // echo $proximaConsulta;
+                // echo $feriado->getfechaAsueto();
                 $repetir=true;
                 }
             }
@@ -387,9 +387,9 @@ if($hora->getHorarioDeConsulta()->getsemestre()==32){
         }
     }
 
-echo "siguiente: "; 
-echo $proximaConsulta;
-echo $hasta;
+// echo "siguiente: "; 
+// echo $proximaConsulta;
+// echo $hasta;
         $siguenteconsulta=array();
         array_push($siguenteconsulta,$idhorarioconsulta);
         array_push($siguenteconsulta,$desde);
@@ -403,17 +403,17 @@ function crearSiguienteHoraDeConsulta($idMateria,$idProfesor,$siguientehorario){
  $idhorarioconsulta= $siguientehorario[0];
  $desde= $siguientehorario[1];
  $hasta= $siguientehorario[2];
- echo '<pre>'; print_r($siguientehorario); echo '</pre>';  
- //test bug
- echo ("desde:".$desde. "<br>");
+//  echo '<pre>'; print_r($siguientehorario); echo '</pre>';  
+//  //test bug
+//  echo ("desde:".$desde. "<br>");
 
- echo ("hasta:".$hasta. "<br>");
+//  echo ("hasta:".$hasta. "<br>");
 
- echo ("mat:".$idMateria. '<br>');
+//  echo ("mat:".$idMateria. '<br>');
 
- echo ("idh:".$idhorarioconsulta. "<br>");
+//  echo ("idh:".$idhorarioconsulta. "<br>");
 
- echo ("idprof:".$idProfesor. "<br>");
+//  echo ("idprof:".$idProfesor. "<br>");
  //
  $stmt = $conn->prepare("INSERT INTO `horadeconsulta` (`id_horadeconsulta`,`fechaDesdeAnotados`,`fechaHastaAnotados`,`cantidadAnotados`,
  `estadoPresentismo`,`estadoVigencia`,`fk_materia`,`fk_horariodeconsulta`,`fk_profesor`)
