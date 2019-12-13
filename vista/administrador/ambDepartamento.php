@@ -60,7 +60,7 @@ $departamentos=$a->BuscarDepartamento();
                             <tr class="info">
                                 <th>Departamento</th>
                                 <td>
-                                    <input class="form-control" type="text1" name="departamento" required><br>
+                                    <input class="form-control" type="text1" name="departamento" required>
                                 </td>
                             </tr>  
                             <tr>
