@@ -6,26 +6,28 @@ if(!isset($_SESSION['rol'])){
   }
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
-
 $a=new controladorAdministrador();
 ?>
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
- 
-    </head>
-    <body background = <?php echo $URL.$fondo?> onload="myFunction()">
-    <script src="jquery.js"></script>
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+    <title>Aula Asignadas</title>
+    <link rel="stylesheet" href="./../css/bootstrap.min.css"> 
+  </head>
+  <body background = <?php echo $URL.$fondo?> onload="myFunction()" style="padding-top: 70px; bg-secondary">
+  <script src="jquery.js"></script>
     <?php require $DIR.$headera ?>
-        <?php if (!empty($message)): ?>
-            <p> <?= $message ?></p>
-        <?php endif; ?>
-        <h2>Aula Asignadas</h2>
-
+    <?php if (!empty($message)): ?>
+      <p> <?= $message ?></p>
+    <?php endif; ?>
 <!-- <table align="center">
     <th>Departamento</th>
     <th>Materia</th>
@@ -42,40 +44,49 @@ $a=new controladorAdministrador();
     </tr>
     <?php endforeach?>
 </table> -->
+    <div class="container"> 
+      <div class="form-group" align="center">
+        <h2 for="aulasAsignadas" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Aula Asignadas </h2>
+      </div> 
+      <div class="container" align="center">
+        <div class="table-responsive col-md-12 col-md-offset-0">
+          <table id="myTable2" class="table table-bordered table-hover">
+            <tr class="info">
+              <th onclick="sortTable(0)" style="cursor:pointer";>Departamento</th>
+              <th onclick="sortTable(1)" style="cursor:pointer";>Materia</th>
+              <th onclick="sortTable(2)" style="cursor:pointer";>Semestre</th>
+              <th onclick="sortTable(3)" style="cursor:pointer";>Apellido</th>
+              <th onclick="sortTable(4)" style="cursor:pointer";>Nombre</th>
+            </tr>
+              <?php foreach ($a->aulasOcupadas($_SESSION['IDintentoBorrarAula']) as $item) : ?>
+            <tr>
+              <?php foreach ($item as $atributo) : ?>
+              <td>
+                <?php echo $atributo?>
+              </td>
+                <?php endforeach?>
+            </tr>
+              <?php endforeach?>
+          </table>
+        </div>
+      </div>
+      <div class="form-group" align="center">
+        <h2 for="aulasConsulta" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Aula de consulta Predeterminada Departamento</h2>
+      </div>
+      <div class="container" align="center">
+        <div class="table-responsive col-md-12 col-md-offset-0">
+          <table class="table table-bordered table-hover">
+            <?php foreach ($a->departamentosOcupados($_SESSION['IDintentoBorrarAula']) as $item) : ?>
+            <tr class="info">
+              <td>
+                <?php echo $item?>
+              </td>
+            </tr>
+              <?php endforeach?>
+          </table>
+        </div>
+      </div>
 
-
- <div class="container"> 
-                <div class="table-responsive col-md-12 col-md-offset-0">
-                    <table id="myTable2" class="table table-bordered table-hover" align="center">
-                        <tr class="info">
-                            <th onclick="sortTable(0)" style="cursor:pointer";>Departamento</th>
-                            <th onclick="sortTable(1)" style="cursor:pointer";>Materia</th>
-                            <th onclick="sortTable(2)" style="cursor:pointer";>Semestre</th>
-                            <th onclick="sortTable(3)" style="cursor:pointer";>Apellido</th>
-                            <th onclick="sortTable(4)" style="cursor:pointer";>Nombre</th>
-                        </tr>
-                        <?php foreach ($a->aulasOcupadas($_SESSION['IDintentoBorrarAula']) as $item) : ?>
-                        <tr>
-                            <?php foreach ($item as $atributo) : ?>
-                                <td>
-                                    <?php echo $atributo?>
-                                </td>
-                            <?php endforeach?>
-                        </tr>
-                        <?php endforeach?>
-                        </table>
-                    </div>
-    </div>  
-    <h2>Aula de consulta Predeterminada Departamento</h2>
-    <table align="center">
-    <?php foreach ($a->departamentosOcupados($_SESSION['IDintentoBorrarAula']) as $item) : ?>
-    <tr>
-        <td>
-            <?php echo $item?>
-        </td>
-    </tr>
-    <?php endforeach?>
-    </table>
 <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -132,5 +143,11 @@ function sortTable(n) {
   }
 }
 </script>
-</body>
+    </div>
+    <script src="./../js/jquery.js"></script>
+    <script src="./../js/bootstrap.min.js"></script>
+  </body>
+  <footer class="footer">
+    <?php require $DIR.$footer; ?>     
+  </footer>
 </html>

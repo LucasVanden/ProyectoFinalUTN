@@ -15,33 +15,53 @@ $editAlumno= $URL.$editAlumno;
 $altaAlumno=$URL . $altaAlumno;
 $a= new controladorAdministrador();?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(./../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
   <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <meta charset="utf-8">
-    <title>Alta Profesor</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
+    <title>Editar Alumno</title>
     <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
-  <body background = <?php echo $URL.$fondo?>>
+  <body background = <?php echo $URL.$fondo?> style="padding-top: 70px; bg-secondary">
   <?php require $DIR.$headera ?>
   <?php $alumno=$a->buscarAlumnoID($_POST['alumno'])?>
- 
-
-    <h2>Editar Alumno</h2>
-    <form action=<?php echo $editAlumno?> method="POST">
-        <p>
-          <label>Legajo: </label><input name="legajo" type="number" value= <?php echo $alumno->getlegajo()?> min=1 required disabled ><br><br>
-          <label>Legajo: </label><input name="legajo" type="hidden" value= <?php echo $alumno->getlegajo()?> min=1 required  >
-          <label>Nombre: </label><input name="nombre" type="text1" value="<?php echo $alumno->getnombre()?>" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br><br>
-          <label>Apellido: </label><input name="apellido" type="text1" value="<?php echo $alumno->getapellido()?>" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br><br>
-          <label>E - mail: </label><input name="email" type="mail" value=<?php echo $alumno->getemail()?> pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email@dominio.com" required><br><br>
-          <label>Teléfono:</label><input name="telefono" type="text1"  value=<?php echo $alumno->gettelefonoAlumno()?> pattern="[0-9]{11}" title="11 numeros (0261-XXXXXXX)" required><br>
-        </p>
+    <div class="container" align="center">
+      <br>
+      <form action=<?php echo $editAlumno?> method="POST" class="form-horizontal">
+        <div class="form-group" align="center">
+          <h2 for="editarAlumno" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Editar Alumno</h2>
+        </div> 
+        <p><br>
+        <div class="form-group">   
+          <label><b> Legajo: </b></label><input name="legajo" type="number" min=1 value= <?php echo $alumno->getlegajo()?> required disabled><br>
+        </div>
+        <div class="form-group">   
+          <label><b> Legajo: </b></label><input name="legajo" type="hidden" min=1 value= <?php echo $alumno->getlegajo()?> required><br>
+        </div>
+        <div class="form-group">
+          <label><b>Nombre:</b></label><input name="nombre" type="text1" value="<?php echo $alumno->getnombre()?>" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br>
+        </div>
+        <div class="form-group">
+          <label><b>Apellido:</b></label><input name="apellido" type="text1" value="<?php echo $alumno->getapellido()?>" pattern="([^\s][A-zÀ-ž\s]+)" title="Apellido separados por espacio conformados por letras A-z" required><br>
+        </div>
+        <div class="form-group">
+          <label><b>e - mail:</b></label><input name="email" type="mail" value=<?php echo $alumno->getemail()?> pattern="[a-zA-Z0-9ñ._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email@dominio.com" required><br>
+        </div>
+        <div class="form-group">
+          <label><b>Teléfono:</b></label><input name="telefono" type="text1" value=<?php echo $alumno->gettelefonoAlumno()?> pattern="[0-9]{11}" title="11 numeros (0261-XXXXXXX)" required><br>
+        </div>
+        </p><br>
         <?php if (!empty($message)) : ?>
             <?php if ($ok):?>
             <div class="alert alert-success" role="alert">
@@ -60,5 +80,6 @@ $a= new controladorAdministrador();?>
         <form action=<?php echo $altaAlumno?> method="POST">
         <div><input type="submit" value="Volver" name="enviar" formaction=<?php echo $altaAlumno ?> /></div>
         </form>
-  </body>
+      </div>
+    </body>
   </html>
