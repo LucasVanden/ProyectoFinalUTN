@@ -7,8 +7,7 @@ if(!isset($_SESSION['rol'])){
     if(!in_array(5,$_SESSION['permisos'])){
         header('location: '. $URL.$login);
     }
-  }
-  
+  }  
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
 
@@ -57,7 +56,7 @@ $aulas=$a->BuscarAulas();
                         <tr class="info">
                             <th>Cuerpo</th>
                             <td>
-                                <input class="form-control" type="text" name="cuerpo" required>
+                                <input class="form-control" type="text1" name="cuerpo" required>
                             </td>
                         </tr>
                         <tr>                   
@@ -65,19 +64,17 @@ $aulas=$a->BuscarAulas();
                             <td>
                                 <input class="form-control" type="number" name="nivel" min="-2" max="10" step="1" required>
                             </td>
-                            <br>
                         </tr>
                         <tr>   
                             <th>Aula</th>
                             <td>
-                                <input class="form-control" type="text" name="Aula" required>
+                                <input class="form-control" type="text1" name="Aula" required>
                             </td>
                             <br>
                         </tr>   
                     </table>
                 </div>
             </div>
-
             <br>
             <div class="form-group" align="center"> 
                 <button class="btn btn-success" id="CargarAula" name="textoConfirmar" type="submit" formaction=<?php echo $abmcrearAula ?>> <b>  +  Cargar Aula </b>  
