@@ -399,7 +399,7 @@ if ($primera){
             }
         }
      }
-     array_push($mensajes,"Se Creo Correctamente ");
+     array_push($mensajes,"Se Creo Correctamente");
     }
     if($dedicaciondoble){
         if($repetido11&&$repetido12&&$repetido21&&$repetido22){
