@@ -49,7 +49,7 @@ if(isset($_POST['ver'])){
 <style>
         @font-face {
   font-family: myFirstFont;
-  src: url(./../SnowHut.ttf);
+  src: url(../../SnowHut.ttf);
 }
 </style>
 
@@ -71,7 +71,7 @@ if(isset($_POST['ver'])){
             <p> <?= $message ?></p>
         <?php endif; ?>
         <div class="container" align="center">
-        <br>
+            <br>
             <form action=<?php echo $bajaMateriaProfesor ?> method="POST" name="horamayor">
                 <div class="form-group" align="center">
                     <h2 for="editarPersonal" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Horario de Cursado</h2>

@@ -45,10 +45,10 @@ $a= new controladorAdministrador();
         </div>  
         <p><br>
         <div class="form-group">   
-          <label><b> Legajo: </b></label><input name="legajo" type="number" min=1 value= <?php echo $profe->getlegajo()?> min=1 required disabled><br>
+          <label><b> Legajo: </b></label><input name="legajo" type="number" min=1 value= <?php echo $profe->getlegajo()?> required disabled><br>
         </div>
         <div class="form-group">   
-          <label><b> Legajo: </b></label><input name="legajo" type="hidden" min=1 value= <?php echo $profe->getlegajo()?> min=1 required><br>
+          <label><b> Legajo: </b></label><input name="legajo" type="hidden" min=1 value= <?php echo $profe->getlegajo()?> required><br>
         </div>
         <div class="form-group">
           <label><b>Nombre:</b></label><input name="nombre" type="text1" value="<?php echo $profe->getnombre()?>" pattern="([^\s][A-zÀ-ž\s]+)" title="Nombres separados por espacio conformados por letras A-z" required><br>
