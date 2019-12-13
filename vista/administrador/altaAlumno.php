@@ -127,7 +127,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     <?php if ($exito) : ?>
     <div class="alert alert-success" role="alert">
       <h4 class="alert-heading">Alumno creado Exitosamente</h4>
-      <p>Se creo alumno: <?php echo $_POST['nombre']?> </p>
+      <p>Se creó alumno: <?php echo $_POST['nombre']?> </p>
     </div>
     <?php else: ?>
     <div class="alert alert-danger" role="alert">

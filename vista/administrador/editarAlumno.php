@@ -65,8 +65,8 @@ $a= new controladorAdministrador();?>
         <?php if (!empty($message)) : ?>
             <?php if ($ok):?>
             <div class="alert alert-success" role="alert">
-              <h4 class="alert-heading">Profesor creado Exitosamente</h4>
-              <p>Se creo profesor: <?php echo $_POST['nombre']?> </p>
+              <h4 class="alert-heading">Alumno creado Exitosamente</h4>
+              <p>Se creó alumno: <?php echo $_POST['nombre']?> </p>
             </div>
         <?php else:?>
           <div class="alert alert-danger" role="alert">
@@ -74,12 +74,22 @@ $a= new controladorAdministrador();?>
          </div>
          <?php endif; ?>    
          <?php endif; ?>
-
-        <div><br><br><input type="submit" value="Enviar"></div>
+         <div class="form-group" align="center"> 
+            <button class="btn btn-success" id="buttonBuscar" value="Enviar" name="Enviar" type="submit"> <b>  +  Enviar </b>  
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>  
+          </div>
         </form>
         <form action=<?php echo $altaAlumno?> method="POST">
-        <div><input type="submit" value="Volver" name="enviar" formaction=<?php echo $altaAlumno ?> /></div>
+          <div class="form-group" align="center"> 
+            <button class="btn btn-primary" id="buttonBuscar" value="Volver" name="Enviar" type="submit" formaction=<?php echo $altaAlumno ?>> <b>  +  Volver </b>  
+              <span class="glyphicon glyphicon-ok"></span>
+            </button>  
+          </div>
         </form>
-      </div>
-    </body>
-  </html>
+    </div>
+  </body>
+  <footer class="footer">
+    <?php require $DIR.$footer; ?>     
+  </footer>
+</html>
