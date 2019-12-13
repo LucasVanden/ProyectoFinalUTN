@@ -48,7 +48,7 @@ $permisoRol=6;
                         <div class="table-responsive col-md-6 col-md-offset-2">
                             <table class="table table-bordered table-hover" id="tablaBuscar">  
                                 <tr class="info">
-                                    <th colspan="2">Profesor</th>       
+                                    <th colspan="2">Administrador</th>       
                                         <?php 
                                             $permisosActuales = $a->BuscarPermisos($permisoRol);
                                             $listaPermisos = $a->buscarNombrePrivilegios();

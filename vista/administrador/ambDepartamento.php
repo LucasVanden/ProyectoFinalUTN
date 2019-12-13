@@ -7,11 +7,9 @@ if(!isset($_SESSION['rol'])){
   if(!in_array(6,$_SESSION['permisos'])){
       header('location: '. $URL.$login);
   }
-}
-  
+}  
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
-
 $Menu= $URL.$AsuetoMenu;
 $ABMAula= $URL.$ABMAula;
 $borrarDepartamento=$URL.$borrarDepartamento;
@@ -39,7 +37,7 @@ $departamentos=$a->BuscarDepartamento();
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0">
-        <title>Departamento</title>
+        <title>Departamentos</title>
         <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/> 
     </head>
     <body background = <?php echo $URL.$fondo?> onload="a();PopUp()">
@@ -133,13 +131,13 @@ $departamentos=$a->BuscarDepartamento();
                 </button>  
             </div>      
 
-<div id="myDIV" >
-<table align="center">
-    <th>Departamento</th> 
-    <th>Cuerpo</th>
-    <th>Nivel</th>
-    <th>Aula</th>
-    <?php foreach ($departamentos as $dep): ?>    
+            <div id="myDIV" >
+                <table align="center">
+                        <th>Departamento</th> 
+                        <th>Cuerpo</th>
+                        <th>Nivel</th>
+                        <th>Aula</th>
+                        <?php foreach ($departamentos as $dep): ?>    
         <form action=<?php echo $editarDepartamento ?> method="POST"> 
        
                     <select name="AulaAsignada" id="<?php echo "AulaidX".$dep->getid_departamento(); ?>"style="visibility:hidden" >  

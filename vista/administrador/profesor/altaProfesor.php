@@ -116,13 +116,6 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
           </button>                    
         </div>
       </form>     
-      <form action=<?php echo $menuAltaProfesor?> method="POST">
-        <div class="form-group" align="center"> 
-          <button class="btn btn-primary" type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?>><b> +  Buscar  </b>  
-            <span class="glyphicon glyphicon-log-in"></span>
-          </button>                    
-        </div>
-      </form>
     </div>
   </body>
 
