@@ -87,7 +87,8 @@ $aulas=$a->BuscarAulas();
                 <button class="btn btn-primary" id="MostrarAulas" name="textoConfirmar" type="submit" formaction=<?php echo $ABMAula ?> onClick="myFunction()"> <b>  +  Mostrar Aulas </b>  
                     <span class="glyphicon glyphicon-ok"></span>
                 </button>  
-            </div>        
+            </div> 
+            <br>        
         <form action=<?php echo $borrarAula ?> method="POST">
             <div id="myDIV" align="center">
             <div class="container"> 
@@ -295,7 +296,6 @@ function sortTable(n) {
 function gg() {
   var myWindow = window.open("aulasOcupadas.php", "","width=500,height=500");
 }
-
 </script>
 </body>
     <footer>
