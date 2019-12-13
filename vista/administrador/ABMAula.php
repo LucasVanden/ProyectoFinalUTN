@@ -125,10 +125,10 @@ $aulas=$a->BuscarAulas();
         </form>
         </div>
 
-        <!-- <script>
+        <script>
             var x = document.getElementById("myDIV");
             x.style.display = "none";
-        </script> -->
+        </script> 
 
         <?php if(isset($_SESSION['mostrarAulas'])) :?>
         <script>
