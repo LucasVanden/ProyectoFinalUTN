@@ -44,7 +44,7 @@ if($stmt->rowCount() == 0) {
     $_SESSION["existenteDepartamento"]=true;
 }
 
-
+$_SESSION['mostrarAulas']=true;
  $direccion= $URL . $abmDepartamento;
  header("Location: $direccion");
 
