@@ -45,6 +45,7 @@ $M2S2=null;
 <!DOCTYPE html>
 <html>
     <head>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
         <title>Establecer Horario</title>
         <link rel="stylesheet" href="./../css/bootstrap.min.css">
@@ -102,7 +103,7 @@ $M2S2=null;
         
         <div class="container">
             <br>
-            <form action="alumnoPpal.php" method="POST" >
+            <form action="alumnoPpal.php" method="POST" name="myForm">
                 <div class="form-group" align="center">
                     <h2 for="establecer" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;"> Establecer Horario de Consulta: </h2>
                 </div>
@@ -150,7 +151,7 @@ $M2S2=null;
                             <tr>
                                 <th>Horario</th>                        
                                 <td>
-                                    <select name="Horarioshora1ersemestre1">                       
+                                    <select name="Horarioshora1ersemestre1" id="Horarioshora1ersemestre1" onchange="check11(this.value)">                       
                                         <option <?php if($H1S1 == '08'){echo("selected");}?> value='08'>08</option>
                                         <option <?php if($H1S1 == '09'){echo("selected");}?> value='09'>09</option>
                                         <option <?php if($H1S1 == '10'){echo("selected");}?> value='10'>10</option>
@@ -167,7 +168,7 @@ $M2S2=null;
                                         <option <?php if($H1S1 == '21'){echo("selected");}?> value='21'>21</option>
                                         <option <?php if($H1S1 == '22'){echo("selected");}?> value='22'>22</option>
                                 
-                                    </select>:<select name="Horariomin1ersemestre1">                       
+                                    </select>:<select name="Horariomin1ersemestre1" id="Horariomin1ersemestre1" onchange="check11(this.value)">                           
                                     
                                         <option <?php if($M1S1 == '00'){echo("selected");}?> value='00'>00</option>
                                         <option <?php if($M1S1 == '15'){echo("selected");}?> value='15'>15</option>
@@ -178,7 +179,7 @@ $M2S2=null;
                                 </td>
                                 <?php if($dedicaciondoble): ?>  
                                 <td>
-                                    <select name="Horarioshora1ersemestre2">                       
+                                    <select name="Horarioshora1ersemestre2" id="Horarioshora1ersemestre2" onchange="check11(this.value)">>                       
                                         <option <?php if($H1S2 == '08'){echo("selected");}?> value='08'>08</option>
                                         <option <?php if($H1S2 == '09'){echo("selected");}?> value='09'>09</option>
                                         <option <?php if($H1S2 == '10'){echo("selected");}?> value='10'>10</option>
@@ -195,7 +196,7 @@ $M2S2=null;
                                         <option <?php if($H1S2 == '21'){echo("selected");}?> value='21'>21</option>
                                         <option <?php if($H1S2 == '22'){echo("selected");}?> value='22'>22</option>
                                     
-                                    </select>:<select name="Horariomin1ersemestre2">                       
+                                    </select>:<select name="Horariomin1ersemestre2" id="Horariomin1ersemestre2" onchange="check12(this.value)">                        
                                         
                                         <option <?php if($M1S2 == '00'){echo("selected");}?> value='00'>00</option>
                                         <option <?php if($M1S2 == '15'){echo("selected");}?> value='15'>15</option>
@@ -235,7 +236,7 @@ $M2S2=null;
                             <tr>
                                 <th>Horario</th>                        
                                 <td>
-                                    <select name="Horarioshora2dosemestre1">                       
+                                    <select name="Horarioshora2dosemestre1" id="Horarioshora2dosemestre1" onchange="check11(this.value)">>                       
                                         <option <?php if($H2S1 == '08'){echo("selected");}?> value='08'>08</option>
                                         <option <?php if($H2S1 == '09'){echo("selected");}?> value='09'>09</option>
                                         <option <?php if($H2S1 == '10'){echo("selected");}?> value='10'>10</option>
@@ -252,7 +253,7 @@ $M2S2=null;
                                         <option <?php if($H2S1 == '21'){echo("selected");}?> value='21'>21</option>
                                         <option <?php if($H2S1 == '22'){echo("selected");}?> value='22'>22</option>
                                     
-                                    </select>:<select name="Horariomin2dosemestre1">                       
+                                    </select>:<select name="Horariomin2dosemestre1" id="Horariomin2dosemestre1" onchange="check21(this.value)">                           
                                         
                                         <option <?php if($M2S1 == '00'){echo("selected");}?> value='00'>00</option>
                                         <option <?php if($M2S1 == '15'){echo("selected");}?> value='15'>15</option>
@@ -263,7 +264,7 @@ $M2S2=null;
                                 </td>
                                 <?php if($dedicaciondoble): ?>  
                                 <td>
-                                    <select name="Horarioshora2dosemestre2">                       
+                                    <select name="Horarioshora2dosemestre2" id="Horarioshora2dosemestre2" onchange="check11(this.value)">>                       
                                         <option <?php if($H2S2 == '08'){echo("selected");}?> value='08'>08</option>
                                         <option <?php if($H2S2 == '09'){echo("selected");}?> value='09'>09</option>
                                         <option <?php if($H2S2 == '10'){echo("selected");}?> value='10'>10</option>
@@ -280,7 +281,7 @@ $M2S2=null;
                                         <option <?php if($H2S2 == '21'){echo("selected");}?> value='21'>21</option>
                                         <option <?php if($H2S2 == '22'){echo("selected");}?> value='22'>22</option>
                                 
-                                    </select>:<select name="Horariomin2dosemestre2">                       
+                                    </select>:<select name="Horariomin2dosemestre2" id="Horariomin2dosemestre2" onchange="check22(this.value)">                       
                                     
                                         <option <?php if($M2S2 == '00'){echo("selected");}?> value='00'>00</option>
                                         <option <?php if($M2S2 == '15'){echo("selected");}?> value='15'>15</option>
@@ -299,7 +300,7 @@ $M2S2=null;
                     <div class="col-md-4 col-md-offset-4">
                         <input type='hidden' name='idmateria' value=<?php echo $idmateria?>>
                         <input type='hidden' name='dedicacion' value=<?php echo $dedicacion->getid_dedicacion()?>>
-                        <button class="btn btn-success" name="Establecer" type="submit" value="Establecer" formaction=<?php echo $crearHorario?>> Establecer 
+                        <button class="btn btn-success" name="Establecer" type="submit" value="Establecer" formaction=<?php echo $crearHorario?> > Establecer 
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
                     </div>
@@ -308,7 +309,67 @@ $M2S2=null;
         </div>
         <script src="./../js/jquery.js"></script>
         <script src="./../js/bootstrap.min.js"></script>
+        <p id="demo"></p>
     </body>
+
+<script>
+
+ function check11(input) {
+  var x = document.forms["myForm"]["Horarioshora1ersemestre1"].value;
+  var y = document.forms["myForm"]["Horariomin1ersemestre1"].value;
+   if ( x==22&&y==45) {
+    document.getElementById("Horariomin1ersemestre1").setCustomValidity("Maximo 22:30");
+    return false;
+
+   } else {
+      
+    document.getElementById("Horariomin1ersemestre1").setCustomValidity("");
+   }
+ }
+ </script>
+ <script>
+ function check12(input) {
+  var x = document.forms["myForm"]["Horarioshora1ersemestre2"].value;
+  var y = document.forms["myForm"]["Horariomin1ersemestre2"].value;
+   if ( x==22&&y==45) {
+    document.getElementById("Horariomin1ersemestre2").setCustomValidity("Maximo 22:30");
+    return false;
+
+   } else {
+      
+    document.getElementById("Horariomin1ersemestre2").setCustomValidity("");
+   }
+ }
+ </script>
+ <script>
+ function check21(input) {
+  var x = document.forms["myForm"]["Horarioshora2dosemestre1"].value;
+  var y = document.forms["myForm"]["Horariomin2dosemestre1"].value;
+   if ( x==22&&y==45) {
+    document.getElementById("Horariomin2dosemestre1").setCustomValidity("Maximo 22:30");
+    return false;
+
+   } else {
+      
+    document.getElementById("Horariomin2dosemestre1").setCustomValidity("");
+   }
+ }
+ </script>
+ <script>
+ function check22(input) {
+  var x = document.forms["myForm"]["Horarioshora2dosemestre2"].value;
+  var y = document.forms["myForm"]["Horariomin2dosemestre2"].value;
+   if ( x==22&&y==45) {
+    document.getElementById("Horariomin2dosemestre2").setCustomValidity("Maximo 22:30");
+    return false;
+
+   } else {
+      
+    document.getElementById("Horariomin2dosemestre2").setCustomValidity("");
+   }
+ }
+</script>
+
     <footer class="footer">
       <?php require $DIR.$footer; ?>     
     </footer>   
