@@ -65,15 +65,17 @@ if(isset($_SESSION['fechasBuscadas'])){
             <div class="form-group" align="center">
                 <h2 for="menuindex" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;">Cargar Fecha de Mesa</h2>
             </div>
-            <div>
-                <table align="center" id="tablaBuscar" style="border-color: #FFFFFF">                     
-                    <tr>
-                        <th>Fecha Mesa</th>
-                        <td>
-                        <input class="form-control" type="date" id="f1" name="fechaMesa" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechaMesaIngresar;?>>   
-                        </td>
-                    </tr>                
-                </table>
+            <div class="container" align="center">
+                <div class="table-responsive col-md-5 col-md-offset-4">
+                    <table class="table table-bordered table-hover" id="tablaBuscar">                     
+                        <tr class="info">
+                            <th>Fecha Mesa</th>
+                            <td>
+                                <input class="form-control" type="date" id="f1" name="fechaMesa" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"value=<?php echo $fechaMesaIngresar;?>>   
+                            </td>
+                        </tr>                
+                    </table>
+                </div>
             </div>
             <br>
             <div class="form-group" align="center"> 

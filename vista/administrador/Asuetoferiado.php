@@ -53,12 +53,13 @@ if(isset($_SESSION['idfechaferiado'])){
             <p> <?= $message ?></p>
         <?php endif; ?>
         <div class="container" align="center">
-        <form action=<?php echo $controladorAsuetoFeriado ?> method="POST" class="form-horizontal">
+        <form action=<?php echo $controladorAsuetoFeriado ?> method="POST">
             <div class="form-group" align="center">     
                 <h2 for="Asuetoferiado" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Feriados </h2>
             </div> 
-            <div>
-                <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
+            <div class="container" align="center">
+                <div class="table-responsive col-md-5 col-md-offset-4">
+                <table align='center' class="table table-bordered table-hover" id="tablaBuscar">  
                    
                     <tr>
                         <th>Fecha Feriado</th>
@@ -69,7 +70,7 @@ if(isset($_SESSION['idfechaferiado'])){
                     </tr>                   
 
                 </table>
-</div>
+</div></div>
 
                     <br>
                     <div class="form-group" align="center"> 

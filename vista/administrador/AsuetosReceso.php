@@ -75,8 +75,9 @@ $fechahastaVerano="'".$year."-01-01"."'";
             <div class="form-group" align="center">     
                 <h2 for="AsuestosReceso" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Recesos </h2>
             </div>
-            <div>
-                <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">  
+            <div class="container" align="center">
+                <div class="table-responsive col-md-9 col-md-offset-1">
+                <table align='center' class="table table-bordered table-hover" id="tablaBuscar">  
                     <tr>
                         <th>Intervalo</th>          
                     </tr>
@@ -92,7 +93,7 @@ $fechahastaVerano="'".$year."-01-01"."'";
                     </tr>               
        
                     </table>                
-            </div> 
+            </div> </div>
                 <?php
 if(isset($_SESSION['comprobacion'])):?>
    <div class="alert alert-danger" role="alert" align="center">

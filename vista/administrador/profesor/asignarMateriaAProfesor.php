@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 if(!isset($_SESSION['rol'])){
     header('location: '. $URL.$login);
@@ -8,13 +7,11 @@ if(!isset($_SESSION['rol'])){
     if(!in_array(9,$_SESSION['permisos'])){
         header('location: '. $URL.$login);
     }
-  }
-  
+  }  
 require_once ($DIR.$conexion);
 require_once ($DIR.$controladorAdministrador);
 //antes de romper
 $a=new controladorAdministrador();
-
 $altaMateriaAProfesor= $URL.$altaMateriaProfesor;
 $departamentoMaterias= $URL.$departamentoMaterias;
 $menuAltaProfesor= $URL.$menuAltaProfesor;
@@ -22,93 +19,104 @@ $asignarMateriaAProfesor= $URL.$asignarMateriaAProfesor;
 $darbajaMateriaProfesor= $URL.$darbajaMateriaProfesor;
 ?>
 
+<style>
+        @font-face {
+  font-family: myFirstFont;
+  src: url(../../SnowHut.ttf);
+}
+</style>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>aHora</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
- 
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,  minimum-scale=1.0">
+      <title>Asignar Materia Profesor</title>
+      <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/> 
     </head>
     <body background = <?php echo $URL.$fondo?> onload="PopUp()">
     <script src="jquery.js"></script>
         <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
-        <?php endif; ?>
-        <h2>Asignar Materia a Profesor</h2>
+        <?php endif; ?> 
+      <div class="container" align="center">
+      <br>
         <form action=<?php echo $altaMateriaAProfesor ?> method="POST"> <!-- -->
-            <div>
-                <table id="tablaBuscar" style="border-color: #FFFFFF">  
-                <tr>
-                <th>Profesor</th>
-                            <td>
-                                <select name="profesor">
-                               
-                                <?php 
-                               $listaprofesores = $a->BuscarProfesor();
-                               foreach ($listaprofesores as $profesor): ?> 
-                                <option value=<?php echo "{$profesor->getid_profesor()}" ?>> <?php echo "{$profesor->getApellido()}, {$profesor->getnombre()}" ?></option>   
-                                <?php endforeach; 
-                               ?>
-
-                                </select>                                
-                            </td>
-                            <th>Departamento</th>
-                            <td>                                
-                                <select id="first-choice" name="departamentos">
-
-                                       <?php 
-                               $listadepartamento = $a->BuscarDepartamento();
-                               foreach ($listadepartamento as $departamento): ?> 
-                                <option value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
-                                <?php endforeach; 
-                               ?>
-                                </select>
-                            </td>
-                            <th>Materia</th>
-                            <td>                       
-                                <select id="second-choice" name="Materias" required>
-                                </select> 
-                                <script>
-                 $("#first-choice").change(function() {
-                 $("#second-choice").load("<?php echo $departamentoMaterias.'?choice='?>"+ $("#first-choice").val());
-                }).change();</script>
-
-
-                            </td>
-</tr>
-</select>
-
-                            <th>Dedicacion</th>
-                            <td>
-
-                            <select name="dedicacion">
-                               
-                               <?php 
-                              $listadedicacion = $a->BuscarDedicacion();
-                              foreach ($listadedicacion as $ded): ?> 
-                               <option value=<?php echo $ded->getid_dedicacion() ?>> <?php echo $ded->gettipo() ?></option>   
-                               <?php endforeach; 
-                              ?>
-
-                               </select>   
-                        </td>
-                        </tr>   
-                        
-
+          <div class="form-group" align="center">
+            <h2 for="asignarMateriaAProfesor" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Asignar Materia a Profesor </h2>
+          </div> 
+          <br>
+            <div class="container" align="center">
+              <div class="table-responsive col-md-10 col-md-offset-2">
+                <table class="table table-bordered table-hover" id="tablaBuscar">  
+                  <tr class="info">
+                    <th>Profesor</th>
+                    <td>
+                      <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" name="profesor">
+                        <?php 
+                          $listaprofesores = $a->BuscarProfesor();
+                          foreach ($listaprofesores as $profesor): ?> 
+                        <option value=<?php echo "{$profesor->getid_profesor()}" ?>> <?php echo "{$profesor->getApellido()}, {$profesor->getnombre()}" ?></option>   
+                          <?php endforeach; 
+                          ?>
+                      </select>                                
+                    </td>
+                    <th>Departamento</th>
+                    <td>                                
+                      <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" id="first-choice" name="departamentos">
+                        <?php 
+                          $listadepartamento = $a->BuscarDepartamento();
+                          foreach ($listadepartamento as $departamento): ?> 
+                        <option value=<?php echo "{$departamento->getid_departamento()}" ?>> <?php echo "{$departamento->getnombre()}" ?></option>   
+                          <?php endforeach; 
+                          ?>
+                      </select>
+                    </td>
+                    <th>Materia</th>
+                    <td>                       
+                      <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" id="second-choice" name="Materias" required>
+                      </select> 
+                      <script>
+                        $("#first-choice").change(function() {
+                          $("#second-choice").load("<?php echo $departamentoMaterias.'?choice='?>"+ $("#first-choice").val());
+                        }).change();</script>
+                    </td>
+                  </tr>
+                      </select> <!--no se que cierra este-->
+                    <th>Dedicacion</th>
+                    <td>
+                      <select class="browser-default custom-select" data-style="btn-primary" data-widthen="auto" name="dedicacion">         
+                        <?php 
+                          $listadedicacion = $a->BuscarDedicacion();
+                          foreach ($listadedicacion as $ded): ?> 
+                        <option value=<?php echo $ded->getid_dedicacion() ?>> <?php echo $ded->gettipo() ?></option>   
+                          <?php endforeach; 
+                          ?>
+                      </select>   
+                    </td>
+                  </tr>   
                 </table>
+              </div>
             </div>
-            <div>
-                <br>
-                <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
-                <input id=buttonBuscar type="submit" value="Asignar" name="Asignar" formaction=<?php echo $altaMateriaAProfesor?> onclick="">
-                </form>
-                <form action="asignarMateriaAProfesor.php" method="POST">
-                <input id=buttonBuscar type="submit" value="Ver" name="ver" formaction=<?php echo $asignarMateriaAProfesor?> onclick="">
-                <div>  <input type="submit" value="Volver" name="Buscar" formaction=<?php echo $menuAltaProfesor ?> /></div>
-                </form>
+            <br>
+              <!-- <input type="submit" value="Buscar" name="Buscar" disabled="disabled" />     -->
+            <div class="form-group" align="center"> 
+              <button class="btn btn-success" id="buttonBuscar" value="Asignar" name="Asignar" type="submit" formaction=<?php echo $altaMateriaAProfesor?> onclick=""> <b>  +  Asignar </b>  
+                <span class="glyphicon glyphicon-ok"></span>
+              </button>  
+            </div>
+          </form>
+          <form action="asignarMateriaAProfesor.php" method="POST">
+            <div class="form-group" align="center"> 
+              <button class="btn btn-primary" id="buttonBuscar" value="Ver" name="ver" type="submit" formaction=<?php echo $asignarMateriaAProfesor?> onclick=""> <b>  +  Ver </b>  
+                <span class="glyphicon glyphicon-ok"></span>
+              </button>  
+            </div>
+          </form>
             </div>                   
         <tr>               
                  
@@ -291,6 +299,8 @@ function sortTable(n) {
 
     } 
 </script>
+</div>
+</body>
     <footer>
         <?php require $DIR.$footer; ?>     
     </footer>  

@@ -30,6 +30,12 @@ $listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_POST['profesor'],$_
 // echo '<pre>'; print_r($listaMaterias); echo '</pre>';   
 }
 }
+if(isset($_SESSION['idprofesor'])){
+    if(isset($_SESSION['idMaterias'])){
+$listaMaterias=$a->BuscarHorarioDeCursadodeProfesorMateria($_SESSION['idprofesor'],$_SESSION['idMaterias']);
+// echo '<pre>'; print_r($listaMaterias); echo '</pre>';   
+}
+}
 
 if(isset($_POST['profesor'])){
     $_SESSION['idprofesor']=$_POST['profesor'];
@@ -37,6 +43,8 @@ if(isset($_POST['profesor'])){
 if(isset($_POST['Materias'])){
     $_SESSION['idMaterias']=$_POST['Materias'];
 }
+if(isset($_POST['ver'])){
+    $_SESSION['mostrarAulas']=true;}
 ?>
 
 <!DOCTYPE html>
@@ -95,9 +103,9 @@ if(isset($_POST['Materias'])){
         <tr>               
                  
 <?php
-if(isset($_POST['ver'])):?>
-<?php if(isset($_POST['profesor'])):?>
- <?php if(isset($_POST['Materias'])):?>
+if(isset($_POST['ver'])||isset($_SESSION['mostrarAulas'])):?>
+<?php if(isset( $_SESSION['idprofesor'])):?>
+ <?php if(isset( $_SESSION['idMaterias'])):?>
   <table align='center' class="table-mostrar">
 
      <div class="container"> 

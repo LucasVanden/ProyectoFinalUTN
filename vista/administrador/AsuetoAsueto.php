@@ -59,8 +59,9 @@ if(isset($_SESSION['idfechaasueto'])){
             <div class="form-group" align="center">     
                 <h2 for="Asuetos" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Asuetos </h2>
             </div> 
-            <div>
-                <table align='center' class="table-mostrar" id="tablaBuscar" style="border-color: #FFFFFF">                     
+            <div class="container" align="center">
+                <div class="table-responsive col-md-5 col-md-offset-4">
+                <table align='center' class="table table-bordered table-hover" id="tablaBuscar">                     
                     <tr>
                         <th>Fecha Asueto</th>
                         <td>
@@ -79,7 +80,8 @@ if(isset($_SESSION['idfechaasueto'])){
                         <input type="time" id="f1" name="horaHasta" value=<?php echo $HoraHasta;?>>   
                         </td>
                     </tr>                      
-</table>
+                </table>
+                </div>
                 </div>
                 <?php
 if(isset($_SESSION['comprobacion'])){

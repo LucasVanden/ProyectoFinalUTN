@@ -42,7 +42,7 @@ $departamentos=$a->BuscarDepartamento();
         <title>Departamento</title>
         <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/> 
     </head>
-    <body background = <?php echo $URL.$fondo?> onload="a();PopUp()" style="padding-top: 70px; bg-secondary">
+    <body background = <?php echo $URL.$fondo?> onload="a();PopUp()">
     <script src="jquery.js"></script>
     <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
@@ -60,7 +60,7 @@ $departamentos=$a->BuscarDepartamento();
                             <tr class="info">
                                 <th>Departamento</th>
                                 <td>
-                                    <input class="form-control" type="text" name="departamento" required><br>
+                                    <input class="form-control" type="text1" name="departamento" required>
                                 </td>
                             </tr>  
                             <tr>
