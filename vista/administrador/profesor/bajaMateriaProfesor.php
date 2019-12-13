@@ -1,4 +1,5 @@
 <!-- ASIGNAR HORARIO DE CURSADO -->
+<!-- Batman -->
 <?php
 session_start();
 
