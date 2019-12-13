@@ -371,20 +371,35 @@ if($hora->getHorarioDeConsulta()->getsemestre()==32){
         //si es una consulta especial de mesa
   
         if(($semestreactual=="31")||($semestreactual=="32")){
+            $enviarmail=true;
             $hasta=fechaDiaAnteriorAfecha($proximaConsulta,$fk_dia);
             //si la consulta especial de mesa es feriado rollback
             foreach ($asuetos as $feriado) {
-            if($hasta==$feriado){
+            if($hasta==$feriado->getfechaAsueto()){
                 $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$tempsemestreactual and n=$n"); 
                 $stmt2->execute();
                 while($row = $stmt2->fetch()) {
                     $idhorarioconsulta=$row['id_horariodeconsulta'];
                     $fk_dia=$row['fk_dia'];
+                    $enviarmail=false;
                 }
                $desde= $hora->getfechaHastaAnotados();
                $hasta=$proximaConsulta;
             }
         }
+          //enviarmail
+          if($enviarmail){
+              $mail=array();
+            $stmt20 = $conn->prepare("SELECT email FROM profesor where  id_profesor=$idProfesor and eliminado  is null"); 
+            $stmt20->execute();
+            while($row = $stmt20->fetch()) {
+                $m=$row['email'];
+                array_push($mail,$m);
+            }
+            $mensajeMail="Proxima Consulta es especial por mesas el dia ".$proximaConsulta;
+            enviaremail($mail,$mensajeMail);
+        }
+      
     }
 
 // echo "siguiente: "; 
@@ -474,7 +489,7 @@ function buscarFechaMesas(){
     $listaMesas=array();
     $año=date("Y");
     $fecha="{$año}-01-01";
-    $stmt = $conn->prepare("SELECT fechaMesa FROM fechaMesa where fechaMesa>$año"); 
+    $stmt = $conn->prepare("SELECT id_fechaMesa,fechaMesa FROM fechaMesa where fechaMesa>$año"); 
     $stmt->execute();
     while($row = $stmt->fetch()) {
         $mesa= new FechaMesa();
