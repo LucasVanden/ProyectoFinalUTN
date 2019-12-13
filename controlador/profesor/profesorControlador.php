@@ -12,6 +12,7 @@ require_once ($DIR . $DetalleAnotados);
 require_once ($DIR . $EstadoAnotados);
 require_once ($DIR . $AvisoProfesor);
 require_once ($DIR . $Dedicacion);
+require_once ($DIR . $Aula);
 date_default_timezone_set('America/Argentina/Mendoza');
 class Profesorcontrolador extends conexion
 {
@@ -164,7 +165,7 @@ class Profesorcontrolador extends conexion
             $tempidhorario =$row['fk_horariodeconsulta'];
             $temporalMateriaid =$row['fk_materia'];
              $temphoraconsulta =$row['id_horadeconsulta'];
-              $stmt3 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
+              $stmt3 = $conn->prepare("SELECT  id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia,fk_aula FROM horariodeconsulta where id_horariodeconsulta=$tempidhorario");
               $stmt3->execute();
                 while($row = $stmt3->fetch()) {
                     $hor = new HorarioDeConsulta();
@@ -175,6 +176,7 @@ class Profesorcontrolador extends conexion
                     $hor->setsemestre($row['semestre']);
                 
                         $tempDia =$row['fk_dia'];
+                        $tempAula =$row['fk_aula'];
 
                         $stmt4 = $conn->prepare("SELECT id_dia,dia FROM dia where id_dia=$tempDia"); 
                         $stmt4->execute();
@@ -183,6 +185,16 @@ class Profesorcontrolador extends conexion
                             $dia->setid_dia($row['id_dia']);
                             $dia->setdia($row['dia']);
                             $hor->setdia($dia);
+                        }
+                        $stmt9 = $conn->prepare("SELECT id_aula,cuerpoAula,nivelAula,numeroAula FROM aula where id_aula=$tempAula"); 
+                        $stmt9->execute();
+                        while($row = $stmt9->fetch()) {
+                            $aula = new Aula();
+                            $aula->setid_aula($row['id_aula']);
+                            $aula->setcuerpoAula($row['cuerpoAula']);
+                            $aula->setnivelAula($row['nivelAula']);
+                            $aula->setnumeroAula($row['numeroAula']);
+                            $hor->setfk_aula($aula);
                         }
                     $hora->setHorarioDeConsulta($hor);
                 }

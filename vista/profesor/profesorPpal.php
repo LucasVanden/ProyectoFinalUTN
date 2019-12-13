@@ -137,6 +137,7 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                                 <th>Materia</th>
                                 <th>Día</th>
                                 <th>Hora</th>
+                                <th>Aula</th>
                                 <th>Cantidad</th>
                                 <th colspan="2"></th>
                             </tr>
@@ -154,6 +155,13 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                                 </td>
                                 <td>
                                     <?php echo $hora->getHorarioDeConsulta()->gethora() ?>
+                                </td>
+                                <td>
+                                <?php echo $hora->getHorarioDeConsulta()->getfk_aula()->getcuerpoAula();
+                                        echo " nivel: ";
+                                        echo $hora->getHorarioDeConsulta()->getfk_aula()->getnivelAula();
+                                        echo " aula: ";
+                                        echo $hora->getHorarioDeConsulta()->getfk_aula()->getnumeroAula(); ?>
                                 </td>
                                 <td>
                                     <?php echo $hora->getcantidadAnotados() ?>
