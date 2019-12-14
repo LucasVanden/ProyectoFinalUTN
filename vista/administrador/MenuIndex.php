@@ -98,7 +98,7 @@ if ($_SESSION['rol']==4){$Permiso=true;}else{$Permiso=false;}
         <title>Menú Administrador</title>
         <link rel="stylesheet" href="./../css/bootstrap.min.css">
     </head>
-    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px; bg-secondary">
+    <body background = <?php echo $URL.$fondo?> style="bg-secondary">
     <?php include  $DIR.$headerAdmin ?>
     <script src="jquery.js"></script>
 
