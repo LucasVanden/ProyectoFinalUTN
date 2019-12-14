@@ -56,7 +56,7 @@ if($stmt->rowCount() == 0) {
     //
 
     $keygen=substr(md5(time()), 0, 25);
-    $stmt0 = $conexttion->prepare("UPDATE usuario SET keygen = '$keygen' WHERE usuario=$legajo"); 
+    $stmt0 = $conexttion->prepare("UPDATE usuario SET keygen = '$keygen' WHERE usuario='$legajo'"); 
     $stmt0->execute();
     $mail=array();
     array_push($mail,$email);

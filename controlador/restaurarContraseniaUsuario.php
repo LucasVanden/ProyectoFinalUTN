@@ -18,7 +18,7 @@ echo $usuario;
 if($usuario!="-1"){
         if($nuevacontraseña==$confirma_contraseña){
             $password = password_hash($nuevacontraseña, PASSWORD_BCRYPT);
-            $stmt = $conn->prepare("UPDATE usuario SET contraseña = '$password' WHERE usuario=$usuario"); 
+            $stmt = $conn->prepare("UPDATE usuario SET contraseña = '$password' WHERE usuario='$usuario'"); 
             $stmt->execute();
             $mensaje="Se actualizo la contraseña";
             $_SESSION['mensaje1']="ok";
