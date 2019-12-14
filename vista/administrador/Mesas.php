@@ -56,7 +56,7 @@ if(isset($_SESSION['fechasBuscadas'])){
             text-align: left;      
         }
     </style>
-        <?php require './../partials/headera.php' ?>
+       <?php include  $DIR.$headerAdmin ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>

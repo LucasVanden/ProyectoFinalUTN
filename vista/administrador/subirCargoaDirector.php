@@ -36,7 +36,7 @@ $eliminarDirecotr= $URL.$eliminarDirecotr;
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require $DIR.$headera ?>
+        <?php include  $DIR.$headerAdmin ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>

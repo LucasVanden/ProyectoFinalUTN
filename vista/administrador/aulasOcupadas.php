@@ -24,7 +24,7 @@ $a=new controladorAdministrador();
   </head>
   <body background = <?php echo $URL.$fondo?> onload="myFunction()" style="padding-top: 70px; bg-secondary">
   <script src="jquery.js"></script>
-    <?php require $DIR.$headera ?>
+
     <?php if (!empty($message)): ?>
       <p> <?= $message ?></p>
     <?php endif; ?>

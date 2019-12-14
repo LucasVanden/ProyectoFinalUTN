@@ -48,7 +48,7 @@ if(isset($_SESSION['idfechaferiado'])){
             text-align: left;      
         }
     </style>
-    <?php require $DIR.$headera ?>
+    <?php include  $DIR.$headerAdmin ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>

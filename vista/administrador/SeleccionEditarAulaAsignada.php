@@ -59,7 +59,7 @@ header("Location: $direccion");
         <script src="jquery.js"></script>
     </head>
     <body style="text-align: center" background = <?php echo $URL.$fondo?>>
-        <?php require './../partials/header.php' ?>
+    <?php include  $DIR.$headerAdmin ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>

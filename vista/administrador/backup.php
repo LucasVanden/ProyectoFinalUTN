@@ -32,9 +32,10 @@ $MenuIndex= $URL.$MenuIndex;
         <title>Backup</title>
         <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/> 
     </head>
-    <body background = <?php echo $URL.$fondo?> style="padding-top: 70px; bg-secondary">
+    <body background = <?php echo $URL.$fondo?> style="bg-secondary">
+
+    <?php include  $DIR.$headerAdmin ?>
     <script src="jquery.js"></script>
-        <?php require './../partials/headera.php' ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>

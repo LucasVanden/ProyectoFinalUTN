@@ -65,8 +65,9 @@ $fechahastaVerano="'".$year."-01-01"."'";
         </style>
     </head>
     <body  onload="myFunction()" id="scroll" onscroll="scrollfunction()" background = <?php echo $URL.$fondo?>>
+
+    <?php include  $DIR.$headerAdmin ?>
     <script src="jquery.js"></script>
-    <?php require $DIR.$headera ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>   

@@ -34,7 +34,7 @@ $a= new controladorAdministrador();?>
     <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
   <body background = <?php echo $URL.$fondo?> style="padding-top: 70px; bg-secondary">
-  <?php require $DIR.$headera ?>
+  <?php include  $DIR.$headerAdmin ?>
   <?php $alumno=$a->buscarAlumnoID($_POST['alumno'])?>
     <div class="container" align="center">
       <br>

@@ -71,7 +71,7 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
     <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>
   </head>
   <body background = <?php echo $URL.$fondo?> style="padding-top: 70px; bg-secondary">
-  <?php require $DIR.$headera ?>
+  <?php include  $DIR.$headerAdmin ?>
     <div class="container" align="center">
       <form action="altaProfesor.php" method="POST" class="form-horizontal">
       <p><br>

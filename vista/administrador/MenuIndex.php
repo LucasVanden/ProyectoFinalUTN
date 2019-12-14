@@ -49,6 +49,9 @@ $_SESSION['mostrarAulas']=null;
 $_SESSION['departamentos']=null;
 $_SESSION['idDepartamentoSeleccionado']=null;
 
+$idusuario=$_SESSION['usuario'];
+$b=new ReportesControlador();
+$_SESSION['nombre']=$b->buscarPersonalDeUsuario($idusuario);
 
 
 $lsitaPermisos=$a->BuscarPermisos($_SESSION['rol']);
@@ -96,8 +99,9 @@ if ($_SESSION['rol']==4){$Permiso=true;}else{$Permiso=false;}
         <link rel="stylesheet" href="./../css/bootstrap.min.css">
     </head>
     <body background = <?php echo $URL.$fondo?> style="padding-top: 70px; bg-secondary">
+    <?php include  $DIR.$headerAdmin ?>
     <script src="jquery.js"></script>
-        <?php require './../partials/headera.php' ?>
+
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>

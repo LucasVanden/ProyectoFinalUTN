@@ -35,7 +35,7 @@ $permisoRol=6;
     </head>
     <body background = <?php echo $URL.$fondo?>>
     <script src="jquery.js"></script>
-        <?php require $DIR.$headera ?>
+        <?php include  $DIR.$headerAdmin ?>
         <div class="container" align="center">
         <br>       
             <iframe width="0" height="0" border="0" name="dummyframe" id="dummyframe"></iframe>      

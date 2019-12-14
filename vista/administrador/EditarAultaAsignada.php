@@ -38,7 +38,7 @@ $a =new controladorAdministrador();
         <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/>        
     </head>
     <body background = <?php echo $URL.$fondo?>>
-    <?php require $DIR.$headera ?>
+    <?php include  $DIR.$headerAdmin ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>    
