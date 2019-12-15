@@ -82,52 +82,52 @@ try{ $stmt->execute();
 <head>
 <title>MySQL database restore using PHP</title>
 <style>
-body {
-	max-width: 550px;
-	font-family: "Segoe UI", Optima, Helvetica, Arial, sans-serif;
-}
+    body {
+        max-width: 550px;
+        font-family: "Segoe UI", Optima, Helvetica, Arial, sans-serif;
+    }
 
-#frm-restore {
-	background: #aee5ef;
-	padding: 20px;
-	border-radius: 2px;
-	border: #a3d7e0 1px solid;
-}
+    #frm-restore {
+        background: #aee5ef;
+        padding: 20px;
+        border-radius: 2px;
+        border: #a3d7e0 1px solid;
+    }
 
-.form-row {
-	margin-bottom: 20px;
-}
+    .form-row {
+        margin-bottom: 20px;
+    }
 
-.input-file {
-	background: #FFF;
-	padding: 10px;
-	margin-top: 5px;
-	border-radius: 2px;
-}
+    .input-file {
+        background: #FFF;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 2px;
+    }
 
-.btn-action {
-	background: #333;
-	border: 0;
-	padding: 10px 40px;
-	color: #FFF;
-	border-radius: 2px;
-}
+    .btn-action {
+        background: #333;
+        border: 0;
+        padding: 10px 40px;
+        color: #FFF;
+        border-radius: 2px;
+    }
 
-.response {
-	padding: 10px;
-	margin-bottom: 20px;
-    border-radius: 2px;
-}
+    .response {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 2px;
+    }
 
-.error {
-    background: #fbd3d3;
-    border: #efc7c7 1px solid;
-}
+    .error {
+        background: #fbd3d3;
+        border: #efc7c7 1px solid;
+    }
 
-.success {
-    background: #cdf3e6;
-    border: #bee2d6 1px solid;
-}
+    .success {
+        background: #cdf3e6;
+        border: #bee2d6 1px solid;
+    }
 </style>
 </head>
 <body>

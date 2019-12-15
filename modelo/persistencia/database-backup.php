@@ -44,7 +44,11 @@ foreach ($tables as $table) {
                 $row[$j] = $row[$j];
                 
                 if (isset($row[$j])) {
+                    if($row[$j]==0){
+                        $sqlScript .=   'NULL' ;
+                    }else{
                     $sqlScript .= '"' . $row[$j] . '"';
+                    }
                 } else {
                     $sqlScript .= '""';
                 }
@@ -62,7 +66,8 @@ foreach ($tables as $table) {
 if(!empty($sqlScript))
 {
     // Save the SQL script to a backup file
-    $backup_file_name = $database_name . '_backup_' . time() . '.sql';
+    date_default_timezone_set('America/Argentina/Mendoza');
+    $backup_file_name = $database_name . '_backup_' . date("Y-m-d").'.'.time() . '.sql';
     $fileHandler = fopen($backup_file_name, 'w+');
     $number_of_lines = fwrite($fileHandler, $sqlScript);
     fclose($fileHandler); 

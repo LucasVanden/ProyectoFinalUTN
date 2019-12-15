@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2019 a las 21:12:08
+-- Tiempo de generación: 15-12-2019 a las 05:04:22
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -349,6 +349,13 @@ CREATE TABLE `persona` (
   `eliminado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`id_persona`, `nombre`, `apellido`, `dni`, `email`, `eliminado`) VALUES
+(1, 'Root', 'Root', 0, 'consultasutnfrm2019@gmail.com', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -493,7 +500,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `usuario`, `contraseña`, `fk_alumno`, `fk_profesor`, `fk_perfil`, `fk_persona`, `keygen`) VALUES
-(1, 'root', '$2y$10$PNwqEM24Ie1UMpkA999Z8eTrPa3.WRJ6UrU7U6sWDjCYEoP.qQs8K', NULL, NULL, 4, NULL, NULL);
+(1, 'root', '$2y$10$PNwqEM24Ie1UMpkA999Z8eTrPa3.WRJ6UrU7U6sWDjCYEoP.qQs8K', NULL, NULL, 4, 1, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -791,7 +798,7 @@ ALTER TABLE `perfil`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `id_persona` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_persona` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `presentismo`
 --

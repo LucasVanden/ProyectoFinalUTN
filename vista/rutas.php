@@ -190,3 +190,7 @@ $recuperarContraseña='/vista/recuperarContraseña.php';
 
 
 $editarPermisos='/controlador/administrador/editarPermisos.php';
+
+//backup
+$restore='/modelo/persistencia/database-resotore.php';
+$dbbackup='/modelo/persistencia/database-backup.php';

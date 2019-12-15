@@ -12,6 +12,85 @@ require_once ($DIR.$conexion);
 require_once ($DIR.$ReportesControlador);
 
 $MenuIndex= $URL.$MenuIndex;
+$dbbackup= $URL.$dbbackup;
+$restore= $URL.$restore;
+?>
+<?php
+require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
+require_once ($DIR .$conexion);
+
+$conn = mysqli_connect("localhost", "root", "", "consultasfrm");
+if (! empty($_FILES)) {
+    // Validating SQL file type by extensions
+    if (! in_array(strtolower(pathinfo($_FILES["backup_file"]["name"], PATHINFO_EXTENSION)), array(
+        "sql"
+    ))) {
+        $response = array(
+            "type" => "error",
+            "message" => "Tipo De archivo Invalido"
+        );
+    } else {
+        if (is_uploaded_file($_FILES["backup_file"]["tmp_name"])) {
+            move_uploaded_file($_FILES["backup_file"]["tmp_name"], $_FILES["backup_file"]["name"]);
+            
+            deleteBd();
+            $response = restoreMysqlDB($_FILES["backup_file"]["name"], $conn);
+        }
+    }
+}
+function restoreMysqlDB($filePath, $conn)
+{
+    $sql = '';
+    $error = '';
+    
+    if (file_exists($filePath)) {
+        $lines = file($filePath);
+        
+        foreach ($lines as $line) {
+            
+            // Ignoring comments from the SQL script
+            if (substr($line, 0, 2) == '--' || $line == '') {
+                continue;
+            }
+            
+            $sql .= $line;
+            
+            if (substr(trim($line), - 1, 1) == ';') {
+                $result = mysqli_query($conn, $sql);
+                if (! $result) {
+                    $error .= mysqli_error($conn) . "\n";
+                }
+                $sql = '';
+            }
+        } // end foreach
+        
+        if ($error) {
+            $response = array(
+                "type" => "error",
+                "message" => $error
+            );
+        } else {
+            $response = array(
+                "type" => "success",
+                "message" => "Base de datos Restaurada exitosamente."
+            );
+        }
+        exec('rm ' . $filePath);
+    } // end if file exists
+    
+    return $response;
+}
+function deleteBd(){
+$con= new conexion();
+$conn=$con->getconexion();
+
+$stmt = $conn->prepare("DROP TABLE `alumno`, `anotadosestado`, `asueto`, `aula`, `avisoprofesor`, `dedicacion`, `dedicacion_materia_profesor`, `departamento`, `detalleanotados`, `dia`, `estadoanotados`, `falta`, `fechamesa`, `horadeconsulta`, `horariocursado`, `horariodeconsulta`, `materia`, `materias_alumno`, `perfil`, `persona`, `presentismo`, `privilegio`, `privilegioperfil`, `profesor`, `turno`, `usuario`;");
+try{ $stmt->execute();
+} 
+ catch(Exception $e){
+ }
+
+}
 ?>
 
 <style>
@@ -31,63 +110,113 @@ $MenuIndex= $URL.$MenuIndex;
         <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximun-scale=1.0, minimum-scale=1.0">
         <title>Backup</title>
         <link href=<?php echo $URL.$style?> rel="stylesheet" type="text/css"/> 
-        <style>
-                 
-/* Center the loader */
-#loader {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 1;
-  width: 150px;
-  height: 150px;
-  margin: -75px 0 0 -75px;
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-}
+<style>
+                    
+    /* Center the loader */
+    #loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    }
 
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
+    @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+    }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+    @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
 
-/* Add animation to "page content" */
-.animate-bottom {
-  position: relative;
-  -webkit-animation-name: animatebottom;
-  -webkit-animation-duration: 1s;
-  animation-name: animatebottom;
-  animation-duration: 1s
-}
+    /* Add animation to "page content" */
+    .animate-bottom {
+    position: relative;
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s
+    }
 
-@-webkit-keyframes animatebottom {
-  from { bottom:-100px; opacity:0 } 
-  to { bottom:0px; opacity:1 }
-}
+    @-webkit-keyframes animatebottom {
+    from { bottom:-100px; opacity:0 } 
+    to { bottom:0px; opacity:1 }
+    }
 
-@keyframes animatebottom { 
-  from{ bottom:-100px; opacity:0 } 
-  to{ bottom:0; opacity:1 }
-}
+    @keyframes animatebottom { 
+    from{ bottom:-100px; opacity:0 } 
+    to{ bottom:0; opacity:1 }
+    }
 
-#myDiv {
-  display: none;
-  text-align: center;
-}
-#myDiv2 {
-  display: none;
-  text-align: center;
-}
+    #myDiv {
+    display: none;
+    text-align: center;
+    }
+    #myDiv2 {
+    display: none;
+    text-align: center;
+    }
+</style>
+<style>
+    <style>
+    body {
+        max-width: 550px;
+        font-family: "Segoe UI", Optima, Helvetica, Arial, sans-serif;
+    }
+
+    #frm-restore {
+        background: #aee5ef;
+        padding: 20px;
+        border-radius: 2px;
+        border: #a3d7e0 1px solid;
+    }
+
+    .form-row {
+        margin-bottom: 20px;
+    }
+
+    .input-file {
+        background: #FFF;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 2px;
+    }
+
+    .btn-action {
+        background: #333;
+        border: 0;
+        padding: 10px 40px;
+        color: #FFF;
+        border-radius: 2px;
+    }
+
+    .response {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 2px;
+    }
+
+    .error {
+        background: #fbd3d3;
+        border: #efc7c7 1px solid;
+    }
+
+    .success {
+        background: #cdf3e6;
+        border: #bee2d6 1px solid;
+    }
+</style>
 </style>
      
     </head>
@@ -121,16 +250,51 @@ $MenuIndex= $URL.$MenuIndex;
                         <tr class="info">
                          
                             <td>
-                            <button class="btn btn-success" onclick="myFunction()">Crear BackUp</button><br/><br/>
+                            <form action=<?php echo $dbbackup?> method="POST" class="form-horizontal">
+                            <button class="btn btn-success" onclick="myFunction()" formaction=<?php echo $dbbackup?>>Crear BackUp</button><br/><br/>
+                            </form>
                             </td>
                             <td>
-                            <button class="btn btn-success" onclick="return confirm('¿Esta seguro que quiere restaurar los datos?')?restaurar():'';">Restaurar BackUp</button><br/><br/>
+                            <!-- <button class="btn btn-success" onclick="return confirm('¿Esta seguro que quiere restaurar los datos?')?restaurar():'';">Restaurar BackUp</button><br/><br/> -->
+                            <button class="btn btn-success" onclick="mostrarRestaurarMenu()">Restaurar BackUp</button><br/><br/>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
-                
+
+<?php
+if(isset($_SESSION['restauracionMensaje'])){ ?>
+
+    <div  style="display:block;" id="mensajeRestaurar">
+    <?php
+    if (! empty($response)) { ?>
+        <div class="response <?php echo $response["type"]; ?>">
+        <?php echo nl2br($response["message"]); ?>
+        </div>
+    <?php } ?>
+    </div>
+<?php 
+$_SESSION['restauracionMensaje'];
+} ?>
+
+
+<div  style="display:none;" id="restauracionCartel">
+    <form method="post" action="" enctype="multipart/form-data"
+        id="frm-restore">
+        <div class="form-row">
+            <div>Seleccione archivo: </div>
+            <div>
+                <input type="file" name="backup_file" class="input-file" required />
+            </div>
+        </div>
+        <div>
+            <input type="submit" name="restore" value="Restore"
+                class="btn-action" onclick="mostrarMensajeRestauracion()"/>
+        </div>
+    </form>
+</div>
+
               
             <div style="display:none;" id="loader"></div>
 
@@ -159,6 +323,8 @@ $MenuIndex= $URL.$MenuIndex;
         var myVar;
 
         function myFunction() {
+            document.getElementById("restauracionCartel").style.display = "none";
+            document.getElementById("mensajeRestaurar").style.display = "none";
             document.getElementById("myDiv2").style.display = "none";
             document.getElementById("myDiv").style.display = "none";
             document.getElementById("mensaje").style.display = "block";
@@ -173,7 +339,7 @@ $MenuIndex= $URL.$MenuIndex;
         }
 
     </script>
-        <script>
+    <script>
         var myVar2;
 
         function restaurar() {
@@ -191,6 +357,24 @@ $MenuIndex= $URL.$MenuIndex;
         }
 
     </script>
+
+    <script>
+        function mostrarRestaurarMenu(){
+            document.getElementById("mensajeRestaurar").style.display = "none";
+            document.getElementById("restauracionCartel").style.display = "block";
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("mensaje").style.display = "none";
+            document.getElementById("myDiv").style.display = "none";
+        }
+    </script>
+
+    <script>
+        function mostrarMensajeRestauracion(){
+            <?php $_SESSION['restauracionMensaje']=true;?>
+            
+        }
+    </script>
+
     <footer>
        <?php require $DIR.$footer; ?>         
     </footer>  
