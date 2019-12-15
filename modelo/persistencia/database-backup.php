@@ -8,6 +8,7 @@ $database_name = "consultasfrm";
 
 // Get connection object and set the charset
 $conn = mysqli_connect($host, $username, $password, $database_name);
+// mysqli_query($conn,"SET_CHARSET'utf8'");
 $conn->set_charset("utf8");
 
 
@@ -44,13 +45,9 @@ foreach ($tables as $table) {
                 $row[$j] = $row[$j];
                 
                 if (isset($row[$j])) {
-                    if($row[$j]==0){
-                        $sqlScript .=   'NULL' ;
-                    }else{
                     $sqlScript .= '"' . $row[$j] . '"';
-                    }
                 } else {
-                    $sqlScript .= '""';
+                    $sqlScript .= 'NULL';
                 }
                 if ($j < ($columnCount - 1)) {
                     $sqlScript .= ',';

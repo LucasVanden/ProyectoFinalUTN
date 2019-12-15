@@ -1,4 +1,8 @@
 <?php
+# Replace text/html with whatever MIME-type you prefer.
+header("Content-Type: text/html; charset=utf-8");
+?>
+<?php
 session_start();
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 if(!isset($_SESSION['rol'])){
@@ -20,6 +24,7 @@ require_once 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once ($DIR .$conexion);
 
 $conn = mysqli_connect("localhost", "root", "", "consultasfrm");
+mysqli_set_charset($conn,"utf8");
 if (! empty($_FILES)) {
     // Validating SQL file type by extensions
     if (! in_array(strtolower(pathinfo($_FILES["backup_file"]["name"], PATHINFO_EXTENSION)), array(
@@ -45,9 +50,17 @@ function restoreMysqlDB($filePath, $conn)
     
     if (file_exists($filePath)) {
         $lines = file($filePath);
-        
+        // echo '<pre>'; print_r($lines); echo '</pre>';
+    $i=0;
         foreach ($lines as $line) {
-            
+            //debug
+            // if($i==0){
+            // echo mb_detect_encoding($line) ;
+            // $line = mb_convert_encoding($line, "UTF-8");   
+            // echo mb_detect_encoding($line) ;
+            // echo $line;
+            // }$i=1;
+            //degub>/
             // Ignoring comments from the SQL script
             if (substr($line, 0, 2) == '--' || $line == '') {
                 continue;
@@ -56,6 +69,7 @@ function restoreMysqlDB($filePath, $conn)
             $sql .= $line;
             
             if (substr(trim($line), - 1, 1) == ';') {
+                // echo $sql;
                 $result = mysqli_query($conn, $sql);
                 if (! $result) {
                     $error .= mysqli_error($conn) . "\n";
