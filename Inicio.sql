@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2019 a las 05:04:22
+-- Tiempo de generación: 16-12-2019 a las 03:52:23
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -389,23 +389,23 @@ CREATE TABLE `privilegio` (
 
 INSERT INTO `privilegio` (`nombrePrivilegio`, `id_privilegio`, `numeroPermiso`) VALUES
 ('Receso', 1, 1),
-('Feriad', 2, 2),
+('Feriado', 2, 2),
 ('Asueto', 3, 3),
 ('Mesas', 4, 4),
 ('Aulas', 5, 5),
-('Depart', 6, 6),
-('Materi', 7, 7),
-('Profes', 8, 8),
-('Asigna', 9, 9),
-('Asigna', 10, 10),
-('Cambia', 11, 11),
+('Departamento', 6, 6),
+('Materias', 7, 7),
+('Profesores', 8, 8),
+('Asignar Materia a Profesor', 9, 9),
+('Asignar Horario de Cursado', 10, 10),
+('Cambiar Aula de Consulta', 11, 11),
 ('Alumno', 12, 12),
-('Cargo ', 13, 13),
-('Person', 14, 14),
-('Cerrar', 15, 15),
-('Calcul', 16, 16),
+('Cargo Direcotr', 13, 13),
+('Personal', 14, 14),
+('Cerrar Horas de consulta Ausentes', 15, 15),
+('Calcular Asistencia', 16, 16),
 ('Backup', 17, 17),
-('Admini', 18, 18);
+('Administrador', 18, 18);
 
 -- --------------------------------------------------------
 
