@@ -274,7 +274,7 @@ if(isset($_SESSION['comprobacion'])){
                 <div class="month">      
                     <ul>
                         <li>
-                            <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                            <?php echo "Enero";?><br>
                             <span style="font-size:18px"><?php echo $year?></span>
                         </li>
                     </ul>
@@ -319,7 +319,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Febrero";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
@@ -366,7 +366,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Marzo";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
@@ -409,7 +409,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Abril";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
@@ -452,7 +452,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Mayo";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
@@ -495,7 +495,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Junio";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
@@ -538,7 +538,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Julio";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
@@ -581,7 +581,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Agosto";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
@@ -624,7 +624,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Septiembre";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
@@ -667,7 +667,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Octubre";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
@@ -710,7 +710,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Noviembre";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
@@ -753,7 +753,7 @@ if(isset($_SESSION['comprobacion'])){
                     
                     
                     <li>
-                    <?php echo date("F",strtotime($year."-".$month."-01"))?><br>
+                    <?php echo "Diciembre";?><br>
                     <span style="font-size:18px"><?php echo $year?></span>
                     </li>
                 </ul>
