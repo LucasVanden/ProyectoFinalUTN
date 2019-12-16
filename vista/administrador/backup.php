@@ -270,7 +270,9 @@ try{ $stmt->execute();
                             </td>
                             <td>
                             <!-- <button class="btn btn-success" onclick="return confirm('¿Esta seguro que quiere restaurar los datos?')?restaurar():'';">Restaurar BackUp</button><br/><br/> -->
+             
                             <button class="btn btn-success" onclick="mostrarRestaurarMenu()">Restaurar BackUp</button><br/><br/>
+                         
                             </td>
                         </tr>
                     </table>
@@ -289,7 +291,7 @@ if(isset($_SESSION['restauracionMensaje'])){ ?>
     <?php } ?>
     </div>
 <?php 
-$_SESSION['restauracionMensaje'];
+$_SESSION['restauracionMensaje']=NULL;
 } ?>
 
 
@@ -337,13 +339,22 @@ $_SESSION['restauracionMensaje'];
         var myVar;
 
         function myFunction() {
-            document.getElementById("restauracionCartel").style.display = "none";
-            document.getElementById("mensajeRestaurar").style.display = "none";
-            document.getElementById("myDiv2").style.display = "none";
-            document.getElementById("myDiv").style.display = "none";
             document.getElementById("mensaje").style.display = "block";
             document.getElementById("loader").style.display = "block";
-        myVar = setTimeout(showPage, 3000);
+            try {
+            document.getElementById("restauracionCartel").style.display = "none";
+            }catch(e){}
+            try {
+            document.getElementById("mensajeRestaurar").style.display = "none";
+            }catch(e){}
+            try {
+            document.getElementById("myDiv2").style.display = "none";
+            }catch(e){}
+            try {
+            document.getElementById("myDiv").style.display = "none";
+            }catch(e){}
+    
+            myVar = setTimeout(showPage, 3000);
         }
 
         function showPage() {
@@ -374,11 +385,21 @@ $_SESSION['restauracionMensaje'];
 
     <script>
         function mostrarRestaurarMenu(){
-            document.getElementById("mensajeRestaurar").style.display = "none";
             document.getElementById("restauracionCartel").style.display = "block";
+            
+            try {
+            document.getElementById("mensajeRestaurar").style.display = "none";
+            }catch(e){}
+            try {
             document.getElementById("loader").style.display = "none";
+            }catch(e){}
+            try {
             document.getElementById("mensaje").style.display = "none";
+            }catch(e){}
+            try {
             document.getElementById("myDiv").style.display = "none";
+            }catch(e){}
+    
         }
     </script>
 
