@@ -74,13 +74,13 @@ header("Location: $direccion");
             <div class="container" align="center">
                 <div class="table-responsive col-md-10 col-md-offset-2">
                     <table id="tablaMateriaPpal" align="center">
-                        <tr class="info">                    
-                            <th>Día</th>
-                            <th>Horario</th>
-                            <th>Semestre</th>
-                            <th>Cuerpo</th>
-                            <th>Nivel</th>
-                            <th>Aula</th>
+                        <tr class="info">      
+                            <th onclick="sortTable(0)" style="cursor:pointer";>Día</th>
+                            <th onclick="sortTable(1)" style="cursor:pointer";>Horario</th>
+                            <th onclick="sortTable(2)" style="cursor:pointer";>Semestre</th>
+                            <th onclick="sortTable(3)" style="cursor:pointer";>Cuerpo</th>
+                            <th onclick="sortTable(4)" style="cursor:pointer";>Nivel</th>
+                            <th onclick="sortTable(5)" style="cursor:pointer";>Aula</th>              
                         </tr>                  
                         <?php foreach ($horarios as $horario): ?> 
                         <form action=<?php echo $setearAula ?> method="POST">   
@@ -198,6 +198,63 @@ header("Location: $direccion");
             $(<?php echo '"#profesor-choice'.$horario->getid_horarioDeConsulta().'"'; ?>).load("<?php echo $buscarNombreAula.'?choice='?>"+ $(<?php echo '"#second-choice'.$horario->getid_horarioDeConsulta().'"';?>).val()+'&choice2='+ $(<?php echo '"#first-choice'.$horario->getid_horarioDeConsulta().'"'; ?>).val()+'&aula='+ $(<?php echo '"#AulaidX'.$horario->getid_horarioDeConsulta().'"'; ?>).val());
         }).change();
     </script>
+
+<script>
+    function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("tablaMateriaPpal");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc"; 
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        x = rows[i].getElementsByTagName("TD")[n];
+        y = rows[i + 1].getElementsByTagName("TD")[n];
+        /* Check if the two rows should switch place,
+        based on the direction, asc or desc: */
+        if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+            }
+        } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            // If so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+            }
+        }
+        }
+        if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        // Each time a switch is done, increase this count by 1:
+        switchcount ++; 
+        } else {
+        /* If no switching has been done AND the direction is "asc",
+        set the direction to "desc" and run the while loop again. */
+        if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+        }
+        }
+    }
+    }
+</script>
 
     <footer>
        <?php require $DIR.$footer; ?>         
