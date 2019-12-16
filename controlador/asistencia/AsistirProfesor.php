@@ -474,4 +474,28 @@ function fechaDiaAnteriorAfecha($fecha,$diaID){
     }
     return $fecha;
 }
+function nextfechaDiaOmitiendo1($diaID){
+    switch ($diaID){
+        case '1':
+           $fecha= date("Y-m-d", strtotime("second Monday"));
+           return $fecha;
+           break;
+        case '2':
+           $fecha= date("Y-m-d", strtotime("second Tuesday"));
+           return $fecha;
+           break;
+        case '3':
+           $fecha= date("Y-m-d", strtotime("second Wednesday"));
+           return $fecha;
+           break;
+        case '4':
+           $fecha= date("Y-m-d", strtotime("second Thursday"));
+           return $fecha;
+           break;
+        case '5':
+           $fecha= date("Y-m-d", strtotime("second Friday"));
+           return $fecha;
+           break;
+    }
+}
 ?>

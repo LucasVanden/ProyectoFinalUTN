@@ -258,6 +258,7 @@ if ($primera){
         array_push($mesas,(22));
         $_SESSION["igualMesa"]=true;
     }
+    }
     if($ejecutaHorarioMesa){
         if($existemesa11){
             $repetidomesa11=horarioIngresadoIgualAlAnterior($diaMesa11,$horaMesa11,$minMesa11,31,$idProfesor,$idmateria,1);
@@ -360,7 +361,7 @@ if ($primera){
             }
         }
     }
-    }
+    
     if($ejecuta){
         $_SESSION["Ejecuto"]=true;
         crearHorarioDeConsulta($hora1erSemestre1,$min1erSemestre1,1,$dia1erSemestre1,$idProfesor,$idmateria,1);
