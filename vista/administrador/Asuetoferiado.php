@@ -52,7 +52,7 @@ if(isset($_SESSION['idfechaferiado'])){
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
         <?php endif; ?>
-        <div class="container" align="center"> 
+   
         <br>
         <form action=<?php echo $controladorAsuetoFeriado ?> method="POST">
             <div class="form-group" align="center">     
@@ -947,19 +947,9 @@ if(isset($_SESSION['idfechaferiado'])){
 </script>
 
 <!-- TESTEO -->
-<p id="demo"></p>
-<?php echo $_SESSION["agrego"]?>
-<?php echo "espacio"?>
-<?php echo $_SESSION["elimino"]?>
 
-<button id="MyButton" class="btn btn-warning">Refresh</button>
-<script>
- $("#MyButton").click(function() {
-    alert('clicked')
-    $("#div").load(" #div");
-  }); </script>
 
-</div> 
+
 </body>
     <footer>
     <?php require $DIR.$footer; ?>        

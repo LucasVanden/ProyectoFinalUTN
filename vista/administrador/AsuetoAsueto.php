@@ -1014,15 +1014,7 @@ if(isset($_SESSION['comprobacion'])){
     document.getElementById("t2").setCustomValidity("");
    }
  }
-</script>
 
-<p id="demo"></p>
-<?php echo $_SESSION["agrego"]?>
-<?php echo "espacio"?>
-<?php echo $_SESSION["elimino"]?>
-
-<button id="MyButton" class="btn btn-warning">Refresh</button>
-<script>
  $("#MyButton").click(function() {
     alert('clicked')
     $("#div").load(" #div");
