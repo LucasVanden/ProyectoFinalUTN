@@ -47,7 +47,7 @@ $idhora=$_POST['Notificaridhora'];
                     <div class="col-md-4 col-md-offset-3">
                         <textarea placeholder="Ingrese Contenido de la Notificación" name="cuerpoNotificacion" rows="10" cols="80"></textarea>
                             <input type='hidden' name='idhoradeconsulta' value = <?php echo $idhora?>>
-                            <input type='hidden' name='materia' value = <?php echo $nombMateria?>>
+                            <input type='hidden' name='materia' value = '<?php echo $nombMateria?>'>
                     </div>
                 </div>  
                 <div class="container">

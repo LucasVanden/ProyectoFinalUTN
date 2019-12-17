@@ -204,7 +204,7 @@ if ($_SESSION['rol']==4){$Permiso=true;}else{$Permiso=false;}
                 <li><a href="<?php echo $calcularAsistencia?>">Calcular Asistencia</a></li>
                 <?php endif?>
 
-                <?php if(true) :?>
+                <?php if($Administrador) :?>
                 <li><a href="<?php echo $altaAdministrador?>">Administrador</a></li>
                 <?php endif?>
 
