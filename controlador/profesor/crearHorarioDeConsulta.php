@@ -192,7 +192,7 @@ if ($primera){
         $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa11){
-        array_push($mensajes,("La consulta del 1er semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
+        array_push($mensajes,("La consulta del 1er semestre conicide con el dia de la mesa.Deberá agregar una consulta especial para esa semana."));
         $ejecuta=false;
         array_push($mesas,(11));
         $_SESSION["igualMesa"]=true;
@@ -213,7 +213,7 @@ if ($primera){
         $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa12){
-        array_push($mensajes,("La segunda consulta del 1er semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
+        array_push($mensajes,("La segunda consulta del 1er semestre conicide con el dia de la mesa.Deberá agregar una consulta especial para esa semana."));
         $ejecuta=false;
         array_push($mesas,(12));
         $_SESSION["igualMesa"]=true;
@@ -233,7 +233,7 @@ if ($primera){
         $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa21){
-        array_push($mensajes,("La consulta del 2do semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
+        array_push($mensajes,("La consulta del 2do semestre conicide con el dia de la mesa.Deberá agregar una consulta especial para esa semana."));
         $ejecuta=false;
         array_push($mesas,(21));
         $_SESSION["igualMesa"]=true;
@@ -253,7 +253,7 @@ if ($primera){
         $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa22){
-        array_push($mensajes,("La segunda consulta del 2do semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
+        array_push($mensajes,("La segunda consulta del 2do semestre conicide con el dia de la mesa.Deberá agregar una consulta especial para esa semana."));
         $ejecuta=false;
         array_push($mesas,(22));
         $_SESSION["igualMesa"]=true;
@@ -561,12 +561,12 @@ if(!$repetido11){
         $_SESSION["falloComprobacion"]=true;
         }
     if(!$C4811){
-        array_push($mensajes,("No puede cambiar la hs de consulta  del 1er semestre en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
+        array_push($mensajes,("No puede cambiar la hs de consulta  del 1er semestre en este momento, debe realizarlo 2 días antes de la consulta o despues de dictarla"));
         $ejecuta=false;
         $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa11){
-        array_push($mensajes,("La consulta del 1er semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
+        array_push($mensajes,("La consulta del 1er semestre conicide con el dia de la mesa.Deberá agregar una consulta especial para esa semana."));
         array_push($mesas,(11));
         $ejecuta=false;
         $_SESSION["igualMesa"]=true;
@@ -597,12 +597,12 @@ if(!$repetido12){
         $_SESSION["falloComprobacion"]=true;
         }
     if(!$C4812){
-        array_push($mensajes,("No puede cambiar la segunda hs de consulta  del 1er semestre en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
+        array_push($mensajes,("No puede cambiar la segunda hs de consulta  del 1er semestre en este momento, debe realizarlo 2 días antes de la consulta o despues de dictarla"));
         $ejecuta=false;
         $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa12){
-        array_push($mensajes,("La segunda consulta del 1er semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
+        array_push($mensajes,("La segunda consulta del 1er semestre conicide con el dia de la mesa.Deberá agregar una consulta especial para esa semana."));
         array_push($mesas,(12));
         $ejecuta=false;
         $_SESSION["igualMesa"]=true;
@@ -633,12 +633,12 @@ if(!$repetido21){
         $_SESSION["falloComprobacion"]=true;
         }
     if(!$C4821){
-        array_push($mensajes,("No puede cambiar la hs de consulta  del 2do semestre en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
+        array_push($mensajes,("No puede cambiar la hs de consulta  del 2do semestre en este momento, debe realizarlo 2 días antes de la consulta o despues de dictarla"));
         $ejecuta=false;
         $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa21){
-        array_push($mensajes,("La consulta del 2do semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
+        array_push($mensajes,("La consulta del 2do semestre conicide con el dia de la mesa.Deberá agregar una consulta especial para esa semana."));
         array_push($mesas,(21));
         $ejecuta=false;
         $_SESSION["igualMesa"]=true;
@@ -669,12 +669,12 @@ if(!$repetido22){
         $_SESSION["falloComprobacion"]=true;
         }
     if(!$C4822){
-        array_push($mensajes,("No puede cambiar la segunda hs de consulta  del 2do semestre en este momento, debe realizarlo 2 dian antes de la consulta o despues de dictarla"));
+        array_push($mensajes,("No puede cambiar la segunda hs de consulta  del 2do semestre en este momento, debe realizarlo 2 días antes de la consulta o despues de dictarla"));
         $ejecuta=false;
         $_SESSION["falloComprobacion"]=true;
         }
     if($diaigualMesa22){
-        array_push($mensajes,("La segunda consulta del 2do semestre conicide con el dia de la mesa.Debe agregar una consulta especial para esa semana, ¿Desea continuar?"));
+        array_push($mensajes,("La segunda consulta del 2do semestre conicide con el dia de la mesa.Deberá agregar una consulta especial para esa semana."));
         array_push($mesas,(22));
         $ejecuta=false;
         $_SESSION["igualMesa"]=true;

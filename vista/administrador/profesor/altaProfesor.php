@@ -27,10 +27,11 @@ if (!empty($_POST['legajo']) && !empty($_POST['nombre'])&& !empty($_POST['apelli
 
   $mensaje=null;
   $ok=false;
-  $stmt2 = $conexttion->prepare("SELECT id_profesor FROM profesor where legajo='$legajo'");
+  // $stmt2 = $conexttion->prepare("SELECT id_profesor FROM profesor where legajo='$legajo' and eliminado is null");
+  $stmt2 = $conexttion->prepare("SELECT usuario FROM usuario where usuario='$legajo'");
   $stmt2->execute();
   while ($row = $stmt2->fetch()) {
-    $profesor = ($row['id_profesor']);
+    $profesor = ($row['usuario']);
   }
   if (isset($profesor)){$message="legajo existente";}else{
 

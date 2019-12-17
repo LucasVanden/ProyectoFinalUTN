@@ -30,7 +30,8 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
   $email = $_POST['email'];
   $mensaje=null; 
 
-  $stmt2 = $conexttion->prepare("SELECT dni FROM persona where dni='$dni'");
+  // $stmt2 = $conexttion->prepare("SELECT dni FROM persona where dni='$dni' and eliminado is null");
+  $stmt2 = $conexttion->prepare("SELECT usuario FROM usuario where usuario='$dni'");
   $stmt2->execute();
   if($stmt2->rowCount() == 0) {
 
@@ -49,7 +50,7 @@ if (!empty($_POST['dni']) && !empty($_POST['nombre'])&& !empty($_POST['apellido'
         }else{
             $message="Hubo un problema al crear al alumno";
             }        
-    }else{$message="dni existente";}
+    }else{$message="Legajo existente";}
 }
 }
 ?>
