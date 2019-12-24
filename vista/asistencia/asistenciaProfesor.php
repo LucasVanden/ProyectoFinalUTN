@@ -43,7 +43,7 @@ $asistirprofesor=$URL.$AsistirProfesor;
         ?>
         <div class="container"> 
             <br>
-            <form action=<?php echo $asistirprofesor?> method="POST" class="form-horizontal">
+        
                 <div class="form-group" align="center">
                     <h2 for="cursando" class="text-primary" style="font-family:myFirstFont,garamond,serif;font-size:42px;"> Estás Dictando: </h2>
                 </div> 
@@ -88,6 +88,7 @@ $asistirprofesor=$URL.$AsistirProfesor;
                                 <?php?>
                                 <td>
                                 <!-- nose xq no quiere recibir el id desde el boton, pero si desde el input hidden caundo en alumno ppal si anda -->
+                                <form action=<?php echo $asistirprofesor?> method="POST" class="form-horizontal">
                                     <div class="form-group"> 
                                         <div class="col-md-4 col-md-offset-4">
                                             <input type="hidden" name="idmateria" value=<?php echo $dedicacion->getMateria()->getid_materia() ?>>
@@ -97,6 +98,7 @@ $asistirprofesor=$URL.$AsistirProfesor;
                                             </button> 
                                         </div>
                                     </div>
+                                    </form>
                                 </td>
                             </tr>
                             <?php endif; ?>                      
@@ -105,7 +107,7 @@ $asistirprofesor=$URL.$AsistirProfesor;
                         </table>
                     </div>
                 </div>
-            </form>
+       
         </div>
         <script src="./../js/jquery.js"></script>
         <script src="./../js/bootstrap.min.js"></script>

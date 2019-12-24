@@ -360,7 +360,7 @@ if($hora->getHorarioDeConsulta()->getsemestre()==32){
         }
     }
   //BUscar siguiente Horario a asignar
-         $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$semestreactual and n=$n"); 
+         $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$semestreactual and n=$n and activoHasta='0000-00-00'"); 
          $stmt2->execute();
          while($row = $stmt2->fetch()) {
              $idhorarioconsulta=$row['id_horariodeconsulta'];
@@ -376,7 +376,7 @@ if($hora->getHorarioDeConsulta()->getsemestre()==32){
             //si la consulta especial de mesa es feriado rollback
             foreach ($asuetos as $feriado) {
             if($hasta==$feriado->getfechaAsueto()){
-                $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$tempsemestreactual and n=$n"); 
+                $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,fk_dia FROM horariodeconsulta where fk_materia=$idMateria and fk_profesor=$idProfesor and semestre=$tempsemestreactual and n=$n and activoHasta='0000-00-00'"); 
                 $stmt2->execute();
                 while($row = $stmt2->fetch()) {
                     $idhorarioconsulta=$row['id_horariodeconsulta'];
