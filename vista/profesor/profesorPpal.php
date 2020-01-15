@@ -230,7 +230,8 @@ $_SESSION['nombre']=$a->idpofesoraNombre($idProfesor);
                                         <?php echo ""?> <!-- aca fecha aviso del alumno-->
                                     </td>
                                     <td>
-                                        <?php echo $aviso->getfechaAvisoProfesor();
+                                        <?php 
+                                        echo date("d-m-Y", strtotime($aviso->getfechaAvisoProfesor()));
                                         echo " ";
                                         echo substr($aviso->gethoraAvisoProfesor(), 0, 5);
                                         ?> <!-- aca fecha aviso del alumno-->

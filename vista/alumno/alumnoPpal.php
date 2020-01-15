@@ -238,7 +238,8 @@ $_SESSION['mensaje']=null;
                                         <td></td>
                                         <td></td>
                                         <td>
-                                            <?php echo $aviso->getfechaAvisoProfesor();
+                                            <?php 
+                                                echo date("d-m-Y", strtotime($aviso->getfechaAvisoProfesor()));
                                                 echo " ";
                                                 echo substr($aviso->gethoraAvisoProfesor(), 0, 5); ?>
                                         </td>
