@@ -424,9 +424,34 @@ function idpofesoraNombre($idprofesor){
 
 
 
-
-
-
+function CantidadDeCambiosRestantes($idProfesor,$idmateria){
+    $con= new conexion();
+    $conn = $con->getconexion();
+    $año= date('Y');
+    $mes= date('m');
+    if($mes<=6){
+        $semestreactual=1;
+        $fechadia= "{$año}-01-01";
+    }else{
+        $semestreactual=2;
+        $fechadia= "{$año}-06-01";
+    }
+    $semestre=$semestreactual;
+       
+    
+        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idProfesor and semestre=$semestre and activoDesde>'$fechadia'"); 
+        $stmt2->execute();
+        $contador=0;
+        while($row = $stmt2->fetch()) {
+            $contador++;
+        }
+        $cambios=3-$contador;
+        if($cambios<0){
+            $cambios=0;
+        }
+        return $cambios;
+    
+}
 
 
 

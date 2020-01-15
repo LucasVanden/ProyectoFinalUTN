@@ -71,7 +71,7 @@ $M2S2=null;
         if($dedicacion->getid_dedicacion()==$nombrededicacion){
             $dedicaciondoble=true;
         }
-          
+
         $cargar=$a->buscarHorariosParallenarEnlosSelect($idmateria,$idProfesor);
         if(isset($cargar)){
            foreach ($cargar as $horario) {
@@ -107,6 +107,14 @@ $M2S2=null;
                 <div class="form-group" align="center">
                     <h2 for="establecer" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:42px;"> Establecer Horario de Consulta: </h2>
                 </div>
+
+                 <div class="form-group" align="center">
+                    <h2 for="establecer" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:23px;"> 
+                    <?php echo "Cambios Restantes:";
+                    echo $a->CantidadDeCambiosRestantes($idProfesor,1,$idmateria);
+                ?> </h2>
+                </div>
+          
                 <div class="container">
                     <div class="table-responsive col-md-4 col-md-offset-4">
                         <table class="table table-bordered table-hover" id="tablaBuscar">

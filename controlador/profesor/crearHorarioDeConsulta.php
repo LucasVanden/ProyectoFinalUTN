@@ -976,7 +976,7 @@ function tieneCantidadDeCambiosDisponible($idProfesor,$semestre,$idmateria){
     }
     if($semestre==$semestreactual){
         $fechadia= "{$año}-01-01";
-        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idProfesor and semestre=$semestre and activoDesde>$fechadia"); 
+        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idProfesor and semestre=$semestre and activoDesde>'$fechadia'"); 
         $stmt2->execute();
         $contador=0;
         while($row = $stmt2->fetch()) {
