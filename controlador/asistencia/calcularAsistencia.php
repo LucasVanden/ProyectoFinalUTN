@@ -103,7 +103,7 @@ function buscarHorasdeConsulta(){
 function comprobarSihuboAsuetoEseDia($fecha){
     $res=false;
     $asuetos=buscarAsuetos();
-    if(count($asuetos)>1){
+    if(count($asuetos)>0){
         foreach ($asuetos as $feriado) {
             if($fecha==$feriado->getfechaAsueto()){
                 $res= true;

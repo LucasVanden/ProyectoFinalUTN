@@ -60,7 +60,10 @@ if($activo11||$activo12||$activo21||$activo22){
     if(isset( $_SESSION['seEnvioLosDatosParaLaConsultaEnSemanaDeMesa'])){
         $Aceptar = $URL.$profesorPpal;
     }
-
+if($_SESSION["falloComprobacionMesa"]){
+        $Aceptar= $URL.$EstablecerHorario;
+        $valueButton="Volver";
+    }
 if($_SESSION["falloComprobacion"]){
     $Aceptar= $URL.$EstablecerHorario;
     $valueButton="Volver";

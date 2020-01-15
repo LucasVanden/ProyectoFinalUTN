@@ -327,7 +327,7 @@ if($hora->getHorarioDeConsulta()->getsemestre()==32){
      $n=$hora->getHorarioDeConsulta()->getn();
  //comprobar si es feriado
     $asuetos=buscarAsuetos();
-    if(count($asuetos)>1){
+    if(count($asuetos)>0){
         $repetir=true;
         while ($repetir) {
             $repetir=false;
@@ -396,7 +396,7 @@ if($hora->getHorarioDeConsulta()->getsemestre()==32){
                 $m=$row['email'];
                 array_push($mail,$m);
             }
-            $mensajeMail="Proxima Consulta es especial por mesas el dia ".$proximaConsulta;
+            $mensajeMail="Proxima Consulta es especial por mesas el dia ".$hasta;
             enviaremail($mail,$mensajeMail);
         }
       
