@@ -453,7 +453,37 @@ function CantidadDeCambiosRestantes($idProfesor,$idmateria){
     
 }
 
+function HabilitarBotonCambioHoraioConsultaMesas($idmateria,$idProfesor){
+    $mostrar=false;
+    $mesas=array();
+    $con= new conexion();
+    $conn = $con->getconexion();
+    $stmt = $conn->prepare("SELECT id_materia,nombreMateria,fk_departamento,fk_dia FROM materia where id_materia=$idmateria"); 
+    $stmt->execute();
+    while($row = $stmt->fetch()) {
+        $mat = new Materia();
+        $mat->setid_materia($row['id_materia']);
+        $mat->setnombreMateria($row['nombreMateria']);
+        $diaMesaMateria=$row['fk_dia'];
+    }
+    $stmt2 = $conn->prepare("SELECT fk_dia,semestre,n FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idProfesor and activoHasta='0000-00-00'"); 
+    $stmt2->execute();
+    while($row = $stmt2->fetch()) {
+        $dia=$row['fk_dia'];
+        $semestre=$row['semestre'];
+        $n=$row['n'];
+        if($dia==$diaMesaMateria){
+            $mostrar=true;
+            $m=$semestre.$n;
+            array_push($mesas,$m);
+        }
+    }
 
+    $_SESSION['horariosdeMesasAagregar']=$mesas;
+
+
+    return $mostrar;
+}
 
 
 

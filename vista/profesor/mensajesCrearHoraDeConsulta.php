@@ -12,7 +12,15 @@ if(!isset($_SESSION['rol'])){
 require_once ($DIR .$conexion);
 require_once $DIR . $profesorControlador;
 $MenuVolver=$URL.$EstablecerHorario;
-
+$soloMesas=false;
+if(isset($_POST['SoloMesas'])){
+   $soloMesas=true;
+   $_SESSION['igualMesa']=true;
+   $otro=array();
+   array_push($otro,"otro");
+   $_SESSION['mensajesCrearHorario']=$otro;
+   $_SESSION["Ejecuto"]=false;
+}
 $idProfesor=$_SESSION['idProfesor'];
 
 $activo11=false;
@@ -71,16 +79,23 @@ if($_SESSION["falloComprobacion"]){
 
 if((!$_SESSION["falloComprobacion"])&&$_SESSION["igualMesa"]){
     $Aceptar=  $URL.$crearHorarioDeConsulta;
+    if($soloMesas){
+        $Aceptar=  $URL.$crearHorarioDeConsultaSOLOMESAS;
+    }
     $valueButton="Continuar";
 }
 if((!$_SESSION["falloComprobacion"])&&$_SESSION["igualMesa"]&& $_SESSION["falloComprobacionMesa"]){
     $Aceptar=  $URL.$crearHorarioDeConsulta;
+    if($soloMesas){
+        $Aceptar=  $URL.$crearHorarioDeConsultaSOLOMESAS;
+    }
     $valueButton="Continuar";
 }
 if($_SESSION["Ejecuto"]){
     $Aceptar= $URL.$profesorPpal;
     $valueButton="Aceptar";
 }
+
 
 //debug
 //echo '$_SESSION["igualMesa"]'.$_SESSION["igualMesa"]; 
@@ -194,24 +209,24 @@ foreach ($cargar as $horario) {
                                 <?php if($activo12): ?>  
                                     <select name="MesaDia1ersemestre2">                       
                                     <?php if($diaMesa==5) :?>   
-                                        <option <?php if($DM1S1 == '3'){echo("selected");}?> value=3>Miércoles</option>
-                                        <option <?php if($DM1S1 == '4'){echo("selected");}?> value=4>Jueves</option>     
+                                        <option <?php if($DM1S2 == '3'){echo("selected");}?> value=3>Miércoles</option>
+                                        <option <?php if($DM1S2 == '4'){echo("selected");}?> value=4>Jueves</option>     
                                     <?php endif;?>       
                                     <?php if($diaMesa==4) :?>   
-                                        <option <?php if($DM1S1 == '2'){echo("selected");}?> value=2>Martes</option>
-                                        <option <?php if($DM1S1 == '3'){echo("selected");}?> value=3>Miércoles</option>     
+                                        <option <?php if($DM1S2 == '2'){echo("selected");}?> value=2>Martes</option>
+                                        <option <?php if($DM1S2 == '3'){echo("selected");}?> value=3>Miércoles</option>     
                                     <?php endif;?>    
                                     <?php if($diaMesa==3) :?>   
-                                        <option <?php if($DM1S1 == '1'){echo("selected");}?> value=1>Lunes</option>
-                                        <option <?php if($DM1S1 == '2'){echo("selected");}?> value=2>Martes</option>     
+                                        <option <?php if($DM1S2 == '1'){echo("selected");}?> value=1>Lunes</option>
+                                        <option <?php if($DM1S2 == '2'){echo("selected");}?> value=2>Martes</option>     
                                     <?php endif;?>    
                                     <?php if($diaMesa==2) :?>   
-                                        <option <?php if($DM1S1 == '5'){echo("selected");}?> value=5>Viernes</option>
-                                        <option <?php if($DM1S1 == '1'){echo("selected");}?> value=1>Lunes</option>     
+                                        <option <?php if($DM1S2 == '5'){echo("selected");}?> value=5>Viernes</option>
+                                        <option <?php if($DM1S2 == '1'){echo("selected");}?> value=1>Lunes</option>     
                                     <?php endif;?>   
                                     <?php if($diaMesa==1) :?>   
-                                        <option <?php if($DM1S1 == '4'){echo("selected");}?> value=4>Jueves</option>
-                                        <option <?php if($DM1S1 == '5'){echo("selected");}?> value=5>Viernes</option>     
+                                        <option <?php if($DM1S2 == '4'){echo("selected");}?> value=4>Jueves</option>
+                                        <option <?php if($DM1S2 == '5'){echo("selected");}?> value=5>Viernes</option>     
                                     <?php endif;?>   
                                     </select>
                                 <?php endif; ?>
@@ -287,24 +302,24 @@ foreach ($cargar as $horario) {
                                 <?php if($activo21): ?>  
                                     <select name="MesaDia2dosemestre1">                       
                                     <?php if($diaMesa==5) :?>   
-                                        <option <?php if($DM1S1 == '3'){echo("selected");}?> value=3>Miércoles</option>
-                                        <option <?php if($DM1S1 == '4'){echo("selected");}?> value=4>Jueves</option>     
+                                        <option <?php if($DM2S1 == '3'){echo("selected");}?> value=3>Miércoles</option>
+                                        <option <?php if($DM2S1 == '4'){echo("selected");}?> value=4>Jueves</option>     
                                     <?php endif;?>       
                                     <?php if($diaMesa==4) :?>   
-                                        <option <?php if($DM1S1 == '2'){echo("selected");}?> value=2>Martes</option>
-                                        <option <?php if($DM1S1 == '3'){echo("selected");}?> value=3>Miércoles</option>     
+                                        <option <?php if($DM2S1 == '2'){echo("selected");}?> value=2>Martes</option>
+                                        <option <?php if($DM2S1 == '3'){echo("selected");}?> value=3>Miércoles</option>     
                                     <?php endif;?>    
                                     <?php if($diaMesa==3) :?>   
-                                        <option <?php if($DM1S1 == '1'){echo("selected");}?> value=1>Lunes</option>
-                                        <option <?php if($DM1S1 == '2'){echo("selected");}?> value=2>Martes</option>     
+                                        <option <?php if($DM2S1 == '1'){echo("selected");}?> value=1>Lunes</option>
+                                        <option <?php if($DM2S1 == '2'){echo("selected");}?> value=2>Martes</option>     
                                     <?php endif;?>    
                                     <?php if($diaMesa==2) :?>   
-                                        <option <?php if($DM1S1 == '5'){echo("selected");}?> value=5>Viernes</option>
-                                        <option <?php if($DM1S1 == '1'){echo("selected");}?> value=1>Lunes</option>     
+                                        <option <?php if($DM2S1 == '5'){echo("selected");}?> value=5>Viernes</option>
+                                        <option <?php if($DM2S1 == '1'){echo("selected");}?> value=1>Lunes</option>     
                                     <?php endif;?>   
                                     <?php if($diaMesa==1) :?>   
-                                        <option <?php if($DM1S1 == '4'){echo("selected");}?> value=4>Jueves</option>
-                                        <option <?php if($DM1S1 == '5'){echo("selected");}?> value=5>Viernes</option>     
+                                        <option <?php if($DM2S1 == '4'){echo("selected");}?> value=4>Jueves</option>
+                                        <option <?php if($DM2S1 == '5'){echo("selected");}?> value=5>Viernes</option>     
                                     <?php endif;?>   
                                     </select>
                                     <?php endif; ?>
@@ -313,24 +328,24 @@ foreach ($cargar as $horario) {
                                 <?php if($activo22): ?>  
                                     <select name="MesaDia2dosemestre2">                       
                                     <?php if($diaMesa==5) :?>   
-                                        <option <?php if($DM1S1 == '3'){echo("selected");}?> value=3>Miércoles</option>
-                                        <option <?php if($DM1S1 == '4'){echo("selected");}?> value=4>Jueves</option>     
+                                        <option <?php if($DM2S2 == '3'){echo("selected");}?> value=3>Miércoles</option>
+                                        <option <?php if($DM2S2 == '4'){echo("selected");}?> value=4>Jueves</option>     
                                     <?php endif;?>       
                                     <?php if($diaMesa==4) :?>   
-                                        <option <?php if($DM1S1 == '2'){echo("selected");}?> value=2>Martes</option>
-                                        <option <?php if($DM1S1 == '3'){echo("selected");}?> value=3>Miércoles</option>     
+                                        <option <?php if($DM2S2 == '2'){echo("selected");}?> value=2>Martes</option>
+                                        <option <?php if($DM2S2 == '3'){echo("selected");}?> value=3>Miércoles</option>     
                                     <?php endif;?>    
                                     <?php if($diaMesa==3) :?>   
-                                        <option <?php if($DM1S1 == '1'){echo("selected");}?> value=1>Lunes</option>
-                                        <option <?php if($DM1S1 == '2'){echo("selected");}?> value=2>Martes</option>     
+                                        <option <?php if($DM2S2 == '1'){echo("selected");}?> value=1>Lunes</option>
+                                        <option <?php if($DM2S2 == '2'){echo("selected");}?> value=2>Martes</option>     
                                     <?php endif;?>    
                                     <?php if($diaMesa==2) :?>   
-                                        <option <?php if($DM1S1 == '5'){echo("selected");}?> value=5>Viernes</option>
-                                        <option <?php if($DM1S1 == '1'){echo("selected");}?> value=1>Lunes</option>     
+                                        <option <?php if($DM2S2 == '5'){echo("selected");}?> value=5>Viernes</option>
+                                        <option <?php if($DM2S2 == '1'){echo("selected");}?> value=1>Lunes</option>     
                                     <?php endif;?>   
                                     <?php if($diaMesa==1) :?>   
-                                        <option <?php if($DM1S1 == '4'){echo("selected");}?> value=4>Jueves</option>
-                                        <option <?php if($DM1S1 == '5'){echo("selected");}?> value=5>Viernes</option>     
+                                        <option <?php if($DM2S2 == '4'){echo("selected");}?> value=4>Jueves</option>
+                                        <option <?php if($DM2S2 == '5'){echo("selected");}?> value=5>Viernes</option>     
                                     <?php endif;?>   
                                     </select>
                                     <?php endif; ?>
@@ -422,7 +437,7 @@ foreach ($cargar as $horario) {
                             </div>
                         <?php endif;?>
 
-                        <?php if(!(($m=="Se Creo Correctamente")||(substr( $m, 0, 3 ) === "La "||$m=="no realizo ningun cambio"))) :?>
+                        <?php if(!(($m=="Se Creo Correctamente")||($m="otro")||(substr( $m, 0, 3 ) === "La "||$m=="no realizo ningun cambio"))) :?>
                             <div class="alert alert-danger" role="alert">
                             <?php echo "-".$m?>
                             </div>

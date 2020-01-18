@@ -75,6 +75,8 @@ $profesorPpal='/vista/profesor/profesorPpal.php';
 $profesorCrearNotificacion='/controlador/profesor/profesorCrearNotificacion.php';
 $profesorAlumnosAnotados='/vista/profesor/profesorAlumnosAnotados.php';
 $crearHorarioDeConsulta='/controlador/profesor/crearHorarioDeConsulta.php';
+$crearHorarioDeConsultaSOLOMESAS='/controlador/profesor/crearHorarioDeConsultaSOLOMESAS.php';
+
 $mensajesCrearHoraDeConsulta='/vista/profesor/mensajesCrearHoraDeConsulta.php';
 $EstablecerHorario='/vista/profesor/profesorEstablecerHorario.php';
 

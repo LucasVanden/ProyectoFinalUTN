@@ -11,8 +11,9 @@ if(!isset($_SESSION['rol'])){
 }
 require_once $DIR . $profesorControlador;
 $crearHorario= $URL . $crearHorarioDeConsulta;
+$mensajesCrearHoraDeConsulta= $URL . $mensajesCrearHoraDeConsulta;
 
-
+$_SESSION['SoloMesas']=false;
 $idProfesor=$_SESSION['idProfesor'];
 // id de la decicacion que le corresponden 2 horas de consulta
 $nombrededicacion="1";
@@ -312,7 +313,22 @@ $M2S2=null;
                             <span class="glyphicon glyphicon-ok"></span>
                         </button>
                     </div>
-                </div>            
+                </div>   
+
+
+                <?php if($a->HabilitarBotonCambioHoraioConsultaMesas($idmateria,$idProfesor)) :?>
+                <div class="form-group"> 
+                    <div class="col-md-4 col-md-offset-4">
+                        <input type='hidden' name='idmateria' value=<?php echo $idmateria?>>
+                        <input type='hidden' name='dedicacion' value=<?php echo $dedicacion->getid_dedicacion()?>>
+                        <button class="btn btn-success" name="SoloMesas" type="submit" value="Establecer" formaction=<?php echo $mensajesCrearHoraDeConsulta?> > Cambiar Horario Especial mesas
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </div>
+                </div> 
+                <?php endif?>  
+
+
             </form>
         </div>
         <script src="./../js/jquery.js"></script>
