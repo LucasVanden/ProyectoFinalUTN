@@ -159,7 +159,11 @@ foreach ($cargar as $horario) {
     <?php require $DIR.$headerp ?>
         <?php if (!empty($message)): ?>
             <p> <?= $message ?></p>
-        <?php endif; ?>   
+        <?php endif; ?>  
+
+        <!-- <?php echo "fallo comprocacion:" . $_SESSION['falloComprobacion'];?>
+        <?php echo "igualMesa:" . $_SESSION['igualMesa'];?>
+        <?php echo "horariosdeMesasAagregar:" . $_SESSION['horariosdeMesasAagregar'];?> -->
 
         <div class="container">
             <br>
@@ -423,24 +427,28 @@ foreach ($cargar as $horario) {
                     <div class="col-md-12 col-md-offset-2">
                     <div>       
                     <?php $i=0;
-                     foreach ($mensj as $m):?>   
+                    
+                    // echo '<pre>'; print_r($mensj); echo '</pre>';
+                     foreach ($mensj as $m):?>    
+                        <!-- <?php echo $m?> -->
 
                         <?php if($m=="Se Creo Correctamente"):?>
                             <div class="alert alert-success" role="alert">
                             <?php echo "-".$m?>
                             </div>
-                        <?php endif;?>
 
-                       <?php if(substr( $m, 0, 3 ) === "La "||$m=="no realizo ningun cambio"):?>
+                       <?php elseif(substr( $m, 0, 3 ) === "La "||$m=="no realizo ningun cambio"):?>
                             <div class="alert alert-warning" role="alert">
                             <?php echo "-".$m?>
                             </div>
-                        <?php endif;?>
 
-                        <?php if(!(($m=="Se Creo Correctamente")||($m="otro")||(substr( $m, 0, 3 ) === "La "||$m=="no realizo ningun cambio"))) :?>
-                            <div class="alert alert-danger" role="alert">
+                        <?php elseif($m=="otro"):?>
+
+                        <?php else:?>
+                        <div class="alert alert-danger" role="alert">
                             <?php echo "-".$m?>
                             </div>
+
                         <?php endif;?>
                           <?php endforeach; 
                               ?>                                               
