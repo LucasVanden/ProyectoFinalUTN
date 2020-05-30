@@ -47,7 +47,7 @@ class ReportesControlador extends conexion
             $mat=$row['nombreMateria'];
             $cantidadAsitencia=0;
 
-            $stmt2 = $conn->prepare("SELECT id_horadeconsulta FROM horadeconsulta where fk_materia=$idmat and fechaDesdeAnotados>='$fechaDesde' and fechaHastaAnotados<='$fechaHasta'"); 
+            $stmt2 = $conn->prepare("SELECT id_horadeconsulta FROM horadeconsulta where fk_materia=$idmat and fechaHastaAnotados>='$fechaDesde' and fechaHastaAnotados<='$fechaHasta'"); 
             $stmt2->execute();
             while($row = $stmt2->fetch()) {
               
@@ -103,7 +103,7 @@ class ReportesControlador extends conexion
                 $Nombreprofesor=$apellido." ".$nombre;
                 $cantidadAsitencia=0;
 
-                $stmt4 = $conn->prepare("SELECT id_horadeconsulta FROM horadeconsulta where fk_materia=$idmat and fk_profesor=$fk_profesor and fechaDesdeAnotados>='$fechaDesde' and fechaHastaAnotados<='$fechaHasta'"); 
+                $stmt4 = $conn->prepare("SELECT id_horadeconsulta FROM horadeconsulta where fk_materia=$idmat and fk_profesor=$fk_profesor and fechaHastaAnotados>='$fechaDesde' and fechaHastaAnotados<='$fechaHasta'"); 
                 $stmt4->execute();
                 while($row = $stmt4->fetch()) {
                 
@@ -154,7 +154,7 @@ class ReportesControlador extends conexion
                 $idmat=$row['id_materia'];
                 $mat=$row['nombreMateria'];
 
-                    $stmt4 = $conn->prepare("SELECT id_horadeconsulta FROM horadeconsulta where fk_materia=$idmat and fechaDesdeAnotados>='$fechaDesde' and fechaHastaAnotados<='$fechaHasta'"); 
+                    $stmt4 = $conn->prepare("SELECT id_horadeconsulta FROM horadeconsulta where fk_materia=$idmat and fechaHastaAnotados>='$fechaDesde' and fechaHastaAnotados<='$fechaHasta'"); 
                     $stmt4->execute();
                     while($row = $stmt4->fetch()) {
                     

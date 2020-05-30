@@ -1251,7 +1251,7 @@ function CambiarActivoDeHoraAnterior($idmateria,$idprofesor){
     $con= new conexion();
     $conn = $con->getconexion();
     $stmt2 = $conn->prepare("SELECT id_horadeconsulta FROM horadeconsulta 
-    where fk_materia=$idmateria and fk_profesor=$idprofesor and estadoVigencia='cambioDeHora' and fk_horariodeconsulta=$idhorarioAcambiar"); 
+    where fk_materia=$idmateria and fk_profesor=$idprofesor and /*estadoVigencia='cambioDeHora' and*/ fk_horariodeconsulta=$idhorarioAcambiar"); 
     $stmt2->execute();
         while($row = $stmt2->fetch()) {
             $hora=($row['id_horadeconsulta']);
