@@ -17,7 +17,26 @@ require_once ($DIR . $Dedicacion);
 $marcarAsuetoAsueto= $URL.$marcarAsuetoAsueto;
 
 
-
+function CambiarFechaHastaDeConsultaAnterior($idmateria,$idprofesor,$semestre,$n){
+    $con= new conexion();
+    $conn = $con->getconexion();
+  
+    $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia 
+    FROM horariodeconsulta where fk_materia=$idmateria and fk_profesor=$idprofesor and semestre=$semestre and activoHasta='0000-00-00' and n=$n"); 
+    $stmt2->execute();
+    while($row = $stmt2->fetch()) {
+        $hor = new HorarioDeConsulta();
+        $hor->setid_horarioDeConsulta($row['id_horariodeconsulta']);
+        //--
+        global $idhorarioAcambiar;
+        $id=$hor->getid_horarioDeConsulta();
+        $idhorarioAcambiar=$id;
+        $fechaActual= date("Y-m-d");
+        $stmt = $conn->prepare("UPDATE horariodeconsulta SET activoHasta='$fechaActual' WHERE id_horariodeconsulta=$id");
+        $stmt->execute();
+    }
+}
+CambiarFechaHastaDeConsultaAnterior(4,27,31,1);
 ?>
 
 

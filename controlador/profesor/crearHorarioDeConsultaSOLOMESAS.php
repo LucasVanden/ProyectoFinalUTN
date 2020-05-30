@@ -555,13 +555,13 @@ function CambiarFechaHastaDeConsultaAnterior($idmateria,$idprofesor,$semestre,$n
     $stmt2->execute();
     while($row = $stmt2->fetch()) {
         $hor = new HorarioDeConsulta();
-        $hor->setid_horariodeconsulta($row['id_horariodeconsulta']);
+        $hor->setid_horarioDeConsulta($row['id_horariodeconsulta']);
         //--
         global $idhorarioAcambiar;
         $id=$hor->getid_horarioDeConsulta();
         $idhorarioAcambiar=$id;
         $fechaActual= date("Y-m-d");
-        $stmt = $conn->prepare("UPDATE horariodeconsulta SET activoHasta='$fechaActual'  WHERE id_horariodeconsulta=$id"); 
+        $stmt = $conn->prepare("UPDATE horariodeconsulta SET activoHasta='$fechaActual' WHERE id_horariodeconsulta=$id");
         $stmt->execute();
     }
 }

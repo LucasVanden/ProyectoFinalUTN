@@ -112,6 +112,10 @@ $idmateria= $a->buscarIDdeNombreMateria($nommat);
 $diaMesa=$a->buscarDiaDeMesaDeMateria($idmateria);
 $dedicacion=$a->buscarDedicaciondeMateria($idmateria,$idProfesor);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
 $cargar=$a->buscarHorariosParallenarEnlosSelect($idmateria,$idProfesor);
+
+
+$_SESSION['idmateria']=$idmateria;
+// echo '<pre>'; print_r($cargar); echo '</pre>';
 if(isset($cargar)){
 foreach ($cargar as $horario) {
    if($horario->getsemestre()==31){
@@ -184,7 +188,8 @@ foreach ($cargar as $horario) {
                             <tr>
                                 <th>Día</th>
                                 <td>
-                                <?php if($activo11): ?>  
+                                <?php
+                                 if($activo11): ?>  
                                     <select name="MesaDia1ersemestre1">       
                                     <?php if($diaMesa==5) :?>   
                                         <option <?php if($DM1S1 == '3'){echo("selected");}?> value=3>Miércoles</option>
