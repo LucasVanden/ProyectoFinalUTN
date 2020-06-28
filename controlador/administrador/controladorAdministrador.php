@@ -33,6 +33,7 @@ class controladorAdministrador extends conexion
                 $aula->setnumeroAula($row['numeroAula']);
                 array_push($listaAulas,$aula);
             }
+            $conn= null;
         return $listaAulas;
     }
 
@@ -63,6 +64,7 @@ class controladorAdministrador extends conexion
                 }
             array_push($ListaHorariosDeConsulta,$hor);
             }
+            $conn= null;
             return $ListaHorariosDeConsulta;
     }
 
@@ -78,6 +80,7 @@ class controladorAdministrador extends conexion
             $dep->setfk_aula($row['fk_aula']);
            array_push($listaDepartamento,$dep);
         }
+        $conn= null;
         return $listaDepartamento;
     }
     function BuscarMaterias($iddepartamento){
@@ -113,6 +116,7 @@ class controladorAdministrador extends conexion
 
        array_push($ListaMaterias,$mat);
     }
+    $conn= null;
     return $ListaMaterias;
     }
     function BuscarProfesor(){
@@ -129,6 +133,7 @@ class controladorAdministrador extends conexion
             $prof->setlegajo($row['legajo']);
            array_push($listaProfesor,$prof);
         }
+        $conn= null;
         return $listaProfesor;
     }
     function BuscarDirector(){
@@ -151,6 +156,7 @@ class controladorAdministrador extends conexion
             array_push($listaProfesor,$prof);
             }
         }
+        $conn= null;
         return $listaProfesor;
     }
 
@@ -166,6 +172,7 @@ class controladorAdministrador extends conexion
             $ded->setcantidadHora($row['cantidadHora']);
            array_push($listaDedicacion,$ded);
         }
+        $conn= null;
         return $listaDedicacion;
     }
 
@@ -215,6 +222,7 @@ class controladorAdministrador extends conexion
 
             array_push($listaMateriasProfesor,$HoradeCursado);
         }
+        $conn= null;
         return $listaMateriasProfesor;
     }
 
@@ -231,6 +239,7 @@ class controladorAdministrador extends conexion
                 $numero=date("j",strtotime($asueto));
                 array_push($listaAsuetos,$numero);
             }
+            $conn= null;
             return $listaAsuetos;
     
     }
@@ -246,6 +255,7 @@ class controladorAdministrador extends conexion
                 $numero=date("j",strtotime($asueto));
                 array_push($listaAsuetos,$numero);
             }
+            $conn= null;
             return $listaAsuetos;
     
     }
@@ -261,6 +271,7 @@ class controladorAdministrador extends conexion
                 $numero=date("j",strtotime($asueto));
                 array_push($listaAsuetos,$numero);
             }
+            $conn= null;
             return $listaAsuetos;
     
     }
@@ -277,6 +288,7 @@ class controladorAdministrador extends conexion
                 $numero=date("j",strtotime($mesa));
                 array_push($listaMesas,$numero);
             }
+            $conn= null;
             return $listaMesas;
     
     }
@@ -292,6 +304,7 @@ class controladorAdministrador extends conexion
                 $aula=$row['cuerpoAula'];
                 array_push($listaAula,$aula);
             }
+            $conn= null;
             return $listaAula;
     
     }
@@ -308,6 +321,7 @@ class controladorAdministrador extends conexion
                 $aula->setnivelAula($row['nivelAula']);
                 $aula->setnumeroAula($row['numeroAula']);
             }
+            $conn= null;
             return $aula;
     
     }
@@ -337,7 +351,7 @@ class controladorAdministrador extends conexion
              array_push($a,$departamento,$materia,$semestre,$apellido,$nombre);
              array_push($b,$a);
          }
-       
+         $conn= null;
          return $b;
     }
     function departamentosOcupados($aula){
@@ -353,6 +367,7 @@ class controladorAdministrador extends conexion
              $departamento=$row[0];
              array_push($a,$departamento);
          }
+         $conn= null;
          return $a;
     }
     function MostrarMateriasProfesor(){
@@ -382,7 +397,7 @@ class controladorAdministrador extends conexion
              array_push($a,$id,$departamento,$materia,$apellido,$nombre,$dedicacion);
              array_push($b,$a);
          }
-
+         $conn= null;
          return $b;
     }
     function BuscarProfesorID($id){
@@ -397,6 +412,7 @@ class controladorAdministrador extends conexion
             $prof->setemail($row['email']);
             $prof->setlegajo($row['legajo']);
         }
+        $conn= null;
         return $prof;
         }
 
@@ -415,6 +431,7 @@ class controladorAdministrador extends conexion
                         $alum->settelefonoAlumno($row['telefonoAlumno']);
                        array_push($listaAlumnos,$alum);
                     }
+                    $conn= null;
             return $listaAlumnos;
         }
         function buscarAlumnoID($idalumno){
@@ -431,6 +448,7 @@ class controladorAdministrador extends conexion
                 $alum->setlegajo($row['legajo']);
                 $alum->settelefonoAlumno($row['telefonoAlumno']);
             }
+            $conn= null;
             return $alum;
         }
         function BuscarPersonal(){
@@ -452,6 +470,7 @@ class controladorAdministrador extends conexion
                 array_push($listaProfesor,$prof);
                 }
             }
+            $conn= null;
             return $listaProfesor;
         }
         function BuscarAdmin(){
@@ -473,6 +492,7 @@ class controladorAdministrador extends conexion
                 array_push($listaProfesor,$prof);
                 }
             }
+            $conn= null;
             return $listaProfesor;
         }
         function BuscarPersonaID($id){
@@ -487,6 +507,7 @@ class controladorAdministrador extends conexion
                 $prof->setemail($row['email']);
                 $prof->setlegajo($row['dni']);
             }
+            $conn= null;
             return $prof;
             }
 
@@ -504,6 +525,7 @@ class controladorAdministrador extends conexion
                 while($row = $stmt->fetch()) {
                     array_push($permisos,$row[1]);
                 }
+                $conn= null;
                 return $permisos;
 
             }
@@ -523,6 +545,7 @@ class controladorAdministrador extends conexion
                     array_push($permisos1,$row[0],$row[1]);
                     array_push($permisos,$permisos1);
                 }
+                $conn= null;
                 return $permisos;
 
             }
@@ -537,6 +560,7 @@ class controladorAdministrador extends conexion
                     array_push($permisos1,$row[0],$row[1]);
                     array_push($permisos,$permisos1);
                 }
+                $conn= null;
                 return $permisos;
 
             }
@@ -557,6 +581,7 @@ class controladorAdministrador extends conexion
                     $prof->setlegajo($row['legajo']);
                    array_push($listaProfesor,$prof);
                 }
+                $conn= null;
                 return $listaProfesor;
             }
 }

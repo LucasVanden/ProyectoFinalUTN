@@ -76,7 +76,7 @@ class ReportesControlador extends conexion
         $respuesta=array();
         array_push($respuesta,$listaMaterias);
         array_push($respuesta,$listaCantidadPresentesMaterias);
-    
+        $conn= null;
         return $respuesta;
     }
     function AlumnosPorProfesorPorMateria($idmateria,$fechaDesde,$fechaHasta){
@@ -133,7 +133,7 @@ class ReportesControlador extends conexion
         $respuesta=array();
         array_push($respuesta,$listraNombreProfesor);
         array_push($respuesta,$listaCantidadPresentesProfesor);
-    
+        $conn= null;
         return $respuesta;
     }
     function AlumnosPorDepartamento($fechaDesde,$fechaHasta){
@@ -184,7 +184,7 @@ class ReportesControlador extends conexion
         $respuesta=array();
         array_push($respuesta,$listaNombreDepartamento);
         array_push($respuesta,$listaCantidadPresentesDepartamento);
-    
+        $conn= null;
         return $respuesta;
     }
     function BuscarDepartamento(){
@@ -198,6 +198,7 @@ class ReportesControlador extends conexion
             $dep->setnombre($row['nombre']);
            array_push($listaDepartamento,$dep);
         }
+        $conn= null;
         return $listaDepartamento;
     }
     function buscarPersonalDeUsuario($idusuario){
@@ -218,6 +219,7 @@ class ReportesControlador extends conexion
                 
             
         }
+        $conn= null;
         return $Nombreprofesor;
         }
 }

@@ -29,23 +29,22 @@ $email='/controlador/enviaremail.php';
 
 $conexion='/modelo/persistencia/conexion.php';
 
-$asistenciaAlumno="/vista/asistencia/asistenciaAlumno.php";
-$asistenciaProfesor="/vista/asistencia/asistenciaProfesor.php";
+
+
 //ALUMNO
 $alumnoPpal="/vista/alumno/alumnoPpal.php";
 $alumnoagregarmateria='/vista/alumno/alumnoAgregarMateria.php';
 $temp1='/vista/alumno/temp.1.php';
 $controladorbajaAlumno='/controlador/administrador/bajaAlumno.php';
 
-$alumnoControlador='/controlador/alumnoControlador.php';
-$departamentoMaterias='/controlador/departamentoMaterias.php';
-$buscarMateriasdeDepartamentodeAlumno='/controlador/buscarMateriasdeDepartamentodeAlumno.php';
-$eliminarAnotacion='/controlador/eliminarAnotacion.php';
-$AgregarMateriaAlumno='/controlador/AgregarMateriaAlumno.php';
-$EliminarMateriaAlumno='/controlador/EliminarMateriaAlumno.php';
-$departamentoMaterias='/controlador/departamentoMaterias.php';
-$crearAnotacion='/controlador/crearAnotacion.php';
-$editAlumno='/controlador/administrador/editAlumno.php';
+$AgregarMateriaAlumno='/controlador/alumno/AgregarMateriaAlumno.php';
+$alumnoControlador='/controlador/alumno/alumnoControlador.php';
+$buscarMateriasdeDepartamentodeAlumno='/controlador/alumno/buscarMateriasdeDepartamentodeAlumno.php';
+$crearAnotacion='/controlador/alumno/crearAnotacion.php';
+$departamentoMaterias='/controlador/alumno/departamentoMaterias.php';
+$eliminarAnotacion='/controlador/alumno/eliminarAnotacion.php';
+$EliminarMateriaAlumno='/controlador/alumno/EliminarMateriaAlumno.php';
+
 
 //MODELO
 $Alumno='/modelo/Alumno.php';
@@ -69,38 +68,48 @@ $Dedicacion='/modelo/Dedicacion.php';
 $Falta='/modelo/Falta.php';
 
 //PROFESOR
-$profesorControlador='/controlador/profesor/profesorControlador.php';
+
 $profesorNotificarAlumno='/vista/profesor/profesorNotificarAlumnos.php';
 $profesorPpal='/vista/profesor/profesorPpal.php';
-$profesorCrearNotificacion='/controlador/profesor/profesorCrearNotificacion.php';
-$profesorAlumnosAnotados='/vista/profesor/profesorAlumnosAnotados.php';
-$crearHorarioDeConsulta='/controlador/profesor/crearHorarioDeConsulta.php';
-$crearHorarioDeConsultaSOLOMESAS='/controlador/profesor/crearHorarioDeConsultaSOLOMESAS.php';
-
 $mensajesCrearHoraDeConsulta='/vista/profesor/mensajesCrearHoraDeConsulta.php';
 $EstablecerHorario='/vista/profesor/profesorEstablecerHorario.php';
+$profesorAlumnosAnotados='/vista/profesor/profesorAlumnosAnotados.php';
+
+$crearHorarioDeConsulta='/controlador/profesor/crearHorarioDeConsulta.php';
+$crearHorarioDeConsultaSOLOMESAS='/controlador/profesor/crearHorarioDeConsultaSOLOMESAS.php';
+$profesorControlador='/controlador/profesor/profesorControlador.php';
+$profesorCrearNotificacion='/controlador/profesor/profesorCrearNotificacion.php';
+
 
 //ASISTENCIA
-$asistenciaProfesor='/vista/asistencia/asistenciaProfesor.php';
 $asistenciaAlumno='/vista/asistencia/asistenciaAlumno.php';
+$asistenciaProfesor='/vista/asistencia/asistenciaProfesor.php';
+
 $AsistenciaControlador='/controlador/asistencia/AsistenciaControlador.php';
-$AsistirProfesor='/controlador/asistencia/AsistirProfesor.php';
-
 $AsistirAlumno='/controlador/asistencia/AsistirAlumno.php';
-
-$CerrarhoraAusente='/controlador/asistencia/Demonio.php';
+$AsistirProfesor='/controlador/asistencia/AsistirProfesor.php';
 $calcularAsistencia='/controlador/asistencia/calcularAsistencia.php';
+$CerrarhoraAusente='/controlador/asistencia/Demonio.php';
+
 
 //REPORTES
-$ReportesControlador='/controlador/reportes/ReportesControlador.php';
-$buscarMateriasDepartamentoincluidoTodas='/controlador/reportes/buscarMateriasDepartamentoincluidoTodas.php';
 $directorReportes='/vista/reportes/directorReportes.php';
 $vistafaltas='/vista/reportes/faltas.php';
+
 $buscarfaltas='/controlador/reportes/buscarFaltas.php';
+$buscarMateriasDepartamentoincluidoTodas='/controlador/reportes/buscarMateriasDepartamentoincluidoTodas.php';
 $llenarMaterias='/controlador/reportes/llenarMaterias.php';
+$ReportesControlador='/controlador/reportes/ReportesControlador.php';
+
 
 //ADMINISTRADOR
+
 $editarAlumno='/vista/administrador/editarAlumno.php';
+$altaAlumno='/vista/administrador/altaAlumno.php';
+$altaPersonal='/vista/administrador/altaPersonal.php';
+$altaAdministrador='/vista/administrador/altaAdministrador.php';
+$editarPersonal='/vista/administrador/editarPersonal.php';
+
 $controladorAsuetosReceso='/controlador/administrador/controladorAsuetosReceso.php';
 $controladorAsuetoFeriado='/controlador/administrador/controladorAsuetoFeriado.php';
 $controladorAsuetoAsueto='/controlador/administrador/controladorAsuetoAsueto.php';
@@ -119,15 +128,9 @@ $marcarAsuetoFeriado='/controlador/administrador/marcarAsuetoFeriado.php';
 $marcarAsuetoAsueto='/controlador/administrador/marcarAsuetoAsueto.php';
 $cargarEnSessionLaFecha='/controlador/administrador/cargarEnSessionLaFecha.php';
 $marcarfechaMesa='/controlador/administrador/marcarfechaMesa.php';
-
 $asignarDirector='/controlador/administrador/cargoDirector/asignarDirector.php';
 $eliminarDirecotr='/controlador/administrador/cargoDirector/eliminarDirecotr.php';
-
-$altaAlumno='/vista/administrador/altaAlumno.php';
-$altaPersonal='/vista/administrador/altaPersonal.php';
-$altaAdministrador='/vista/administrador/altaAdministrador.php';
-
-$editarPersonal='/vista/administrador/editarPersonal.php';
+$editAlumno='/controlador/administrador/editAlumno.php';
 $editPersonal='/controlador/administrador/editPersonal.php';
 $bajaPersonal='/controlador/administrador/bajaPersonal.php';
 

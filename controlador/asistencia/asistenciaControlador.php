@@ -44,6 +44,7 @@ class Asistenciacontrolador extends conexion
                 array_push($listaDedicaciones,$ded);
             }
         }
+        $conn= null;
         return $listaDedicaciones;
     }
 
@@ -95,6 +96,7 @@ function buscarHorasConsulta($idprofesor,$idMateria){
         }
         array_push($listaHora,$hora);
     }
+    $conn= null;
     return $listaHora;
 }
 function buscarProfesorDeUsuario($idusuario){
@@ -105,6 +107,7 @@ function buscarProfesorDeUsuario($idusuario){
     while($row = $stmt->fetch()) {
        $idprofesor=$row['fk_profesor'];
     }
+    $conn= null;
    return $idprofesor;
     }
 
@@ -115,7 +118,7 @@ function tienePresentismo($idhoradeconsulta){
     while($row = $stmt->fetch()) {
         $idpresentismo =$row['id_presentismo'];
     }
-
+    $conn= null;
     if(isset($idpresentismo)){
     return true;
 
@@ -266,6 +269,7 @@ function BuscarMateriasAAsistir($idalumno){
                 } 
             }
             // echo '<pre>'; print_r($ListHoraDeConsulta); echo '</pre>';
+            $conn= null;
             return $ListHoraDeConsulta;
         }
         function buscarAlumnoDeUsuario($idusuario){
@@ -274,6 +278,7 @@ function BuscarMateriasAAsistir($idalumno){
             $stmt = $conn->prepare("SELECT fk_alumno FROM usuario where id_usuario=$idusuario"); 
             $stmt->execute();
             $idalumno=null;
+            $conn= null;
             while($row = $stmt->fetch()) {
                $idalumno=$row['fk_alumno'];
             }
@@ -289,7 +294,7 @@ function BuscarMateriasAAsistir($idalumno){
                     $nombre=$row['nombre'];
                 }
                 $NombreAlumno=$apellido." ".$nombre;
-                    
+                $conn= null;
                 return $NombreAlumno;
             }
 }

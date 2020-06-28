@@ -209,6 +209,7 @@ return $mat;
                 }
             $mat->setHoraDeConsulta($ListHoraDeConsulta);
         }
+        $conn= null;
         return $mat;
 
     }
@@ -238,6 +239,7 @@ return $mat;
             $prof->setemail($row['email']);
            array_push($listaProfesor,$prof);
         }
+        $conn= null;
         return $listaProfesor;
     }
     function BuscarDepartamento(){
@@ -251,6 +253,7 @@ return $mat;
             $dep->setnombre($row['nombre']);
            array_push($listaDepartamento,$dep);
         }
+        $conn= null;
         return $listaDepartamento;
     }
 
@@ -327,6 +330,7 @@ return $mat;
               
     }
     array_push($profesorHorarios,$listaHorarios);
+    $conn= null;
     return $profesorHorarios;
 }
 
@@ -518,6 +522,7 @@ function AnotadoRepetido($idhora,$idalumno){
             } 
         }
         // echo '<pre>'; print_r($ListHoraDeConsulta); echo '</pre>';
+        $conn= null;
         return $ListHoraDeConsulta;
     }
 
@@ -530,6 +535,7 @@ function AnotadoRepetido($idhora,$idalumno){
         while($row = $stmt->fetch()) {
            $idalumno=$row['fk_alumno'];
         }
+        $conn= null;
        return $idalumno;
         }
 
@@ -541,6 +547,7 @@ function AnotadoRepetido($idhora,$idalumno){
                     array_push($lista,$hora);
                 }
             }
+            $conn= null;
             return $lista;
             }
 
@@ -554,7 +561,7 @@ function AnotadoRepetido($idhora,$idalumno){
                     $nombre=$row['nombre'];
                 }
                 $NombreAlumno=$apellido." ".$nombre;
-                    
+                $conn= null;   
                 return $NombreAlumno;
             }
 

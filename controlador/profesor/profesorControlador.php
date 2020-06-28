@@ -55,6 +55,7 @@ class Profesorcontrolador extends conexion
                 array_push($listaDedicaciones,$ded);
             }
         }
+        $conn= null;
         return $listaDedicaciones;
     }
     function agruparMateriasPorDepartamento($listaDedicaciones){
@@ -80,6 +81,7 @@ class Profesorcontrolador extends conexion
             array_push($resultado,$nombre,$materias);
             array_push($resultadoFinal,$resultado);
         }
+        $conn= null;
         return $resultadoFinal;
     }
 
@@ -91,6 +93,7 @@ class Profesorcontrolador extends conexion
         while($row = $stmt->fetch()) {
         $dia=$row['fk_dia'];
             }
+        $conn= null;
         return $dia;
     }
 
@@ -102,6 +105,7 @@ class Profesorcontrolador extends conexion
         while($row = $stmt->fetch()) {
         $id= $row['id_materia'];
     }
+        $conn= null;
         return $id;
     }
 
@@ -121,6 +125,7 @@ class Profesorcontrolador extends conexion
                     $ded->setcantidadHora($row['cantidadHora']);
                 }
         }
+        $conn= null;
         return $ded;
     }
 
@@ -148,6 +153,7 @@ class Profesorcontrolador extends conexion
                 }
             array_push($listaHorarios,$hor);
             }
+            $conn= null;
             return $listaHorarios;
     }
 
@@ -221,6 +227,7 @@ class Profesorcontrolador extends conexion
             $hora->setAvisoProfesor($listaAvisos);
             array_push($listaHora,$hora);
         }
+        $conn= null;
         return $listaHora;
     }
 
@@ -295,6 +302,7 @@ class Profesorcontrolador extends conexion
                 array_push($listaDetallesAnotados,$detalle);
                 }      
             }
+            $conn= null;
             return $listaDetallesAnotados;
         }
 
@@ -313,6 +321,7 @@ class Profesorcontrolador extends conexion
                         $mat= $row['nombreMateria'];
                     }
                     }
+                $conn= null;
                 return $mat;
                 }
 
@@ -342,6 +351,7 @@ function buscarHorariosParallenarEnlosSelect($idmateria,$idprofesor){
             }
         array_push($ListaHorariosDeConsulta,$hor);
         }
+        $conn= null;
         return $ListaHorariosDeConsulta;
 }
 
@@ -417,7 +427,7 @@ function idpofesoraNombre($idprofesor){
         $nombre=$row['nombre'];
     }
     $Nombreprofesor=$apellido." ".$nombre;
-        
+    $conn= null; 
     return $Nombreprofesor;
 }
 
@@ -449,6 +459,7 @@ function CantidadDeCambiosRestantes($idProfesor,$idmateria){
         if($cambios<0){
             $cambios=0;
         }
+        $conn= null;
         return $cambios;
     
 }
@@ -481,7 +492,7 @@ function HabilitarBotonCambioHoraioConsultaMesas($idmateria,$idProfesor){
 
     $_SESSION['horariosdeMesasAagregar']=$mesas;
 
-
+    $conn= null;
     return $mostrar;
 }
 

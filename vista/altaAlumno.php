@@ -1,5 +1,5 @@
 <?php
-require 'dbPFPrueba.php';
+
 require 'C:/xampp/htdocs/ProyectoFinalUTN/vista/rutas.php';
 require_once $DIR . '/modelo/persistencia/conexion.php';
 $message = '';

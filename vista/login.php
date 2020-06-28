@@ -34,7 +34,7 @@ if (isset($_SESSION['rol'])) {
         default:
     }
 }
-require 'dbPFprueba.php';
+
 require_once $DIR . '/modelo/persistencia/conexion.php';
 
 //nuevo con sesion
