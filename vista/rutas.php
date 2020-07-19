@@ -71,15 +71,19 @@ $Falta='/modelo/Falta.php';
 
 $profesorNotificarAlumno='/vista/profesor/profesorNotificarAlumnos.php';
 $profesorPpal='/vista/profesor/profesorPpal.php';
-$mensajesCrearHoraDeConsulta='/vista/profesor/mensajesCrearHoraDeConsulta.php';
+
+$mensajesCrearHoraDeConsulta='/vista/profesor/mensajesCrearHoraDeConsulta.1.php';
+
 $EstablecerHorario='/vista/profesor/profesorEstablecerHorario.php';
 $profesorAlumnosAnotados='/vista/profesor/profesorAlumnosAnotados.php';
 
+$crearHorarioDeConsultaRefactorizado='/controlador/profesor/comprobarValidez.php';
+$comprobarValidezMesa='/controlador/profesor/comprobarValidezMesa.php';
 $crearHorarioDeConsulta='/controlador/profesor/crearHorarioDeConsulta.php';
 $crearHorarioDeConsultaSOLOMESAS='/controlador/profesor/crearHorarioDeConsultaSOLOMESAS.php';
 $profesorControlador='/controlador/profesor/profesorControlador.php';
 $profesorCrearNotificacion='/controlador/profesor/profesorCrearNotificacion.php';
-
+$creacionHorario='/controlador/profesor/creacionHorario.php';
 
 //ASISTENCIA
 $asistenciaAlumno='/vista/asistencia/asistenciaAlumno.php';

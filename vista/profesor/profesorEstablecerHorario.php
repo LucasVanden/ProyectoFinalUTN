@@ -10,7 +10,50 @@ if(!isset($_SESSION['rol'])){
     }
 }
 require_once $DIR . $profesorControlador;
-$crearHorario= $URL . $crearHorarioDeConsulta;
+//$crearHorario= $URL . $crearHorarioDeConsulta;
+
+//blanquear Session
+$_SESSION['CreacionHorariosComunes']=null;
+$_SESSION['mensajesCrearHorario']=null;
+$_SESSION['CreacionHorariosMesas']=null;
+$_SESSION['creacionExitosa']=null;
+$_SESSION['dedicacionCreacion']=null;
+$_SESSION['semestreactualCreacion']=null;
+
+$_SESSION['dia1S_1']=null;
+$_SESSION['hora1S_1']=null;
+$_SESSION['min1S_1']=null;
+
+$_SESSION['dia2S_1']=null;
+$_SESSION['hora2S_1']=null;
+$_SESSION['min2S_1']=null;
+
+$_SESSION['dia1S_2']=null;
+$_SESSION['hora1S_2']=null;
+$_SESSION['min1S_2']=null;
+
+$_SESSION['dia2S_2']=null;
+$_SESSION['hora2S_2']=null;
+$_SESSION['min2S_2']=null;
+
+$_SESSION['DiaMesa11']=null;
+$_SESSION['HoraMesa11']=null;
+$_SESSION['MinMesa11']=null;
+
+$_SESSION['DiaMesa21']=null;
+$_SESSION['HoraMesa21']=null;
+$_SESSION['MinMesa21']=null;
+
+$_SESSION['DiaMesa12']=null;
+$_SESSION['HoraMesa12']=null;
+$_SESSION['MinMesa12']=null;
+
+$_SESSION['DiaMesa22']=null;
+$_SESSION['HoraMesa22']=null;
+$_SESSION['MinMesa22']=null;
+//end blanquear
+
+$crearHorario= $URL . $crearHorarioDeConsultaRefactorizado;
 $mensajesCrearHoraDeConsulta= $URL . $mensajesCrearHoraDeConsulta;
 
 $_SESSION['SoloMesas']=false;
@@ -112,7 +155,7 @@ $M2S2=null;
                  <div class="form-group" align="center">
                     <h2 for="establecer" class="text-primary" style = "font-family:myFirstFont,garamond,serif;font-size:23px;"> 
                     <?php echo "Cambios Restantes:";
-                    echo $a->CantidadDeCambiosRestantes($idProfesor,1,$idmateria);
+                    echo $a->CantidadDeCambiosRestantes($idProfesor,$idmateria);
                 ?> </h2>
                 </div>
           

@@ -1092,7 +1092,6 @@ function CambiarFechaHastaDeConsultaAnterior($idmateria,$idprofesor,$semestre,$n
         $stmt->execute();
     }
 }
-
 function crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingresadonumero,$idprofesor,$idmateria,$n){
     $con= new conexion();
     $conn = $con->getconexion();
@@ -1119,8 +1118,6 @@ function crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingre
     global $idhorariodeconsultacreado;
     $idhorariodeconsultacreado = $conn->lastInsertId("horariodeconsulta");
 }
-
-
 function primeraVezQueCargaHorario($idmateria,$idprofesor){
     $con= new conexion();
     $conn = $con->getconexion();
@@ -1136,7 +1133,6 @@ function primeraVezQueCargaHorario($idmateria,$idprofesor){
         return true;
     }
 }
-
 function crearHoraDeConsulta($idmateria,$idprofesor,$idhorarioconsulta,$diaingresadonumero){
     $con= new conexion();
     $conn = $con->getconexion();
@@ -1266,7 +1262,6 @@ function CambiarActivoDeHoraAnterior($idmateria,$idprofesor){
     }
   
 }
-
 function los2HorariosAsignadosDifierenEn1Hs($dia1,$hora1,$min1,$dia2,$hora2,$min2){
     if($dia1==$dia2){
         $h1 = ltrim($hora1, "0");
@@ -1301,7 +1296,6 @@ function los2HorariosAsignadosDifierenEn1Hs($dia1,$hora1,$min1,$dia2,$hora2,$min
         return true;
     }
 }
-
 function comprobarCambioDeHorarioMesa($idProfesor,$idmateria,$semestre,$semestreDeLaConsulta,$n){
     $con= new conexion();
     $conn = $con->getconexion();
@@ -1329,11 +1323,10 @@ function comprobarCambioDeHorarioMesa($idProfesor,$idmateria,$semestre,$semestre
         }
     }
 
-}
-return $comprobacion;
+    }
+    return $comprobacion;
 }
 //auxiliares
-
 function enviarMailAAlumnosAnotados($idhoradeconsulta,$idmateria,$idprofesor){
     $listaDetalles=array();
     $con= new conexion();
@@ -1419,8 +1412,8 @@ function horarioIngresadoIgualAlAnterior($diaingresadonumero,$horaingresada,$min
         $igual= true;
       }
     return $igual;
-  }
-  function horarioIngresadoMesaIgualAlAnterior($diaingresadonumero,$horaingresada,$miningresado,$semestreDeLaConsulta,$idprofesor,$idmateria){
+}
+function horarioIngresadoMesaIgualAlAnterior($diaingresadonumero,$horaingresada,$miningresado,$semestreDeLaConsulta,$idprofesor,$idmateria){
     $igual=false;
       $con= new conexion();
       $hora="{$horaingresada}:{$miningresado}";
@@ -1433,41 +1426,39 @@ function horarioIngresadoIgualAlAnterior($diaingresadonumero,$horaingresada,$min
         $igual= true;
       }
     return $igual;
-  }
-
-function mayorMentorigual($horasql1,$signo,$hora2,$min2){
-$hora=  substr($horasql1, 0, 2);
-$min=substr($horasql1, 3, 2);
-    switch ($signo) {
-        case '>':
-            if($hora>$hora2){
-                return true;}
-                    elseif ($hora<$hora2) {
-                        return false;}
-                            elseif($min>$min2){return true;}
-                                elseif ($min<$min2){return false;}
-                                    else return false;
-            
-            break;
-        case '<':
-            if($hora<$hora2){
-                return true;}
-                    elseif ($hora>$hora2) {
-                        return false;}
-                            elseif($min<$min2){return true;}
-                                elseif ($min>$min2){return false;}
-                                    else return false;
-            break;
-        case "==":
-            if($hora==$hora2){
-                if ($min==$min2)
-                    {return true;}
-            }
-            else return false;
-            break;
-    }
 }
-
+function mayorMentorigual($horasql1,$signo,$hora2,$min2){
+    $hora=  substr($horasql1, 0, 2);
+    $min=substr($horasql1, 3, 2);
+        switch ($signo) {
+            case '>':
+                if($hora>$hora2){
+                    return true;}
+                        elseif ($hora<$hora2) {
+                            return false;}
+                                elseif($min>$min2){return true;}
+                                    elseif ($min<$min2){return false;}
+                                        else return false;
+                
+                break;
+            case '<':
+                if($hora<$hora2){
+                    return true;}
+                        elseif ($hora>$hora2) {
+                            return false;}
+                                elseif($min<$min2){return true;}
+                                    elseif ($min>$min2){return false;}
+                                        else return false;
+                break;
+            case "==":
+                if($hora==$hora2){
+                    if ($min==$min2)
+                        {return true;}
+                }
+                else return false;
+                break;
+        }
+}
 function nextfechaDia($diaID){
     switch ($diaID){
         case '1':
@@ -1488,7 +1479,6 @@ function nextfechaDia($diaID){
     }
     return $fecha;
 }
-
 function alert($msg) {
     echo "<script type='text/javascript'>alert('$msg');</script>";
 }
