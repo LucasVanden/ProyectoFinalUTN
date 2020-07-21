@@ -52,7 +52,6 @@ $minMesa22=$_SESSION['MinMesa22'];
 //Datos
 $idProfesor=$_SESSION['idProfesor'];
 $idmateria=$_SESSION['IdMateriaCreacion'];
-$dedicacion=$_SESSION['dedicacionCreacion'];
 $semestreactual=$_SESSION['semestreactualCreacion'];
 $dedicaciondoble=$_SESSION['dedicacionCreacion'];
 $idhorarioAcambiar;

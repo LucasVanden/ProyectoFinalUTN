@@ -15,21 +15,29 @@ require_once ($DIR . $AnotadosEstado);
 require_once ($DIR . $EstadoAnotados);
 require_once ($DIR . $Asueto);
 require_once ($DIR . $FechaMesa);
+require_once $DIR . $profesorControlador;
 session_start();
 date_default_timezone_set('America/Argentina/Mendoza');
+
 //    GET DATOS
 
 //materia profesor
 $idmateria=$_SESSION['IdMateriaCreacion'];
 $idProfesor=$_SESSION['idProfesor'];
 // doble
-$dedicaciondoble=$_SESSION['dedicacionCreacion']=$dedicaciondoble;
+$a=new Profesorcontrolador();
+$dedicacion=$a->buscarDedicaciondeMateria($idmateria,$idProfesor);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------       
+$dedicaciondoble=false;
+if($dedicacion->getid_dedicacion()==1){
+    $dedicaciondoble=true;
+}
 
 //doble semestre 1
 if($dedicaciondoble){
     $dia1erSemestre2=$_SESSION['dia1S_2'];
     $$hora1erSemestre2=$_SESSION['hora1S_2'];
     $$min1erSemestre2=$_SESSION['min1S_2'];
+
     $dia2doSemestre2=$_SESSION['dia2S_2'];
     $hora2doSemestre2=$_SESSION['hora2S_2'];
     $min2doSemestre2=$_SESSION['min2S_2'];
@@ -100,6 +108,13 @@ $mesas=array();
 $ejecuta=true;
 $idhorarioAcambiar=null;
 
+$soloMesas=false;
+if(isset($_SESSION['SoloCambiaoMesasEspecial'])){
+    if($_SESSION['SoloCambiaoMesasEspecial']==true){
+        $soloMesas=true;
+    }
+};
+
 //    VERIFICACION DATOS
 //simple
 ComprobarValidez($idProfesor,$idmateria,$diaMesa11,$horaMesa11,$minMesa11,1,1,31,$existemesa11);
@@ -107,7 +122,9 @@ ComprobarValidez($idProfesor,$idmateria,$diaMesa21,$horaMesa21,$minMesa21,1,2,31
 
 //doble
 if($dedicaciondoble){
+    if($existemesa12&&$existemesa22){
     ComprobarSuperposicionEntreLosHorariosAsignados($diaMesa11,$horaMesa11,$minMesa11,$diaMesa12,$horaMesa12,$minMesa12,$diaMesa21,$horaMesa21,$minMesa21,$diaMesa22,$horaMesa22,$minMesa22);
+    }
     ComprobarValidez($idProfesor,$idmateria,$diaMesa12,$horaMesa12,$minMesa12,2,1,32,$existemesa12);
     ComprobarValidez($idProfesor,$idmateria,$diaMesa22,$horaMesa22,$minMesa22,2,2,32,$existemesa22);
 }
@@ -133,17 +150,21 @@ function ComprobarValidez($idProfesor,$idmateria,$dia,$hora,$min,$n,$semestre,$m
 
         $superposicion_Materia=comprobarSuperposiciónHorariaconotraMateria($idProfesor,$dia,$hora,$min,$semestre);
         $superposicion_Consulta=comprobarSuperposiciónHorariaconotraConsulta($idProfesor,$dia,$hora,$min,$semestre,$idmateria,$n,$mesa);
+        if($_SESSION['SoloCambiaoMesasEspecial']==false){
+            ComprobarSuperposicionEntreLosHorariosAsignadosDeMesas($dia,$hora,$min,$semestre,$n);
+        }
         $esSemandaDeConsultaDeMesa=comprobarCambioDeHorarioMesa($idProfesor,$idmateria,$semestre,$mesa,$n);  
         global $mensajes;
         global $mesas;
+   
 
         if(isset($superposicion_Materia)){
-            array_push($mensajes,("superposicion del horario {$n} del semestre {$semestre} con materia {$CM11->getfk_materia()->getnombreMateria()}"));
+            array_push($mensajes,("superposicion del horario {$n} del semestre {$semestre} con materia {$superposicion_Materia->getfk_materia()->getnombreMateria()}"));
             $ejecuta=false;
             $_SESSION["falloComprobacionMesa"]=true;
         }
         if(isset($superposicion_Consulta)){
-            array_push($mensajes,("superposicion del  horario {$n} del semestre {$semestre} con consulta de {$CC11->getfk_materia()->getnombreMateria()}"));
+            array_push($mensajes,("superposicion del  horario {$n} del semestre {$semestre} con consulta de {$superposicion_Consulta->getfk_materia()->getnombreMateria()}"));
             $ejecuta=false;
             $_SESSION["falloComprobacionMesa"]=true;
         }
@@ -231,6 +252,11 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado
     $mesaSemestre="3{$semestre}";
     $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta 
     where (fk_profesor=$idprofesor )and( activoHasta='0000-00-00' )and((semestre=$semestre) or (semestre='$mesaSemestre')) "); 
+    //si no es solo cambio de mesas, evitar compara con las horas guardadas en BD de la misma materia y verificar con las horas que se estan seteando desde SESSION
+    if($_SESSION['SoloCambiaoMesasEspecial']==false){
+        $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta 
+        where (id_materia!=$idmateria)and(fk_profesor=$idprofesor )and( activoHasta='0000-00-00' )and((semestre=$semestre) or (semestre='$mesaSemestre')) "); 
+    }
     $stmt2->execute();
 
     while($row = $stmt2->fetch()) {
@@ -269,6 +295,7 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado
         
     
     foreach ($listaConsultasProfesor as $horarioConsulta) {
+           echo '<pre>'; print_r($horarioConsulta); echo '</pre>';
        if ($horarioConsulta->getdia()->getid_dia()==$diaingresadonumero){
           if(// se acaba antes de que empieze la calse, o empieza despues que termina la clase
            !(mayorMentorigual($horarioConsulta->gethora(),">",$horaingresada+1 ,$miningresado )||
@@ -459,6 +486,81 @@ function ComprobarSuperposicionEntreLosHorariosAsignados($dia1erSemestre1,$hora1
             array_push($mensajes,("Los Horarios Ingresados del 2 semestre se superponen"));
             $_SESSION["falloComprobacion"]=true;
         }
+}
+function ComprobarSuperposicionEntreLosHorariosAsignadosDeMesas($diaMesa,$horaMesa,$minMesa,$semestre,$n){
+
+    global $dia1erSemestre1;
+    global $hora1erSemestre1;
+    global $min1erSemestre1;
+    
+    global  $dia1erSemestre2;
+    global $hora1erSemestre2;
+    global $min1erSemestre2;
+
+    global $dia2doSemestre1;
+    global $hora2doSemestre1;
+    global $min2doSemestre1;
+
+    global $dia2doSemestre2;
+    global $hora2doSemestre2;
+    global $min2doSemestre2;
+
+    global $mensajes;
+    global $dedicaciondoble;
+
+    if($semestre==1){
+        $dia=$dia1erSemestre1;
+        $hora=$hora1erSemestre1;
+        $min=$min1erSemestre1;
+        
+        $dia2=$dia1erSemestre2;
+        $hora2=$hora1erSemestre2;
+        $min2=$min1erSemestre2;
+    }
+    if($semestre==2){
+        $dia=$dia2doSemestre1;
+        $hora=$hora2doSemestre1;
+        $min=$min2doSemestre1;
+        
+        $dia2=$dia2doSemestre2;
+        $hora2=$hora2doSemestre2;
+        $min2=$min2doSemestre2;
+    }
+  
+        $HI=los2HorariosAsignadosDifierenEn1Hs($diaMesa,$horaMesa,$minMesa,$dia,$hora,$min);
+        if(!$HI){
+            array_push($mensajes,("Los Horarios Ingresados de la mesa {$n} se superponen con el 1er horario de consulta del semestre {$semestre} "));
+            $_SESSION["falloComprobacion"]=true;
+        }
+        if($dedicaciondoble){    
+            $H2=los2HorariosAsignadosDifierenEn1Hs($diaMesa,$horaMesa,$minMesa,$dia2,$hora2,$min2);
+            if(!$H2){
+                array_push($mensajes,("Los Horarios Ingresados de la mesa {$n} se superponen con el 2do horario de consulta del semestre {$semestre} "));
+                $_SESSION["falloComprobacion"]=true;
+            }
+        }
+}
+function DElETE($diaMesa11,$horaMesa11,$minMesa11,$diaMesa12,$horaMesa12,$minaMesa12,
+    $diaMesa21,$horaMesa21,$minaMesa21,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2,
+    $dia2doSemestre1,$hora2doSemestre1,$min2doSemestre1,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2){
+
+    global $existemesa11;
+    global $existemesa12;
+    global $existemesa21;
+    global $existemesa22;
+
+    if($existemesa11){
+        ComprobarSuperposicionEntreLosHorariosAsignadosDeMesas($diaMesa11,$horaMesa11,$minMesa11,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2,1,1);
+    }
+    if($existemesa12){
+        ComprobarSuperposicionEntreLosHorariosAsignadosDeMesas($diaMesa12,$horaMesa12,$minaMesa12,$dia1erSemestre1,$hora1erSemestre1,$min1erSemestre1,$dia1erSemestre2,$hora1erSemestre2,$min1erSemestre2,1,2);
+    }
+    if($existemesa21){
+        ComprobarSuperposicionEntreLosHorariosAsignadosDeMesas($diaMesa21,$horaMesa21,$minaMesa21,$dia2doSemestre1,$hora2doSemestre1,$min2doSemestre1,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2,2,1);
+    }
+    if($existemesa22){
+        ComprobarSuperposicionEntreLosHorariosAsignadosDeMesas($diaMesa22,$horaMesa22,$minaMesa22,$dia2doSemestre1,$hora2doSemestre1,$min2doSemestre1,$dia2doSemestre2,$hora2doSemestre2,$min2doSemestre2,2,2);
+    }
 }
 function primeraVezQueCargaHorario($idmateria,$idprofesor){
     $con= new conexion();

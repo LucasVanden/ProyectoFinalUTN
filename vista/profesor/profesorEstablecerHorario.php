@@ -19,6 +19,7 @@ $_SESSION['CreacionHorariosMesas']=null;
 $_SESSION['creacionExitosa']=null;
 $_SESSION['dedicacionCreacion']=null;
 $_SESSION['semestreactualCreacion']=null;
+$_SESSION['SoloCambiaoMesasEspecial']=null;
 
 $_SESSION['dia1S_1']=null;
 $_SESSION['hora1S_1']=null;
@@ -110,7 +111,7 @@ $M2S2=null;
         $a=new Profesorcontrolador();
         $idmateria= $a->buscarIDdeNombreMateria($nommat);
         $dedicacion=$a->buscarDedicaciondeMateria($idmateria,$idProfesor);//id PROFESOR SESSION<---------------------------------------------------------------------------------------------
-        
+        $_SESSION['IdMateriaCreacion']=$idmateria;
         $dedicaciondoble=false;
         if($dedicacion->getid_dedicacion()==$nombrededicacion){
             $dedicaciondoble=true;

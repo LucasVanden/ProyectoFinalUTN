@@ -23,14 +23,18 @@ date_default_timezone_set('America/Argentina/Mendoza');
 $variable=1;
 function funcion1(){
     $variable = 5;
-    funcion2();
+    funcion2($pikachu);
 };
-function funcion2(){
+function funcion2($pikachu){
     global $variable;
     $variable = 10;
 };
-funcion1();
 
+funcion1();
+$_SESSION['tutancamoasdn']=true;
+if ($_SESSION['tutancamoasdn']==false){
+    echo "tutancamon";
+}
 echo $variable;
 $diaActual= date('N');
 $diaActualN= date('D');

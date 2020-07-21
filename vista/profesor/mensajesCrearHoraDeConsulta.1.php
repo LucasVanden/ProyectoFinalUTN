@@ -73,6 +73,7 @@ if(isset($_SESSION['igualMesa'])&&(isset($_SESSION['falloComprobacion']))){
 if(isset($_POST['SoloMesas'])){
     $Aceptar= $URL.$comprobarValidezMesa;
     $valueButton="Continuar";
+    $_SESSION['SoloCambiaoMesasEspecial']=true;
 }
 
 $volver= $URL . $profesorPpal;
