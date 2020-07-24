@@ -255,7 +255,7 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado
     //si no es solo cambio de mesas, evitar compara con las horas guardadas en BD de la misma materia y verificar con las horas que se estan seteando desde SESSION
     if($_SESSION['SoloCambiaoMesasEspecial']==false){
         $stmt2 = $conn->prepare("SELECT id_horariodeconsulta,hora,activoDesde,activoHasta,semestre,fk_dia,fk_profesor,fk_materia FROM horariodeconsulta 
-        where (id_materia!=$idmateria)and(fk_profesor=$idprofesor )and( activoHasta='0000-00-00' )and((semestre=$semestre) or (semestre='$mesaSemestre')) "); 
+        where (fk_materia!=$idmateria)and(fk_profesor=$idprofesor )and( activoHasta='0000-00-00' )and((semestre=$semestre) or (semestre='$mesaSemestre')) "); 
     }
     $stmt2->execute();
 
@@ -295,7 +295,7 @@ function comprobarSuperposiciónHorariaconotraConsulta($idprofesor,$diaingresado
         
     
     foreach ($listaConsultasProfesor as $horarioConsulta) {
-           echo '<pre>'; print_r($horarioConsulta); echo '</pre>';
+          // echo '<pre>'; print_r($horarioConsulta); echo '</pre>';
        if ($horarioConsulta->getdia()->getid_dia()==$diaingresadonumero){
           if(// se acaba antes de que empieze la calse, o empieza despues que termina la clase
            !(mayorMentorigual($horarioConsulta->gethora(),">",$horaingresada+1 ,$miningresado )||

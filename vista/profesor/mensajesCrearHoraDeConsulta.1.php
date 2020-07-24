@@ -70,11 +70,21 @@ if(isset($_SESSION['igualMesa'])&&(isset($_SESSION['falloComprobacion']))){
     }
 }
 
+if(isset($_SESSION['igualMesa'])&&(isset($_SESSION['falloComprobacionMesa']))){
+    if($_SESSION["igualMesa"]&&($_SESSION['falloComprobacionMesa'])){
+        $Aceptar= $URL.$comprobarValidezMesa;
+        $valueButton="Continuar";
+    }
+}
+
 if(isset($_POST['SoloMesas'])){
+    $_SESSION['igualMesa']=true;
     $Aceptar= $URL.$comprobarValidezMesa;
     $valueButton="Continuar";
     $_SESSION['SoloCambiaoMesasEspecial']=true;
 }
+
+
 
 $volver= $URL . $profesorPpal;
 $nommat=$_SESSION['nombreMateriaSeleccionadaEnPpal'];

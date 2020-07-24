@@ -131,8 +131,10 @@ function creacion($idProfesor,$idmateria,$dia,$hora,$min,$n,$semestre){
     }
 }
 function creacionMesas($idmateria,$idProfesor,$dia,$hora,$min,$mesa,$n){
-    CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,$mesa,$n);
-    crearHorarioDeConsulta($hora,$min,$mesa,$dia,$idProfesor,$idmateria,$n);
+    if(!horarioIngresadoIgualAlAnterior($dia,$hora,$min,$mesa,$idProfesor,$idmateria,$n)){
+        CambiarFechaHastaDeConsultaAnterior($idmateria,$idProfesor,$mesa,$n);
+        crearHorarioDeConsulta($hora,$min,$mesa,$dia,$idProfesor,$idmateria,$n);
+    }
 }
 function crearHorarioDeConsulta($horaingresada,$miningresado,$semestre,$diaingresadonumero,$idprofesor,$idmateria,$n){
     $con= new conexion();
